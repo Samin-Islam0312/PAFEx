@@ -1,4 +1,4 @@
-[DBG] invalid=1 divzero=8 overflow=8 underflow=0 total=0 subnormal=0
+[DBG] invalid=1 divzero=8 overflow=0 underflow=0 total=0 subnormal=0
 [FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/divZero/divByZero/host.bc
 [FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
 ========================================
@@ -82,7 +82,7 @@ IEEE Exceptions According to the standard
   Total FP Ops:       0
   Div by Zero:        8
   Invalid Ops:        1
-  Overflow:           8
+  Overflow:           0
   Underflow:          0
 
 Detailed Breakdown
@@ -95,7 +95,7 @@ Workload Stats
   Operations Total:   0
 
 Derived Metrics
-  Total Exceptions:   17
+  Total Exceptions:   9
   Exception Density:  0 (per million ops)
   NaN Prop Rate:      0 (per million NaNs)
   Subnormal Rate:     0 (per million underflows)

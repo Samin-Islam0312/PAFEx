@@ -23,22 +23,22 @@ Stack dump:
 1.	Running pass "(anonymous namespace)::DevicePass" on module "/home/users/sislam3/SBAC-PAD/results/invalid/sqrt/device.bc"
  #0 0x0000000003677518 llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) (/home/users/sislam3/opt/llvm-22/bin/opt+0x3677518)
  #1 0x000000000367436c SignalHandler(int, siginfo_t*, void*) Signals.cpp:0:0
- #2 0x00007fd33c3f3cf0 __restore_rt (/lib64/libpthread.so.0+0x12cf0)
- #3 0x00007fd33b08bacf raise (/lib64/libc.so.6+0x4eacf)
- #4 0x00007fd33b05eea5 abort (/lib64/libc.so.6+0x21ea5)
- #5 0x00007fd33b05ed79 _nl_load_domain.cold.0 (/lib64/libc.so.6+0x21d79)
- #6 0x00007fd33b084426 (/lib64/libc.so.6+0x47426)
+ #2 0x00007fe4c13c9cf0 __restore_rt (/lib64/libpthread.so.0+0x12cf0)
+ #3 0x00007fe4c0061acf raise (/lib64/libc.so.6+0x4eacf)
+ #4 0x00007fe4c0034ea5 abort (/lib64/libc.so.6+0x21ea5)
+ #5 0x00007fe4c0034d79 _nl_load_domain.cold.0 (/lib64/libc.so.6+0x21d79)
+ #6 0x00007fe4c005a426 (/lib64/libc.so.6+0x47426)
  #7 0x00000000034a1150 llvm::IntegerType::get(llvm::LLVMContext&, unsigned int) (/home/users/sislam3/opt/llvm-22/bin/opt+0x34a1150)
- #8 0x00007fd33c8275f5 (anonymous namespace)::DevicePass::isSNaN(llvm::IRBuilder<llvm::ConstantFolder, llvm::IRBuilderDefaultInserter>&, llvm::Value*, llvm::Type*) pass.cpp:0:0
- #9 0x00007fd33c826688 (anonymous namespace)::DevicePass::detectInvalidOp(llvm::Instruction*, llvm::IRBuilder<llvm::ConstantFolder, llvm::IRBuilderDefaultInserter>&, llvm::Module&, (anonymous namespace)::OperationID, (anonymous namespace)::WorklistEntry const&) pass.cpp:0:0
-#10 0x00007fd33c825b4b (anonymous namespace)::DevicePass::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) pass.cpp:0:0
-#11 0x00007fd33c8238dc llvm::detail::PassModel<llvm::Module, (anonymous namespace)::DevicePass, llvm::AnalysisManager<llvm::Module>>::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) pass.cpp:0:0
+ #8 0x00007fe4c17fd685 (anonymous namespace)::DevicePass::isSNaN(llvm::IRBuilder<llvm::ConstantFolder, llvm::IRBuilderDefaultInserter>&, llvm::Value*, llvm::Type*) pass.cpp:0:0
+ #9 0x00007fe4c17fc688 (anonymous namespace)::DevicePass::detectInvalidOp(llvm::Instruction*, llvm::IRBuilder<llvm::ConstantFolder, llvm::IRBuilderDefaultInserter>&, llvm::Module&, (anonymous namespace)::OperationID, (anonymous namespace)::WorklistEntry const&) pass.cpp:0:0
+#10 0x00007fe4c17fbb4b (anonymous namespace)::DevicePass::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) pass.cpp:0:0
+#11 0x00007fe4c17f98dc llvm::detail::PassModel<llvm::Module, (anonymous namespace)::DevicePass, llvm::AnalysisManager<llvm::Module>>::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) pass.cpp:0:0
 #12 0x000000000347f479 llvm::PassManager<llvm::Module, llvm::AnalysisManager<llvm::Module>>::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) (/home/users/sislam3/opt/llvm-22/bin/opt+0x347f479)
 #13 0x000000000086a855 llvm::runPassPipeline(llvm::StringRef, llvm::Module&, llvm::TargetMachine*, llvm::TargetLibraryInfoImpl*, llvm::ToolOutputFile*, llvm::ToolOutputFile*, llvm::ToolOutputFile*, llvm::StringRef, llvm::ArrayRef<llvm::PassPlugin>, llvm::ArrayRef<std::function<void (llvm::PassBuilder&)>>, llvm::opt_tool::OutputKind, llvm::opt_tool::VerifierKind, bool, bool, bool, bool, bool, bool, bool, bool) (/home/users/sislam3/opt/llvm-22/bin/opt+0x86a855)
 #14 0x000000000085d92f optMain (/home/users/sislam3/opt/llvm-22/bin/opt+0x85d92f)
-#15 0x00007fd33b077d85 __libc_start_main (/lib64/libc.so.6+0x3ad85)
+#15 0x00007fe4c004dd85 __libc_start_main (/lib64/libc.so.6+0x3ad85)
 #16 0x000000000085493e _start (/home/users/sislam3/opt/llvm-22/bin/opt+0x85493e)
-./run_tests.sh: line 58: 2161097 Aborted                 (core dumped) $LLVM_DIR/bin/opt -load-pass-plugin=./build/lib/device/DevicePass.so -passes="fp-exception" $outdir/device.bc -o $outdir/instrumented_device.bc 2>&1
+./run_tests.sh: line 58: 2245296 Aborted                 (core dumped) $LLVM_DIR/bin/opt -load-pass-plugin=./build/lib/device/DevicePass.so -passes="fp-exception" $outdir/device.bc -o $outdir/instrumented_device.bc 2>&1
 /home/users/sislam3/opt/llvm-22/bin/llc: error: /home/users/sislam3/opt/llvm-22/bin/llc: /home/users/sislam3/SBAC-PAD/results/invalid/sqrt/instrumented_device.bc: error: Could not open input file: No such file or directory
 ptxas fatal   : Input file '/home/users/sislam3/SBAC-PAD/results/invalid/sqrt/instrumented.ptx' could not be opened
 ptxas fatal   : Ptx assembly aborted due to errors

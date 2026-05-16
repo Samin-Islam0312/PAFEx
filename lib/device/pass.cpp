@@ -703,6 +703,11 @@ bool DevicePass::detectOverflow(Instruction *I, Instruction *NextI, Module &M,
     Value *InputsFinite = ConstantInt::getTrue(M.getContext());
     if (Op0) InputsFinite = B.CreateAnd(InputsFinite, isFinite(B, Op0, Ty));
     if (Op1 && OpID != OP_SQRT) InputsFinite = B.CreateAnd(InputsFinite, isFinite(B, Op1, Ty));
+    
+    if (OpID == OP_DIV && Op1) {
+        Value *DenomNonZero = B.CreateNot(isZero(B, Op1, Ty));
+        InputsFinite = B.CreateAnd(InputsFinite, DenomNonZero, "overflow_denom_nonzero");
+    }
 
     Value *ResultIsInf = isInf(B, I, Ty);
     Value *ResultIsMaxFin = isMaxFinite(B, I, Ty);

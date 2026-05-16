@@ -1,2 +1,5 @@
+[ 50%] Built target HostPass
+Scanning dependencies of target DevicePass
+[ 75%] Building CXX object lib/device/CMakeFiles/DevicePass.dir/pass.cpp.o
+[100%] Linking CXX shared module DevicePass.so
 [100%] Built target DevicePass
-[100%] Built target HostPass
