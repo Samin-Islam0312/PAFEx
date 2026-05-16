@@ -9,6 +9,7 @@
 [FPPass] Visiting function: _Z22testOverflow_RoundZeroPf [KERNEL]
 [FPPass]   Collected 1 instructions to instrument
 [FPPass]   INSTRUMENT _Z22testOverflow_RoundZeroPf:301 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=6 line=301
 [FPPass]     -> Injected check: ex=2 op=6 line=301
 [FPPass]     -> Injected check: ex=3 op=6 line=301

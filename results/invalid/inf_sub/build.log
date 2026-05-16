@@ -13,18 +13,23 @@
 [FPPass]   COLLECT fadd @ _Z17testInvalidInfSubPf:15
 [FPPass]   Collected 5 instructions to instrument
 [FPPass]   INSTRUMENT _Z17testInvalidInfSubPf:12 op=0
+[DBG] detectInvalidOp: OpID=0 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=0 line=12
 [FPPass]     -> Injected check: ex=2 op=0 line=12
 [FPPass]   INSTRUMENT _Z17testInvalidInfSubPf:13 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=1 line=13
 [FPPass]     -> Injected check: ex=2 op=1 line=13
 [FPPass]   INSTRUMENT _Z17testInvalidInfSubPf:14 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=1 line=14
 [FPPass]     -> Injected check: ex=2 op=1 line=14
 [FPPass]   INSTRUMENT _Z17testInvalidInfSubPf:15 op=0
+[DBG] detectInvalidOp: OpID=0 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=0 line=15
 [FPPass]     -> Injected check: ex=2 op=0 line=15
 [FPPass]   INSTRUMENT _Z17testInvalidInfSubPf:133 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=6 line=133
 [FPPass]     -> Injected check: ex=2 op=6 line=133
 [FPPass]     -> Injected check: ex=3 op=6 line=133

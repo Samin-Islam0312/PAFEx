@@ -15,31 +15,37 @@
 [FPPass]   COLLECT fdiv @ _Z14testInvalidDivPf:20
 [FPPass]   Collected 6 instructions to instrument
 [FPPass]   INSTRUMENT _Z14testInvalidDivPf:13 op=3
+[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=13
 [FPPass]     -> Injected check: ex=1 op=3 line=13
 [FPPass]     -> Injected check: ex=2 op=3 line=13
 [FPPass]     -> Injected check: ex=3 op=3 line=13
 [FPPass]   INSTRUMENT _Z14testInvalidDivPf:14 op=3
+[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=14
 [FPPass]     -> Injected check: ex=1 op=3 line=14
 [FPPass]     -> Injected check: ex=2 op=3 line=14
 [FPPass]     -> Injected check: ex=3 op=3 line=14
 [FPPass]   INSTRUMENT _Z14testInvalidDivPf:15 op=3
+[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=15
 [FPPass]     -> Injected check: ex=1 op=3 line=15
 [FPPass]     -> Injected check: ex=2 op=3 line=15
 [FPPass]     -> Injected check: ex=3 op=3 line=15
 [FPPass]   INSTRUMENT _Z14testInvalidDivPf:16 op=3
+[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=16
 [FPPass]     -> Injected check: ex=1 op=3 line=16
 [FPPass]     -> Injected check: ex=2 op=3 line=16
 [FPPass]     -> Injected check: ex=3 op=3 line=16
 [FPPass]   INSTRUMENT _Z14testInvalidDivPf:17 op=3
+[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=17
 [FPPass]     -> Injected check: ex=1 op=3 line=17
 [FPPass]     -> Injected check: ex=2 op=3 line=17
 [FPPass]     -> Injected check: ex=3 op=3 line=17
 [FPPass]   INSTRUMENT _Z14testInvalidDivPf:20 op=3
+[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=20
 [FPPass]     -> Injected check: ex=1 op=3 line=20
 [FPPass]     -> Injected check: ex=2 op=3 line=20

@@ -7,8 +7,6 @@
 .address_size 64
 
 	// .globl	_Z14testInvalidFMAPf    // -- Begin function _Z14testInvalidFMAPf
-.global .align 1 .b8 threadIdx[1];
-.global .align 1 .b8 _$_str[11] = {95, 95, 67, 85, 68, 65, 95, 70, 84, 90};
 .visible .global .align 8 .u64 fp_invalid_counter;
 .visible .global .align 8 .u64 fp_divbyzero_counter;
 .visible .global .align 8 .u64 fp_overflow_counter;

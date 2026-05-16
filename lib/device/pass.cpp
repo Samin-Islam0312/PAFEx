@@ -398,11 +398,22 @@ bool DevicePass::instrumentInstruction(WorklistEntry &Entry, Module &M) {
 }
 
 // Bit-level helper functions
+// Value* DevicePass::toInt(IRBuilder<> &B, Value *V) {
+//     Type *Ty = V->getType();
+//     unsigned Width = Ty->getPrimitiveSizeInBits();
+//     return B.CreateBitCast(V, Type::getIntNTy(B.getContext(), Width));
+// }
+
 Value* DevicePass::toInt(IRBuilder<> &B, Value *V) {
     Type *Ty = V->getType();
+    if (!Ty->isFloatTy() && !Ty->isDoubleTy()) {
+        errs() << "[FPPass] WARN: toInt() got non-FP type, skipping\n";
+        return UndefValue::get(Type::getInt64Ty(B.getContext()));
+    }
     unsigned Width = Ty->getPrimitiveSizeInBits();
     return B.CreateBitCast(V, Type::getIntNTy(B.getContext(), Width));
 }
+
 
 Value* DevicePass::isInf(IRBuilder<> &B, Value *V, Type *Ty) {
     if (!Ty->isFloatTy() && !Ty->isDoubleTy())
@@ -616,17 +627,43 @@ bool DevicePass::detectInvalidOp(Instruction *I, IRBuilder<> &B, Module &M,
 
     if (!Ty->isFloatTy() && !Ty->isDoubleTy()) return false;
 
-    Value *Op0 = I->getNumOperands() > 0 ? I->getOperand(0) : nullptr;
-    Value *Op1 = I->getNumOperands() > 1 ? I->getOperand(1) : nullptr;
+
+
+    // Value *Op0 = I->getNumOperands() > 0 ? I->getOperand(0) : nullptr;
+    // Value *Op1 = I->getNumOperands() > 1 ? I->getOperand(1) : nullptr;
+    // Value *Op2 = nullptr;
+    // if (OpID == OP_FMA && isa<CallInst>(I)) {
+    //     auto *CI = cast<CallInst>(I);
+    //     Op0 = CI->getArgOperand(0);
+    //     Op1 = CI->getArgOperand(1);
+    //     Op2 = CI->getArgOperand(2);
+    // }
+
+
+    Value *Op0 = nullptr;
+    Value *Op1 = nullptr;
     Value *Op2 = nullptr;
 
-    if (OpID == OP_FMA && isa<CallInst>(I)) {
-        auto *CI = cast<CallInst>(I);
-        Op0 = CI->getArgOperand(0);
-        Op1 = CI->getArgOperand(1);
-        Op2 = CI->getArgOperand(2);
+    if (auto *CI = dyn_cast<CallInst>(I)) {
+        // For call instructions (intrinsics, libdevice), use getArgOperand() to
+        // skip the callee function pointer at the end of the operand list.
+        unsigned NArgs = CI->arg_size();
+        if (NArgs > 0) Op0 = CI->getArgOperand(0);
+        if (NArgs > 1) Op1 = CI->getArgOperand(1);
+        if (NArgs > 2) Op2 = CI->getArgOperand(2);
+    } else {
+        // Binary FP ops (fadd/fmul/fdiv/fsub): operands are direct.
+        if (I->getNumOperands() > 0) Op0 = I->getOperand(0);
+        if (I->getNumOperands() > 1) Op1 = I->getOperand(1);
     }
 
+
+
+
+    // errs() << "[DBG] detectInvalidOp: OpID=" << OpID 
+        << " Op0=" << (Op0 ? Op0->getType()->getTypeID() : -1)
+        << " Ty=" << Ty->getTypeID() << "\n";
+        
     Value *AnySNaN = Op0 ? isSNaN(B, Op0, Ty) : nullptr;
     if (Op1 && OpID != OP_CVT)
         AnySNaN = AnySNaN ? B.CreateOr(AnySNaN, isSNaN(B, Op1, Ty))
@@ -697,13 +734,28 @@ bool DevicePass::detectOverflow(Instruction *I, Instruction *NextI, Module &M,
 
     IRBuilder<> B(NextI);
 
-    Value *Op0 = I->getNumOperands() > 0 ? I->getOperand(0) : nullptr;
-    Value *Op1 = I->getNumOperands() > 1 ? I->getOperand(1) : nullptr;
+    // Value *Op0 = I->getNumOperands() > 0 ? I->getOperand(0) : nullptr;
+    // Value *Op1 = I->getNumOperands() > 1 ? I->getOperand(1) : nullptr;
+
+    Value *Op0 = nullptr;
+    Value *Op1 = nullptr;
+    Value *Op2 = nullptr;
+
+    if (auto *CI = dyn_cast<CallInst>(I)) {
+        unsigned NArgs = CI->arg_size();
+        if (NArgs > 0) Op0 = CI->getArgOperand(0);
+        if (NArgs > 1) Op1 = CI->getArgOperand(1);
+        if (NArgs > 2) Op2 = CI->getArgOperand(2);
+    } else {
+        if (I->getNumOperands() > 0) Op0 = I->getOperand(0);
+        if (I->getNumOperands() > 1) Op1 = I->getOperand(1);
+    }
 
     Value *InputsFinite = ConstantInt::getTrue(M.getContext());
+
     if (Op0) InputsFinite = B.CreateAnd(InputsFinite, isFinite(B, Op0, Ty));
     if (Op1 && OpID != OP_SQRT) InputsFinite = B.CreateAnd(InputsFinite, isFinite(B, Op1, Ty));
-    
+
     if (OpID == OP_DIV && Op1) {
         Value *DenomNonZero = B.CreateNot(isZero(B, Op1, Ty));
         InputsFinite = B.CreateAnd(InputsFinite, DenomNonZero, "overflow_denom_nonzero");
@@ -757,17 +809,19 @@ bool DevicePass::detectUnderflow(Instruction *I, Instruction *NextI, Module &M,
     if (!Ty->isFloatTy() && !Ty->isDoubleTy()) return false;
     if (!NextI) return false;
 
-    IRBuilder<> B(NextI);
+   IRBuilder<> B(NextI);
 
-    Value *Op0 = I->getNumOperands() > 0 ? I->getOperand(0) : nullptr;
-    Value *Op1 = I->getNumOperands() > 1 ? I->getOperand(1) : nullptr;
+    Value *Op0 = nullptr;
+    Value *Op1 = nullptr;
     Value *Op2 = nullptr;
-
-    if (OpID == OP_FMA && isa<CallInst>(I)) {
-        auto *CI = cast<CallInst>(I);
-        Op0 = CI->getArgOperand(0);
-        Op1 = CI->getArgOperand(1);
-        Op2 = CI->getArgOperand(2);
+    if (auto *CI = dyn_cast<CallInst>(I)) {
+        unsigned NArgs = CI->arg_size();
+        if (NArgs > 0) Op0 = CI->getArgOperand(0);
+        if (NArgs > 1) Op1 = CI->getArgOperand(1);
+        if (NArgs > 2) Op2 = CI->getArgOperand(2);
+    } else {
+        if (I->getNumOperands() > 0) Op0 = I->getOperand(0);
+        if (I->getNumOperands() > 1) Op1 = I->getOperand(1);
     }
 
     Value *InputsNotTiny = ConstantInt::getTrue(M.getContext());

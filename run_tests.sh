@@ -18,6 +18,13 @@ export PAPI_DIR=${PAPI_DIR:-$HOME/opt/papi}
 export CUDA_HOME=$(dirname $(dirname $(realpath $(which nvcc))))
 export LD_LIBRARY_PATH=$LLVM_DIR/lib:$PAPI_DIR/lib:$CUDA_HOME/lib64:${LD_LIBRARY_PATH:-}
 
+# Locate libdevice once (used in device pipeline for all tests)
+LIBDEVICE=$CUDA_HOME/nvvm/libdevice/libdevice.10.bc
+if [ ! -f "$LIBDEVICE" ]; then
+    LIBDEVICE=$(find $CUDA_HOME -name "libdevice*.bc" 2>/dev/null | head -1)
+fi
+echo "Using libdevice: $LIBDEVICE"
+
 ROOT=$(pwd)
 RESULTS=$ROOT/results
 mkdir -p $RESULTS
@@ -73,13 +80,28 @@ run_one_test() {
     # Part 2: DEVICE PIPELINE
     {
         echo "=== Part 2: Device pipeline ==="
-        $LLVM_DIR/bin/clang++ -g -emit-llvm --cuda-device-only -x cuda "$test_file" \
+
+        # Emit at -O0
+        $LLVM_DIR/bin/clang++ -O0 -g -emit-llvm --cuda-device-only -x cuda "$test_file" \
             --cuda-gpu-arch=$GPU_ARCH -c -o $outdir/device.bc 2>&1
+
+        # Link libdevice (only-needed = only pull in functions the kernel uses)
+        $LLVM_DIR/bin/llvm-link --only-needed $outdir/device.bc $LIBDEVICE \
+            -o $outdir/device_linked.bc 2>&1
+
+        # Run pass
         $LLVM_DIR/bin/opt -load-pass-plugin=./build/lib/device/DevicePass.so \
-            -passes="fp-exception" $outdir/device.bc \
+            -passes="fp-exception" $outdir/device_linked.bc \
             -o $outdir/instrumented_device.bc 2>&1
-        $LLVM_DIR/bin/llc -mcpu=$GPU_ARCH $outdir/instrumented_device.bc \
+
+        # Optimize after instrumentation
+        $LLVM_DIR/bin/opt -O2 $outdir/instrumented_device.bc \
+            -o $outdir/optimized_device.bc 2>&1
+
+        # Lower to PTX
+        $LLVM_DIR/bin/llc -O2 -mcpu=$GPU_ARCH $outdir/optimized_device.bc \
             -o $outdir/instrumented.ptx 2>&1
+
         ptxas --gpu-name $GPU_ARCH $outdir/instrumented.ptx \
             -o $outdir/instrumented.cubin 2>&1
         fatbinary --64 --create $outdir/instrumented.fatbin \

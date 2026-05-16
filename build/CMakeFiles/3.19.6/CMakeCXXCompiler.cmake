@@ -20,11 +20,11 @@ set(CMAKE_CXX_SIMULATE_VERSION "")
 
 
 
-set(CMAKE_AR "/usr/bin/ar")
+set(CMAKE_AR "/opt/cray/pe/cce/20.0.0/binutils/x86_64/x86_64-pc-linux-gnu/bin/ar")
 set(CMAKE_CXX_COMPILER_AR "/home/users/sislam3/opt/llvm-22/bin/llvm-ar")
-set(CMAKE_RANLIB "/usr/bin/ranlib")
+set(CMAKE_RANLIB "/opt/cray/pe/cce/20.0.0/binutils/x86_64/x86_64-pc-linux-gnu/bin/ranlib")
 set(CMAKE_CXX_COMPILER_RANLIB "/home/users/sislam3/opt/llvm-22/bin/llvm-ranlib")
-set(CMAKE_LINKER "/usr/bin/ld")
+set(CMAKE_LINKER "/opt/cray/pe/cce/20.0.0/binutils/x86_64/x86_64-pc-linux-gnu/bin/ld")
 set(CMAKE_MT "")
 set(CMAKE_COMPILER_IS_GNUCXX )
 set(CMAKE_CXX_COMPILER_LOADED 1)
@@ -83,7 +83,7 @@ endif()
 
 
 
-set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "/opt/rh/gcc-toolset-13/root/usr/include/c++/13;/opt/rh/gcc-toolset-13/root/usr/include/c++/13/x86_64-redhat-linux;/opt/rh/gcc-toolset-13/root/usr/include/c++/13/backward;/home/users/sislam3/opt/llvm-22/lib/clang/22/include;/usr/local/include;/usr/include")
+set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "/packages/cuda/12.8.1/extras/CUPTI/include;/packages/cuda/12.8.1/targets/x86_64-linux/include;/opt/rh/gcc-toolset-13/root/usr/include/c++/13;/opt/rh/gcc-toolset-13/root/usr/include/c++/13/x86_64-redhat-linux;/opt/rh/gcc-toolset-13/root/usr/include/c++/13/backward;/home/users/sislam3/opt/llvm-22/lib/clang/22/include;/usr/local/include;/usr/include")
 set(CMAKE_CXX_IMPLICIT_LINK_LIBRARIES "stdc++;m;gcc_s;gcc;c;gcc_s;gcc")
 set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13;/opt/rh/gcc-toolset-13/root/usr/lib64;/lib64;/usr/lib64;/lib;/usr/lib")
 set(CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "")

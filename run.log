@@ -1,16 +1,39 @@
 PART 0: BUILDING THE PASSES
+-- The C compiler identification is Clang 22.1.5
+-- The CXX compiler identification is Clang 22.1.5
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /home/users/sislam3/opt/llvm-22/bin/clang - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/users/sislam3/opt/llvm-22/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ZLIB: /usr/lib64/libz.so (found version "1.2.11") 
+-- Found zstd: /usr/lib64/libzstd.so  
+-- Found LibXml2: /usr/lib64/libxml2.so (found version "2.9.7") 
+-- Linker detection: GNU ld
+-- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS
+-- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS - Success
 -- Registering DevicePass as a pass plugin (static build: OFF)
 -- Registering HostPass as a pass plugin (static build: OFF)
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/users/sislam3/SBAC-PAD/build
+Scanning dependencies of target DevicePass
+[ 25%] Building CXX object lib/device/CMakeFiles/DevicePass.dir/pass.cpp.o
+[ 50%] Linking CXX shared module DevicePass.so
 [ 50%] Built target DevicePass
+Scanning dependencies of target HostPass
 [ 75%] Building CXX object lib/host/CMakeFiles/HostPass.dir/pass.cpp.o
 [100%] Linking CXX shared module HostPass.so
 [100%] Built target HostPass
 PART 1: BUILDING THE PAPI RUNTIME OBJECTS
 nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
 PART 2: DEVICE PIPELINE (GPU Instrumentation)
+Using libdevice: /storage/packages/cuda/12.8.1/nvvm/libdevice/libdevice.10.bc
 [FPPass] Running on device module: nvptx64-nvidia-cuda
 [FPPass] Declared device counter: fp_invalid_counter
 [FPPass] Declared device counter: fp_divbyzero_counter
@@ -19,30 +42,30 @@ PART 2: DEVICE PIPELINE (GPU Instrumentation)
 [FPPass] Declared device counter: fp_total_counter
 [FPPass] Declared device counter: fp_subnormal_counter
 [FPPass] Visiting function: _Z8dot_prodPfS_i [KERNEL]
-[FPPass]   COLLECT fmul @ _Z8dot_prodPfS_i:11
-[FPPass]   COLLECT fsub @ _Z8dot_prodPfS_i:12
-[FPPass]   COLLECT fsub @ _Z8dot_prodPfS_i:12
-[FPPass]   COLLECT fdiv @ _Z8dot_prodPfS_i:12
-[FPPass]   COLLECT fadd @ _Z8dot_prodPfS_i:13
+[FPPass]   COLLECT fmul @ _Z8dot_prodPfS_i:10
+[FPPass]   COLLECT fsub @ _Z8dot_prodPfS_i:11
+[FPPass]   COLLECT fsub @ _Z8dot_prodPfS_i:11
+[FPPass]   COLLECT fdiv @ _Z8dot_prodPfS_i:11
+[FPPass]   COLLECT fadd @ _Z8dot_prodPfS_i:12
 [FPPass]   Collected 5 instructions to instrument
-[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:11 op=2
-[FPPass]     -> Injected check: ex=0 op=2 line=11
-[FPPass]     -> Injected check: ex=2 op=2 line=11
-[FPPass]     -> Injected check: ex=3 op=2 line=11
-[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:12 op=1
-[FPPass]     -> Injected check: ex=0 op=1 line=12
-[FPPass]     -> Injected check: ex=2 op=1 line=12
-[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:12 op=1
-[FPPass]     -> Injected check: ex=0 op=1 line=12
-[FPPass]     -> Injected check: ex=2 op=1 line=12
-[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:12 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=12
-[FPPass]     -> Injected check: ex=1 op=3 line=12
-[FPPass]     -> Injected check: ex=2 op=3 line=12
-[FPPass]     -> Injected check: ex=3 op=3 line=12
-[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:13 op=0
-[FPPass]     -> Injected check: ex=0 op=0 line=13
-[FPPass]     -> Injected check: ex=2 op=0 line=13
+[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:10 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=10
+[FPPass]     -> Injected check: ex=2 op=2 line=10
+[FPPass]     -> Injected check: ex=3 op=2 line=10
+[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:11 op=1
+[FPPass]     -> Injected check: ex=0 op=1 line=11
+[FPPass]     -> Injected check: ex=2 op=1 line=11
+[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:11 op=1
+[FPPass]     -> Injected check: ex=0 op=1 line=11
+[FPPass]     -> Injected check: ex=2 op=1 line=11
+[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:11 op=3
+[FPPass]     -> Injected check: ex=0 op=3 line=11
+[FPPass]     -> Injected check: ex=1 op=3 line=11
+[FPPass]     -> Injected check: ex=2 op=3 line=11
+[FPPass]     -> Injected check: ex=3 op=3 line=11
+[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:12 op=0
+[FPPass]     -> Injected check: ex=0 op=0 line=12
+[FPPass]     -> Injected check: ex=2 op=0 line=12
 [FPPass] SUMMARY: visited 1 functions, instrumented 5 instructions
 PART 3: HOST PIPELINE (CPU Instrumentation)
 [HostPass] Running on Host Module: host.bc
@@ -61,10 +84,10 @@ PART 3: HOST PIPELINE (CPU Instrumentation)
 [HostPass] Found main(), injecting PAPI lifecycle.
 [HostPass] Instrumented 1 kernel launches.
 PART 4: LINKING & EXECUTION
-	libcudart.so.12 => /storage/packages/cuda/12.8.1/lib64/libcudart.so.12 (0x00007fa99390a000)
-	libpapi.so.7.3 => /home/users/sislam3/opt/papi/lib/libpapi.so.7.3 (0x00007fa993d20000)
-	libsde.so => /home/users/sislam3/opt/papi/lib/libsde.so (0x00007fa993d12000)
-	libpfm.so.4 => /home/users/sislam3/opt/papi/lib/libpfm.so.4 (0x00007fa991fce000)
+	libcudart.so.12 => /storage/packages/cuda/12.8.1/lib64/libcudart.so.12 (0x00007fb9b1559000)
+	libpapi.so.7.3 => /home/users/sislam3/opt/papi/lib/libpapi.so.7.3 (0x00007fb9b196f000)
+	libsde.so => /home/users/sislam3/opt/papi/lib/libsde.so (0x00007fb9b1961000)
+	libpfm.so.4 => /home/users/sislam3/opt/papi/lib/libpfm.so.4 (0x00007fb9afc1d000)
 VERIFY DEVICE SYMBOLS IN CUBIN
 STT_OBJECT       STB_GLOBAL STV_DEFAULT    fp_invalid_counter
 STT_OBJECT       STB_GLOBAL STV_DEFAULT    fp_divbyzero_counter

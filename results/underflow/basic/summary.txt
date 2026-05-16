@@ -1,0 +1,14 @@
+Test:     underflow / basic
+Source:   tests/basic_tests/underflow/basic.cu
+Status:   OK (rc=0)
+
+Counters:
+  invalid              0
+  divzero              0
+  overflow             0
+  underflow            4
+  total                0
+  subnormal            0
+  kernels_launched     1
+
+Full output: run.log

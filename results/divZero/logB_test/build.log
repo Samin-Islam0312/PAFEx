@@ -13,18 +13,22 @@
 [FPPass]   COLLECT fmul @ _Z12testLogBZeroPfPi:185
 [FPPass]   Collected 4 instructions to instrument
 [FPPass]   INSTRUMENT _Z12testLogBZeroPfPi:185 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=2 line=185
 [FPPass]     -> Injected check: ex=2 op=2 line=185
 [FPPass]     -> Injected check: ex=3 op=2 line=185
 [FPPass]   INSTRUMENT _Z12testLogBZeroPfPi:185 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=2 line=185
 [FPPass]     -> Injected check: ex=2 op=2 line=185
 [FPPass]     -> Injected check: ex=3 op=2 line=185
 [FPPass]   INSTRUMENT _Z12testLogBZeroPfPi:185 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=2 line=185
 [FPPass]     -> Injected check: ex=2 op=2 line=185
 [FPPass]     -> Injected check: ex=3 op=2 line=185
 [FPPass]   INSTRUMENT _Z12testLogBZeroPfPi:185 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=2 line=185
 [FPPass]     -> Injected check: ex=2 op=2 line=185
 [FPPass]     -> Injected check: ex=3 op=2 line=185

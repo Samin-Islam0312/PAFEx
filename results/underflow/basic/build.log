@@ -45,45 +45,346 @@
 [FPPass]   COLLECT fmul @ _Z24testUnderflow_OperationsPfPi:187
 [FPPass]   Collected 69 instructions to instrument
 [FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:19 op=3
+[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=19
 [FPPass]     -> Injected check: ex=1 op=3 line=19
 [FPPass]     -> Injected check: ex=2 op=3 line=19
 [FPPass]     -> Injected check: ex=3 op=3 line=19
 [FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:25 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=2 line=25
 [FPPass]     -> Injected check: ex=2 op=2 line=25
 [FPPass]     -> Injected check: ex=3 op=2 line=25
 [FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:33 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=1 line=33
 [FPPass]     -> Injected check: ex=2 op=1 line=33
 [FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:40 op=0
+[DBG] detectInvalidOp: OpID=0 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=0 line=40
 [FPPass]     -> Injected check: ex=2 op=0 line=40
 [FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:318 op=5
-opt: /home/users/sislam3/llvm-project/llvm/lib/IR/Type.cpp:319: static llvm::IntegerType* llvm::IntegerType::get(llvm::LLVMContext&, unsigned int): Assertion `NumBits >= MIN_INT_BITS && "bitwidth too small"' failed.
-PLEASE submit a bug report to https://github.com/llvm/llvm-project/issues/ and include the crash backtrace and instructions to reproduce the bug.
-Stack dump:
-0.	Program arguments: /home/users/sislam3/opt/llvm-22/bin/opt -load-pass-plugin=./build/lib/device/DevicePass.so -passes=fp-exception /home/users/sislam3/SBAC-PAD/results/underflow/basic/device.bc -o /home/users/sislam3/SBAC-PAD/results/underflow/basic/instrumented_device.bc
-1.	Running pass "(anonymous namespace)::DevicePass" on module "/home/users/sislam3/SBAC-PAD/results/underflow/basic/device.bc"
- #0 0x0000000003677518 llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) (/home/users/sislam3/opt/llvm-22/bin/opt+0x3677518)
- #1 0x000000000367436c SignalHandler(int, siginfo_t*, void*) Signals.cpp:0:0
- #2 0x00007f8d356dbcf0 __restore_rt (/lib64/libpthread.so.0+0x12cf0)
- #3 0x00007f8d34373acf raise (/lib64/libc.so.6+0x4eacf)
- #4 0x00007f8d34346ea5 abort (/lib64/libc.so.6+0x21ea5)
- #5 0x00007f8d34346d79 _nl_load_domain.cold.0 (/lib64/libc.so.6+0x21d79)
- #6 0x00007f8d3436c426 (/lib64/libc.so.6+0x47426)
- #7 0x00000000034a1150 llvm::IntegerType::get(llvm::LLVMContext&, unsigned int) (/home/users/sislam3/opt/llvm-22/bin/opt+0x34a1150)
- #8 0x00007f8d35b0f685 (anonymous namespace)::DevicePass::isSNaN(llvm::IRBuilder<llvm::ConstantFolder, llvm::IRBuilderDefaultInserter>&, llvm::Value*, llvm::Type*) pass.cpp:0:0
- #9 0x00007f8d35b0e688 (anonymous namespace)::DevicePass::detectInvalidOp(llvm::Instruction*, llvm::IRBuilder<llvm::ConstantFolder, llvm::IRBuilderDefaultInserter>&, llvm::Module&, (anonymous namespace)::OperationID, (anonymous namespace)::WorklistEntry const&) pass.cpp:0:0
-#10 0x00007f8d35b0db4b (anonymous namespace)::DevicePass::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) pass.cpp:0:0
-#11 0x00007f8d35b0b8dc llvm::detail::PassModel<llvm::Module, (anonymous namespace)::DevicePass, llvm::AnalysisManager<llvm::Module>>::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) pass.cpp:0:0
-#12 0x000000000347f479 llvm::PassManager<llvm::Module, llvm::AnalysisManager<llvm::Module>>::run(llvm::Module&, llvm::AnalysisManager<llvm::Module>&) (/home/users/sislam3/opt/llvm-22/bin/opt+0x347f479)
-#13 0x000000000086a855 llvm::runPassPipeline(llvm::StringRef, llvm::Module&, llvm::TargetMachine*, llvm::TargetLibraryInfoImpl*, llvm::ToolOutputFile*, llvm::ToolOutputFile*, llvm::ToolOutputFile*, llvm::StringRef, llvm::ArrayRef<llvm::PassPlugin>, llvm::ArrayRef<std::function<void (llvm::PassBuilder&)>>, llvm::opt_tool::OutputKind, llvm::opt_tool::VerifierKind, bool, bool, bool, bool, bool, bool, bool, bool) (/home/users/sislam3/opt/llvm-22/bin/opt+0x86a855)
-#14 0x000000000085d92f optMain (/home/users/sislam3/opt/llvm-22/bin/opt+0x85d92f)
-#15 0x00007f8d3435fd85 __libc_start_main (/lib64/libc.so.6+0x3ad85)
-#16 0x000000000085493e _start (/home/users/sislam3/opt/llvm-22/bin/opt+0x85493e)
-./run_tests.sh: line 58: 2245698 Aborted                 (core dumped) $LLVM_DIR/bin/opt -load-pass-plugin=./build/lib/device/DevicePass.so -passes="fp-exception" $outdir/device.bc -o $outdir/instrumented_device.bc 2>&1
-/home/users/sislam3/opt/llvm-22/bin/llc: error: /home/users/sislam3/opt/llvm-22/bin/llc: /home/users/sislam3/SBAC-PAD/results/underflow/basic/instrumented_device.bc: error: Could not open input file: No such file or directory
-ptxas fatal   : Input file '/home/users/sislam3/SBAC-PAD/results/underflow/basic/instrumented.ptx' could not be opened
-ptxas fatal   : Ptx assembly aborted due to errors
-fatbinary fatal   : Could not open input file '/home/users/sislam3/SBAC-PAD/results/underflow/basic/instrumented.cubin'
+[DBG] detectInvalidOp: OpID=5 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=5 line=318
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:113 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=113
+[FPPass]     -> Injected check: ex=2 op=6 line=113
+[FPPass]     -> Injected check: ex=3 op=6 line=113
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:113 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=113
+[FPPass]     -> Injected check: ex=2 op=6 line=113
+[FPPass]     -> Injected check: ex=3 op=6 line=113
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:113 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=113
+[FPPass]     -> Injected check: ex=2 op=1 line=113
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:113 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=113
+[FPPass]     -> Injected check: ex=2 op=1 line=113
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:113 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=113
+[FPPass]     -> Injected check: ex=2 op=6 line=113
+[FPPass]     -> Injected check: ex=3 op=6 line=113
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:113 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=113
+[FPPass]     -> Injected check: ex=2 op=6 line=113
+[FPPass]     -> Injected check: ex=3 op=6 line=113
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:113 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=113
+[FPPass]     -> Injected check: ex=2 op=2 line=113
+[FPPass]     -> Injected check: ex=3 op=2 line=113
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=235
+[FPPass]     -> Injected check: ex=2 op=2 line=235
+[FPPass]     -> Injected check: ex=3 op=2 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=235
+[FPPass]     -> Injected check: ex=2 op=2 line=235
+[FPPass]     -> Injected check: ex=3 op=2 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=235
+[FPPass]     -> Injected check: ex=2 op=1 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=235
+[FPPass]     -> Injected check: ex=2 op=2 line=235
+[FPPass]     -> Injected check: ex=3 op=2 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=235
+[FPPass]     -> Injected check: ex=2 op=1 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=0
+[DBG] detectInvalidOp: OpID=0 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=0 line=235
+[FPPass]     -> Injected check: ex=2 op=0 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=235
+[FPPass]     -> Injected check: ex=2 op=2 line=235
+[FPPass]     -> Injected check: ex=3 op=2 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=235
+[FPPass]     -> Injected check: ex=2 op=2 line=235
+[FPPass]     -> Injected check: ex=3 op=2 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=235
+[FPPass]     -> Injected check: ex=2 op=2 line=235
+[FPPass]     -> Injected check: ex=3 op=2 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=235
+[FPPass]     -> Injected check: ex=2 op=1 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=235
+[FPPass]     -> Injected check: ex=2 op=2 line=235
+[FPPass]     -> Injected check: ex=3 op=2 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=235
+[FPPass]     -> Injected check: ex=2 op=1 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=235
+[FPPass]     -> Injected check: ex=2 op=1 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=235
+[FPPass]     -> Injected check: ex=2 op=2 line=235
+[FPPass]     -> Injected check: ex=3 op=2 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=235
+[FPPass]     -> Injected check: ex=2 op=1 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=235
+[FPPass]     -> Injected check: ex=2 op=1 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=235
+[FPPass]     -> Injected check: ex=2 op=1 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=235
+[FPPass]     -> Injected check: ex=2 op=1 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=0
+[DBG] detectInvalidOp: OpID=0 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=0 line=235
+[FPPass]     -> Injected check: ex=2 op=0 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=235
+[FPPass]     -> Injected check: ex=2 op=6 line=235
+[FPPass]     -> Injected check: ex=3 op=6 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=235
+[FPPass]     -> Injected check: ex=2 op=2 line=235
+[FPPass]     -> Injected check: ex=3 op=2 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=235
+[FPPass]     -> Injected check: ex=2 op=2 line=235
+[FPPass]     -> Injected check: ex=3 op=2 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=0
+[DBG] detectInvalidOp: OpID=0 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=0 line=235
+[FPPass]     -> Injected check: ex=2 op=0 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:235 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=235
+[FPPass]     -> Injected check: ex=2 op=1 line=235
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=187
+[FPPass]     -> Injected check: ex=2 op=2 line=187
+[FPPass]     -> Injected check: ex=3 op=2 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=187
+[FPPass]     -> Injected check: ex=2 op=6 line=187
+[FPPass]     -> Injected check: ex=3 op=6 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=1
+[DBG] detectInvalidOp: OpID=1 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=1 line=187
+[FPPass]     -> Injected check: ex=2 op=1 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=187
+[FPPass]     -> Injected check: ex=2 op=6 line=187
+[FPPass]     -> Injected check: ex=3 op=6 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=187
+[FPPass]     -> Injected check: ex=2 op=6 line=187
+[FPPass]     -> Injected check: ex=3 op=6 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=187
+[FPPass]     -> Injected check: ex=2 op=6 line=187
+[FPPass]     -> Injected check: ex=3 op=6 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=187
+[FPPass]     -> Injected check: ex=2 op=6 line=187
+[FPPass]     -> Injected check: ex=3 op=6 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=187
+[FPPass]     -> Injected check: ex=2 op=6 line=187
+[FPPass]     -> Injected check: ex=3 op=6 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=187
+[FPPass]     -> Injected check: ex=2 op=6 line=187
+[FPPass]     -> Injected check: ex=3 op=6 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=187
+[FPPass]     -> Injected check: ex=2 op=6 line=187
+[FPPass]     -> Injected check: ex=3 op=6 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=187
+[FPPass]     -> Injected check: ex=2 op=6 line=187
+[FPPass]     -> Injected check: ex=3 op=6 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=2 line=187
+[FPPass]     -> Injected check: ex=2 op=2 line=187
+[FPPass]     -> Injected check: ex=3 op=2 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=187
+[FPPass]     -> Injected check: ex=2 op=6 line=187
+[FPPass]     -> Injected check: ex=3 op=6 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=187
+[FPPass]     -> Injected check: ex=2 op=6 line=187
+[FPPass]     -> Injected check: ex=3 op=6 line=187
+[FPPass]   INSTRUMENT _Z24testUnderflow_OperationsPfPi:187 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
+[FPPass]     -> Injected check: ex=0 op=6 line=187
+[FPPass]     -> Injected check: ex=2 op=6 line=187
+[FPPass]     -> Injected check: ex=3 op=6 line=187
+[FPPass] SUMMARY: visited 2 functions, instrumented 69 instructions
+=== Part 3: Host pipeline ===
+[HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD/results/underflow/basic/host.bc
+[HostPass] Created host shadow: fp_invalid_counter
+[HostPass] Created host shadow: fp_divbyzero_counter
+[HostPass] Created host shadow: fp_overflow_counter
+[HostPass] Created host shadow: fp_underflow_counter
+[HostPass] Created host shadow: fp_total_counter
+[HostPass] Created host shadow: fp_subnormal_counter
+[HostPass] Registered shadow: fp_invalid_counter
+[HostPass] Registered shadow: fp_divbyzero_counter
+[HostPass] Registered shadow: fp_overflow_counter
+[HostPass] Registered shadow: fp_underflow_counter
+[HostPass] Registered shadow: fp_total_counter
+[HostPass] Registered shadow: fp_subnormal_counter
+[HostPass] Found main(), injecting PAPI lifecycle.
+[HostPass] Instrumented 1 kernel launches.
+=== Part 4: Link ===

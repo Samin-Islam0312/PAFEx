@@ -13,18 +13,22 @@
 [FPPass]   COLLECT fmul @ _Z14testInvalidMulPf:15
 [FPPass]   Collected 4 instructions to instrument
 [FPPass]   INSTRUMENT _Z14testInvalidMulPf:12 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=2 line=12
 [FPPass]     -> Injected check: ex=2 op=2 line=12
 [FPPass]     -> Injected check: ex=3 op=2 line=12
 [FPPass]   INSTRUMENT _Z14testInvalidMulPf:13 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=2 line=13
 [FPPass]     -> Injected check: ex=2 op=2 line=13
 [FPPass]     -> Injected check: ex=3 op=2 line=13
 [FPPass]   INSTRUMENT _Z14testInvalidMulPf:14 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=2 line=14
 [FPPass]     -> Injected check: ex=2 op=2 line=14
 [FPPass]     -> Injected check: ex=3 op=2 line=14
 [FPPass]   INSTRUMENT _Z14testInvalidMulPf:15 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=2 line=15
 [FPPass]     -> Injected check: ex=2 op=2 line=15
 [FPPass]     -> Injected check: ex=3 op=2 line=15

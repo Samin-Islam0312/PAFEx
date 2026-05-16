@@ -9,6 +9,7 @@
 [FPPass] Visiting function: _Z25testOverflow_RoundNearestPf [KERNEL]
 [FPPass]   Collected 1 instructions to instrument
 [FPPass]   INSTRUMENT _Z25testOverflow_RoundNearestPf:295 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=6 line=295
 [FPPass]     -> Injected check: ex=2 op=6 line=295
 [FPPass]     -> Injected check: ex=3 op=6 line=295

@@ -12,10 +12,12 @@
 [FPPass]   COLLECT fmul @ _Z26testUnderflow_RoundNearestPfPi:38
 [FPPass]   Collected 2 instructions to instrument
 [FPPass]   INSTRUMENT _Z26testUnderflow_RoundNearestPfPi:38 op=2
+[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=2 line=38
 [FPPass]     -> Injected check: ex=2 op=2 line=38
 [FPPass]     -> Injected check: ex=3 op=2 line=38
 [FPPass]   INSTRUMENT _Z26testUnderflow_RoundNearestPfPi:295 op=6
+[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=6 line=295
 [FPPass]     -> Injected check: ex=2 op=6 line=295
 [FPPass]     -> Injected check: ex=3 op=6 line=295

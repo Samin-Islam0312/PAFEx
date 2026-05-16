@@ -13,9 +13,6 @@
 	.param .b64 vprintf_param_1
 )
 ;
-.global .align 1 .b8 blockIdx[1];
-.global .align 1 .b8 blockDim[1];
-.global .align 1 .b8 threadIdx[1];
 .global .align 1 .b8 _$_str[9] = {100, 111, 116, 58, 32, 37, 102, 10};
 .visible .global .align 8 .u64 fp_invalid_counter;
 .visible .global .align 8 .u64 fp_divbyzero_counter;
@@ -33,8 +30,8 @@
 	.local .align 8 .b8 	__local_depot0[48];
 	.reg .b64 	%SP;
 	.reg .b64 	%SPL;
-	.reg .pred 	%p<164>;
-	.reg .b32 	%r<95>;
+	.reg .pred 	%p<166>;
+	.reg .b32 	%r<96>;
 	.reg .b64 	%rd<26>;
 	.loc	1 5 0                           // tests/gpu_fpx.cu:5:0
 $L__func_begin0:
@@ -309,47 +306,50 @@ $L__BB0_20:                             //   in Loop: Header=BB0_1 Depth=1
 	and.b32 	%r69, %r7, 2139095040;
 	setp.ne.b32 	%p111, %r69, 2139095040;
 	and.pred 	%p112, %p110, %p111;
-	and.b32 	%r70, %r8, 2139095040;
-	setp.eq.b32 	%p113, %r70, 2139095040;
-	and.b32 	%r71, %r8, 8388607;
-	setp.eq.b32 	%p114, %r71, 0;
-	and.pred 	%p115, %p113, %p114;
-	and.pred 	%p116, %p112, %p115;
-	not.pred 	%p117, %p116;
-	@%p117 bra 	$L__BB0_22;
+	and.b32 	%r70, %r7, 2147483647;
+	setp.ne.b32 	%p113, %r70, 0;
+	and.pred 	%p114, %p112, %p113;
+	and.b32 	%r71, %r8, 2139095040;
+	setp.eq.b32 	%p115, %r71, 2139095040;
+	and.b32 	%r72, %r8, 8388607;
+	setp.eq.b32 	%p116, %r72, 0;
+	and.pred 	%p117, %p115, %p116;
+	and.pred 	%p118, %p114, %p117;
+	not.pred 	%p119, %p118;
+	@%p119 bra 	$L__BB0_22;
 	bra.uni 	$L__BB0_21;
 $L__BB0_21:                             //   in Loop: Header=BB0_1 Depth=1
 	atom.global.add.u64 	%rd22, [fp_overflow_counter], 1;
 	bra.uni 	$L__BB0_22;
 $L__BB0_22:                             //   in Loop: Header=BB0_1 Depth=1
-	and.b32 	%r72, %r5, 2139095040;
-	setp.ne.b32 	%p118, %r72, 0;
-	and.b32 	%r73, %r5, 8388607;
-	setp.eq.b32 	%p119, %r73, 0;
-	or.pred 	%p120, %p118, %p119;
-	and.b32 	%r74, %r7, 2139095040;
-	setp.ne.b32 	%p121, %r74, 0;
-	and.b32 	%r75, %r7, 8388607;
-	setp.eq.b32 	%p122, %r75, 0;
-	or.pred 	%p123, %p121, %p122;
-	and.pred 	%p124, %p120, %p123;
-	and.b32 	%r76, %r8, 2139095040;
-	setp.eq.b32 	%p125, %r76, 0;
-	and.b32 	%r77, %r8, 8388607;
-	setp.ne.b32 	%p126, %r77, 0;
-	and.pred 	%p127, %p125, %p126;
-	and.b32 	%r78, %r8, 2147483647;
-	setp.eq.b32 	%p128, %r78, 0;
-	and.b32 	%r79, %r5, 2147483647;
-	setp.ne.b32 	%p129, %r79, 0;
-	and.b32 	%r80, %r7, 2147483647;
-	setp.ne.b32 	%p130, %r80, 0;
-	and.pred 	%p131, %p129, %p130;
-	and.pred 	%p132, %p128, %p131;
-	or.pred 	%p133, %p127, %p132;
-	and.pred 	%p134, %p124, %p133;
-	not.pred 	%p135, %p134;
-	@%p135 bra 	$L__BB0_24;
+	and.b32 	%r73, %r5, 2139095040;
+	setp.ne.b32 	%p120, %r73, 0;
+	and.b32 	%r74, %r5, 8388607;
+	setp.eq.b32 	%p121, %r74, 0;
+	or.pred 	%p122, %p120, %p121;
+	and.b32 	%r75, %r7, 2139095040;
+	setp.ne.b32 	%p123, %r75, 0;
+	and.b32 	%r76, %r7, 8388607;
+	setp.eq.b32 	%p124, %r76, 0;
+	or.pred 	%p125, %p123, %p124;
+	and.pred 	%p126, %p122, %p125;
+	and.b32 	%r77, %r8, 2139095040;
+	setp.eq.b32 	%p127, %r77, 0;
+	and.b32 	%r78, %r8, 8388607;
+	setp.ne.b32 	%p128, %r78, 0;
+	and.pred 	%p129, %p127, %p128;
+	and.b32 	%r79, %r8, 2147483647;
+	setp.eq.b32 	%p130, %r79, 0;
+	and.b32 	%r80, %r5, 2147483647;
+	setp.ne.b32 	%p131, %r80, 0;
+	and.b32 	%r81, %r7, 2147483647;
+	setp.ne.b32 	%p132, %r81, 0;
+	and.pred 	%p133, %p131, %p132;
+	and.pred 	%p134, %p130, %p133;
+	or.pred 	%p135, %p129, %p134;
+	and.pred 	%p136, %p126, %p135;
+	not.pred 	%p137, %p136;
+	@%p137 bra 	$L__BB0_24;
 	bra.uni 	$L__BB0_23;
 $L__BB0_23:                             //   in Loop: Header=BB0_1 Depth=1
 	atom.global.add.u64 	%rd23, [fp_underflow_counter], 1;
@@ -360,54 +360,54 @@ $L__BB0_24:                             //   in Loop: Header=BB0_1 Depth=1
 	ld.b32 	%r9, [%SP+28];
 	.loc	1 12 7                          // tests/gpu_fpx.cu:12:7
 	ld.b32 	%r10, [%SP+20];
-	and.b32 	%r81, %r10, 2139095040;
-	setp.eq.b32 	%p136, %r81, 2139095040;
-	and.b32 	%r82, %r10, 8388607;
-	setp.ne.b32 	%p137, %r82, 0;
-	and.b32 	%r83, %r10, 4194304;
-	setp.eq.b32 	%p138, %r83, 0;
-	and.pred 	%p139, %p136, %p138;
-	and.pred 	%p140, %p139, %p137;
-	and.b32 	%r84, %r9, 2139095040;
-	setp.eq.b32 	%p141, %r84, 2139095040;
-	and.b32 	%r85, %r9, 8388607;
-	setp.ne.b32 	%p142, %r85, 0;
-	and.b32 	%r86, %r9, 4194304;
-	setp.eq.b32 	%p143, %r86, 0;
-	and.pred 	%p144, %p141, %p143;
-	and.pred 	%p145, %p144, %p142;
-	or.pred 	%p146, %p140, %p145;
-	setp.eq.b32 	%p147, %r82, 0;
-	and.pred 	%p148, %p136, %p147;
-	setp.eq.b32 	%p149, %r85, 0;
-	and.pred 	%p150, %p141, %p149;
-	and.pred 	%p151, %p148, %p150;
-	and.b32 	%r87, %r10, -2147483648;
-	and.b32 	%r88, %r9, -2147483648;
-	setp.ne.b32 	%p152, %r87, %r88;
-	and.pred 	%p153, %p151, %p152;
-	or.pred 	%p154, %p146, %p153;
-	not.pred 	%p155, %p154;
-	@%p155 bra 	$L__BB0_26;
+	and.b32 	%r82, %r10, 2139095040;
+	setp.eq.b32 	%p138, %r82, 2139095040;
+	and.b32 	%r83, %r10, 8388607;
+	setp.ne.b32 	%p139, %r83, 0;
+	and.b32 	%r84, %r10, 4194304;
+	setp.eq.b32 	%p140, %r84, 0;
+	and.pred 	%p141, %p138, %p140;
+	and.pred 	%p142, %p141, %p139;
+	and.b32 	%r85, %r9, 2139095040;
+	setp.eq.b32 	%p143, %r85, 2139095040;
+	and.b32 	%r86, %r9, 8388607;
+	setp.ne.b32 	%p144, %r86, 0;
+	and.b32 	%r87, %r9, 4194304;
+	setp.eq.b32 	%p145, %r87, 0;
+	and.pred 	%p146, %p143, %p145;
+	and.pred 	%p147, %p146, %p144;
+	or.pred 	%p148, %p142, %p147;
+	setp.eq.b32 	%p149, %r83, 0;
+	and.pred 	%p150, %p138, %p149;
+	setp.eq.b32 	%p151, %r86, 0;
+	and.pred 	%p152, %p143, %p151;
+	and.pred 	%p153, %p150, %p152;
+	and.b32 	%r88, %r10, -2147483648;
+	and.b32 	%r89, %r9, -2147483648;
+	setp.ne.b32 	%p154, %r88, %r89;
+	and.pred 	%p155, %p153, %p154;
+	or.pred 	%p156, %p148, %p155;
+	not.pred 	%p157, %p156;
+	@%p157 bra 	$L__BB0_26;
 	bra.uni 	$L__BB0_25;
 $L__BB0_25:                             //   in Loop: Header=BB0_1 Depth=1
 	atom.global.add.u64 	%rd24, [fp_invalid_counter], 1;
 	bra.uni 	$L__BB0_26;
 $L__BB0_26:                             //   in Loop: Header=BB0_1 Depth=1
 	add.f32 	%r11, %r10, %r9;
-	and.b32 	%r89, %r10, 2139095040;
-	setp.ne.b32 	%p156, %r89, 2139095040;
-	and.b32 	%r90, %r9, 2139095040;
-	setp.ne.b32 	%p157, %r90, 2139095040;
-	and.pred 	%p158, %p156, %p157;
-	and.b32 	%r91, %r11, 2139095040;
-	setp.eq.b32 	%p159, %r91, 2139095040;
-	and.b32 	%r92, %r11, 8388607;
-	setp.eq.b32 	%p160, %r92, 0;
-	and.pred 	%p161, %p159, %p160;
-	and.pred 	%p162, %p158, %p161;
-	not.pred 	%p163, %p162;
-	@%p163 bra 	$L__BB0_28;
+	and.b32 	%r90, %r10, 2139095040;
+	setp.ne.b32 	%p158, %r90, 2139095040;
+	and.b32 	%r91, %r9, 2139095040;
+	setp.ne.b32 	%p159, %r91, 2139095040;
+	and.pred 	%p160, %p158, %p159;
+	and.b32 	%r92, %r11, 2139095040;
+	setp.eq.b32 	%p161, %r92, 2139095040;
+	and.b32 	%r93, %r11, 8388607;
+	setp.eq.b32 	%p162, %r93, 0;
+	and.pred 	%p163, %p161, %p162;
+	and.pred 	%p164, %p160, %p163;
+	not.pred 	%p165, %p164;
+	@%p165 bra 	$L__BB0_28;
 	bra.uni 	$L__BB0_27;
 $L__BB0_27:                             //   in Loop: Header=BB0_1 Depth=1
 	atom.global.add.u64 	%rd25, [fp_overflow_counter], 1;
@@ -420,9 +420,9 @@ $L__tmp4:
 $L__BB0_29:                             // %for.inc
                                         //   in Loop: Header=BB0_1 Depth=1
 	.loc	1 7 27                          // tests/gpu_fpx.cu:7:27
-	ld.b32 	%r93, [%SP+24];
-	add.s32 	%r94, %r93, 1;
-	st.b32 	[%SP+24], %r94;
+	ld.b32 	%r94, [%SP+24];
+	add.s32 	%r95, %r94, 1;
+	st.b32 	[%SP+24], %r95;
 	.loc	1 7 3                           // tests/gpu_fpx.cu:7:3
 	bra.uni 	$L__BB0_1;
 $L__tmp5:
