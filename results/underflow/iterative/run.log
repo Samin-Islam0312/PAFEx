@@ -1,0 +1,62 @@
+[DBG] invalid=0 divzero=0 overflow=0 underflow=1 total=0 subnormal=0
+[DBG] invalid=0 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/underflow/iterative/host.bc
+[FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
+========================================
+[TEST] Underflow in Iterative Computation
+[IEEE 754 Clause 7.5.0]
+========================================
+
+--- Test 1: Repeated Multiplication by 0.5 ---
+Starting value: 1.0
+Operation: value *= 0.5 (150 iterations)
+
+Underflow first occurred at iteration: 126
+FLT_MIN reached around: 1.0 × 0.5^127 ≈ iteration 127
+
+Iteration | Value
+----------|------------------
+   125    | 1.175494e-38 
+   130    | 3.673420e-40 (denormal)
+   135    | 1.147944e-41 (denormal)
+   140    | 3.587324e-43 (denormal)
+   145    | 1.121039e-44 (denormal)
+   149    | 0.000000e+00 (ZERO - flushed)
+
+--- Test 2: Summing Denormals ---
+Sum of 1000 denormals: 1.175549e-38
+Expected: ~1.175549e-38
+
+========================================
+Key Observations:
+  - Underflow occurs gradually in iterations
+  - Denormals allow continued computation
+  - Eventually may flush to zero
+========================================
+
+[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD/results/underflow/iterative/host.bc
+
+IEEE Exceptions According to the standard
+  Total FP Ops:       0
+  Div by Zero:        0
+  Invalid Ops:        0
+  Overflow:           0
+  Underflow:          0
+
+Detailed Breakdown
+  NaNs (Input):       0
+  NaNs (Created):     0
+  Denormals Produced: 0
+
+Workload Stats
+  Kernels Launched:   1
+  Operations Total:   0
+
+Derived Metrics
+  Total Exceptions:   0
+  Exception Density:  0 (per million ops)
+  NaN Prop Rate:      0 (per million NaNs)
+  Subnormal Rate:     0 (per million underflows)
+  Instability Score:  0
+
+[FP_INSTRUMENT] Finalized.

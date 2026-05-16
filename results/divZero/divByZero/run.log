@@ -1,0 +1,104 @@
+[DBG] invalid=1 divzero=8 overflow=8 underflow=0 total=0 subnormal=0
+[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/divZero/divByZero/host.bc
+[FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
+========================================
+[TEST] Division by Zero Exception
+[IEEE 754 Clause 7.3.0]
+========================================
+Rule: x/0 = +/-Inf (sign = XOR of operands)
+Note: 0/0 = NaN (invalid op, not divByZero)
+
+[TEST 0] +5 / +0
+  Result: inf
+  isInf: YES, Sign: +1
+  Expected: +Inf
+  Got:      +Inf
+  Status: PASS
+
+[TEST 1] +5 / -0
+  Result: -inf
+  isInf: YES, Sign: -1
+  Expected: -Inf
+  Got:      -Inf
+  Status: PASS
+
+[TEST 2] -5 / +0
+  Result: -inf
+  isInf: YES, Sign: -1
+  Expected: -Inf
+  Got:      -Inf
+  Status: PASS
+
+[TEST 3] -5 / -0
+  Result: inf
+  isInf: YES, Sign: +1
+  Expected: +Inf
+  Got:      +Inf
+  Status: PASS
+
+[TEST 4] +1 / +0
+  Result: inf
+  isInf: YES, Sign: +1
+  Expected: +Inf
+  Got:      +Inf
+  Status: PASS
+
+[TEST 5] +1 / -0
+  Result: -inf
+  isInf: YES, Sign: -1
+  Expected: -Inf
+  Got:      -Inf
+  Status: PASS
+
+[TEST 6] +0.0001 / +0
+  Result: inf
+  isInf: YES, Sign: +1
+  Expected: +Inf
+  Got:      +Inf
+  Status: PASS
+
+[TEST 7] -0.0001 / +0
+  Result: -inf
+  isInf: YES, Sign: -1
+  Expected: -Inf
+  Got:      -Inf
+  Status: PASS
+
+[TEST 8] 0 / 0 (invalid op)
+  Result: nan
+  isInf: NO, Sign: N/A
+  Expected: NaN
+  Got:      NaN
+  Status: PASS
+
+========================================
+Summary: 9/9 tests passed
+Overall: PASSED
+========================================
+
+[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD/results/divZero/divByZero/host.bc
+
+IEEE Exceptions According to the standard
+  Total FP Ops:       0
+  Div by Zero:        8
+  Invalid Ops:        1
+  Overflow:           8
+  Underflow:          0
+
+Detailed Breakdown
+  NaNs (Input):       0
+  NaNs (Created):     0
+  Denormals Produced: 0
+
+Workload Stats
+  Kernels Launched:   1
+  Operations Total:   0
+
+Derived Metrics
+  Total Exceptions:   17
+  Exception Density:  0 (per million ops)
+  NaN Prop Rate:      0 (per million NaNs)
+  Subnormal Rate:     0 (per million underflows)
+  Instability Score:  0
+
+[FP_INSTRUMENT] Finalized.

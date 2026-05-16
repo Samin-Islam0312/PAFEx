@@ -1,0 +1,14 @@
+Test:     divZero / logB_test
+Source:   tests/basic_tests/divZero/logB_test.cu
+Status:   OK (rc=0)
+
+Counters:
+  invalid              0
+  divzero              0
+  overflow             0
+  underflow            0
+  total                0
+  subnormal            0
+  kernels_launched     1
+
+Full output: run.log

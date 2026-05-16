@@ -1,0 +1,15 @@
+category,test,baseline_ms,instrumented_ms,overhead_pct,slowdown_x
+divZero,divByZero,1123.780,1185.922,5.00,1.05
+divZero,logB_test,1125.450,1172.584,4.00,1.04
+invalid,div,1125.903,1199.395,6.00,1.06
+invalid,fma_zero_inf,1121.737,1184.766,5.00,1.05
+invalid,inf_sub,1122.799,1173.886,4.00,1.04
+invalid,mul_zero_inf,1122.451,1173.500,4.00,1.04
+overflow,round_nearest,1122.587,1176.707,4.00,1.04
+overflow,round_negative,1120.563,1167.136,4.00,1.04
+overflow,round_positive,1122.154,1170.535,4.00,1.04
+overflow,round_zero,1122.714,1165.598,3.00,1.03
+underflow,denormal,1124.623,1176.533,4.00,1.04
+underflow,gradual,1125.372,1180.452,4.00,1.04
+underflow,iterative,1128.071,1204.424,6.00,1.06
+underflow,rounding,1123.505,1178.351,4.00,1.04

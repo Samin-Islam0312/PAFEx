@@ -1,0 +1,14 @@
+Test:     invalid / div
+Source:   tests/basic_tests/invalid/div.cu
+Status:   OK (rc=0)
+
+Counters:
+  invalid              5
+  divzero              1
+  overflow             1
+  underflow            0
+  total                0
+  subnormal            0
+  kernels_launched     1
+
+Full output: run.log

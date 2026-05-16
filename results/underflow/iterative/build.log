@@ -1,0 +1,41 @@
+=== Part 2: Device pipeline ===
+[FPPass] Running on device module: nvptx64-nvidia-cuda
+[FPPass] Declared device counter: fp_invalid_counter
+[FPPass] Declared device counter: fp_divbyzero_counter
+[FPPass] Declared device counter: fp_overflow_counter
+[FPPass] Declared device counter: fp_underflow_counter
+[FPPass] Declared device counter: fp_total_counter
+[FPPass] Declared device counter: fp_subnormal_counter
+[FPPass] Visiting function: _Z12is_subnormalf [device]
+[FPPass]   Collected 0 instructions to instrument
+[FPPass] Visiting function: _Z22testIterativeUnderflowPfPi [KERNEL]
+[FPPass]   COLLECT fmul @ _Z22testIterativeUnderflowPfPi:21
+[FPPass]   Collected 1 instructions to instrument
+[FPPass]   INSTRUMENT _Z22testIterativeUnderflowPfPi:21 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=21
+[FPPass]     -> Injected check: ex=2 op=2 line=21
+[FPPass]     -> Injected check: ex=3 op=2 line=21
+[FPPass] Visiting function: _Z23testUnderflow_SummationPf [KERNEL]
+[FPPass]   COLLECT fadd @ _Z23testUnderflow_SummationPf:50
+[FPPass]   Collected 1 instructions to instrument
+[FPPass]   INSTRUMENT _Z23testUnderflow_SummationPf:50 op=0
+[FPPass]     -> Injected check: ex=0 op=0 line=50
+[FPPass]     -> Injected check: ex=2 op=0 line=50
+[FPPass] SUMMARY: visited 3 functions, instrumented 2 instructions
+=== Part 3: Host pipeline ===
+[HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD/results/underflow/iterative/host.bc
+[HostPass] Created host shadow: fp_invalid_counter
+[HostPass] Created host shadow: fp_divbyzero_counter
+[HostPass] Created host shadow: fp_overflow_counter
+[HostPass] Created host shadow: fp_underflow_counter
+[HostPass] Created host shadow: fp_total_counter
+[HostPass] Created host shadow: fp_subnormal_counter
+[HostPass] Registered shadow: fp_invalid_counter
+[HostPass] Registered shadow: fp_divbyzero_counter
+[HostPass] Registered shadow: fp_overflow_counter
+[HostPass] Registered shadow: fp_underflow_counter
+[HostPass] Registered shadow: fp_total_counter
+[HostPass] Registered shadow: fp_subnormal_counter
+[HostPass] Found main(), injecting PAPI lifecycle.
+[HostPass] Instrumented 2 kernel launches.
+=== Part 4: Link ===

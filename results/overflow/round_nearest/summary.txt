@@ -1,0 +1,14 @@
+Test:     overflow / round_nearest
+Source:   tests/basic_tests/overflow/round_nearest.cu
+Status:   OK (rc=0)
+
+Counters:
+  invalid              0
+  divzero              0
+  overflow             1
+  underflow            0
+  total                0
+  subnormal            0
+  kernels_launched     1
+
+Full output: run.log

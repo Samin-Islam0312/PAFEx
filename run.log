@@ -1,0 +1,108 @@
+PART 0: BUILDING THE PASSES
+-- Registering DevicePass as a pass plugin (static build: OFF)
+-- Registering HostPass as a pass plugin (static build: OFF)
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/users/sislam3/SBAC-PAD/build
+[ 50%] Built target DevicePass
+[ 75%] Building CXX object lib/host/CMakeFiles/HostPass.dir/pass.cpp.o
+[100%] Linking CXX shared module HostPass.so
+[100%] Built target HostPass
+PART 1: BUILDING THE PAPI RUNTIME OBJECTS
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+PART 2: DEVICE PIPELINE (GPU Instrumentation)
+[FPPass] Running on device module: nvptx64-nvidia-cuda
+[FPPass] Declared device counter: fp_invalid_counter
+[FPPass] Declared device counter: fp_divbyzero_counter
+[FPPass] Declared device counter: fp_overflow_counter
+[FPPass] Declared device counter: fp_underflow_counter
+[FPPass] Declared device counter: fp_total_counter
+[FPPass] Declared device counter: fp_subnormal_counter
+[FPPass] Visiting function: _Z8dot_prodPfS_i [KERNEL]
+[FPPass]   COLLECT fmul @ _Z8dot_prodPfS_i:11
+[FPPass]   COLLECT fsub @ _Z8dot_prodPfS_i:12
+[FPPass]   COLLECT fsub @ _Z8dot_prodPfS_i:12
+[FPPass]   COLLECT fdiv @ _Z8dot_prodPfS_i:12
+[FPPass]   COLLECT fadd @ _Z8dot_prodPfS_i:13
+[FPPass]   Collected 5 instructions to instrument
+[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:11 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=11
+[FPPass]     -> Injected check: ex=2 op=2 line=11
+[FPPass]     -> Injected check: ex=3 op=2 line=11
+[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:12 op=1
+[FPPass]     -> Injected check: ex=0 op=1 line=12
+[FPPass]     -> Injected check: ex=2 op=1 line=12
+[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:12 op=1
+[FPPass]     -> Injected check: ex=0 op=1 line=12
+[FPPass]     -> Injected check: ex=2 op=1 line=12
+[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:12 op=3
+[FPPass]     -> Injected check: ex=0 op=3 line=12
+[FPPass]     -> Injected check: ex=1 op=3 line=12
+[FPPass]     -> Injected check: ex=2 op=3 line=12
+[FPPass]     -> Injected check: ex=3 op=3 line=12
+[FPPass]   INSTRUMENT _Z8dot_prodPfS_i:13 op=0
+[FPPass]     -> Injected check: ex=0 op=0 line=13
+[FPPass]     -> Injected check: ex=2 op=0 line=13
+[FPPass] SUMMARY: visited 1 functions, instrumented 5 instructions
+PART 3: HOST PIPELINE (CPU Instrumentation)
+[HostPass] Running on Host Module: host.bc
+[HostPass] Created host shadow: fp_invalid_counter
+[HostPass] Created host shadow: fp_divbyzero_counter
+[HostPass] Created host shadow: fp_overflow_counter
+[HostPass] Created host shadow: fp_underflow_counter
+[HostPass] Created host shadow: fp_total_counter
+[HostPass] Created host shadow: fp_subnormal_counter
+[HostPass] Registered shadow: fp_invalid_counter
+[HostPass] Registered shadow: fp_divbyzero_counter
+[HostPass] Registered shadow: fp_overflow_counter
+[HostPass] Registered shadow: fp_underflow_counter
+[HostPass] Registered shadow: fp_total_counter
+[HostPass] Registered shadow: fp_subnormal_counter
+[HostPass] Found main(), injecting PAPI lifecycle.
+[HostPass] Instrumented 1 kernel launches.
+PART 4: LINKING & EXECUTION
+	libcudart.so.12 => /storage/packages/cuda/12.8.1/lib64/libcudart.so.12 (0x00007fa99390a000)
+	libpapi.so.7.3 => /home/users/sislam3/opt/papi/lib/libpapi.so.7.3 (0x00007fa993d20000)
+	libsde.so => /home/users/sislam3/opt/papi/lib/libsde.so (0x00007fa993d12000)
+	libpfm.so.4 => /home/users/sislam3/opt/papi/lib/libpfm.so.4 (0x00007fa991fce000)
+VERIFY DEVICE SYMBOLS IN CUBIN
+STT_OBJECT       STB_GLOBAL STV_DEFAULT    fp_invalid_counter
+STT_OBJECT       STB_GLOBAL STV_DEFAULT    fp_divbyzero_counter
+STT_OBJECT       STB_GLOBAL STV_DEFAULT    fp_overflow_counter
+STT_OBJECT       STB_GLOBAL STV_DEFAULT    fp_underflow_counter
+STT_OBJECT       STB_GLOBAL STV_DEFAULT    fp_total_counter
+STT_OBJECT       STB_GLOBAL STV_DEFAULT    fp_subnormal_counter
+RUN
+[FP_INSTRUMENT] Initialized for: host.bc
+[FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
+Calling kernel
+dot: nan
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+done
+
+[FP_INSTRUMENT] Summary for: host.bc
+
+IEEE Exceptions According to the standard
+  Total FP Ops:       0
+  Div by Zero:        0
+  Invalid Ops:        12
+  Overflow:           0
+  Underflow:          0
+
+Detailed Breakdown
+  NaNs (Input):       0
+  NaNs (Created):     0
+  Denormals Produced: 0
+
+Workload Stats
+  Kernels Launched:   1
+  Operations Total:   0
+
+Derived Metrics
+  Total Exceptions:   12
+  Exception Density:  0 (per million ops)
+  NaN Prop Rate:      0 (per million NaNs)
+  Subnormal Rate:     0 (per million underflows)
+  Instability Score:  0
+
+[FP_INSTRUMENT] Finalized.

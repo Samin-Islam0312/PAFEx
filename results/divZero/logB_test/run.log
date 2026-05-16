@@ -1,0 +1,57 @@
+[DBG] invalid=0 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/divZero/logB_test/host.bc
+[FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
+========================================
+[TEST] logB(0) Division by Zero
+[IEEE 754 Clause 7.3.0 - second bullet]
+========================================
+Rule: logB(0) = -Inf when result is FP format
+
+[TEST 0] logB(+0)
+  Result: -inf
+  isInf: YES, Sign: NEGATIVE
+  Expected: -Inf, Got: -Inf ✓
+
+[TEST 1] logB(-0)
+  Result: -inf
+  isInf: YES, Sign: NEGATIVE
+  Expected: -Inf, Got: -Inf ✓
+
+[TEST 2] logB(1) - valid
+  Result: 0.000000
+  isInf: NO, Sign: N/A
+  Expected: Finite value, Got: Finite ✓
+
+[TEST 3] logB(8) - valid
+  Result: 3.000000
+  isInf: NO, Sign: N/A
+  Expected: Finite value, Got: Finite ✓
+
+========================================
+
+[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD/results/divZero/logB_test/host.bc
+
+IEEE Exceptions According to the standard
+  Total FP Ops:       0
+  Div by Zero:        0
+  Invalid Ops:        0
+  Overflow:           0
+  Underflow:          0
+
+Detailed Breakdown
+  NaNs (Input):       0
+  NaNs (Created):     0
+  Denormals Produced: 0
+
+Workload Stats
+  Kernels Launched:   1
+  Operations Total:   0
+
+Derived Metrics
+  Total Exceptions:   0
+  Exception Density:  0 (per million ops)
+  NaN Prop Rate:      0 (per million NaNs)
+  Subnormal Rate:     0 (per million underflows)
+  Instability Score:  0
+
+[FP_INSTRUMENT] Finalized.

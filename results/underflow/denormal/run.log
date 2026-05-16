@@ -1,0 +1,73 @@
+[DBG] invalid=0 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/underflow/denormal/host.bc
+[FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
+========================================
+[TEST] Denormal Number Operations
+[IEEE 754 Clause 7.5.0]
+========================================
+Testing operations that produce or use denormals
+FLT_MIN = 1.175494e-38
+Denormal example: FLT_MIN/2 = 5.877472e-39
+
+[0] denorm + denorm
+    Result: 1.175494e-38
+    Is denormal: NO
+    Is zero: NO
+    Is normalized: YES
+
+[1] denorm × 2.0
+    Result: 1.175494e-38
+    Is denormal: NO
+    Is zero: NO
+    Is normalized: YES
+
+[2] denorm / 1.5
+    Result: 3.918315e-39
+    Is denormal: YES
+    Is zero: NO
+    Is normalized: NO
+
+[3] denorm × denorm
+    Result: 0.000000e+00
+    Is denormal: NO
+    Is zero: YES
+    Is normalized: NO
+
+[4] (FLT_MIN×1.5) - FLT_MIN
+    Result: 5.877472e-39
+    Is denormal: YES
+    Is zero: NO
+    Is normalized: NO
+
+========================================
+Note: GPU behavior depends on FTZ (Flush-To-Zero) mode
+  FTZ=0: Denormals supported (IEEE 754 compliant)
+  FTZ=1: Denormals flushed to zero (faster, non-compliant)
+========================================
+
+[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD/results/underflow/denormal/host.bc
+
+IEEE Exceptions According to the standard
+  Total FP Ops:       0
+  Div by Zero:        0
+  Invalid Ops:        0
+  Overflow:           0
+  Underflow:          0
+
+Detailed Breakdown
+  NaNs (Input):       0
+  NaNs (Created):     0
+  Denormals Produced: 0
+
+Workload Stats
+  Kernels Launched:   1
+  Operations Total:   0
+
+Derived Metrics
+  Total Exceptions:   0
+  Exception Density:  0 (per million ops)
+  NaN Prop Rate:      0 (per million NaNs)
+  Subnormal Rate:     0 (per million underflows)
+  Instability Score:  0
+
+[FP_INSTRUMENT] Finalized.

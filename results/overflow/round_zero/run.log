@@ -1,0 +1,64 @@
+[DBG] invalid=0 divzero=0 overflow=1 underflow=0 total=0 subnormal=0
+[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/overflow/round_zero/host.bc
+[FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
+========================================
+[TEST] Overflow - Round Toward Zero
+[IEEE 754 Clause 7.4.0.b]
+========================================
+Rule: roundTowardZero → largest finite number
+FLT_MAX = 3.402823e+38
+
+[0] __fadd_rz(FLT_MAX, FLT_MAX)
+    Result: 3.402823e+38
+    Is finite: YES, Is FLT_MAX: YES
+    Expected: FLT_MAX
+    Status: PASS ✓
+
+[1] __fmul_rz(FLT_MAX, 2.0)
+    Result: 3.402823e+38
+    Is finite: YES, Is FLT_MAX: YES
+    Expected: FLT_MAX
+    Status: PASS ✓
+
+[2] __fmul_rz(-FLT_MAX, 2.0)
+    Result: -3.402823e+38
+    Is finite: YES, Is FLT_MAX: YES
+    Expected: -FLT_MAX
+    Status: PASS ✓
+
+[3] __fmaf_rz(FLT_MAX, 1.5, FLT_MAX)
+    Result: 3.402823e+38
+    Is finite: YES, Is FLT_MAX: YES
+    Expected: FLT_MAX
+    Status: PASS ✓
+
+========================================
+Result: 4/4 tests passed
+========================================
+
+[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD/results/overflow/round_zero/host.bc
+
+IEEE Exceptions According to the standard
+  Total FP Ops:       0
+  Div by Zero:        0
+  Invalid Ops:        0
+  Overflow:           1
+  Underflow:          0
+
+Detailed Breakdown
+  NaNs (Input):       0
+  NaNs (Created):     0
+  Denormals Produced: 0
+
+Workload Stats
+  Kernels Launched:   1
+  Operations Total:   0
+
+Derived Metrics
+  Total Exceptions:   1
+  Exception Density:  0 (per million ops)
+  NaN Prop Rate:      0 (per million NaNs)
+  Subnormal Rate:     0 (per million underflows)
+  Instability Score:  0
+
+[FP_INSTRUMENT] Finalized.

@@ -1,0 +1,131 @@
+[DBG] invalid=0 divzero=0 overflow=0 underflow=1 total=0 subnormal=0
+[DBG] invalid=0 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+[DBG] invalid=0 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+[DBG] invalid=0 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/underflow/rounding/host.bc
+[FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
+========================================
+[TEST] Underflow Exception
+[IEEE 754 Clause 7.5.0]
+========================================
+FLT_MIN = 1.175494e-38 (smallest normalized)
+Underflow: result strictly between ±FLT_MIN and 0
+Result: denormal (subnormal) number or flush to zero
+
+--- Test 1: Underflow with Round Nearest ---
+  __fdiv_rn(FLT_MIN, 2.0)
+    Value: 5.877472e-39
+    Is denormal: YES
+    Is zero: NO
+    Abs < FLT_MIN: YES
+  __fmul_rn(FLT_MIN, 0.5)
+    Value: 5.877472e-39
+    Is denormal: YES
+    Is zero: NO
+    Abs < FLT_MIN: YES
+  __fmul_rn(FLT_MIN, 1e-20)
+    Value: 0.000000e+00
+    Is denormal: NO
+    Is zero: YES
+    Abs < FLT_MIN: NO
+  __fsub_rn(tiny+ε, tiny)
+    Value: 1.401298e-45
+    Is denormal: YES
+    Is zero: NO
+    Abs < FLT_MIN: YES
+  __fmaf_rn(FLT_MIN, 0.25, 0)
+    Value: 2.938736e-39
+    Is denormal: YES
+    Is zero: NO
+    Abs < FLT_MIN: YES
+
+  Denormals produced: 4/5
+
+--- Test 2: Underflow with Round Toward Zero ---
+  __fdiv_rz(FLT_MIN, 2.0)
+    Value: 5.877472e-39
+    Is denormal: YES
+    Is zero: NO
+    Abs < FLT_MIN: YES
+  __fmul_rz(FLT_MIN, 0.5)
+    Value: 5.877472e-39
+    Is denormal: YES
+    Is zero: NO
+    Abs < FLT_MIN: YES
+  __fmul_rz(FLT_MIN, 1e-30)
+    Value: 0.000000e+00
+    Is denormal: NO
+    Is zero: YES
+    Abs < FLT_MIN: NO
+
+  Denormals produced: 2/3
+
+--- Test 3: Underflow with Round Up ---
+  __fdiv_ru(+FLT_MIN, 2.0)
+    Value: 5.877472e-39
+    Is denormal: YES
+    Is zero: NO
+    Abs < FLT_MIN: YES
+  __fmul_ru(+FLT_MIN, 0.5)
+    Value: 5.877472e-39
+    Is denormal: YES
+    Is zero: NO
+    Abs < FLT_MIN: YES
+  __fmul_ru(-FLT_MIN, 0.5)
+    Value: -5.877472e-39
+    Is denormal: YES
+    Is zero: NO
+    Abs < FLT_MIN: YES
+
+--- Test 4: Underflow with Round Down ---
+  __fdiv_rd(+FLT_MIN, 2.0)
+    Value: 5.877472e-39
+    Is denormal: YES
+    Is zero: NO
+    Abs < FLT_MIN: YES
+  __fmul_rd(-FLT_MIN, 0.5)
+    Value: -5.877472e-39
+    Is denormal: YES
+    Is zero: NO
+    Abs < FLT_MIN: YES
+  __fmul_rd(-FLT_MIN, 0.25)
+    Value: -2.938736e-39
+    Is denormal: YES
+    Is zero: NO
+    Abs < FLT_MIN: YES
+
+========================================
+Summary:
+  Underflow detected when: 0 < |result| < FLT_MIN
+  Result options:
+    1. Denormal/subnormal number (gradual underflow)
+    2. Flush to zero (FTZ mode)
+  Your pass should detect all underflow-causing operations
+========================================
+
+[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD/results/underflow/rounding/host.bc
+
+IEEE Exceptions According to the standard
+  Total FP Ops:       0
+  Div by Zero:        0
+  Invalid Ops:        0
+  Overflow:           0
+  Underflow:          0
+
+Detailed Breakdown
+  NaNs (Input):       0
+  NaNs (Created):     0
+  Denormals Produced: 0
+
+Workload Stats
+  Kernels Launched:   1
+  Operations Total:   0
+
+Derived Metrics
+  Total Exceptions:   0
+  Exception Density:  0 (per million ops)
+  NaN Prop Rate:      0 (per million NaNs)
+  Subnormal Rate:     0 (per million underflows)
+  Instability Score:  0
+
+[FP_INSTRUMENT] Finalized.

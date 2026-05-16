@@ -1,0 +1,24 @@
+/storage/packages/cmake/3.19.6/bin/cmake -S/home/users/sislam3/SBAC-PAD -B/home/users/sislam3/SBAC-PAD/build --check-build-system CMakeFiles/Makefile.cmake 0
+/storage/packages/cmake/3.19.6/bin/cmake -E cmake_progress_start /home/users/sislam3/SBAC-PAD/build/CMakeFiles /home/users/sislam3/SBAC-PAD/build//CMakeFiles/progress.marks
+make  -f CMakeFiles/Makefile2 all
+make[1]: Entering directory '/storage/users/sislam3/SBAC-PAD/build'
+make  -f lib/device/CMakeFiles/DevicePass.dir/build.make lib/device/CMakeFiles/DevicePass.dir/depend
+make[2]: Entering directory '/storage/users/sislam3/SBAC-PAD/build'
+cd /home/users/sislam3/SBAC-PAD/build && /storage/packages/cmake/3.19.6/bin/cmake -E cmake_depends "Unix Makefiles" /home/users/sislam3/SBAC-PAD /home/users/sislam3/SBAC-PAD/lib/device /home/users/sislam3/SBAC-PAD/build /home/users/sislam3/SBAC-PAD/build/lib/device /home/users/sislam3/SBAC-PAD/build/lib/device/CMakeFiles/DevicePass.dir/DependInfo.cmake --color=
+Dependee "/home/users/sislam3/SBAC-PAD/build/lib/device/CMakeFiles/DevicePass.dir/DependInfo.cmake" is newer than depender "/home/users/sislam3/SBAC-PAD/build/lib/device/CMakeFiles/DevicePass.dir/depend.internal".
+Dependee "/home/users/sislam3/SBAC-PAD/build/lib/device/CMakeFiles/CMakeDirectoryInformation.cmake" is newer than depender "/home/users/sislam3/SBAC-PAD/build/lib/device/CMakeFiles/DevicePass.dir/depend.internal".
+Scanning dependencies of target DevicePass
+make[2]: Leaving directory '/storage/users/sislam3/SBAC-PAD/build'
+make  -f lib/device/CMakeFiles/DevicePass.dir/build.make lib/device/CMakeFiles/DevicePass.dir/build
+make[2]: Entering directory '/storage/users/sislam3/SBAC-PAD/build'
+[ 25%] Building CXX object lib/device/CMakeFiles/DevicePass.dir/pass.cpp.o
+cd /home/users/sislam3/SBAC-PAD/build/lib/device && /home/users/sislam3/opt/llvm-22/bin/clang++  -I/storage/users/sislam3/opt/llvm-22/include -O3 -DNDEBUG -fPIC   -D_GNU_SOURCE -D_DEBUG -D_GLIBCXX_ASSERTIONS -D_GLIBCXX_USE_CXX11_ABI=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -fno-exceptions -funwind-tables -fno-rtti -std=gnu++17 -o CMakeFiles/DevicePass.dir/pass.cpp.o -c /home/users/sislam3/SBAC-PAD/lib/device/pass.cpp
+/home/users/sislam3/SBAC-PAD/lib/device/pass.cpp:36:10: fatal error: 'llvm/Passes/PassPlugin.h' file not found
+   36 | #include "llvm/Passes/PassPlugin.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+make[2]: *** [lib/device/CMakeFiles/DevicePass.dir/build.make:82: lib/device/CMakeFiles/DevicePass.dir/pass.cpp.o] Error 1
+make[2]: Leaving directory '/storage/users/sislam3/SBAC-PAD/build'
+make[1]: *** [CMakeFiles/Makefile2:305: lib/device/CMakeFiles/DevicePass.dir/all] Error 2
+make[1]: Leaving directory '/storage/users/sislam3/SBAC-PAD/build'
+make: *** [Makefile:149: all] Error 2

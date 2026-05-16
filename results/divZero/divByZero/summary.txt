@@ -1,0 +1,14 @@
+Test:     divZero / divByZero
+Source:   tests/basic_tests/divZero/divByZero.cu
+Status:   OK (rc=0)
+
+Counters:
+  invalid              1
+  divzero              8
+  overflow             8
+  underflow            0
+  total                0
+  subnormal            0
+  kernels_launched     1
+
+Full output: run.log

@@ -1,0 +1,14 @@
+Test:     invalid / mul_zero_inf
+Source:   tests/basic_tests/invalid/mul_zero_inf.cu
+Status:   OK (rc=0)
+
+Counters:
+  invalid              4
+  divzero              0
+  overflow             0
+  underflow            0
+  total                0
+  subnormal            0
+  kernels_launched     1
+
+Full output: run.log
