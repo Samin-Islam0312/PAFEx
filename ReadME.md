@@ -72,4 +72,16 @@ export C_INCLUDE_PATH=$PAPI_DIR/include:$C_INCLUDE_PATH
 echo "OACISS H100/A100 FP Instrumentation Environment Activated."
 * 
 
-#### Compilation Process
+### Compilation Process
+
+
+### Benchmark program selection
+
+```bash
+cp -r rodinia/cuda/hotspot SBAC-PAD/tests/benchmarks/rodinia
+cp -r rodinia/cuda/gaussian SBAC-PAD/tests/benchmarks/rodinia
+cp -r rodinia/cuda/backprop SBAC-PAD/tests/benchmarks/rodinia
+cp -r rodinia/cuda/cfd SBAC-PAD/tests/benchmarks/rodinia
+cp -r rodinia/cuda/myocyte SBAC-PAD/tests/benchmarks/rodinia
+
+
