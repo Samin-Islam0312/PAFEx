@@ -9,27 +9,22 @@
 [FPPass] Visiting function: _Z14testInvalidFMAPf [KERNEL]
 [FPPass]   Collected 5 instructions to instrument
 [FPPass]   INSTRUMENT _Z14testInvalidFMAPf:133 op=6
-[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=6 line=133
 [FPPass]     -> Injected check: ex=2 op=6 line=133
 [FPPass]     -> Injected check: ex=3 op=6 line=133
 [FPPass]   INSTRUMENT _Z14testInvalidFMAPf:133 op=6
-[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=6 line=133
 [FPPass]     -> Injected check: ex=2 op=6 line=133
 [FPPass]     -> Injected check: ex=3 op=6 line=133
 [FPPass]   INSTRUMENT _Z14testInvalidFMAPf:133 op=6
-[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=6 line=133
 [FPPass]     -> Injected check: ex=2 op=6 line=133
 [FPPass]     -> Injected check: ex=3 op=6 line=133
 [FPPass]   INSTRUMENT _Z14testInvalidFMAPf:133 op=6
-[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=6 line=133
 [FPPass]     -> Injected check: ex=2 op=6 line=133
 [FPPass]     -> Injected check: ex=3 op=6 line=133
 [FPPass]   INSTRUMENT _Z14testInvalidFMAPf:133 op=6
-[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=6 line=133
 [FPPass]     -> Injected check: ex=2 op=6 line=133
 [FPPass]     -> Injected check: ex=3 op=6 line=133

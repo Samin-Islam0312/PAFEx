@@ -6,7 +6,7 @@ Counters:
   invalid              0
   divzero              0
   overflow             0
-  underflow            0
+  underflow            3
   total                0
   subnormal            0
   kernels_launched     1

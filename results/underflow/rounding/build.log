@@ -9,25 +9,87 @@
 [FPPass] Visiting function: _Z12is_subnormalf [device]
 [FPPass]   Collected 0 instructions to instrument
 [FPPass] Visiting function: _Z26testUnderflow_RoundNearestPfPi [KERNEL]
+[FPPass]   COLLECT nvvm.div 'llvm.nvvm.div.rn.f' @ _Z26testUnderflow_RoundNearestPfPi:213
+[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rn.f' @ _Z26testUnderflow_RoundNearestPfPi:307
+[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rn.f' @ _Z26testUnderflow_RoundNearestPfPi:307
 [FPPass]   COLLECT fmul @ _Z26testUnderflow_RoundNearestPfPi:38
-[FPPass]   Collected 2 instructions to instrument
+[FPPass]   Collected 5 instructions to instrument
+[FPPass]   INSTRUMENT _Z26testUnderflow_RoundNearestPfPi:213 op=3
+[FPPass]     -> Injected check: ex=0 op=3 line=213
+[FPPass]     -> Injected check: ex=1 op=3 line=213
+[FPPass]     -> Injected check: ex=2 op=3 line=213
+[FPPass]     -> Injected check: ex=3 op=3 line=213
+[FPPass]   INSTRUMENT _Z26testUnderflow_RoundNearestPfPi:307 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=307
+[FPPass]     -> Injected check: ex=2 op=2 line=307
+[FPPass]     -> Injected check: ex=3 op=2 line=307
+[FPPass]   INSTRUMENT _Z26testUnderflow_RoundNearestPfPi:307 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=307
+[FPPass]     -> Injected check: ex=2 op=2 line=307
+[FPPass]     -> Injected check: ex=3 op=2 line=307
 [FPPass]   INSTRUMENT _Z26testUnderflow_RoundNearestPfPi:38 op=2
-[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=2 line=38
 [FPPass]     -> Injected check: ex=2 op=2 line=38
 [FPPass]     -> Injected check: ex=3 op=2 line=38
 [FPPass]   INSTRUMENT _Z26testUnderflow_RoundNearestPfPi:295 op=6
-[DBG] detectInvalidOp: OpID=6 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=6 line=295
 [FPPass]     -> Injected check: ex=2 op=6 line=295
 [FPPass]     -> Injected check: ex=3 op=6 line=295
 [FPPass] Visiting function: _Z23testUnderflow_RoundZeroPfPi [KERNEL]
-[FPPass]   Collected 0 instructions to instrument
+[FPPass]   COLLECT nvvm.div 'llvm.nvvm.div.rz.f' @ _Z23testUnderflow_RoundZeroPfPi:219
+[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rz.f' @ _Z23testUnderflow_RoundZeroPfPi:313
+[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rz.f' @ _Z23testUnderflow_RoundZeroPfPi:313
+[FPPass]   Collected 3 instructions to instrument
+[FPPass]   INSTRUMENT _Z23testUnderflow_RoundZeroPfPi:219 op=3
+[FPPass]     -> Injected check: ex=0 op=3 line=219
+[FPPass]     -> Injected check: ex=1 op=3 line=219
+[FPPass]     -> Injected check: ex=2 op=3 line=219
+[FPPass]     -> Injected check: ex=3 op=3 line=219
+[FPPass]   INSTRUMENT _Z23testUnderflow_RoundZeroPfPi:313 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=313
+[FPPass]     -> Injected check: ex=2 op=2 line=313
+[FPPass]     -> Injected check: ex=3 op=2 line=313
+[FPPass]   INSTRUMENT _Z23testUnderflow_RoundZeroPfPi:313 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=313
+[FPPass]     -> Injected check: ex=2 op=2 line=313
+[FPPass]     -> Injected check: ex=3 op=2 line=313
 [FPPass] Visiting function: _Z21testUnderflow_RoundUpPfPi [KERNEL]
-[FPPass]   Collected 0 instructions to instrument
+[FPPass]   COLLECT nvvm.div 'llvm.nvvm.div.rp.f' @ _Z21testUnderflow_RoundUpPfPi:216
+[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rp.f' @ _Z21testUnderflow_RoundUpPfPi:310
+[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rp.f' @ _Z21testUnderflow_RoundUpPfPi:310
+[FPPass]   Collected 3 instructions to instrument
+[FPPass]   INSTRUMENT _Z21testUnderflow_RoundUpPfPi:216 op=3
+[FPPass]     -> Injected check: ex=0 op=3 line=216
+[FPPass]     -> Injected check: ex=1 op=3 line=216
+[FPPass]     -> Injected check: ex=2 op=3 line=216
+[FPPass]     -> Injected check: ex=3 op=3 line=216
+[FPPass]   INSTRUMENT _Z21testUnderflow_RoundUpPfPi:310 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=310
+[FPPass]     -> Injected check: ex=2 op=2 line=310
+[FPPass]     -> Injected check: ex=3 op=2 line=310
+[FPPass]   INSTRUMENT _Z21testUnderflow_RoundUpPfPi:310 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=310
+[FPPass]     -> Injected check: ex=2 op=2 line=310
+[FPPass]     -> Injected check: ex=3 op=2 line=310
 [FPPass] Visiting function: _Z23testUnderflow_RoundDownPfPi [KERNEL]
-[FPPass]   Collected 0 instructions to instrument
-[FPPass] SUMMARY: visited 5 functions, instrumented 2 instructions
+[FPPass]   COLLECT nvvm.div 'llvm.nvvm.div.rm.f' @ _Z23testUnderflow_RoundDownPfPi:210
+[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rm.f' @ _Z23testUnderflow_RoundDownPfPi:304
+[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rm.f' @ _Z23testUnderflow_RoundDownPfPi:304
+[FPPass]   Collected 3 instructions to instrument
+[FPPass]   INSTRUMENT _Z23testUnderflow_RoundDownPfPi:210 op=3
+[FPPass]     -> Injected check: ex=0 op=3 line=210
+[FPPass]     -> Injected check: ex=1 op=3 line=210
+[FPPass]     -> Injected check: ex=2 op=3 line=210
+[FPPass]     -> Injected check: ex=3 op=3 line=210
+[FPPass]   INSTRUMENT _Z23testUnderflow_RoundDownPfPi:304 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=304
+[FPPass]     -> Injected check: ex=2 op=2 line=304
+[FPPass]     -> Injected check: ex=3 op=2 line=304
+[FPPass]   INSTRUMENT _Z23testUnderflow_RoundDownPfPi:304 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=304
+[FPPass]     -> Injected check: ex=2 op=2 line=304
+[FPPass]     -> Injected check: ex=3 op=2 line=304
+[FPPass] SUMMARY: visited 5 functions, instrumented 14 instructions
 === Part 3: Host pipeline ===
 [HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD/results/underflow/rounding/host.bc
 [HostPass] Created host shadow: fp_invalid_counter

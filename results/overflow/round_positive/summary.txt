@@ -5,7 +5,7 @@ Status:   OK (rc=0)
 Counters:
   invalid              0
   divzero              0
-  overflow             0
+  overflow             4
   underflow            0
   total                0
   subnormal            0

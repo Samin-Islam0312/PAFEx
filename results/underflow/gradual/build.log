@@ -18,43 +18,36 @@
 [FPPass]   COLLECT fdiv @ _Z20testGradualUnderflowPfPi:53
 [FPPass]   Collected 7 instructions to instrument
 [FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:23 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=23
 [FPPass]     -> Injected check: ex=1 op=3 line=23
 [FPPass]     -> Injected check: ex=2 op=3 line=23
 [FPPass]     -> Injected check: ex=3 op=3 line=23
 [FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:28 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=28
 [FPPass]     -> Injected check: ex=1 op=3 line=28
 [FPPass]     -> Injected check: ex=2 op=3 line=28
 [FPPass]     -> Injected check: ex=3 op=3 line=28
 [FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:33 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=33
 [FPPass]     -> Injected check: ex=1 op=3 line=33
 [FPPass]     -> Injected check: ex=2 op=3 line=33
 [FPPass]     -> Injected check: ex=3 op=3 line=33
 [FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:38 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=38
 [FPPass]     -> Injected check: ex=1 op=3 line=38
 [FPPass]     -> Injected check: ex=2 op=3 line=38
 [FPPass]     -> Injected check: ex=3 op=3 line=38
 [FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:43 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=43
 [FPPass]     -> Injected check: ex=1 op=3 line=43
 [FPPass]     -> Injected check: ex=2 op=3 line=43
 [FPPass]     -> Injected check: ex=3 op=3 line=43
 [FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:48 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=48
 [FPPass]     -> Injected check: ex=1 op=3 line=48
 [FPPass]     -> Injected check: ex=2 op=3 line=48
 [FPPass]     -> Injected check: ex=3 op=3 line=48
 [FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:53 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=53
 [FPPass]     -> Injected check: ex=1 op=3 line=53
 [FPPass]     -> Injected check: ex=2 op=3 line=53

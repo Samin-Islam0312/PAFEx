@@ -16,25 +16,18 @@
 [FPPass]   COLLECT sqrt @ _Z15testInvalidSqrtPf:318
 [FPPass]   Collected 7 instructions to instrument
 [FPPass]   INSTRUMENT _Z15testInvalidSqrtPf:318 op=5
-[DBG] detectInvalidOp: OpID=5 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=5 line=318
 [FPPass]   INSTRUMENT _Z15testInvalidSqrtPf:318 op=5
-[DBG] detectInvalidOp: OpID=5 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=5 line=318
 [FPPass]   INSTRUMENT _Z15testInvalidSqrtPf:318 op=5
-[DBG] detectInvalidOp: OpID=5 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=5 line=318
 [FPPass]   INSTRUMENT _Z15testInvalidSqrtPf:318 op=5
-[DBG] detectInvalidOp: OpID=5 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=5 line=318
 [FPPass]   INSTRUMENT _Z15testInvalidSqrtPf:318 op=5
-[DBG] detectInvalidOp: OpID=5 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=5 line=318
 [FPPass]   INSTRUMENT _Z15testInvalidSqrtPf:318 op=5
-[DBG] detectInvalidOp: OpID=5 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=5 line=318
 [FPPass]   INSTRUMENT _Z15testInvalidSqrtPf:318 op=5
-[DBG] detectInvalidOp: OpID=5 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=5 line=318
 [FPPass] SUMMARY: visited 1 functions, instrumented 7 instructions
 === Part 3: Host pipeline ===

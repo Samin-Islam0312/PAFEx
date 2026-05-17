@@ -1,7 +1,7 @@
-[DBG] invalid=0 divzero=0 overflow=0 underflow=1 total=0 subnormal=0
-[DBG] invalid=0 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
-[DBG] invalid=0 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
-[DBG] invalid=0 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+[DBG] invalid=0 divzero=0 overflow=0 underflow=4 total=0 subnormal=0
+[DBG] invalid=0 divzero=0 overflow=0 underflow=3 total=0 subnormal=0
+[DBG] invalid=0 divzero=0 overflow=0 underflow=3 total=0 subnormal=0
+[DBG] invalid=0 divzero=0 overflow=0 underflow=3 total=0 subnormal=0
 [FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/underflow/rounding/host.bc
 [FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
 ========================================
@@ -110,7 +110,7 @@ IEEE Exceptions According to the standard
   Div by Zero:        0
   Invalid Ops:        0
   Overflow:           0
-  Underflow:          0
+  Underflow:          3
 
 Detailed Breakdown
   NaNs (Input):       0
@@ -122,7 +122,7 @@ Workload Stats
   Operations Total:   0
 
 Derived Metrics
-  Total Exceptions:   0
+  Total Exceptions:   3
   Exception Density:  0 (per million ops)
   NaN Prop Rate:      0 (per million NaNs)
   Subnormal Rate:     0 (per million underflows)

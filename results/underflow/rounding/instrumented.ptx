@@ -72,9 +72,9 @@ $L__func_end0:
 	.local .align 8 .b8 	__local_depot1[80];
 	.reg .b64 	%SP;
 	.reg .b64 	%SPL;
-	.reg .pred 	%p<80>;
-	.reg .b32 	%r<83>;
-	.reg .b64 	%rd<24>;
+	.reg .pred 	%p<229>;
+	.reg .b32 	%r<150>;
+	.reg .b64 	%rd<34>;
 	.loc	4 11 0                          // tests/basic_tests/underflow/rounding.cu:11:0
 $L__func_begin1:
 	.loc	4 11 0                          // tests/basic_tests/underflow/rounding.cu:11:0
@@ -88,394 +88,670 @@ $L__func_begin1:
 	st.b64 	[%SP+56], %rd2;
 $L__tmp4:
 	.loc	3 53 27                         // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_builtin_vars.h:53:27 @[ tests/basic_tests/underflow/rounding.cu:12:15 ]
-	mov.u32 	%r7, %tid.x;
+	mov.u32 	%r16, %tid.x;
 $L__tmp5:
 	.loc	4 12 9                          // tests/basic_tests/underflow/rounding.cu:12:9
-	st.b32 	[%SP+64], %r7;
+	st.b32 	[%SP+64], %r16;
 	.loc	4 14 11                         // tests/basic_tests/underflow/rounding.cu:14:11
 	st.b32 	[%SP+68], 8388608;
 $L__tmp6:
 	.loc	4 18 9                          // tests/basic_tests/underflow/rounding.cu:18:9
-	ld.b32 	%r8, [%SP+64];
+	ld.b32 	%r17, [%SP+64];
 	.loc	4 18 13                         // tests/basic_tests/underflow/rounding.cu:18:13
-	setp.ne.b32 	%p1, %r8, 0;
-	@%p1 bra 	$L__BB1_2;
+	setp.ne.b32 	%p1, %r17, 0;
+	@%p1 bra 	$L__BB1_10;
 	bra.uni 	$L__BB1_1;
 $L__BB1_1:                              // %if.then
 $L__tmp7:
 	.loc	4 20 31                         // tests/basic_tests/underflow/rounding.cu:20:31
-	ld.b32 	%r9, [%SP+68];
-	st.b32 	[%SP+36], %r9;
+	ld.b32 	%r18, [%SP+68];
+	st.b32 	[%SP+36], %r18;
 	st.b32 	[%SP+40], 1073741824;
 $L__tmp8:
 	.loc	6 213 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:213:23 @[ tests/basic_tests/underflow/rounding.cu:20:21 ]
-	ld.b32 	%r10, [%SP+36];
+	ld.b32 	%r1, [%SP+36];
 	.loc	6 213 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:213:28 @[ tests/basic_tests/underflow/rounding.cu:20:21 ]
-	ld.b32 	%r11, [%SP+40];
+	ld.b32 	%r2, [%SP+40];
 	.loc	6 213 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:213:10 @[ tests/basic_tests/underflow/rounding.cu:20:21 ]
-	div.rn.f32 	%r12, %r10, %r11;
+	and.b32 	%r19, %r1, 2139095040;
+	setp.eq.b32 	%p2, %r19, 2139095040;
+	and.b32 	%r20, %r1, 8388607;
+	setp.ne.b32 	%p3, %r20, 0;
+	and.b32 	%r21, %r1, 4194304;
+	setp.eq.b32 	%p4, %r21, 0;
+	and.pred 	%p5, %p2, %p4;
+	and.pred 	%p6, %p5, %p3;
+	and.b32 	%r22, %r2, 2139095040;
+	setp.eq.b32 	%p7, %r22, 2139095040;
+	and.b32 	%r23, %r2, 8388607;
+	setp.ne.b32 	%p8, %r23, 0;
+	and.b32 	%r24, %r2, 4194304;
+	setp.eq.b32 	%p9, %r24, 0;
+	and.pred 	%p10, %p7, %p9;
+	and.pred 	%p11, %p10, %p8;
+	or.pred 	%p12, %p6, %p11;
+	or.b32 	%r25, %r1, %r2;
+	and.b32 	%r26, %r25, 2147483647;
+	setp.eq.b32 	%p13, %r26, 0;
+	setp.eq.b32 	%p14, %r20, 0;
+	and.pred 	%p15, %p2, %p14;
+	setp.eq.b32 	%p16, %r23, 0;
+	and.pred 	%p17, %p7, %p16;
+	and.pred 	%p18, %p15, %p17;
+	or.pred 	%p19, %p13, %p18;
+	or.pred 	%p20, %p12, %p19;
+	not.pred 	%p21, %p20;
+	@%p21 bra 	$L__BB1_3;
+	bra.uni 	$L__BB1_2;
+$L__BB1_2:
+	atom.global.add.u64 	%rd3, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB1_3;
+$L__BB1_3:
+	and.b32 	%r27, %r2, 2147483647;
+	setp.ne.b32 	%p22, %r27, 0;
+	and.b32 	%r28, %r1, 2139095040;
+	setp.eq.b32 	%p23, %r28, 2139095040;
+	and.b32 	%r29, %r1, 2147483647;
+	setp.eq.b32 	%p24, %r29, 0;
+	or.pred 	%p25, %p23, %p24;
+	or.pred 	%p26, %p22, %p25;
+	@%p26 bra 	$L__BB1_5;
+	bra.uni 	$L__BB1_4;
+$L__BB1_4:
+	atom.global.add.u64 	%rd4, [fp_divbyzero_counter], 1;
+	bra.uni 	$L__BB1_5;
+$L__BB1_5:
+	div.rn.f32 	%r3, %r1, %r2;
 $L__tmp9:
 	.loc	4 20 9                          // tests/basic_tests/underflow/rounding.cu:20:9
-	ld.b64 	%rd3, [%SP+48];
+	and.b32 	%r30, %r1, 2139095040;
+	setp.ne.b32 	%p27, %r30, 2139095040;
+	and.b32 	%r31, %r2, 2139095040;
+	setp.ne.b32 	%p28, %r31, 2139095040;
+	and.pred 	%p29, %p27, %p28;
+	and.b32 	%r32, %r2, 2147483647;
+	setp.ne.b32 	%p30, %r32, 0;
+	and.pred 	%p31, %p29, %p30;
+	and.b32 	%r33, %r3, 2139095040;
+	setp.eq.b32 	%p32, %r33, 2139095040;
+	and.b32 	%r34, %r3, 8388607;
+	setp.eq.b32 	%p33, %r34, 0;
+	and.pred 	%p34, %p32, %p33;
+	and.pred 	%p35, %p31, %p34;
+	not.pred 	%p36, %p35;
+	@%p36 bra 	$L__BB1_7;
+	bra.uni 	$L__BB1_6;
+$L__BB1_6:
+	atom.global.add.u64 	%rd5, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB1_7;
+$L__BB1_7:
+	and.b32 	%r35, %r1, 2139095040;
+	setp.ne.b32 	%p37, %r35, 0;
+	and.b32 	%r36, %r1, 8388607;
+	setp.eq.b32 	%p38, %r36, 0;
+	or.pred 	%p39, %p37, %p38;
+	and.b32 	%r37, %r2, 2139095040;
+	setp.ne.b32 	%p40, %r37, 0;
+	and.b32 	%r38, %r2, 8388607;
+	setp.eq.b32 	%p41, %r38, 0;
+	or.pred 	%p42, %p40, %p41;
+	and.pred 	%p43, %p39, %p42;
+	and.b32 	%r39, %r3, 2139095040;
+	setp.eq.b32 	%p44, %r39, 0;
+	and.b32 	%r40, %r3, 8388607;
+	setp.ne.b32 	%p45, %r40, 0;
+	and.pred 	%p46, %p44, %p45;
+	and.b32 	%r41, %r3, 2147483647;
+	setp.eq.b32 	%p47, %r41, 0;
+	and.b32 	%r42, %r1, 2147483647;
+	setp.ne.b32 	%p48, %r42, 0;
+	and.b32 	%r43, %r2, 2147483647;
+	setp.ne.b32 	%p49, %r43, 0;
+	and.pred 	%p50, %p48, %p49;
+	and.pred 	%p51, %p47, %p50;
+	or.pred 	%p52, %p46, %p51;
+	and.pred 	%p53, %p43, %p52;
+	not.pred 	%p54, %p53;
+	@%p54 bra 	$L__BB1_9;
+	bra.uni 	$L__BB1_8;
+$L__BB1_8:
+	atom.global.add.u64 	%rd6, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB1_9;
+$L__BB1_9:
+	ld.b64 	%rd7, [%SP+48];
 	.loc	4 20 19                         // tests/basic_tests/underflow/rounding.cu:20:19
-	st.b32 	[%rd3], %r12;
+	st.b32 	[%rd7], %r3;
 	.loc	4 21 39                         // tests/basic_tests/underflow/rounding.cu:21:39
-	ld.b64 	%rd4, [%SP+48];
-	ld.b32 	%r13, [%rd4];
+	ld.b64 	%rd8, [%SP+48];
+	ld.b32 	%r44, [%rd8];
 	.loc	4 21 26                         // tests/basic_tests/underflow/rounding.cu:21:26
 	{ // callseq 0, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r13;
+	st.param.b32 	[param0], %r44;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r14, [retval0];
+	ld.param.b32 	%r45, [retval0];
 	} // callseq 0
-	and.b32 	%r15, %r14, 1;
+	and.b32 	%r46, %r45, 1;
 	.loc	4 21 9                          // tests/basic_tests/underflow/rounding.cu:21:9
-	ld.b64 	%rd5, [%SP+56];
+	ld.b64 	%rd9, [%SP+56];
 	.loc	4 21 24                         // tests/basic_tests/underflow/rounding.cu:21:24
-	st.b32 	[%rd5], %r15;
+	st.b32 	[%rd9], %r46;
 	.loc	4 22 5                          // tests/basic_tests/underflow/rounding.cu:22:5
-	bra.uni 	$L__BB1_2;
+	bra.uni 	$L__BB1_10;
 $L__tmp10:
-$L__BB1_2:                              // %if.end
+$L__BB1_10:                             // %if.end
 	.loc	4 24 9                          // tests/basic_tests/underflow/rounding.cu:24:9
-	ld.b32 	%r16, [%SP+64];
+	ld.b32 	%r47, [%SP+64];
 	.loc	4 24 13                         // tests/basic_tests/underflow/rounding.cu:24:13
-	setp.ne.b32 	%p2, %r16, 1;
-	@%p2 bra 	$L__BB1_4;
-	bra.uni 	$L__BB1_3;
-$L__BB1_3:                              // %if.then6
+	setp.ne.b32 	%p55, %r47, 1;
+	@%p55 bra 	$L__BB1_18;
+	bra.uni 	$L__BB1_11;
+$L__BB1_11:                             // %if.then6
 $L__tmp11:
 	.loc	4 26 31                         // tests/basic_tests/underflow/rounding.cu:26:31
-	ld.b32 	%r17, [%SP+68];
-	st.b32 	[%SP+20], %r17;
+	ld.b32 	%r48, [%SP+68];
+	st.b32 	[%SP+20], %r48;
 	st.b32 	[%SP+24], 1056964608;
 $L__tmp12:
 	.loc	6 307 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:307:23 @[ tests/basic_tests/underflow/rounding.cu:26:21 ]
-	ld.b32 	%r18, [%SP+20];
+	ld.b32 	%r4, [%SP+20];
 	.loc	6 307 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:307:28 @[ tests/basic_tests/underflow/rounding.cu:26:21 ]
-	ld.b32 	%r19, [%SP+24];
+	ld.b32 	%r5, [%SP+24];
 	.loc	6 307 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:307:10 @[ tests/basic_tests/underflow/rounding.cu:26:21 ]
-	mul.rn.f32 	%r20, %r18, %r19;
+	and.b32 	%r49, %r4, 2139095040;
+	setp.eq.b32 	%p56, %r49, 2139095040;
+	and.b32 	%r50, %r4, 8388607;
+	setp.ne.b32 	%p57, %r50, 0;
+	and.b32 	%r51, %r4, 4194304;
+	setp.eq.b32 	%p58, %r51, 0;
+	and.pred 	%p59, %p56, %p58;
+	and.pred 	%p60, %p59, %p57;
+	and.b32 	%r52, %r5, 2139095040;
+	setp.eq.b32 	%p61, %r52, 2139095040;
+	and.b32 	%r53, %r5, 8388607;
+	setp.ne.b32 	%p62, %r53, 0;
+	and.b32 	%r54, %r5, 4194304;
+	setp.eq.b32 	%p63, %r54, 0;
+	and.pred 	%p64, %p61, %p63;
+	and.pred 	%p65, %p64, %p62;
+	or.pred 	%p66, %p60, %p65;
+	and.b32 	%r55, %r4, 2147483647;
+	setp.eq.b32 	%p67, %r55, 0;
+	setp.eq.b32 	%p68, %r53, 0;
+	and.pred 	%p69, %p61, %p68;
+	and.pred 	%p70, %p67, %p69;
+	setp.eq.b32 	%p71, %r50, 0;
+	and.pred 	%p72, %p56, %p71;
+	and.b32 	%r56, %r5, 2147483647;
+	setp.eq.b32 	%p73, %r56, 0;
+	and.pred 	%p74, %p72, %p73;
+	or.pred 	%p75, %p70, %p74;
+	or.pred 	%p76, %p66, %p75;
+	not.pred 	%p77, %p76;
+	@%p77 bra 	$L__BB1_13;
+	bra.uni 	$L__BB1_12;
+$L__BB1_12:
+	atom.global.add.u64 	%rd10, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB1_13;
+$L__BB1_13:
+	mul.rn.f32 	%r6, %r4, %r5;
 $L__tmp13:
 	.loc	4 26 9                          // tests/basic_tests/underflow/rounding.cu:26:9
-	ld.b64 	%rd6, [%SP+48];
+	and.b32 	%r57, %r4, 2139095040;
+	setp.ne.b32 	%p78, %r57, 2139095040;
+	and.b32 	%r58, %r5, 2139095040;
+	setp.ne.b32 	%p79, %r58, 2139095040;
+	and.pred 	%p80, %p78, %p79;
+	and.b32 	%r59, %r6, 2139095040;
+	setp.eq.b32 	%p81, %r59, 2139095040;
+	and.b32 	%r60, %r6, 8388607;
+	setp.eq.b32 	%p82, %r60, 0;
+	and.pred 	%p83, %p81, %p82;
+	and.pred 	%p84, %p80, %p83;
+	not.pred 	%p85, %p84;
+	@%p85 bra 	$L__BB1_15;
+	bra.uni 	$L__BB1_14;
+$L__BB1_14:
+	atom.global.add.u64 	%rd11, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB1_15;
+$L__BB1_15:
+	and.b32 	%r61, %r4, 2139095040;
+	setp.ne.b32 	%p86, %r61, 0;
+	and.b32 	%r62, %r4, 8388607;
+	setp.eq.b32 	%p87, %r62, 0;
+	or.pred 	%p88, %p86, %p87;
+	and.b32 	%r63, %r5, 2139095040;
+	setp.ne.b32 	%p89, %r63, 0;
+	and.b32 	%r64, %r5, 8388607;
+	setp.eq.b32 	%p90, %r64, 0;
+	or.pred 	%p91, %p89, %p90;
+	and.pred 	%p92, %p88, %p91;
+	and.b32 	%r65, %r6, 2139095040;
+	setp.eq.b32 	%p93, %r65, 0;
+	and.b32 	%r66, %r6, 8388607;
+	setp.ne.b32 	%p94, %r66, 0;
+	and.pred 	%p95, %p93, %p94;
+	and.b32 	%r67, %r6, 2147483647;
+	setp.eq.b32 	%p96, %r67, 0;
+	and.b32 	%r68, %r4, 2147483647;
+	setp.ne.b32 	%p97, %r68, 0;
+	and.b32 	%r69, %r5, 2147483647;
+	setp.ne.b32 	%p98, %r69, 0;
+	and.pred 	%p99, %p97, %p98;
+	and.pred 	%p100, %p96, %p99;
+	or.pred 	%p101, %p95, %p100;
+	and.pred 	%p102, %p92, %p101;
+	not.pred 	%p103, %p102;
+	@%p103 bra 	$L__BB1_17;
+	bra.uni 	$L__BB1_16;
+$L__BB1_16:
+	atom.global.add.u64 	%rd12, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB1_17;
+$L__BB1_17:
+	ld.b64 	%rd13, [%SP+48];
 	.loc	4 26 19                         // tests/basic_tests/underflow/rounding.cu:26:19
-	st.b32 	[%rd6+4], %r20;
+	st.b32 	[%rd13+4], %r6;
 	.loc	4 27 39                         // tests/basic_tests/underflow/rounding.cu:27:39
-	ld.b64 	%rd7, [%SP+48];
-	ld.b32 	%r21, [%rd7+4];
+	ld.b64 	%rd14, [%SP+48];
+	ld.b32 	%r70, [%rd14+4];
 	.loc	4 27 26                         // tests/basic_tests/underflow/rounding.cu:27:26
 	{ // callseq 1, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r21;
+	st.param.b32 	[param0], %r70;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r22, [retval0];
+	ld.param.b32 	%r71, [retval0];
 	} // callseq 1
-	and.b32 	%r23, %r22, 1;
+	and.b32 	%r72, %r71, 1;
 	.loc	4 27 9                          // tests/basic_tests/underflow/rounding.cu:27:9
-	ld.b64 	%rd8, [%SP+56];
+	ld.b64 	%rd15, [%SP+56];
 	.loc	4 27 24                         // tests/basic_tests/underflow/rounding.cu:27:24
-	st.b32 	[%rd8+4], %r23;
+	st.b32 	[%rd15+4], %r72;
 	.loc	4 28 5                          // tests/basic_tests/underflow/rounding.cu:28:5
-	bra.uni 	$L__BB1_4;
+	bra.uni 	$L__BB1_18;
 $L__tmp14:
-$L__BB1_4:                              // %if.end13
+$L__BB1_18:                             // %if.end13
 	.loc	4 30 9                          // tests/basic_tests/underflow/rounding.cu:30:9
-	ld.b32 	%r24, [%SP+64];
+	ld.b32 	%r73, [%SP+64];
 	.loc	4 30 13                         // tests/basic_tests/underflow/rounding.cu:30:13
-	setp.ne.b32 	%p3, %r24, 2;
-	@%p3 bra 	$L__BB1_6;
-	bra.uni 	$L__BB1_5;
-$L__BB1_5:                              // %if.then15
+	setp.ne.b32 	%p104, %r73, 2;
+	@%p104 bra 	$L__BB1_26;
+	bra.uni 	$L__BB1_19;
+$L__BB1_19:                             // %if.then15
 $L__tmp15:
 	.loc	4 32 31                         // tests/basic_tests/underflow/rounding.cu:32:31
-	ld.b32 	%r25, [%SP+68];
-	st.b32 	[%SP+28], %r25;
+	ld.b32 	%r74, [%SP+68];
+	st.b32 	[%SP+28], %r74;
 	st.b32 	[%SP+32], 507307272;
 $L__tmp16:
 	.loc	6 307 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:307:23 @[ tests/basic_tests/underflow/rounding.cu:32:21 ]
-	ld.b32 	%r26, [%SP+28];
+	ld.b32 	%r7, [%SP+28];
 	.loc	6 307 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:307:28 @[ tests/basic_tests/underflow/rounding.cu:32:21 ]
-	ld.b32 	%r27, [%SP+32];
+	ld.b32 	%r8, [%SP+32];
 	.loc	6 307 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:307:10 @[ tests/basic_tests/underflow/rounding.cu:32:21 ]
-	mul.rn.f32 	%r28, %r26, %r27;
+	and.b32 	%r75, %r7, 2139095040;
+	setp.eq.b32 	%p105, %r75, 2139095040;
+	and.b32 	%r76, %r7, 8388607;
+	setp.ne.b32 	%p106, %r76, 0;
+	and.b32 	%r77, %r7, 4194304;
+	setp.eq.b32 	%p107, %r77, 0;
+	and.pred 	%p108, %p105, %p107;
+	and.pred 	%p109, %p108, %p106;
+	and.b32 	%r78, %r8, 2139095040;
+	setp.eq.b32 	%p110, %r78, 2139095040;
+	and.b32 	%r79, %r8, 8388607;
+	setp.ne.b32 	%p111, %r79, 0;
+	and.b32 	%r80, %r8, 4194304;
+	setp.eq.b32 	%p112, %r80, 0;
+	and.pred 	%p113, %p110, %p112;
+	and.pred 	%p114, %p113, %p111;
+	or.pred 	%p115, %p109, %p114;
+	and.b32 	%r81, %r7, 2147483647;
+	setp.eq.b32 	%p116, %r81, 0;
+	setp.eq.b32 	%p117, %r79, 0;
+	and.pred 	%p118, %p110, %p117;
+	and.pred 	%p119, %p116, %p118;
+	setp.eq.b32 	%p120, %r76, 0;
+	and.pred 	%p121, %p105, %p120;
+	and.b32 	%r82, %r8, 2147483647;
+	setp.eq.b32 	%p122, %r82, 0;
+	and.pred 	%p123, %p121, %p122;
+	or.pred 	%p124, %p119, %p123;
+	or.pred 	%p125, %p115, %p124;
+	not.pred 	%p126, %p125;
+	@%p126 bra 	$L__BB1_21;
+	bra.uni 	$L__BB1_20;
+$L__BB1_20:
+	atom.global.add.u64 	%rd16, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB1_21;
+$L__BB1_21:
+	mul.rn.f32 	%r9, %r7, %r8;
 $L__tmp17:
 	.loc	4 32 9                          // tests/basic_tests/underflow/rounding.cu:32:9
-	ld.b64 	%rd9, [%SP+48];
+	and.b32 	%r83, %r7, 2139095040;
+	setp.ne.b32 	%p127, %r83, 2139095040;
+	and.b32 	%r84, %r8, 2139095040;
+	setp.ne.b32 	%p128, %r84, 2139095040;
+	and.pred 	%p129, %p127, %p128;
+	and.b32 	%r85, %r9, 2139095040;
+	setp.eq.b32 	%p130, %r85, 2139095040;
+	and.b32 	%r86, %r9, 8388607;
+	setp.eq.b32 	%p131, %r86, 0;
+	and.pred 	%p132, %p130, %p131;
+	and.pred 	%p133, %p129, %p132;
+	not.pred 	%p134, %p133;
+	@%p134 bra 	$L__BB1_23;
+	bra.uni 	$L__BB1_22;
+$L__BB1_22:
+	atom.global.add.u64 	%rd17, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB1_23;
+$L__BB1_23:
+	and.b32 	%r87, %r7, 2139095040;
+	setp.ne.b32 	%p135, %r87, 0;
+	and.b32 	%r88, %r7, 8388607;
+	setp.eq.b32 	%p136, %r88, 0;
+	or.pred 	%p137, %p135, %p136;
+	and.b32 	%r89, %r8, 2139095040;
+	setp.ne.b32 	%p138, %r89, 0;
+	and.b32 	%r90, %r8, 8388607;
+	setp.eq.b32 	%p139, %r90, 0;
+	or.pred 	%p140, %p138, %p139;
+	and.pred 	%p141, %p137, %p140;
+	and.b32 	%r91, %r9, 2139095040;
+	setp.eq.b32 	%p142, %r91, 0;
+	and.b32 	%r92, %r9, 8388607;
+	setp.ne.b32 	%p143, %r92, 0;
+	and.pred 	%p144, %p142, %p143;
+	and.b32 	%r93, %r9, 2147483647;
+	setp.eq.b32 	%p145, %r93, 0;
+	and.b32 	%r94, %r7, 2147483647;
+	setp.ne.b32 	%p146, %r94, 0;
+	and.b32 	%r95, %r8, 2147483647;
+	setp.ne.b32 	%p147, %r95, 0;
+	and.pred 	%p148, %p146, %p147;
+	and.pred 	%p149, %p145, %p148;
+	or.pred 	%p150, %p144, %p149;
+	and.pred 	%p151, %p141, %p150;
+	not.pred 	%p152, %p151;
+	@%p152 bra 	$L__BB1_25;
+	bra.uni 	$L__BB1_24;
+$L__BB1_24:
+	atom.global.add.u64 	%rd18, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB1_25;
+$L__BB1_25:
+	ld.b64 	%rd19, [%SP+48];
 	.loc	4 32 19                         // tests/basic_tests/underflow/rounding.cu:32:19
-	st.b32 	[%rd9+8], %r28;
+	st.b32 	[%rd19+8], %r9;
 	.loc	4 33 39                         // tests/basic_tests/underflow/rounding.cu:33:39
-	ld.b64 	%rd10, [%SP+48];
-	ld.b32 	%r29, [%rd10+8];
+	ld.b64 	%rd20, [%SP+48];
+	ld.b32 	%r96, [%rd20+8];
 	.loc	4 33 26                         // tests/basic_tests/underflow/rounding.cu:33:26
 	{ // callseq 2, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r29;
+	st.param.b32 	[param0], %r96;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r30, [retval0];
+	ld.param.b32 	%r97, [retval0];
 	} // callseq 2
-	and.b32 	%r31, %r30, 1;
+	and.b32 	%r98, %r97, 1;
 	.loc	4 33 9                          // tests/basic_tests/underflow/rounding.cu:33:9
-	ld.b64 	%rd11, [%SP+56];
+	ld.b64 	%rd21, [%SP+56];
 	.loc	4 33 24                         // tests/basic_tests/underflow/rounding.cu:33:24
-	st.b32 	[%rd11+8], %r31;
+	st.b32 	[%rd21+8], %r98;
 	.loc	4 34 5                          // tests/basic_tests/underflow/rounding.cu:34:5
-	bra.uni 	$L__BB1_6;
+	bra.uni 	$L__BB1_26;
 $L__tmp18:
-$L__BB1_6:                              // %if.end22
+$L__BB1_26:                             // %if.end22
 	.loc	4 36 9                          // tests/basic_tests/underflow/rounding.cu:36:9
-	ld.b32 	%r32, [%SP+64];
+	ld.b32 	%r99, [%SP+64];
 	.loc	4 36 13                         // tests/basic_tests/underflow/rounding.cu:36:13
-	setp.ne.b32 	%p4, %r32, 3;
-	@%p4 bra 	$L__BB1_14;
-	bra.uni 	$L__BB1_7;
-$L__BB1_7:                              // %if.then24
+	setp.ne.b32 	%p153, %r99, 3;
+	@%p153 bra 	$L__BB1_34;
+	bra.uni 	$L__BB1_27;
+$L__BB1_27:                             // %if.then24
 $L__tmp19:
 	.loc	4 38 19                         // tests/basic_tests/underflow/rounding.cu:38:19
-	ld.b32 	%r1, [%SP+68];
+	ld.b32 	%r10, [%SP+68];
 	.loc	4 38 24                         // tests/basic_tests/underflow/rounding.cu:38:24
-	and.b32 	%r33, %r1, 2139095040;
-	setp.ne.b32 	%p5, %r33, 2139095040;
-	and.b32 	%r34, %r1, 8388607;
-	setp.eq.b32 	%p6, %r34, 0;
-	or.pred 	%p7, %p5, %p6;
-	shr.u32 	%r35, %r1, 22;
-	and.b32 	%r36, %r35, 1;
-	setp.ne.b32 	%p8, %r36, 0;
-	or.pred 	%p9, %p7, %p8;
-	@%p9 bra 	$L__BB1_9;
-	bra.uni 	$L__BB1_8;
-$L__BB1_8:
-	atom.global.add.u64 	%rd12, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB1_9;
-$L__BB1_9:
-	mul.f32 	%r2, %r1, 0f3F800001;
+	and.b32 	%r100, %r10, 2139095040;
+	setp.ne.b32 	%p154, %r100, 2139095040;
+	and.b32 	%r101, %r10, 8388607;
+	setp.eq.b32 	%p155, %r101, 0;
+	or.pred 	%p156, %p154, %p155;
+	shr.u32 	%r102, %r10, 22;
+	and.b32 	%r103, %r102, 1;
+	setp.ne.b32 	%p157, %r103, 0;
+	or.pred 	%p158, %p156, %p157;
+	@%p158 bra 	$L__BB1_29;
+	bra.uni 	$L__BB1_28;
+$L__BB1_28:
+	atom.global.add.u64 	%rd22, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB1_29;
+$L__BB1_29:
+	mul.f32 	%r11, %r10, 0f3F800001;
 	.loc	4 38 15                         // tests/basic_tests/underflow/rounding.cu:38:15
-	and.b32 	%r37, %r1, 2139095040;
-	setp.eq.b32 	%p10, %r37, 2139095040;
-	and.b32 	%r38, %r2, 2139095040;
-	setp.ne.b32 	%p11, %r38, 2139095040;
-	and.b32 	%r39, %r2, 8388607;
-	setp.ne.b32 	%p12, %r39, 0;
-	or.pred 	%p13, %p11, %p12;
-	or.pred 	%p14, %p10, %p13;
-	@%p14 bra 	$L__BB1_11;
-	bra.uni 	$L__BB1_10;
-$L__BB1_10:
-	atom.global.add.u64 	%rd13, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB1_11;
-$L__BB1_11:
-	and.b32 	%r40, %r1, 2139095040;
-	setp.ne.b32 	%p15, %r40, 0;
-	and.b32 	%r41, %r1, 8388607;
-	setp.eq.b32 	%p16, %r41, 0;
-	or.pred 	%p17, %p15, %p16;
-	and.b32 	%r42, %r2, 2139095040;
-	setp.eq.b32 	%p18, %r42, 0;
-	and.b32 	%r43, %r2, 8388607;
-	setp.ne.b32 	%p19, %r43, 0;
-	and.pred 	%p20, %p18, %p19;
-	and.b32 	%r44, %r2, 2147483647;
-	setp.eq.b32 	%p21, %r44, 0;
-	and.b32 	%r45, %r1, 2147483647;
-	setp.ne.b32 	%p22, %r45, 0;
-	and.pred 	%p23, %p21, %p22;
-	or.pred 	%p24, %p20, %p23;
-	and.pred 	%p25, %p17, %p24;
-	not.pred 	%p26, %p25;
-	@%p26 bra 	$L__BB1_13;
-	bra.uni 	$L__BB1_12;
-$L__BB1_12:
-	atom.global.add.u64 	%rd14, [fp_underflow_counter], 1;
-	bra.uni 	$L__BB1_13;
-$L__BB1_13:
-	st.b32 	[%SP+72], %r2;
+	and.b32 	%r104, %r10, 2139095040;
+	setp.eq.b32 	%p159, %r104, 2139095040;
+	and.b32 	%r105, %r11, 2139095040;
+	setp.ne.b32 	%p160, %r105, 2139095040;
+	and.b32 	%r106, %r11, 8388607;
+	setp.ne.b32 	%p161, %r106, 0;
+	or.pred 	%p162, %p160, %p161;
+	or.pred 	%p163, %p159, %p162;
+	@%p163 bra 	$L__BB1_31;
+	bra.uni 	$L__BB1_30;
+$L__BB1_30:
+	atom.global.add.u64 	%rd23, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB1_31;
+$L__BB1_31:
+	and.b32 	%r107, %r10, 2139095040;
+	setp.ne.b32 	%p164, %r107, 0;
+	and.b32 	%r108, %r10, 8388607;
+	setp.eq.b32 	%p165, %r108, 0;
+	or.pred 	%p166, %p164, %p165;
+	and.b32 	%r109, %r11, 2139095040;
+	setp.eq.b32 	%p167, %r109, 0;
+	and.b32 	%r110, %r11, 8388607;
+	setp.ne.b32 	%p168, %r110, 0;
+	and.pred 	%p169, %p167, %p168;
+	and.b32 	%r111, %r11, 2147483647;
+	setp.eq.b32 	%p170, %r111, 0;
+	and.b32 	%r112, %r10, 2147483647;
+	setp.ne.b32 	%p171, %r112, 0;
+	and.pred 	%p172, %p170, %p171;
+	or.pred 	%p173, %p169, %p172;
+	and.pred 	%p174, %p166, %p173;
+	not.pred 	%p175, %p174;
+	@%p175 bra 	$L__BB1_33;
+	bra.uni 	$L__BB1_32;
+$L__BB1_32:
+	atom.global.add.u64 	%rd24, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB1_33;
+$L__BB1_33:
+	st.b32 	[%SP+72], %r11;
 	.loc	4 39 19                         // tests/basic_tests/underflow/rounding.cu:39:19
-	ld.b32 	%r49, [%SP+68];
+	ld.b32 	%r116, [%SP+68];
 	.loc	4 39 15                         // tests/basic_tests/underflow/rounding.cu:39:15
-	st.b32 	[%SP+76], %r49;
+	st.b32 	[%SP+76], %r116;
 	.loc	4 40 31                         // tests/basic_tests/underflow/rounding.cu:40:31
-	ld.b32 	%r50, [%SP+72];
+	ld.b32 	%r117, [%SP+72];
 	.loc	4 40 34                         // tests/basic_tests/underflow/rounding.cu:40:34
-	ld.b32 	%r51, [%SP+76];
-	st.b32 	[%SP+12], %r50;
-	st.b32 	[%SP+16], %r51;
+	ld.b32 	%r118, [%SP+76];
+	st.b32 	[%SP+12], %r117;
+	st.b32 	[%SP+16], %r118;
 $L__tmp20:
 	.loc	6 328 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:328:10 @[ tests/basic_tests/underflow/rounding.cu:40:21 ]
-	ld.b32 	%r47, [%SP+12];
-	ld.b32 	%r48, [%SP+16];
+	ld.b32 	%r114, [%SP+12];
+	ld.b32 	%r115, [%SP+16];
 	// begin inline asm
-	sub.rn.f32 %r46, %r47, %r48;
+	sub.rn.f32 %r113, %r114, %r115;
 	// end inline asm
 $L__tmp21:
 	.loc	4 40 9                          // tests/basic_tests/underflow/rounding.cu:40:9
-	ld.b64 	%rd15, [%SP+48];
+	ld.b64 	%rd25, [%SP+48];
 	.loc	4 40 19                         // tests/basic_tests/underflow/rounding.cu:40:19
-	st.b32 	[%rd15+12], %r46;
+	st.b32 	[%rd25+12], %r113;
 	.loc	4 41 39                         // tests/basic_tests/underflow/rounding.cu:41:39
-	ld.b64 	%rd16, [%SP+48];
-	ld.b32 	%r52, [%rd16+12];
+	ld.b64 	%rd26, [%SP+48];
+	ld.b32 	%r119, [%rd26+12];
 	.loc	4 41 26                         // tests/basic_tests/underflow/rounding.cu:41:26
 	{ // callseq 3, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r52;
+	st.param.b32 	[param0], %r119;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r53, [retval0];
+	ld.param.b32 	%r120, [retval0];
 	} // callseq 3
-	and.b32 	%r54, %r53, 1;
+	and.b32 	%r121, %r120, 1;
 	.loc	4 41 9                          // tests/basic_tests/underflow/rounding.cu:41:9
-	ld.b64 	%rd17, [%SP+56];
+	ld.b64 	%rd27, [%SP+56];
 	.loc	4 41 24                         // tests/basic_tests/underflow/rounding.cu:41:24
-	st.b32 	[%rd17+12], %r54;
+	st.b32 	[%rd27+12], %r121;
 	.loc	4 42 5                          // tests/basic_tests/underflow/rounding.cu:42:5
-	bra.uni 	$L__BB1_14;
+	bra.uni 	$L__BB1_34;
 $L__tmp22:
-$L__BB1_14:                             // %if.end31
+$L__BB1_34:                             // %if.end31
 	.loc	4 44 9                          // tests/basic_tests/underflow/rounding.cu:44:9
-	ld.b32 	%r55, [%SP+64];
+	ld.b32 	%r122, [%SP+64];
 	.loc	4 44 13                         // tests/basic_tests/underflow/rounding.cu:44:13
-	setp.ne.b32 	%p27, %r55, 4;
-	@%p27 bra 	$L__BB1_22;
-	bra.uni 	$L__BB1_15;
-$L__BB1_15:                             // %if.then33
+	setp.ne.b32 	%p176, %r122, 4;
+	@%p176 bra 	$L__BB1_42;
+	bra.uni 	$L__BB1_35;
+$L__BB1_35:                             // %if.then33
 $L__tmp23:
 	.loc	4 46 31                         // tests/basic_tests/underflow/rounding.cu:46:31
-	ld.b32 	%r56, [%SP+68];
-	st.b32 	[%SP], %r56;
+	ld.b32 	%r123, [%SP+68];
+	st.b32 	[%SP], %r123;
 	st.b32 	[%SP+4], 1048576000;
 	st.b32 	[%SP+8], 0;
 $L__tmp24:
 	.loc	6 295 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:295:23 @[ tests/basic_tests/underflow/rounding.cu:46:21 ]
-	ld.b32 	%r3, [%SP];
+	ld.b32 	%r12, [%SP];
 	.loc	6 295 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:295:28 @[ tests/basic_tests/underflow/rounding.cu:46:21 ]
-	ld.b32 	%r4, [%SP+4];
+	ld.b32 	%r13, [%SP+4];
 	.loc	6 295 33                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:295:33 @[ tests/basic_tests/underflow/rounding.cu:46:21 ]
-	ld.b32 	%r5, [%SP+8];
+	ld.b32 	%r14, [%SP+8];
 	.loc	6 295 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:295:10 @[ tests/basic_tests/underflow/rounding.cu:46:21 ]
-	and.b32 	%r57, %r3, 2139095040;
-	setp.eq.b32 	%p28, %r57, 2139095040;
-	and.b32 	%r58, %r3, 8388607;
-	setp.ne.b32 	%p29, %r58, 0;
-	and.b32 	%r59, %r3, 4194304;
-	setp.eq.b32 	%p30, %r59, 0;
-	and.pred 	%p31, %p28, %p30;
-	and.pred 	%p32, %p31, %p29;
-	and.b32 	%r60, %r4, 2139095040;
-	setp.eq.b32 	%p33, %r60, 2139095040;
-	and.b32 	%r61, %r4, 8388607;
-	setp.ne.b32 	%p34, %r61, 0;
-	and.b32 	%r62, %r4, 4194304;
-	setp.eq.b32 	%p35, %r62, 0;
-	and.pred 	%p36, %p33, %p35;
-	and.pred 	%p37, %p36, %p34;
-	or.pred 	%p38, %p32, %p37;
-	and.b32 	%r63, %r5, 2139095040;
-	setp.eq.b32 	%p39, %r63, 2139095040;
-	and.b32 	%r64, %r5, 8388607;
-	setp.ne.b32 	%p40, %r64, 0;
-	and.b32 	%r65, %r5, 4194304;
-	setp.eq.b32 	%p41, %r65, 0;
-	and.pred 	%p42, %p39, %p41;
-	and.pred 	%p43, %p42, %p40;
-	or.pred 	%p44, %p38, %p43;
-	and.b32 	%r66, %r3, 2147483647;
-	setp.eq.b32 	%p45, %r66, 0;
-	setp.eq.b32 	%p46, %r61, 0;
-	and.pred 	%p47, %p33, %p46;
-	and.pred 	%p48, %p45, %p47;
-	setp.eq.b32 	%p49, %r58, 0;
-	and.pred 	%p50, %p28, %p49;
-	and.b32 	%r67, %r4, 2147483647;
-	setp.eq.b32 	%p51, %r67, 0;
-	and.pred 	%p52, %p50, %p51;
-	or.pred 	%p53, %p48, %p52;
-	or.pred 	%p54, %p44, %p53;
-	not.pred 	%p55, %p54;
-	@%p55 bra 	$L__BB1_17;
-	bra.uni 	$L__BB1_16;
-$L__BB1_16:
-	atom.global.add.u64 	%rd18, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB1_17;
-$L__BB1_17:
-	fma.rn.f32 	%r6, %r3, %r4, %r5;
+	and.b32 	%r124, %r12, 2139095040;
+	setp.eq.b32 	%p177, %r124, 2139095040;
+	and.b32 	%r125, %r12, 8388607;
+	setp.ne.b32 	%p178, %r125, 0;
+	and.b32 	%r126, %r12, 4194304;
+	setp.eq.b32 	%p179, %r126, 0;
+	and.pred 	%p180, %p177, %p179;
+	and.pred 	%p181, %p180, %p178;
+	and.b32 	%r127, %r13, 2139095040;
+	setp.eq.b32 	%p182, %r127, 2139095040;
+	and.b32 	%r128, %r13, 8388607;
+	setp.ne.b32 	%p183, %r128, 0;
+	and.b32 	%r129, %r13, 4194304;
+	setp.eq.b32 	%p184, %r129, 0;
+	and.pred 	%p185, %p182, %p184;
+	and.pred 	%p186, %p185, %p183;
+	or.pred 	%p187, %p181, %p186;
+	and.b32 	%r130, %r14, 2139095040;
+	setp.eq.b32 	%p188, %r130, 2139095040;
+	and.b32 	%r131, %r14, 8388607;
+	setp.ne.b32 	%p189, %r131, 0;
+	and.b32 	%r132, %r14, 4194304;
+	setp.eq.b32 	%p190, %r132, 0;
+	and.pred 	%p191, %p188, %p190;
+	and.pred 	%p192, %p191, %p189;
+	or.pred 	%p193, %p187, %p192;
+	and.b32 	%r133, %r12, 2147483647;
+	setp.eq.b32 	%p194, %r133, 0;
+	setp.eq.b32 	%p195, %r128, 0;
+	and.pred 	%p196, %p182, %p195;
+	and.pred 	%p197, %p194, %p196;
+	setp.eq.b32 	%p198, %r125, 0;
+	and.pred 	%p199, %p177, %p198;
+	and.b32 	%r134, %r13, 2147483647;
+	setp.eq.b32 	%p200, %r134, 0;
+	and.pred 	%p201, %p199, %p200;
+	or.pred 	%p202, %p197, %p201;
+	or.pred 	%p203, %p193, %p202;
+	not.pred 	%p204, %p203;
+	@%p204 bra 	$L__BB1_37;
+	bra.uni 	$L__BB1_36;
+$L__BB1_36:
+	atom.global.add.u64 	%rd28, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB1_37;
+$L__BB1_37:
+	fma.rn.f32 	%r15, %r12, %r13, %r14;
 $L__tmp25:
 	.loc	4 46 9                          // tests/basic_tests/underflow/rounding.cu:46:9
-	and.b32 	%r68, %r3, 2139095040;
-	setp.ne.b32 	%p56, %r68, 2139095040;
-	and.b32 	%r69, %r4, 2139095040;
-	setp.ne.b32 	%p57, %r69, 2139095040;
-	and.pred 	%p58, %p56, %p57;
-	and.b32 	%r70, %r6, 2139095040;
-	setp.eq.b32 	%p59, %r70, 2139095040;
-	and.b32 	%r71, %r6, 8388607;
-	setp.eq.b32 	%p60, %r71, 0;
-	and.pred 	%p61, %p59, %p60;
-	and.pred 	%p62, %p58, %p61;
-	not.pred 	%p63, %p62;
-	@%p63 bra 	$L__BB1_19;
-	bra.uni 	$L__BB1_18;
-$L__BB1_18:
-	atom.global.add.u64 	%rd19, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB1_19;
-$L__BB1_19:
-	and.b32 	%r72, %r3, 2139095040;
-	setp.ne.b32 	%p64, %r72, 0;
-	and.b32 	%r73, %r3, 8388607;
-	setp.eq.b32 	%p65, %r73, 0;
-	or.pred 	%p66, %p64, %p65;
-	and.b32 	%r74, %r4, 2139095040;
-	setp.ne.b32 	%p67, %r74, 0;
-	and.b32 	%r75, %r4, 8388607;
-	setp.eq.b32 	%p68, %r75, 0;
-	or.pred 	%p69, %p67, %p68;
-	and.pred 	%p70, %p66, %p69;
-	and.b32 	%r76, %r5, 2139095040;
-	setp.ne.b32 	%p71, %r76, 0;
-	and.b32 	%r77, %r5, 8388607;
-	setp.eq.b32 	%p72, %r77, 0;
-	or.pred 	%p73, %p71, %p72;
-	and.pred 	%p74, %p70, %p73;
-	and.b32 	%r78, %r6, 2139095040;
-	setp.eq.b32 	%p75, %r78, 0;
-	and.b32 	%r79, %r6, 8388607;
-	setp.ne.b32 	%p76, %r79, 0;
-	and.pred 	%p77, %p75, %p76;
-	and.pred 	%p78, %p74, %p77;
-	not.pred 	%p79, %p78;
-	@%p79 bra 	$L__BB1_21;
-	bra.uni 	$L__BB1_20;
-$L__BB1_20:
-	atom.global.add.u64 	%rd20, [fp_underflow_counter], 1;
-	bra.uni 	$L__BB1_21;
-$L__BB1_21:
-	ld.b64 	%rd21, [%SP+48];
+	and.b32 	%r135, %r12, 2139095040;
+	setp.ne.b32 	%p205, %r135, 2139095040;
+	and.b32 	%r136, %r13, 2139095040;
+	setp.ne.b32 	%p206, %r136, 2139095040;
+	and.pred 	%p207, %p205, %p206;
+	and.b32 	%r137, %r15, 2139095040;
+	setp.eq.b32 	%p208, %r137, 2139095040;
+	and.b32 	%r138, %r15, 8388607;
+	setp.eq.b32 	%p209, %r138, 0;
+	and.pred 	%p210, %p208, %p209;
+	and.pred 	%p211, %p207, %p210;
+	not.pred 	%p212, %p211;
+	@%p212 bra 	$L__BB1_39;
+	bra.uni 	$L__BB1_38;
+$L__BB1_38:
+	atom.global.add.u64 	%rd29, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB1_39;
+$L__BB1_39:
+	and.b32 	%r139, %r12, 2139095040;
+	setp.ne.b32 	%p213, %r139, 0;
+	and.b32 	%r140, %r12, 8388607;
+	setp.eq.b32 	%p214, %r140, 0;
+	or.pred 	%p215, %p213, %p214;
+	and.b32 	%r141, %r13, 2139095040;
+	setp.ne.b32 	%p216, %r141, 0;
+	and.b32 	%r142, %r13, 8388607;
+	setp.eq.b32 	%p217, %r142, 0;
+	or.pred 	%p218, %p216, %p217;
+	and.pred 	%p219, %p215, %p218;
+	and.b32 	%r143, %r14, 2139095040;
+	setp.ne.b32 	%p220, %r143, 0;
+	and.b32 	%r144, %r14, 8388607;
+	setp.eq.b32 	%p221, %r144, 0;
+	or.pred 	%p222, %p220, %p221;
+	and.pred 	%p223, %p219, %p222;
+	and.b32 	%r145, %r15, 2139095040;
+	setp.eq.b32 	%p224, %r145, 0;
+	and.b32 	%r146, %r15, 8388607;
+	setp.ne.b32 	%p225, %r146, 0;
+	and.pred 	%p226, %p224, %p225;
+	and.pred 	%p227, %p223, %p226;
+	not.pred 	%p228, %p227;
+	@%p228 bra 	$L__BB1_41;
+	bra.uni 	$L__BB1_40;
+$L__BB1_40:
+	atom.global.add.u64 	%rd30, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB1_41;
+$L__BB1_41:
+	ld.b64 	%rd31, [%SP+48];
 	.loc	4 46 19                         // tests/basic_tests/underflow/rounding.cu:46:19
-	st.b32 	[%rd21+16], %r6;
+	st.b32 	[%rd31+16], %r15;
 	.loc	4 47 39                         // tests/basic_tests/underflow/rounding.cu:47:39
-	ld.b64 	%rd22, [%SP+48];
-	ld.b32 	%r80, [%rd22+16];
+	ld.b64 	%rd32, [%SP+48];
+	ld.b32 	%r147, [%rd32+16];
 	.loc	4 47 26                         // tests/basic_tests/underflow/rounding.cu:47:26
 	{ // callseq 4, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r80;
+	st.param.b32 	[param0], %r147;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r81, [retval0];
+	ld.param.b32 	%r148, [retval0];
 	} // callseq 4
-	and.b32 	%r82, %r81, 1;
+	and.b32 	%r149, %r148, 1;
 	.loc	4 47 9                          // tests/basic_tests/underflow/rounding.cu:47:9
-	ld.b64 	%rd23, [%SP+56];
+	ld.b64 	%rd33, [%SP+56];
 	.loc	4 47 24                         // tests/basic_tests/underflow/rounding.cu:47:24
-	st.b32 	[%rd23+16], %r82;
+	st.b32 	[%rd33+16], %r149;
 	.loc	4 48 5                          // tests/basic_tests/underflow/rounding.cu:48:5
-	bra.uni 	$L__BB1_22;
+	bra.uni 	$L__BB1_42;
 $L__tmp26:
-$L__BB1_22:                             // %if.end40
+$L__BB1_42:                             // %if.end40
 	.loc	4 49 1                          // tests/basic_tests/underflow/rounding.cu:49:1
 	ret;
 $L__tmp27:
@@ -491,9 +767,9 @@ $L__func_end1:
 	.local .align 8 .b8 	__local_depot2[48];
 	.reg .b64 	%SP;
 	.reg .b64 	%SPL;
-	.reg .pred 	%p<4>;
-	.reg .b32 	%r<26>;
-	.reg .b64 	%rd<12>;
+	.reg .pred 	%p<144>;
+	.reg .b32 	%r<90>;
+	.reg .b64 	%rd<22>;
 	.loc	4 51 0                          // tests/basic_tests/underflow/rounding.cu:51:0
 $L__func_begin2:
 	.loc	4 51 0                          // tests/basic_tests/underflow/rounding.cu:51:0
@@ -507,145 +783,409 @@ $L__func_begin2:
 	st.b64 	[%SP+32], %rd2;
 $L__tmp28:
 	.loc	3 53 27                         // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_builtin_vars.h:53:27 @[ tests/basic_tests/underflow/rounding.cu:52:15 ]
-	mov.u32 	%r1, %tid.x;
+	mov.u32 	%r10, %tid.x;
 $L__tmp29:
 	.loc	4 52 9                          // tests/basic_tests/underflow/rounding.cu:52:9
-	st.b32 	[%SP+40], %r1;
+	st.b32 	[%SP+40], %r10;
 	.loc	4 54 11                         // tests/basic_tests/underflow/rounding.cu:54:11
 	st.b32 	[%SP+44], 8388608;
 $L__tmp30:
 	.loc	4 58 9                          // tests/basic_tests/underflow/rounding.cu:58:9
-	ld.b32 	%r2, [%SP+40];
+	ld.b32 	%r11, [%SP+40];
 	.loc	4 58 13                         // tests/basic_tests/underflow/rounding.cu:58:13
-	setp.ne.b32 	%p1, %r2, 0;
-	@%p1 bra 	$L__BB2_2;
+	setp.ne.b32 	%p1, %r11, 0;
+	@%p1 bra 	$L__BB2_10;
 	bra.uni 	$L__BB2_1;
 $L__BB2_1:                              // %if.then
 $L__tmp31:
 	.loc	4 59 31                         // tests/basic_tests/underflow/rounding.cu:59:31
-	ld.b32 	%r3, [%SP+44];
-	st.b32 	[%SP+16], %r3;
+	ld.b32 	%r12, [%SP+44];
+	st.b32 	[%SP+16], %r12;
 	st.b32 	[%SP+20], 1073741824;
 $L__tmp32:
 	.loc	6 219 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:219:23 @[ tests/basic_tests/underflow/rounding.cu:59:21 ]
-	ld.b32 	%r4, [%SP+16];
+	ld.b32 	%r1, [%SP+16];
 	.loc	6 219 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:219:28 @[ tests/basic_tests/underflow/rounding.cu:59:21 ]
-	ld.b32 	%r5, [%SP+20];
+	ld.b32 	%r2, [%SP+20];
 	.loc	6 219 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:219:10 @[ tests/basic_tests/underflow/rounding.cu:59:21 ]
-	div.rz.f32 	%r6, %r4, %r5;
+	and.b32 	%r13, %r1, 2139095040;
+	setp.eq.b32 	%p2, %r13, 2139095040;
+	and.b32 	%r14, %r1, 8388607;
+	setp.ne.b32 	%p3, %r14, 0;
+	and.b32 	%r15, %r1, 4194304;
+	setp.eq.b32 	%p4, %r15, 0;
+	and.pred 	%p5, %p2, %p4;
+	and.pred 	%p6, %p5, %p3;
+	and.b32 	%r16, %r2, 2139095040;
+	setp.eq.b32 	%p7, %r16, 2139095040;
+	and.b32 	%r17, %r2, 8388607;
+	setp.ne.b32 	%p8, %r17, 0;
+	and.b32 	%r18, %r2, 4194304;
+	setp.eq.b32 	%p9, %r18, 0;
+	and.pred 	%p10, %p7, %p9;
+	and.pred 	%p11, %p10, %p8;
+	or.pred 	%p12, %p6, %p11;
+	or.b32 	%r19, %r1, %r2;
+	and.b32 	%r20, %r19, 2147483647;
+	setp.eq.b32 	%p13, %r20, 0;
+	setp.eq.b32 	%p14, %r14, 0;
+	and.pred 	%p15, %p2, %p14;
+	setp.eq.b32 	%p16, %r17, 0;
+	and.pred 	%p17, %p7, %p16;
+	and.pred 	%p18, %p15, %p17;
+	or.pred 	%p19, %p13, %p18;
+	or.pred 	%p20, %p12, %p19;
+	not.pred 	%p21, %p20;
+	@%p21 bra 	$L__BB2_3;
+	bra.uni 	$L__BB2_2;
+$L__BB2_2:
+	atom.global.add.u64 	%rd3, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB2_3;
+$L__BB2_3:
+	and.b32 	%r21, %r2, 2147483647;
+	setp.ne.b32 	%p22, %r21, 0;
+	and.b32 	%r22, %r1, 2139095040;
+	setp.eq.b32 	%p23, %r22, 2139095040;
+	and.b32 	%r23, %r1, 2147483647;
+	setp.eq.b32 	%p24, %r23, 0;
+	or.pred 	%p25, %p23, %p24;
+	or.pred 	%p26, %p22, %p25;
+	@%p26 bra 	$L__BB2_5;
+	bra.uni 	$L__BB2_4;
+$L__BB2_4:
+	atom.global.add.u64 	%rd4, [fp_divbyzero_counter], 1;
+	bra.uni 	$L__BB2_5;
+$L__BB2_5:
+	div.rz.f32 	%r3, %r1, %r2;
 $L__tmp33:
 	.loc	4 59 9                          // tests/basic_tests/underflow/rounding.cu:59:9
-	ld.b64 	%rd3, [%SP+24];
+	and.b32 	%r24, %r1, 2139095040;
+	setp.eq.b32 	%p27, %r24, 2139095040;
+	and.b32 	%r25, %r2, 2139095040;
+	setp.eq.b32 	%p28, %r25, 2139095040;
+	or.pred 	%p29, %p27, %p28;
+	and.b32 	%r26, %r2, 2147483647;
+	setp.eq.b32 	%p30, %r26, 0;
+	or.pred 	%p31, %p29, %p30;
+	and.b32 	%r27, %r3, 2147483647;
+	setp.ne.b32 	%p32, %r27, 2139095039;
+	or.pred 	%p33, %p31, %p32;
+	@%p33 bra 	$L__BB2_7;
+	bra.uni 	$L__BB2_6;
+$L__BB2_6:
+	atom.global.add.u64 	%rd5, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB2_7;
+$L__BB2_7:
+	and.b32 	%r28, %r1, 2139095040;
+	setp.ne.b32 	%p34, %r28, 0;
+	and.b32 	%r29, %r1, 8388607;
+	setp.eq.b32 	%p35, %r29, 0;
+	or.pred 	%p36, %p34, %p35;
+	and.b32 	%r30, %r2, 2139095040;
+	setp.ne.b32 	%p37, %r30, 0;
+	and.b32 	%r31, %r2, 8388607;
+	setp.eq.b32 	%p38, %r31, 0;
+	or.pred 	%p39, %p37, %p38;
+	and.pred 	%p40, %p36, %p39;
+	and.b32 	%r32, %r3, 2139095040;
+	setp.eq.b32 	%p41, %r32, 0;
+	and.b32 	%r33, %r3, 8388607;
+	setp.ne.b32 	%p42, %r33, 0;
+	and.pred 	%p43, %p41, %p42;
+	and.b32 	%r34, %r3, 2147483647;
+	setp.eq.b32 	%p44, %r34, 0;
+	and.b32 	%r35, %r1, 2147483647;
+	setp.ne.b32 	%p45, %r35, 0;
+	and.b32 	%r36, %r2, 2147483647;
+	setp.ne.b32 	%p46, %r36, 0;
+	and.pred 	%p47, %p45, %p46;
+	and.pred 	%p48, %p44, %p47;
+	or.pred 	%p49, %p43, %p48;
+	and.pred 	%p50, %p40, %p49;
+	not.pred 	%p51, %p50;
+	@%p51 bra 	$L__BB2_9;
+	bra.uni 	$L__BB2_8;
+$L__BB2_8:
+	atom.global.add.u64 	%rd6, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB2_9;
+$L__BB2_9:
+	ld.b64 	%rd7, [%SP+24];
 	.loc	4 59 19                         // tests/basic_tests/underflow/rounding.cu:59:19
-	st.b32 	[%rd3], %r6;
+	st.b32 	[%rd7], %r3;
 	.loc	4 60 39                         // tests/basic_tests/underflow/rounding.cu:60:39
-	ld.b64 	%rd4, [%SP+24];
-	ld.b32 	%r7, [%rd4];
+	ld.b64 	%rd8, [%SP+24];
+	ld.b32 	%r37, [%rd8];
 	.loc	4 60 26                         // tests/basic_tests/underflow/rounding.cu:60:26
 	{ // callseq 5, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r7;
+	st.param.b32 	[param0], %r37;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r8, [retval0];
+	ld.param.b32 	%r38, [retval0];
 	} // callseq 5
-	and.b32 	%r9, %r8, 1;
+	and.b32 	%r39, %r38, 1;
 	.loc	4 60 9                          // tests/basic_tests/underflow/rounding.cu:60:9
-	ld.b64 	%rd5, [%SP+32];
+	ld.b64 	%rd9, [%SP+32];
 	.loc	4 60 24                         // tests/basic_tests/underflow/rounding.cu:60:24
-	st.b32 	[%rd5], %r9;
+	st.b32 	[%rd9], %r39;
 	.loc	4 61 5                          // tests/basic_tests/underflow/rounding.cu:61:5
-	bra.uni 	$L__BB2_2;
+	bra.uni 	$L__BB2_10;
 $L__tmp34:
-$L__BB2_2:                              // %if.end
+$L__BB2_10:                             // %if.end
 	.loc	4 63 9                          // tests/basic_tests/underflow/rounding.cu:63:9
-	ld.b32 	%r10, [%SP+40];
+	ld.b32 	%r40, [%SP+40];
 	.loc	4 63 13                         // tests/basic_tests/underflow/rounding.cu:63:13
-	setp.ne.b32 	%p2, %r10, 1;
-	@%p2 bra 	$L__BB2_4;
-	bra.uni 	$L__BB2_3;
-$L__BB2_3:                              // %if.then6
+	setp.ne.b32 	%p52, %r40, 1;
+	@%p52 bra 	$L__BB2_18;
+	bra.uni 	$L__BB2_11;
+$L__BB2_11:                             // %if.then6
 $L__tmp35:
 	.loc	4 64 31                         // tests/basic_tests/underflow/rounding.cu:64:31
-	ld.b32 	%r11, [%SP+44];
-	st.b32 	[%SP], %r11;
+	ld.b32 	%r41, [%SP+44];
+	st.b32 	[%SP], %r41;
 	st.b32 	[%SP+4], 1056964608;
 $L__tmp36:
 	.loc	6 313 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:313:23 @[ tests/basic_tests/underflow/rounding.cu:64:21 ]
-	ld.b32 	%r12, [%SP];
+	ld.b32 	%r4, [%SP];
 	.loc	6 313 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:313:28 @[ tests/basic_tests/underflow/rounding.cu:64:21 ]
-	ld.b32 	%r13, [%SP+4];
+	ld.b32 	%r5, [%SP+4];
 	.loc	6 313 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:313:10 @[ tests/basic_tests/underflow/rounding.cu:64:21 ]
-	mul.rz.f32 	%r14, %r12, %r13;
+	and.b32 	%r42, %r4, 2139095040;
+	setp.eq.b32 	%p53, %r42, 2139095040;
+	and.b32 	%r43, %r4, 8388607;
+	setp.ne.b32 	%p54, %r43, 0;
+	and.b32 	%r44, %r4, 4194304;
+	setp.eq.b32 	%p55, %r44, 0;
+	and.pred 	%p56, %p53, %p55;
+	and.pred 	%p57, %p56, %p54;
+	and.b32 	%r45, %r5, 2139095040;
+	setp.eq.b32 	%p58, %r45, 2139095040;
+	and.b32 	%r46, %r5, 8388607;
+	setp.ne.b32 	%p59, %r46, 0;
+	and.b32 	%r47, %r5, 4194304;
+	setp.eq.b32 	%p60, %r47, 0;
+	and.pred 	%p61, %p58, %p60;
+	and.pred 	%p62, %p61, %p59;
+	or.pred 	%p63, %p57, %p62;
+	and.b32 	%r48, %r4, 2147483647;
+	setp.eq.b32 	%p64, %r48, 0;
+	setp.eq.b32 	%p65, %r46, 0;
+	and.pred 	%p66, %p58, %p65;
+	and.pred 	%p67, %p64, %p66;
+	setp.eq.b32 	%p68, %r43, 0;
+	and.pred 	%p69, %p53, %p68;
+	and.b32 	%r49, %r5, 2147483647;
+	setp.eq.b32 	%p70, %r49, 0;
+	and.pred 	%p71, %p69, %p70;
+	or.pred 	%p72, %p67, %p71;
+	or.pred 	%p73, %p63, %p72;
+	not.pred 	%p74, %p73;
+	@%p74 bra 	$L__BB2_13;
+	bra.uni 	$L__BB2_12;
+$L__BB2_12:
+	atom.global.add.u64 	%rd10, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB2_13;
+$L__BB2_13:
+	mul.rz.f32 	%r6, %r4, %r5;
 $L__tmp37:
 	.loc	4 64 9                          // tests/basic_tests/underflow/rounding.cu:64:9
-	ld.b64 	%rd6, [%SP+24];
+	and.b32 	%r50, %r4, 2139095040;
+	setp.eq.b32 	%p75, %r50, 2139095040;
+	and.b32 	%r51, %r5, 2139095040;
+	setp.eq.b32 	%p76, %r51, 2139095040;
+	or.pred 	%p77, %p75, %p76;
+	and.b32 	%r52, %r6, 2147483647;
+	setp.ne.b32 	%p78, %r52, 2139095039;
+	or.pred 	%p79, %p77, %p78;
+	@%p79 bra 	$L__BB2_15;
+	bra.uni 	$L__BB2_14;
+$L__BB2_14:
+	atom.global.add.u64 	%rd11, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB2_15;
+$L__BB2_15:
+	and.b32 	%r53, %r4, 2139095040;
+	setp.ne.b32 	%p80, %r53, 0;
+	and.b32 	%r54, %r4, 8388607;
+	setp.eq.b32 	%p81, %r54, 0;
+	or.pred 	%p82, %p80, %p81;
+	and.b32 	%r55, %r5, 2139095040;
+	setp.ne.b32 	%p83, %r55, 0;
+	and.b32 	%r56, %r5, 8388607;
+	setp.eq.b32 	%p84, %r56, 0;
+	or.pred 	%p85, %p83, %p84;
+	and.pred 	%p86, %p82, %p85;
+	and.b32 	%r57, %r6, 2139095040;
+	setp.eq.b32 	%p87, %r57, 0;
+	and.b32 	%r58, %r6, 8388607;
+	setp.ne.b32 	%p88, %r58, 0;
+	and.pred 	%p89, %p87, %p88;
+	and.b32 	%r59, %r6, 2147483647;
+	setp.eq.b32 	%p90, %r59, 0;
+	and.b32 	%r60, %r4, 2147483647;
+	setp.ne.b32 	%p91, %r60, 0;
+	and.b32 	%r61, %r5, 2147483647;
+	setp.ne.b32 	%p92, %r61, 0;
+	and.pred 	%p93, %p91, %p92;
+	and.pred 	%p94, %p90, %p93;
+	or.pred 	%p95, %p89, %p94;
+	and.pred 	%p96, %p86, %p95;
+	not.pred 	%p97, %p96;
+	@%p97 bra 	$L__BB2_17;
+	bra.uni 	$L__BB2_16;
+$L__BB2_16:
+	atom.global.add.u64 	%rd12, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB2_17;
+$L__BB2_17:
+	ld.b64 	%rd13, [%SP+24];
 	.loc	4 64 19                         // tests/basic_tests/underflow/rounding.cu:64:19
-	st.b32 	[%rd6+4], %r14;
+	st.b32 	[%rd13+4], %r6;
 	.loc	4 65 39                         // tests/basic_tests/underflow/rounding.cu:65:39
-	ld.b64 	%rd7, [%SP+24];
-	ld.b32 	%r15, [%rd7+4];
+	ld.b64 	%rd14, [%SP+24];
+	ld.b32 	%r62, [%rd14+4];
 	.loc	4 65 26                         // tests/basic_tests/underflow/rounding.cu:65:26
 	{ // callseq 6, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r15;
+	st.param.b32 	[param0], %r62;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r16, [retval0];
+	ld.param.b32 	%r63, [retval0];
 	} // callseq 6
-	and.b32 	%r17, %r16, 1;
+	and.b32 	%r64, %r63, 1;
 	.loc	4 65 9                          // tests/basic_tests/underflow/rounding.cu:65:9
-	ld.b64 	%rd8, [%SP+32];
+	ld.b64 	%rd15, [%SP+32];
 	.loc	4 65 24                         // tests/basic_tests/underflow/rounding.cu:65:24
-	st.b32 	[%rd8+4], %r17;
+	st.b32 	[%rd15+4], %r64;
 	.loc	4 66 5                          // tests/basic_tests/underflow/rounding.cu:66:5
-	bra.uni 	$L__BB2_4;
+	bra.uni 	$L__BB2_18;
 $L__tmp38:
-$L__BB2_4:                              // %if.end13
+$L__BB2_18:                             // %if.end13
 	.loc	4 68 9                          // tests/basic_tests/underflow/rounding.cu:68:9
-	ld.b32 	%r18, [%SP+40];
+	ld.b32 	%r65, [%SP+40];
 	.loc	4 68 13                         // tests/basic_tests/underflow/rounding.cu:68:13
-	setp.ne.b32 	%p3, %r18, 2;
-	@%p3 bra 	$L__BB2_6;
-	bra.uni 	$L__BB2_5;
-$L__BB2_5:                              // %if.then15
+	setp.ne.b32 	%p98, %r65, 2;
+	@%p98 bra 	$L__BB2_26;
+	bra.uni 	$L__BB2_19;
+$L__BB2_19:                             // %if.then15
 $L__tmp39:
 	.loc	4 70 31                         // tests/basic_tests/underflow/rounding.cu:70:31
-	ld.b32 	%r19, [%SP+44];
-	st.b32 	[%SP+8], %r19;
+	ld.b32 	%r66, [%SP+44];
+	st.b32 	[%SP+8], %r66;
 	st.b32 	[%SP+12], 228737632;
 $L__tmp40:
 	.loc	6 313 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:313:23 @[ tests/basic_tests/underflow/rounding.cu:70:21 ]
-	ld.b32 	%r20, [%SP+8];
+	ld.b32 	%r7, [%SP+8];
 	.loc	6 313 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:313:28 @[ tests/basic_tests/underflow/rounding.cu:70:21 ]
-	ld.b32 	%r21, [%SP+12];
+	ld.b32 	%r8, [%SP+12];
 	.loc	6 313 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:313:10 @[ tests/basic_tests/underflow/rounding.cu:70:21 ]
-	mul.rz.f32 	%r22, %r20, %r21;
+	and.b32 	%r67, %r7, 2139095040;
+	setp.eq.b32 	%p99, %r67, 2139095040;
+	and.b32 	%r68, %r7, 8388607;
+	setp.ne.b32 	%p100, %r68, 0;
+	and.b32 	%r69, %r7, 4194304;
+	setp.eq.b32 	%p101, %r69, 0;
+	and.pred 	%p102, %p99, %p101;
+	and.pred 	%p103, %p102, %p100;
+	and.b32 	%r70, %r8, 2139095040;
+	setp.eq.b32 	%p104, %r70, 2139095040;
+	and.b32 	%r71, %r8, 8388607;
+	setp.ne.b32 	%p105, %r71, 0;
+	and.b32 	%r72, %r8, 4194304;
+	setp.eq.b32 	%p106, %r72, 0;
+	and.pred 	%p107, %p104, %p106;
+	and.pred 	%p108, %p107, %p105;
+	or.pred 	%p109, %p103, %p108;
+	and.b32 	%r73, %r7, 2147483647;
+	setp.eq.b32 	%p110, %r73, 0;
+	setp.eq.b32 	%p111, %r71, 0;
+	and.pred 	%p112, %p104, %p111;
+	and.pred 	%p113, %p110, %p112;
+	setp.eq.b32 	%p114, %r68, 0;
+	and.pred 	%p115, %p99, %p114;
+	and.b32 	%r74, %r8, 2147483647;
+	setp.eq.b32 	%p116, %r74, 0;
+	and.pred 	%p117, %p115, %p116;
+	or.pred 	%p118, %p113, %p117;
+	or.pred 	%p119, %p109, %p118;
+	not.pred 	%p120, %p119;
+	@%p120 bra 	$L__BB2_21;
+	bra.uni 	$L__BB2_20;
+$L__BB2_20:
+	atom.global.add.u64 	%rd16, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB2_21;
+$L__BB2_21:
+	mul.rz.f32 	%r9, %r7, %r8;
 $L__tmp41:
 	.loc	4 70 9                          // tests/basic_tests/underflow/rounding.cu:70:9
-	ld.b64 	%rd9, [%SP+24];
+	and.b32 	%r75, %r7, 2139095040;
+	setp.eq.b32 	%p121, %r75, 2139095040;
+	and.b32 	%r76, %r8, 2139095040;
+	setp.eq.b32 	%p122, %r76, 2139095040;
+	or.pred 	%p123, %p121, %p122;
+	and.b32 	%r77, %r9, 2147483647;
+	setp.ne.b32 	%p124, %r77, 2139095039;
+	or.pred 	%p125, %p123, %p124;
+	@%p125 bra 	$L__BB2_23;
+	bra.uni 	$L__BB2_22;
+$L__BB2_22:
+	atom.global.add.u64 	%rd17, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB2_23;
+$L__BB2_23:
+	and.b32 	%r78, %r7, 2139095040;
+	setp.ne.b32 	%p126, %r78, 0;
+	and.b32 	%r79, %r7, 8388607;
+	setp.eq.b32 	%p127, %r79, 0;
+	or.pred 	%p128, %p126, %p127;
+	and.b32 	%r80, %r8, 2139095040;
+	setp.ne.b32 	%p129, %r80, 0;
+	and.b32 	%r81, %r8, 8388607;
+	setp.eq.b32 	%p130, %r81, 0;
+	or.pred 	%p131, %p129, %p130;
+	and.pred 	%p132, %p128, %p131;
+	and.b32 	%r82, %r9, 2139095040;
+	setp.eq.b32 	%p133, %r82, 0;
+	and.b32 	%r83, %r9, 8388607;
+	setp.ne.b32 	%p134, %r83, 0;
+	and.pred 	%p135, %p133, %p134;
+	and.b32 	%r84, %r9, 2147483647;
+	setp.eq.b32 	%p136, %r84, 0;
+	and.b32 	%r85, %r7, 2147483647;
+	setp.ne.b32 	%p137, %r85, 0;
+	and.b32 	%r86, %r8, 2147483647;
+	setp.ne.b32 	%p138, %r86, 0;
+	and.pred 	%p139, %p137, %p138;
+	and.pred 	%p140, %p136, %p139;
+	or.pred 	%p141, %p135, %p140;
+	and.pred 	%p142, %p132, %p141;
+	not.pred 	%p143, %p142;
+	@%p143 bra 	$L__BB2_25;
+	bra.uni 	$L__BB2_24;
+$L__BB2_24:
+	atom.global.add.u64 	%rd18, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB2_25;
+$L__BB2_25:
+	ld.b64 	%rd19, [%SP+24];
 	.loc	4 70 19                         // tests/basic_tests/underflow/rounding.cu:70:19
-	st.b32 	[%rd9+8], %r22;
+	st.b32 	[%rd19+8], %r9;
 	.loc	4 71 39                         // tests/basic_tests/underflow/rounding.cu:71:39
-	ld.b64 	%rd10, [%SP+24];
-	ld.b32 	%r23, [%rd10+8];
+	ld.b64 	%rd20, [%SP+24];
+	ld.b32 	%r87, [%rd20+8];
 	.loc	4 71 26                         // tests/basic_tests/underflow/rounding.cu:71:26
 	{ // callseq 7, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r23;
+	st.param.b32 	[param0], %r87;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r24, [retval0];
+	ld.param.b32 	%r88, [retval0];
 	} // callseq 7
-	and.b32 	%r25, %r24, 1;
+	and.b32 	%r89, %r88, 1;
 	.loc	4 71 9                          // tests/basic_tests/underflow/rounding.cu:71:9
-	ld.b64 	%rd11, [%SP+32];
+	ld.b64 	%rd21, [%SP+32];
 	.loc	4 71 24                         // tests/basic_tests/underflow/rounding.cu:71:24
-	st.b32 	[%rd11+8], %r25;
+	st.b32 	[%rd21+8], %r89;
 	.loc	4 72 5                          // tests/basic_tests/underflow/rounding.cu:72:5
-	bra.uni 	$L__BB2_6;
+	bra.uni 	$L__BB2_26;
 $L__tmp42:
-$L__BB2_6:                              // %if.end22
+$L__BB2_26:                             // %if.end22
 	.loc	4 73 1                          // tests/basic_tests/underflow/rounding.cu:73:1
 	ret;
 $L__tmp43:
@@ -661,9 +1201,9 @@ $L__func_end2:
 	.local .align 8 .b8 	__local_depot3[48];
 	.reg .b64 	%SP;
 	.reg .b64 	%SPL;
-	.reg .pred 	%p<4>;
-	.reg .b32 	%r<27>;
-	.reg .b64 	%rd<12>;
+	.reg .pred 	%p<171>;
+	.reg .b32 	%r<106>;
+	.reg .b64 	%rd<22>;
 	.loc	4 75 0                          // tests/basic_tests/underflow/rounding.cu:75:0
 $L__func_begin3:
 	.loc	4 75 0                          // tests/basic_tests/underflow/rounding.cu:75:0
@@ -677,147 +1217,453 @@ $L__func_begin3:
 	st.b64 	[%SP+32], %rd2;
 $L__tmp44:
 	.loc	3 53 27                         // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_builtin_vars.h:53:27 @[ tests/basic_tests/underflow/rounding.cu:76:15 ]
-	mov.u32 	%r1, %tid.x;
+	mov.u32 	%r10, %tid.x;
 $L__tmp45:
 	.loc	4 76 9                          // tests/basic_tests/underflow/rounding.cu:76:9
-	st.b32 	[%SP+40], %r1;
+	st.b32 	[%SP+40], %r10;
 	.loc	4 78 11                         // tests/basic_tests/underflow/rounding.cu:78:11
 	st.b32 	[%SP+44], 8388608;
 $L__tmp46:
 	.loc	4 82 9                          // tests/basic_tests/underflow/rounding.cu:82:9
-	ld.b32 	%r2, [%SP+40];
+	ld.b32 	%r11, [%SP+40];
 	.loc	4 82 13                         // tests/basic_tests/underflow/rounding.cu:82:13
-	setp.ne.b32 	%p1, %r2, 0;
-	@%p1 bra 	$L__BB3_2;
+	setp.ne.b32 	%p1, %r11, 0;
+	@%p1 bra 	$L__BB3_10;
 	bra.uni 	$L__BB3_1;
 $L__BB3_1:                              // %if.then
 $L__tmp47:
 	.loc	4 84 31                         // tests/basic_tests/underflow/rounding.cu:84:31
-	ld.b32 	%r3, [%SP+44];
-	st.b32 	[%SP+16], %r3;
+	ld.b32 	%r12, [%SP+44];
+	st.b32 	[%SP+16], %r12;
 	st.b32 	[%SP+20], 1073741824;
 $L__tmp48:
 	.loc	6 216 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:216:23 @[ tests/basic_tests/underflow/rounding.cu:84:21 ]
-	ld.b32 	%r4, [%SP+16];
+	ld.b32 	%r1, [%SP+16];
 	.loc	6 216 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:216:28 @[ tests/basic_tests/underflow/rounding.cu:84:21 ]
-	ld.b32 	%r5, [%SP+20];
+	ld.b32 	%r2, [%SP+20];
 	.loc	6 216 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:216:10 @[ tests/basic_tests/underflow/rounding.cu:84:21 ]
-	div.rp.f32 	%r6, %r4, %r5;
+	and.b32 	%r13, %r1, 2139095040;
+	setp.eq.b32 	%p2, %r13, 2139095040;
+	and.b32 	%r14, %r1, 8388607;
+	setp.ne.b32 	%p3, %r14, 0;
+	and.b32 	%r15, %r1, 4194304;
+	setp.eq.b32 	%p4, %r15, 0;
+	and.pred 	%p5, %p2, %p4;
+	and.pred 	%p6, %p5, %p3;
+	and.b32 	%r16, %r2, 2139095040;
+	setp.eq.b32 	%p7, %r16, 2139095040;
+	and.b32 	%r17, %r2, 8388607;
+	setp.ne.b32 	%p8, %r17, 0;
+	and.b32 	%r18, %r2, 4194304;
+	setp.eq.b32 	%p9, %r18, 0;
+	and.pred 	%p10, %p7, %p9;
+	and.pred 	%p11, %p10, %p8;
+	or.pred 	%p12, %p6, %p11;
+	or.b32 	%r19, %r1, %r2;
+	and.b32 	%r20, %r19, 2147483647;
+	setp.eq.b32 	%p13, %r20, 0;
+	setp.eq.b32 	%p14, %r14, 0;
+	and.pred 	%p15, %p2, %p14;
+	setp.eq.b32 	%p16, %r17, 0;
+	and.pred 	%p17, %p7, %p16;
+	and.pred 	%p18, %p15, %p17;
+	or.pred 	%p19, %p13, %p18;
+	or.pred 	%p20, %p12, %p19;
+	not.pred 	%p21, %p20;
+	@%p21 bra 	$L__BB3_3;
+	bra.uni 	$L__BB3_2;
+$L__BB3_2:
+	atom.global.add.u64 	%rd3, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB3_3;
+$L__BB3_3:
+	and.b32 	%r21, %r2, 2147483647;
+	setp.ne.b32 	%p22, %r21, 0;
+	and.b32 	%r22, %r1, 2139095040;
+	setp.eq.b32 	%p23, %r22, 2139095040;
+	and.b32 	%r23, %r1, 2147483647;
+	setp.eq.b32 	%p24, %r23, 0;
+	or.pred 	%p25, %p23, %p24;
+	or.pred 	%p26, %p22, %p25;
+	@%p26 bra 	$L__BB3_5;
+	bra.uni 	$L__BB3_4;
+$L__BB3_4:
+	atom.global.add.u64 	%rd4, [fp_divbyzero_counter], 1;
+	bra.uni 	$L__BB3_5;
+$L__BB3_5:
+	div.rp.f32 	%r3, %r1, %r2;
 $L__tmp49:
 	.loc	4 84 9                          // tests/basic_tests/underflow/rounding.cu:84:9
-	ld.b64 	%rd3, [%SP+24];
+	and.b32 	%r24, %r1, 2139095040;
+	setp.ne.b32 	%p27, %r24, 2139095040;
+	and.b32 	%r25, %r2, 2139095040;
+	setp.ne.b32 	%p28, %r25, 2139095040;
+	and.pred 	%p29, %p27, %p28;
+	and.b32 	%r26, %r2, 2147483647;
+	setp.ne.b32 	%p30, %r26, 0;
+	and.pred 	%p31, %p29, %p30;
+	and.b32 	%r27, %r3, 2139095040;
+	setp.eq.b32 	%p32, %r27, 2139095040;
+	and.b32 	%r28, %r3, 8388607;
+	setp.eq.b32 	%p33, %r28, 0;
+	and.pred 	%p34, %p32, %p33;
+	and.b32 	%r29, %r3, 2147483647;
+	setp.eq.b32 	%p35, %r29, 2139095039;
+	and.b32 	%r30, %r3, -2147483648;
+	setp.eq.b32 	%p36, %r30, 0;
+	shr.u32 	%r31, %r3, 31;
+	and.b32 	%r32, %r31, 1;
+	setp.ne.b32 	%p37, %r32, 0;
+	and.pred 	%p38, %p34, %p36;
+	and.pred 	%p39, %p35, %p37;
+	or.pred 	%p40, %p38, %p39;
+	and.pred 	%p41, %p31, %p40;
+	not.pred 	%p42, %p41;
+	@%p42 bra 	$L__BB3_7;
+	bra.uni 	$L__BB3_6;
+$L__BB3_6:
+	atom.global.add.u64 	%rd5, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB3_7;
+$L__BB3_7:
+	and.b32 	%r33, %r1, 2139095040;
+	setp.ne.b32 	%p43, %r33, 0;
+	and.b32 	%r34, %r1, 8388607;
+	setp.eq.b32 	%p44, %r34, 0;
+	or.pred 	%p45, %p43, %p44;
+	and.b32 	%r35, %r2, 2139095040;
+	setp.ne.b32 	%p46, %r35, 0;
+	and.b32 	%r36, %r2, 8388607;
+	setp.eq.b32 	%p47, %r36, 0;
+	or.pred 	%p48, %p46, %p47;
+	and.pred 	%p49, %p45, %p48;
+	and.b32 	%r37, %r3, 2139095040;
+	setp.eq.b32 	%p50, %r37, 0;
+	and.b32 	%r38, %r3, 8388607;
+	setp.ne.b32 	%p51, %r38, 0;
+	and.pred 	%p52, %p50, %p51;
+	and.b32 	%r39, %r3, 2147483647;
+	setp.eq.b32 	%p53, %r39, 0;
+	and.b32 	%r40, %r1, 2147483647;
+	setp.ne.b32 	%p54, %r40, 0;
+	and.b32 	%r41, %r2, 2147483647;
+	setp.ne.b32 	%p55, %r41, 0;
+	and.pred 	%p56, %p54, %p55;
+	and.pred 	%p57, %p53, %p56;
+	or.pred 	%p58, %p52, %p57;
+	and.pred 	%p59, %p49, %p58;
+	not.pred 	%p60, %p59;
+	@%p60 bra 	$L__BB3_9;
+	bra.uni 	$L__BB3_8;
+$L__BB3_8:
+	atom.global.add.u64 	%rd6, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB3_9;
+$L__BB3_9:
+	ld.b64 	%rd7, [%SP+24];
 	.loc	4 84 19                         // tests/basic_tests/underflow/rounding.cu:84:19
-	st.b32 	[%rd3], %r6;
+	st.b32 	[%rd7], %r3;
 	.loc	4 85 39                         // tests/basic_tests/underflow/rounding.cu:85:39
-	ld.b64 	%rd4, [%SP+24];
-	ld.b32 	%r7, [%rd4];
+	ld.b64 	%rd8, [%SP+24];
+	ld.b32 	%r42, [%rd8];
 	.loc	4 85 26                         // tests/basic_tests/underflow/rounding.cu:85:26
 	{ // callseq 8, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r7;
+	st.param.b32 	[param0], %r42;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r8, [retval0];
+	ld.param.b32 	%r43, [retval0];
 	} // callseq 8
-	and.b32 	%r9, %r8, 1;
+	and.b32 	%r44, %r43, 1;
 	.loc	4 85 9                          // tests/basic_tests/underflow/rounding.cu:85:9
-	ld.b64 	%rd5, [%SP+32];
+	ld.b64 	%rd9, [%SP+32];
 	.loc	4 85 24                         // tests/basic_tests/underflow/rounding.cu:85:24
-	st.b32 	[%rd5], %r9;
+	st.b32 	[%rd9], %r44;
 	.loc	4 86 5                          // tests/basic_tests/underflow/rounding.cu:86:5
-	bra.uni 	$L__BB3_2;
+	bra.uni 	$L__BB3_10;
 $L__tmp50:
-$L__BB3_2:                              // %if.end
+$L__BB3_10:                             // %if.end
 	.loc	4 88 9                          // tests/basic_tests/underflow/rounding.cu:88:9
-	ld.b32 	%r10, [%SP+40];
+	ld.b32 	%r45, [%SP+40];
 	.loc	4 88 13                         // tests/basic_tests/underflow/rounding.cu:88:13
-	setp.ne.b32 	%p2, %r10, 1;
-	@%p2 bra 	$L__BB3_4;
-	bra.uni 	$L__BB3_3;
-$L__BB3_3:                              // %if.then6
+	setp.ne.b32 	%p61, %r45, 1;
+	@%p61 bra 	$L__BB3_18;
+	bra.uni 	$L__BB3_11;
+$L__BB3_11:                             // %if.then6
 $L__tmp51:
 	.loc	4 89 31                         // tests/basic_tests/underflow/rounding.cu:89:31
-	ld.b32 	%r11, [%SP+44];
-	st.b32 	[%SP], %r11;
+	ld.b32 	%r46, [%SP+44];
+	st.b32 	[%SP], %r46;
 	st.b32 	[%SP+4], 1056964608;
 $L__tmp52:
 	.loc	6 310 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:310:23 @[ tests/basic_tests/underflow/rounding.cu:89:21 ]
-	ld.b32 	%r12, [%SP];
+	ld.b32 	%r4, [%SP];
 	.loc	6 310 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:310:28 @[ tests/basic_tests/underflow/rounding.cu:89:21 ]
-	ld.b32 	%r13, [%SP+4];
+	ld.b32 	%r5, [%SP+4];
 	.loc	6 310 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:310:10 @[ tests/basic_tests/underflow/rounding.cu:89:21 ]
-	mul.rp.f32 	%r14, %r12, %r13;
+	and.b32 	%r47, %r4, 2139095040;
+	setp.eq.b32 	%p62, %r47, 2139095040;
+	and.b32 	%r48, %r4, 8388607;
+	setp.ne.b32 	%p63, %r48, 0;
+	and.b32 	%r49, %r4, 4194304;
+	setp.eq.b32 	%p64, %r49, 0;
+	and.pred 	%p65, %p62, %p64;
+	and.pred 	%p66, %p65, %p63;
+	and.b32 	%r50, %r5, 2139095040;
+	setp.eq.b32 	%p67, %r50, 2139095040;
+	and.b32 	%r51, %r5, 8388607;
+	setp.ne.b32 	%p68, %r51, 0;
+	and.b32 	%r52, %r5, 4194304;
+	setp.eq.b32 	%p69, %r52, 0;
+	and.pred 	%p70, %p67, %p69;
+	and.pred 	%p71, %p70, %p68;
+	or.pred 	%p72, %p66, %p71;
+	and.b32 	%r53, %r4, 2147483647;
+	setp.eq.b32 	%p73, %r53, 0;
+	setp.eq.b32 	%p74, %r51, 0;
+	and.pred 	%p75, %p67, %p74;
+	and.pred 	%p76, %p73, %p75;
+	setp.eq.b32 	%p77, %r48, 0;
+	and.pred 	%p78, %p62, %p77;
+	and.b32 	%r54, %r5, 2147483647;
+	setp.eq.b32 	%p79, %r54, 0;
+	and.pred 	%p80, %p78, %p79;
+	or.pred 	%p81, %p76, %p80;
+	or.pred 	%p82, %p72, %p81;
+	not.pred 	%p83, %p82;
+	@%p83 bra 	$L__BB3_13;
+	bra.uni 	$L__BB3_12;
+$L__BB3_12:
+	atom.global.add.u64 	%rd10, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB3_13;
+$L__BB3_13:
+	mul.rp.f32 	%r6, %r4, %r5;
 $L__tmp53:
 	.loc	4 89 9                          // tests/basic_tests/underflow/rounding.cu:89:9
-	ld.b64 	%rd6, [%SP+24];
+	and.b32 	%r55, %r4, 2139095040;
+	setp.ne.b32 	%p84, %r55, 2139095040;
+	and.b32 	%r56, %r5, 2139095040;
+	setp.ne.b32 	%p85, %r56, 2139095040;
+	and.pred 	%p86, %p84, %p85;
+	and.b32 	%r57, %r6, 2139095040;
+	setp.eq.b32 	%p87, %r57, 2139095040;
+	and.b32 	%r58, %r6, 8388607;
+	setp.eq.b32 	%p88, %r58, 0;
+	and.pred 	%p89, %p87, %p88;
+	and.b32 	%r59, %r6, 2147483647;
+	setp.eq.b32 	%p90, %r59, 2139095039;
+	and.b32 	%r60, %r6, -2147483648;
+	setp.eq.b32 	%p91, %r60, 0;
+	shr.u32 	%r61, %r6, 31;
+	and.b32 	%r62, %r61, 1;
+	setp.ne.b32 	%p92, %r62, 0;
+	and.pred 	%p93, %p89, %p91;
+	and.pred 	%p94, %p90, %p92;
+	or.pred 	%p95, %p93, %p94;
+	and.pred 	%p96, %p86, %p95;
+	not.pred 	%p97, %p96;
+	@%p97 bra 	$L__BB3_15;
+	bra.uni 	$L__BB3_14;
+$L__BB3_14:
+	atom.global.add.u64 	%rd11, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB3_15;
+$L__BB3_15:
+	and.b32 	%r63, %r4, 2139095040;
+	setp.ne.b32 	%p98, %r63, 0;
+	and.b32 	%r64, %r4, 8388607;
+	setp.eq.b32 	%p99, %r64, 0;
+	or.pred 	%p100, %p98, %p99;
+	and.b32 	%r65, %r5, 2139095040;
+	setp.ne.b32 	%p101, %r65, 0;
+	and.b32 	%r66, %r5, 8388607;
+	setp.eq.b32 	%p102, %r66, 0;
+	or.pred 	%p103, %p101, %p102;
+	and.pred 	%p104, %p100, %p103;
+	and.b32 	%r67, %r6, 2139095040;
+	setp.eq.b32 	%p105, %r67, 0;
+	and.b32 	%r68, %r6, 8388607;
+	setp.ne.b32 	%p106, %r68, 0;
+	and.pred 	%p107, %p105, %p106;
+	and.b32 	%r69, %r6, 2147483647;
+	setp.eq.b32 	%p108, %r69, 0;
+	and.b32 	%r70, %r4, 2147483647;
+	setp.ne.b32 	%p109, %r70, 0;
+	and.b32 	%r71, %r5, 2147483647;
+	setp.ne.b32 	%p110, %r71, 0;
+	and.pred 	%p111, %p109, %p110;
+	and.pred 	%p112, %p108, %p111;
+	or.pred 	%p113, %p107, %p112;
+	and.pred 	%p114, %p104, %p113;
+	not.pred 	%p115, %p114;
+	@%p115 bra 	$L__BB3_17;
+	bra.uni 	$L__BB3_16;
+$L__BB3_16:
+	atom.global.add.u64 	%rd12, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB3_17;
+$L__BB3_17:
+	ld.b64 	%rd13, [%SP+24];
 	.loc	4 89 19                         // tests/basic_tests/underflow/rounding.cu:89:19
-	st.b32 	[%rd6+4], %r14;
+	st.b32 	[%rd13+4], %r6;
 	.loc	4 90 39                         // tests/basic_tests/underflow/rounding.cu:90:39
-	ld.b64 	%rd7, [%SP+24];
-	ld.b32 	%r15, [%rd7+4];
+	ld.b64 	%rd14, [%SP+24];
+	ld.b32 	%r72, [%rd14+4];
 	.loc	4 90 26                         // tests/basic_tests/underflow/rounding.cu:90:26
 	{ // callseq 9, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r15;
+	st.param.b32 	[param0], %r72;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r16, [retval0];
+	ld.param.b32 	%r73, [retval0];
 	} // callseq 9
-	and.b32 	%r17, %r16, 1;
+	and.b32 	%r74, %r73, 1;
 	.loc	4 90 9                          // tests/basic_tests/underflow/rounding.cu:90:9
-	ld.b64 	%rd8, [%SP+32];
+	ld.b64 	%rd15, [%SP+32];
 	.loc	4 90 24                         // tests/basic_tests/underflow/rounding.cu:90:24
-	st.b32 	[%rd8+4], %r17;
+	st.b32 	[%rd15+4], %r74;
 	.loc	4 91 5                          // tests/basic_tests/underflow/rounding.cu:91:5
-	bra.uni 	$L__BB3_4;
+	bra.uni 	$L__BB3_18;
 $L__tmp54:
-$L__BB3_4:                              // %if.end13
+$L__BB3_18:                             // %if.end13
 	.loc	4 93 9                          // tests/basic_tests/underflow/rounding.cu:93:9
-	ld.b32 	%r18, [%SP+40];
+	ld.b32 	%r75, [%SP+40];
 	.loc	4 93 13                         // tests/basic_tests/underflow/rounding.cu:93:13
-	setp.ne.b32 	%p3, %r18, 2;
-	@%p3 bra 	$L__BB3_6;
-	bra.uni 	$L__BB3_5;
-$L__BB3_5:                              // %if.then15
+	setp.ne.b32 	%p116, %r75, 2;
+	@%p116 bra 	$L__BB3_26;
+	bra.uni 	$L__BB3_19;
+$L__BB3_19:                             // %if.then15
 $L__tmp55:
 	.loc	4 95 32                         // tests/basic_tests/underflow/rounding.cu:95:32
-	ld.b32 	%r19, [%SP+44];
+	ld.b32 	%r76, [%SP+44];
 	.loc	4 95 31                         // tests/basic_tests/underflow/rounding.cu:95:31
-	neg.f32 	%r20, %r19;
-	st.b32 	[%SP+8], %r20;
+	neg.f32 	%r77, %r76;
+	st.b32 	[%SP+8], %r77;
 	st.b32 	[%SP+12], 1056964608;
 $L__tmp56:
 	.loc	6 310 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:310:23 @[ tests/basic_tests/underflow/rounding.cu:95:21 ]
-	ld.b32 	%r21, [%SP+8];
+	ld.b32 	%r7, [%SP+8];
 	.loc	6 310 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:310:28 @[ tests/basic_tests/underflow/rounding.cu:95:21 ]
-	ld.b32 	%r22, [%SP+12];
+	ld.b32 	%r8, [%SP+12];
 	.loc	6 310 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:310:10 @[ tests/basic_tests/underflow/rounding.cu:95:21 ]
-	mul.rp.f32 	%r23, %r21, %r22;
+	and.b32 	%r78, %r7, 2139095040;
+	setp.eq.b32 	%p117, %r78, 2139095040;
+	and.b32 	%r79, %r7, 8388607;
+	setp.ne.b32 	%p118, %r79, 0;
+	and.b32 	%r80, %r7, 4194304;
+	setp.eq.b32 	%p119, %r80, 0;
+	and.pred 	%p120, %p117, %p119;
+	and.pred 	%p121, %p120, %p118;
+	and.b32 	%r81, %r8, 2139095040;
+	setp.eq.b32 	%p122, %r81, 2139095040;
+	and.b32 	%r82, %r8, 8388607;
+	setp.ne.b32 	%p123, %r82, 0;
+	and.b32 	%r83, %r8, 4194304;
+	setp.eq.b32 	%p124, %r83, 0;
+	and.pred 	%p125, %p122, %p124;
+	and.pred 	%p126, %p125, %p123;
+	or.pred 	%p127, %p121, %p126;
+	and.b32 	%r84, %r7, 2147483647;
+	setp.eq.b32 	%p128, %r84, 0;
+	setp.eq.b32 	%p129, %r82, 0;
+	and.pred 	%p130, %p122, %p129;
+	and.pred 	%p131, %p128, %p130;
+	setp.eq.b32 	%p132, %r79, 0;
+	and.pred 	%p133, %p117, %p132;
+	and.b32 	%r85, %r8, 2147483647;
+	setp.eq.b32 	%p134, %r85, 0;
+	and.pred 	%p135, %p133, %p134;
+	or.pred 	%p136, %p131, %p135;
+	or.pred 	%p137, %p127, %p136;
+	not.pred 	%p138, %p137;
+	@%p138 bra 	$L__BB3_21;
+	bra.uni 	$L__BB3_20;
+$L__BB3_20:
+	atom.global.add.u64 	%rd16, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB3_21;
+$L__BB3_21:
+	mul.rp.f32 	%r9, %r7, %r8;
 $L__tmp57:
 	.loc	4 95 9                          // tests/basic_tests/underflow/rounding.cu:95:9
-	ld.b64 	%rd9, [%SP+24];
+	and.b32 	%r86, %r7, 2139095040;
+	setp.ne.b32 	%p139, %r86, 2139095040;
+	and.b32 	%r87, %r8, 2139095040;
+	setp.ne.b32 	%p140, %r87, 2139095040;
+	and.pred 	%p141, %p139, %p140;
+	and.b32 	%r88, %r9, 2139095040;
+	setp.eq.b32 	%p142, %r88, 2139095040;
+	and.b32 	%r89, %r9, 8388607;
+	setp.eq.b32 	%p143, %r89, 0;
+	and.pred 	%p144, %p142, %p143;
+	and.b32 	%r90, %r9, 2147483647;
+	setp.eq.b32 	%p145, %r90, 2139095039;
+	and.b32 	%r91, %r9, -2147483648;
+	setp.eq.b32 	%p146, %r91, 0;
+	shr.u32 	%r92, %r9, 31;
+	and.b32 	%r93, %r92, 1;
+	setp.ne.b32 	%p147, %r93, 0;
+	and.pred 	%p148, %p144, %p146;
+	and.pred 	%p149, %p145, %p147;
+	or.pred 	%p150, %p148, %p149;
+	and.pred 	%p151, %p141, %p150;
+	not.pred 	%p152, %p151;
+	@%p152 bra 	$L__BB3_23;
+	bra.uni 	$L__BB3_22;
+$L__BB3_22:
+	atom.global.add.u64 	%rd17, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB3_23;
+$L__BB3_23:
+	and.b32 	%r94, %r7, 2139095040;
+	setp.ne.b32 	%p153, %r94, 0;
+	and.b32 	%r95, %r7, 8388607;
+	setp.eq.b32 	%p154, %r95, 0;
+	or.pred 	%p155, %p153, %p154;
+	and.b32 	%r96, %r8, 2139095040;
+	setp.ne.b32 	%p156, %r96, 0;
+	and.b32 	%r97, %r8, 8388607;
+	setp.eq.b32 	%p157, %r97, 0;
+	or.pred 	%p158, %p156, %p157;
+	and.pred 	%p159, %p155, %p158;
+	and.b32 	%r98, %r9, 2139095040;
+	setp.eq.b32 	%p160, %r98, 0;
+	and.b32 	%r99, %r9, 8388607;
+	setp.ne.b32 	%p161, %r99, 0;
+	and.pred 	%p162, %p160, %p161;
+	and.b32 	%r100, %r9, 2147483647;
+	setp.eq.b32 	%p163, %r100, 0;
+	and.b32 	%r101, %r7, 2147483647;
+	setp.ne.b32 	%p164, %r101, 0;
+	and.b32 	%r102, %r8, 2147483647;
+	setp.ne.b32 	%p165, %r102, 0;
+	and.pred 	%p166, %p164, %p165;
+	and.pred 	%p167, %p163, %p166;
+	or.pred 	%p168, %p162, %p167;
+	and.pred 	%p169, %p159, %p168;
+	not.pred 	%p170, %p169;
+	@%p170 bra 	$L__BB3_25;
+	bra.uni 	$L__BB3_24;
+$L__BB3_24:
+	atom.global.add.u64 	%rd18, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB3_25;
+$L__BB3_25:
+	ld.b64 	%rd19, [%SP+24];
 	.loc	4 95 19                         // tests/basic_tests/underflow/rounding.cu:95:19
-	st.b32 	[%rd9+8], %r23;
+	st.b32 	[%rd19+8], %r9;
 	.loc	4 96 39                         // tests/basic_tests/underflow/rounding.cu:96:39
-	ld.b64 	%rd10, [%SP+24];
-	ld.b32 	%r24, [%rd10+8];
+	ld.b64 	%rd20, [%SP+24];
+	ld.b32 	%r103, [%rd20+8];
 	.loc	4 96 26                         // tests/basic_tests/underflow/rounding.cu:96:26
 	{ // callseq 10, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r24;
+	st.param.b32 	[param0], %r103;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r25, [retval0];
+	ld.param.b32 	%r104, [retval0];
 	} // callseq 10
-	and.b32 	%r26, %r25, 1;
+	and.b32 	%r105, %r104, 1;
 	.loc	4 96 9                          // tests/basic_tests/underflow/rounding.cu:96:9
-	ld.b64 	%rd11, [%SP+32];
+	ld.b64 	%rd21, [%SP+32];
 	.loc	4 96 24                         // tests/basic_tests/underflow/rounding.cu:96:24
-	st.b32 	[%rd11+8], %r26;
+	st.b32 	[%rd21+8], %r105;
 	.loc	4 97 5                          // tests/basic_tests/underflow/rounding.cu:97:5
-	bra.uni 	$L__BB3_6;
+	bra.uni 	$L__BB3_26;
 $L__tmp58:
-$L__BB3_6:                              // %if.end22
+$L__BB3_26:                             // %if.end22
 	.loc	4 98 1                          // tests/basic_tests/underflow/rounding.cu:98:1
 	ret;
 $L__tmp59:
@@ -833,9 +1679,9 @@ $L__func_end3:
 	.local .align 8 .b8 	__local_depot4[48];
 	.reg .b64 	%SP;
 	.reg .b64 	%SPL;
-	.reg .pred 	%p<4>;
-	.reg .b32 	%r<28>;
-	.reg .b64 	%rd<12>;
+	.reg .pred 	%p<171>;
+	.reg .b32 	%r<107>;
+	.reg .b64 	%rd<22>;
 	.loc	4 100 0                         // tests/basic_tests/underflow/rounding.cu:100:0
 $L__func_begin4:
 	.loc	4 100 0                         // tests/basic_tests/underflow/rounding.cu:100:0
@@ -849,149 +1695,455 @@ $L__func_begin4:
 	st.b64 	[%SP+32], %rd2;
 $L__tmp60:
 	.loc	3 53 27                         // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_builtin_vars.h:53:27 @[ tests/basic_tests/underflow/rounding.cu:101:15 ]
-	mov.u32 	%r1, %tid.x;
+	mov.u32 	%r10, %tid.x;
 $L__tmp61:
 	.loc	4 101 9                         // tests/basic_tests/underflow/rounding.cu:101:9
-	st.b32 	[%SP+40], %r1;
+	st.b32 	[%SP+40], %r10;
 	.loc	4 103 11                        // tests/basic_tests/underflow/rounding.cu:103:11
 	st.b32 	[%SP+44], 8388608;
 $L__tmp62:
 	.loc	4 107 9                         // tests/basic_tests/underflow/rounding.cu:107:9
-	ld.b32 	%r2, [%SP+40];
+	ld.b32 	%r11, [%SP+40];
 	.loc	4 107 13                        // tests/basic_tests/underflow/rounding.cu:107:13
-	setp.ne.b32 	%p1, %r2, 0;
-	@%p1 bra 	$L__BB4_2;
+	setp.ne.b32 	%p1, %r11, 0;
+	@%p1 bra 	$L__BB4_10;
 	bra.uni 	$L__BB4_1;
 $L__BB4_1:                              // %if.then
 $L__tmp63:
 	.loc	4 109 31                        // tests/basic_tests/underflow/rounding.cu:109:31
-	ld.b32 	%r3, [%SP+44];
-	st.b32 	[%SP+16], %r3;
+	ld.b32 	%r12, [%SP+44];
+	st.b32 	[%SP+16], %r12;
 	st.b32 	[%SP+20], 1073741824;
 $L__tmp64:
 	.loc	6 210 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:210:23 @[ tests/basic_tests/underflow/rounding.cu:109:21 ]
-	ld.b32 	%r4, [%SP+16];
+	ld.b32 	%r1, [%SP+16];
 	.loc	6 210 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:210:28 @[ tests/basic_tests/underflow/rounding.cu:109:21 ]
-	ld.b32 	%r5, [%SP+20];
+	ld.b32 	%r2, [%SP+20];
 	.loc	6 210 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:210:10 @[ tests/basic_tests/underflow/rounding.cu:109:21 ]
-	div.rm.f32 	%r6, %r4, %r5;
+	and.b32 	%r13, %r1, 2139095040;
+	setp.eq.b32 	%p2, %r13, 2139095040;
+	and.b32 	%r14, %r1, 8388607;
+	setp.ne.b32 	%p3, %r14, 0;
+	and.b32 	%r15, %r1, 4194304;
+	setp.eq.b32 	%p4, %r15, 0;
+	and.pred 	%p5, %p2, %p4;
+	and.pred 	%p6, %p5, %p3;
+	and.b32 	%r16, %r2, 2139095040;
+	setp.eq.b32 	%p7, %r16, 2139095040;
+	and.b32 	%r17, %r2, 8388607;
+	setp.ne.b32 	%p8, %r17, 0;
+	and.b32 	%r18, %r2, 4194304;
+	setp.eq.b32 	%p9, %r18, 0;
+	and.pred 	%p10, %p7, %p9;
+	and.pred 	%p11, %p10, %p8;
+	or.pred 	%p12, %p6, %p11;
+	or.b32 	%r19, %r1, %r2;
+	and.b32 	%r20, %r19, 2147483647;
+	setp.eq.b32 	%p13, %r20, 0;
+	setp.eq.b32 	%p14, %r14, 0;
+	and.pred 	%p15, %p2, %p14;
+	setp.eq.b32 	%p16, %r17, 0;
+	and.pred 	%p17, %p7, %p16;
+	and.pred 	%p18, %p15, %p17;
+	or.pred 	%p19, %p13, %p18;
+	or.pred 	%p20, %p12, %p19;
+	not.pred 	%p21, %p20;
+	@%p21 bra 	$L__BB4_3;
+	bra.uni 	$L__BB4_2;
+$L__BB4_2:
+	atom.global.add.u64 	%rd3, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB4_3;
+$L__BB4_3:
+	and.b32 	%r21, %r2, 2147483647;
+	setp.ne.b32 	%p22, %r21, 0;
+	and.b32 	%r22, %r1, 2139095040;
+	setp.eq.b32 	%p23, %r22, 2139095040;
+	and.b32 	%r23, %r1, 2147483647;
+	setp.eq.b32 	%p24, %r23, 0;
+	or.pred 	%p25, %p23, %p24;
+	or.pred 	%p26, %p22, %p25;
+	@%p26 bra 	$L__BB4_5;
+	bra.uni 	$L__BB4_4;
+$L__BB4_4:
+	atom.global.add.u64 	%rd4, [fp_divbyzero_counter], 1;
+	bra.uni 	$L__BB4_5;
+$L__BB4_5:
+	div.rm.f32 	%r3, %r1, %r2;
 $L__tmp65:
 	.loc	4 109 9                         // tests/basic_tests/underflow/rounding.cu:109:9
-	ld.b64 	%rd3, [%SP+24];
+	and.b32 	%r24, %r1, 2139095040;
+	setp.ne.b32 	%p27, %r24, 2139095040;
+	and.b32 	%r25, %r2, 2139095040;
+	setp.ne.b32 	%p28, %r25, 2139095040;
+	and.pred 	%p29, %p27, %p28;
+	and.b32 	%r26, %r2, 2147483647;
+	setp.ne.b32 	%p30, %r26, 0;
+	and.pred 	%p31, %p29, %p30;
+	and.b32 	%r27, %r3, 2139095040;
+	setp.eq.b32 	%p32, %r27, 2139095040;
+	and.b32 	%r28, %r3, 8388607;
+	setp.eq.b32 	%p33, %r28, 0;
+	and.pred 	%p34, %p32, %p33;
+	and.b32 	%r29, %r3, 2147483647;
+	setp.eq.b32 	%p35, %r29, 2139095039;
+	and.b32 	%r30, %r3, -2147483648;
+	setp.eq.b32 	%p36, %r30, 0;
+	shr.u32 	%r31, %r3, 31;
+	and.b32 	%r32, %r31, 1;
+	setp.ne.b32 	%p37, %r32, 0;
+	and.pred 	%p38, %p34, %p37;
+	and.pred 	%p39, %p35, %p36;
+	or.pred 	%p40, %p38, %p39;
+	and.pred 	%p41, %p31, %p40;
+	not.pred 	%p42, %p41;
+	@%p42 bra 	$L__BB4_7;
+	bra.uni 	$L__BB4_6;
+$L__BB4_6:
+	atom.global.add.u64 	%rd5, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB4_7;
+$L__BB4_7:
+	and.b32 	%r33, %r1, 2139095040;
+	setp.ne.b32 	%p43, %r33, 0;
+	and.b32 	%r34, %r1, 8388607;
+	setp.eq.b32 	%p44, %r34, 0;
+	or.pred 	%p45, %p43, %p44;
+	and.b32 	%r35, %r2, 2139095040;
+	setp.ne.b32 	%p46, %r35, 0;
+	and.b32 	%r36, %r2, 8388607;
+	setp.eq.b32 	%p47, %r36, 0;
+	or.pred 	%p48, %p46, %p47;
+	and.pred 	%p49, %p45, %p48;
+	and.b32 	%r37, %r3, 2139095040;
+	setp.eq.b32 	%p50, %r37, 0;
+	and.b32 	%r38, %r3, 8388607;
+	setp.ne.b32 	%p51, %r38, 0;
+	and.pred 	%p52, %p50, %p51;
+	and.b32 	%r39, %r3, 2147483647;
+	setp.eq.b32 	%p53, %r39, 0;
+	and.b32 	%r40, %r1, 2147483647;
+	setp.ne.b32 	%p54, %r40, 0;
+	and.b32 	%r41, %r2, 2147483647;
+	setp.ne.b32 	%p55, %r41, 0;
+	and.pred 	%p56, %p54, %p55;
+	and.pred 	%p57, %p53, %p56;
+	or.pred 	%p58, %p52, %p57;
+	and.pred 	%p59, %p49, %p58;
+	not.pred 	%p60, %p59;
+	@%p60 bra 	$L__BB4_9;
+	bra.uni 	$L__BB4_8;
+$L__BB4_8:
+	atom.global.add.u64 	%rd6, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB4_9;
+$L__BB4_9:
+	ld.b64 	%rd7, [%SP+24];
 	.loc	4 109 19                        // tests/basic_tests/underflow/rounding.cu:109:19
-	st.b32 	[%rd3], %r6;
+	st.b32 	[%rd7], %r3;
 	.loc	4 110 39                        // tests/basic_tests/underflow/rounding.cu:110:39
-	ld.b64 	%rd4, [%SP+24];
-	ld.b32 	%r7, [%rd4];
+	ld.b64 	%rd8, [%SP+24];
+	ld.b32 	%r42, [%rd8];
 	.loc	4 110 26                        // tests/basic_tests/underflow/rounding.cu:110:26
 	{ // callseq 11, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r7;
+	st.param.b32 	[param0], %r42;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r8, [retval0];
+	ld.param.b32 	%r43, [retval0];
 	} // callseq 11
-	and.b32 	%r9, %r8, 1;
+	and.b32 	%r44, %r43, 1;
 	.loc	4 110 9                         // tests/basic_tests/underflow/rounding.cu:110:9
-	ld.b64 	%rd5, [%SP+32];
+	ld.b64 	%rd9, [%SP+32];
 	.loc	4 110 24                        // tests/basic_tests/underflow/rounding.cu:110:24
-	st.b32 	[%rd5], %r9;
+	st.b32 	[%rd9], %r44;
 	.loc	4 111 5                         // tests/basic_tests/underflow/rounding.cu:111:5
-	bra.uni 	$L__BB4_2;
+	bra.uni 	$L__BB4_10;
 $L__tmp66:
-$L__BB4_2:                              // %if.end
+$L__BB4_10:                             // %if.end
 	.loc	4 113 9                         // tests/basic_tests/underflow/rounding.cu:113:9
-	ld.b32 	%r10, [%SP+40];
+	ld.b32 	%r45, [%SP+40];
 	.loc	4 113 13                        // tests/basic_tests/underflow/rounding.cu:113:13
-	setp.ne.b32 	%p2, %r10, 1;
-	@%p2 bra 	$L__BB4_4;
-	bra.uni 	$L__BB4_3;
-$L__BB4_3:                              // %if.then6
+	setp.ne.b32 	%p61, %r45, 1;
+	@%p61 bra 	$L__BB4_18;
+	bra.uni 	$L__BB4_11;
+$L__BB4_11:                             // %if.then6
 $L__tmp67:
 	.loc	4 115 32                        // tests/basic_tests/underflow/rounding.cu:115:32
-	ld.b32 	%r11, [%SP+44];
+	ld.b32 	%r46, [%SP+44];
 	.loc	4 115 31                        // tests/basic_tests/underflow/rounding.cu:115:31
-	neg.f32 	%r12, %r11;
-	st.b32 	[%SP], %r12;
+	neg.f32 	%r47, %r46;
+	st.b32 	[%SP], %r47;
 	st.b32 	[%SP+4], 1056964608;
 $L__tmp68:
 	.loc	6 304 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:304:23 @[ tests/basic_tests/underflow/rounding.cu:115:21 ]
-	ld.b32 	%r13, [%SP];
+	ld.b32 	%r4, [%SP];
 	.loc	6 304 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:304:28 @[ tests/basic_tests/underflow/rounding.cu:115:21 ]
-	ld.b32 	%r14, [%SP+4];
+	ld.b32 	%r5, [%SP+4];
 	.loc	6 304 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:304:10 @[ tests/basic_tests/underflow/rounding.cu:115:21 ]
-	mul.rm.f32 	%r15, %r13, %r14;
+	and.b32 	%r48, %r4, 2139095040;
+	setp.eq.b32 	%p62, %r48, 2139095040;
+	and.b32 	%r49, %r4, 8388607;
+	setp.ne.b32 	%p63, %r49, 0;
+	and.b32 	%r50, %r4, 4194304;
+	setp.eq.b32 	%p64, %r50, 0;
+	and.pred 	%p65, %p62, %p64;
+	and.pred 	%p66, %p65, %p63;
+	and.b32 	%r51, %r5, 2139095040;
+	setp.eq.b32 	%p67, %r51, 2139095040;
+	and.b32 	%r52, %r5, 8388607;
+	setp.ne.b32 	%p68, %r52, 0;
+	and.b32 	%r53, %r5, 4194304;
+	setp.eq.b32 	%p69, %r53, 0;
+	and.pred 	%p70, %p67, %p69;
+	and.pred 	%p71, %p70, %p68;
+	or.pred 	%p72, %p66, %p71;
+	and.b32 	%r54, %r4, 2147483647;
+	setp.eq.b32 	%p73, %r54, 0;
+	setp.eq.b32 	%p74, %r52, 0;
+	and.pred 	%p75, %p67, %p74;
+	and.pred 	%p76, %p73, %p75;
+	setp.eq.b32 	%p77, %r49, 0;
+	and.pred 	%p78, %p62, %p77;
+	and.b32 	%r55, %r5, 2147483647;
+	setp.eq.b32 	%p79, %r55, 0;
+	and.pred 	%p80, %p78, %p79;
+	or.pred 	%p81, %p76, %p80;
+	or.pred 	%p82, %p72, %p81;
+	not.pred 	%p83, %p82;
+	@%p83 bra 	$L__BB4_13;
+	bra.uni 	$L__BB4_12;
+$L__BB4_12:
+	atom.global.add.u64 	%rd10, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB4_13;
+$L__BB4_13:
+	mul.rm.f32 	%r6, %r4, %r5;
 $L__tmp69:
 	.loc	4 115 9                         // tests/basic_tests/underflow/rounding.cu:115:9
-	ld.b64 	%rd6, [%SP+24];
+	and.b32 	%r56, %r4, 2139095040;
+	setp.ne.b32 	%p84, %r56, 2139095040;
+	and.b32 	%r57, %r5, 2139095040;
+	setp.ne.b32 	%p85, %r57, 2139095040;
+	and.pred 	%p86, %p84, %p85;
+	and.b32 	%r58, %r6, 2139095040;
+	setp.eq.b32 	%p87, %r58, 2139095040;
+	and.b32 	%r59, %r6, 8388607;
+	setp.eq.b32 	%p88, %r59, 0;
+	and.pred 	%p89, %p87, %p88;
+	and.b32 	%r60, %r6, 2147483647;
+	setp.eq.b32 	%p90, %r60, 2139095039;
+	and.b32 	%r61, %r6, -2147483648;
+	setp.eq.b32 	%p91, %r61, 0;
+	shr.u32 	%r62, %r6, 31;
+	and.b32 	%r63, %r62, 1;
+	setp.ne.b32 	%p92, %r63, 0;
+	and.pred 	%p93, %p89, %p92;
+	and.pred 	%p94, %p90, %p91;
+	or.pred 	%p95, %p93, %p94;
+	and.pred 	%p96, %p86, %p95;
+	not.pred 	%p97, %p96;
+	@%p97 bra 	$L__BB4_15;
+	bra.uni 	$L__BB4_14;
+$L__BB4_14:
+	atom.global.add.u64 	%rd11, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB4_15;
+$L__BB4_15:
+	and.b32 	%r64, %r4, 2139095040;
+	setp.ne.b32 	%p98, %r64, 0;
+	and.b32 	%r65, %r4, 8388607;
+	setp.eq.b32 	%p99, %r65, 0;
+	or.pred 	%p100, %p98, %p99;
+	and.b32 	%r66, %r5, 2139095040;
+	setp.ne.b32 	%p101, %r66, 0;
+	and.b32 	%r67, %r5, 8388607;
+	setp.eq.b32 	%p102, %r67, 0;
+	or.pred 	%p103, %p101, %p102;
+	and.pred 	%p104, %p100, %p103;
+	and.b32 	%r68, %r6, 2139095040;
+	setp.eq.b32 	%p105, %r68, 0;
+	and.b32 	%r69, %r6, 8388607;
+	setp.ne.b32 	%p106, %r69, 0;
+	and.pred 	%p107, %p105, %p106;
+	and.b32 	%r70, %r6, 2147483647;
+	setp.eq.b32 	%p108, %r70, 0;
+	and.b32 	%r71, %r4, 2147483647;
+	setp.ne.b32 	%p109, %r71, 0;
+	and.b32 	%r72, %r5, 2147483647;
+	setp.ne.b32 	%p110, %r72, 0;
+	and.pred 	%p111, %p109, %p110;
+	and.pred 	%p112, %p108, %p111;
+	or.pred 	%p113, %p107, %p112;
+	and.pred 	%p114, %p104, %p113;
+	not.pred 	%p115, %p114;
+	@%p115 bra 	$L__BB4_17;
+	bra.uni 	$L__BB4_16;
+$L__BB4_16:
+	atom.global.add.u64 	%rd12, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB4_17;
+$L__BB4_17:
+	ld.b64 	%rd13, [%SP+24];
 	.loc	4 115 19                        // tests/basic_tests/underflow/rounding.cu:115:19
-	st.b32 	[%rd6+4], %r15;
+	st.b32 	[%rd13+4], %r6;
 	.loc	4 116 39                        // tests/basic_tests/underflow/rounding.cu:116:39
-	ld.b64 	%rd7, [%SP+24];
-	ld.b32 	%r16, [%rd7+4];
+	ld.b64 	%rd14, [%SP+24];
+	ld.b32 	%r73, [%rd14+4];
 	.loc	4 116 26                        // tests/basic_tests/underflow/rounding.cu:116:26
 	{ // callseq 12, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r16;
+	st.param.b32 	[param0], %r73;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r17, [retval0];
+	ld.param.b32 	%r74, [retval0];
 	} // callseq 12
-	and.b32 	%r18, %r17, 1;
+	and.b32 	%r75, %r74, 1;
 	.loc	4 116 9                         // tests/basic_tests/underflow/rounding.cu:116:9
-	ld.b64 	%rd8, [%SP+32];
+	ld.b64 	%rd15, [%SP+32];
 	.loc	4 116 24                        // tests/basic_tests/underflow/rounding.cu:116:24
-	st.b32 	[%rd8+4], %r18;
+	st.b32 	[%rd15+4], %r75;
 	.loc	4 117 5                         // tests/basic_tests/underflow/rounding.cu:117:5
-	bra.uni 	$L__BB4_4;
+	bra.uni 	$L__BB4_18;
 $L__tmp70:
-$L__BB4_4:                              // %if.end13
+$L__BB4_18:                             // %if.end13
 	.loc	4 119 9                         // tests/basic_tests/underflow/rounding.cu:119:9
-	ld.b32 	%r19, [%SP+40];
+	ld.b32 	%r76, [%SP+40];
 	.loc	4 119 13                        // tests/basic_tests/underflow/rounding.cu:119:13
-	setp.ne.b32 	%p3, %r19, 2;
-	@%p3 bra 	$L__BB4_6;
-	bra.uni 	$L__BB4_5;
-$L__BB4_5:                              // %if.then15
+	setp.ne.b32 	%p116, %r76, 2;
+	@%p116 bra 	$L__BB4_26;
+	bra.uni 	$L__BB4_19;
+$L__BB4_19:                             // %if.then15
 $L__tmp71:
 	.loc	4 120 32                        // tests/basic_tests/underflow/rounding.cu:120:32
-	ld.b32 	%r20, [%SP+44];
+	ld.b32 	%r77, [%SP+44];
 	.loc	4 120 31                        // tests/basic_tests/underflow/rounding.cu:120:31
-	neg.f32 	%r21, %r20;
-	st.b32 	[%SP+8], %r21;
+	neg.f32 	%r78, %r77;
+	st.b32 	[%SP+8], %r78;
 	st.b32 	[%SP+12], 1048576000;
 $L__tmp72:
 	.loc	6 304 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:304:23 @[ tests/basic_tests/underflow/rounding.cu:120:21 ]
-	ld.b32 	%r22, [%SP+8];
+	ld.b32 	%r7, [%SP+8];
 	.loc	6 304 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:304:28 @[ tests/basic_tests/underflow/rounding.cu:120:21 ]
-	ld.b32 	%r23, [%SP+12];
+	ld.b32 	%r8, [%SP+12];
 	.loc	6 304 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:304:10 @[ tests/basic_tests/underflow/rounding.cu:120:21 ]
-	mul.rm.f32 	%r24, %r22, %r23;
+	and.b32 	%r79, %r7, 2139095040;
+	setp.eq.b32 	%p117, %r79, 2139095040;
+	and.b32 	%r80, %r7, 8388607;
+	setp.ne.b32 	%p118, %r80, 0;
+	and.b32 	%r81, %r7, 4194304;
+	setp.eq.b32 	%p119, %r81, 0;
+	and.pred 	%p120, %p117, %p119;
+	and.pred 	%p121, %p120, %p118;
+	and.b32 	%r82, %r8, 2139095040;
+	setp.eq.b32 	%p122, %r82, 2139095040;
+	and.b32 	%r83, %r8, 8388607;
+	setp.ne.b32 	%p123, %r83, 0;
+	and.b32 	%r84, %r8, 4194304;
+	setp.eq.b32 	%p124, %r84, 0;
+	and.pred 	%p125, %p122, %p124;
+	and.pred 	%p126, %p125, %p123;
+	or.pred 	%p127, %p121, %p126;
+	and.b32 	%r85, %r7, 2147483647;
+	setp.eq.b32 	%p128, %r85, 0;
+	setp.eq.b32 	%p129, %r83, 0;
+	and.pred 	%p130, %p122, %p129;
+	and.pred 	%p131, %p128, %p130;
+	setp.eq.b32 	%p132, %r80, 0;
+	and.pred 	%p133, %p117, %p132;
+	and.b32 	%r86, %r8, 2147483647;
+	setp.eq.b32 	%p134, %r86, 0;
+	and.pred 	%p135, %p133, %p134;
+	or.pred 	%p136, %p131, %p135;
+	or.pred 	%p137, %p127, %p136;
+	not.pred 	%p138, %p137;
+	@%p138 bra 	$L__BB4_21;
+	bra.uni 	$L__BB4_20;
+$L__BB4_20:
+	atom.global.add.u64 	%rd16, [fp_invalid_counter], 1;
+	bra.uni 	$L__BB4_21;
+$L__BB4_21:
+	mul.rm.f32 	%r9, %r7, %r8;
 $L__tmp73:
 	.loc	4 120 9                         // tests/basic_tests/underflow/rounding.cu:120:9
-	ld.b64 	%rd9, [%SP+24];
+	and.b32 	%r87, %r7, 2139095040;
+	setp.ne.b32 	%p139, %r87, 2139095040;
+	and.b32 	%r88, %r8, 2139095040;
+	setp.ne.b32 	%p140, %r88, 2139095040;
+	and.pred 	%p141, %p139, %p140;
+	and.b32 	%r89, %r9, 2139095040;
+	setp.eq.b32 	%p142, %r89, 2139095040;
+	and.b32 	%r90, %r9, 8388607;
+	setp.eq.b32 	%p143, %r90, 0;
+	and.pred 	%p144, %p142, %p143;
+	and.b32 	%r91, %r9, 2147483647;
+	setp.eq.b32 	%p145, %r91, 2139095039;
+	and.b32 	%r92, %r9, -2147483648;
+	setp.eq.b32 	%p146, %r92, 0;
+	shr.u32 	%r93, %r9, 31;
+	and.b32 	%r94, %r93, 1;
+	setp.ne.b32 	%p147, %r94, 0;
+	and.pred 	%p148, %p144, %p147;
+	and.pred 	%p149, %p145, %p146;
+	or.pred 	%p150, %p148, %p149;
+	and.pred 	%p151, %p141, %p150;
+	not.pred 	%p152, %p151;
+	@%p152 bra 	$L__BB4_23;
+	bra.uni 	$L__BB4_22;
+$L__BB4_22:
+	atom.global.add.u64 	%rd17, [fp_overflow_counter], 1;
+	bra.uni 	$L__BB4_23;
+$L__BB4_23:
+	and.b32 	%r95, %r7, 2139095040;
+	setp.ne.b32 	%p153, %r95, 0;
+	and.b32 	%r96, %r7, 8388607;
+	setp.eq.b32 	%p154, %r96, 0;
+	or.pred 	%p155, %p153, %p154;
+	and.b32 	%r97, %r8, 2139095040;
+	setp.ne.b32 	%p156, %r97, 0;
+	and.b32 	%r98, %r8, 8388607;
+	setp.eq.b32 	%p157, %r98, 0;
+	or.pred 	%p158, %p156, %p157;
+	and.pred 	%p159, %p155, %p158;
+	and.b32 	%r99, %r9, 2139095040;
+	setp.eq.b32 	%p160, %r99, 0;
+	and.b32 	%r100, %r9, 8388607;
+	setp.ne.b32 	%p161, %r100, 0;
+	and.pred 	%p162, %p160, %p161;
+	and.b32 	%r101, %r9, 2147483647;
+	setp.eq.b32 	%p163, %r101, 0;
+	and.b32 	%r102, %r7, 2147483647;
+	setp.ne.b32 	%p164, %r102, 0;
+	and.b32 	%r103, %r8, 2147483647;
+	setp.ne.b32 	%p165, %r103, 0;
+	and.pred 	%p166, %p164, %p165;
+	and.pred 	%p167, %p163, %p166;
+	or.pred 	%p168, %p162, %p167;
+	and.pred 	%p169, %p159, %p168;
+	not.pred 	%p170, %p169;
+	@%p170 bra 	$L__BB4_25;
+	bra.uni 	$L__BB4_24;
+$L__BB4_24:
+	atom.global.add.u64 	%rd18, [fp_underflow_counter], 1;
+	bra.uni 	$L__BB4_25;
+$L__BB4_25:
+	ld.b64 	%rd19, [%SP+24];
 	.loc	4 120 19                        // tests/basic_tests/underflow/rounding.cu:120:19
-	st.b32 	[%rd9+8], %r24;
+	st.b32 	[%rd19+8], %r9;
 	.loc	4 121 39                        // tests/basic_tests/underflow/rounding.cu:121:39
-	ld.b64 	%rd10, [%SP+24];
-	ld.b32 	%r25, [%rd10+8];
+	ld.b64 	%rd20, [%SP+24];
+	ld.b32 	%r104, [%rd20+8];
 	.loc	4 121 26                        // tests/basic_tests/underflow/rounding.cu:121:26
 	{ // callseq 13, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r25;
+	st.param.b32 	[param0], %r104;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r26, [retval0];
+	ld.param.b32 	%r105, [retval0];
 	} // callseq 13
-	and.b32 	%r27, %r26, 1;
+	and.b32 	%r106, %r105, 1;
 	.loc	4 121 9                         // tests/basic_tests/underflow/rounding.cu:121:9
-	ld.b64 	%rd11, [%SP+32];
+	ld.b64 	%rd21, [%SP+32];
 	.loc	4 121 24                        // tests/basic_tests/underflow/rounding.cu:121:24
-	st.b32 	[%rd11+8], %r27;
+	st.b32 	[%rd21+8], %r106;
 	.loc	4 122 5                         // tests/basic_tests/underflow/rounding.cu:122:5
-	bra.uni 	$L__BB4_6;
+	bra.uni 	$L__BB4_26;
 $L__tmp74:
-$L__BB4_6:                              // %if.end23
+$L__BB4_26:                             // %if.end23
 	.loc	4 123 1                         // tests/basic_tests/underflow/rounding.cu:123:1
 	ret;
 $L__tmp75:

@@ -12,7 +12,6 @@
 [FPPass]   COLLECT fmul @ _Z22testIterativeUnderflowPfPi:21
 [FPPass]   Collected 1 instructions to instrument
 [FPPass]   INSTRUMENT _Z22testIterativeUnderflowPfPi:21 op=2
-[DBG] detectInvalidOp: OpID=2 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=2 line=21
 [FPPass]     -> Injected check: ex=2 op=2 line=21
 [FPPass]     -> Injected check: ex=3 op=2 line=21
@@ -20,7 +19,6 @@
 [FPPass]   COLLECT fadd @ _Z23testUnderflow_SummationPf:50
 [FPPass]   Collected 1 instructions to instrument
 [FPPass]   INSTRUMENT _Z23testUnderflow_SummationPf:50 op=0
-[DBG] detectInvalidOp: OpID=0 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=0 line=50
 [FPPass]     -> Injected check: ex=2 op=0 line=50
 [FPPass] SUMMARY: visited 3 functions, instrumented 2 instructions

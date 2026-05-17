@@ -79,123 +79,609 @@ if.then:                                          ; preds = %entry
     #dbg_declare(ptr %__b.addr.i, !1003, !DIExpression(), !1004)
   %4 = load float, ptr %__a.addr.i, align 4, !dbg !1005
   %5 = load float, ptr %__b.addr.i, align 4, !dbg !1006
-  %6 = call float @llvm.nvvm.add.rn.f(float %4, float %5), !dbg !1007
-  %7 = load ptr, ptr %result.addr, align 8, !dbg !1008
-  %arrayidx = getelementptr inbounds float, ptr %7, i64 0, !dbg !1008
-  store float %6, ptr %arrayidx, align 4, !dbg !1009
-  %8 = load ptr, ptr %result.addr, align 8, !dbg !1010
-  %arrayidx2 = getelementptr inbounds float, ptr %8, i64 0, !dbg !1010
-  %9 = load float, ptr %arrayidx2, align 4, !dbg !1010
-  %call3 = call noundef zeroext i1 @_Z12is_subnormalf(float noundef %9) #4, !dbg !1011
-  %10 = zext i1 %call3 to i64, !dbg !1011
+  %6 = bitcast float %4 to i32, !dbg !1007
+  %7 = bitcast float %4 to i32, !dbg !1007
+  %8 = and i32 %7, 2139095040, !dbg !1007
+  %9 = icmp eq i32 %8, 2139095040, !dbg !1007
+  %10 = and i32 %7, 8388607, !dbg !1007
+  %11 = icmp ne i32 %10, 0, !dbg !1007
+  %is_nan = and i1 %9, %11, !dbg !1007
+  %12 = and i32 %6, 4194304, !dbg !1007
+  %13 = icmp eq i32 %12, 0, !dbg !1007
+  %is_snan = and i1 %is_nan, %13, !dbg !1007
+  %14 = bitcast float %5 to i32, !dbg !1007
+  %15 = bitcast float %5 to i32, !dbg !1007
+  %16 = and i32 %15, 2139095040, !dbg !1007
+  %17 = icmp eq i32 %16, 2139095040, !dbg !1007
+  %18 = and i32 %15, 8388607, !dbg !1007
+  %19 = icmp ne i32 %18, 0, !dbg !1007
+  %is_nan1 = and i1 %17, %19, !dbg !1007
+  %20 = and i32 %14, 4194304, !dbg !1007
+  %21 = icmp eq i32 %20, 0, !dbg !1007
+  %is_snan2 = and i1 %is_nan1, %21, !dbg !1007
+  %22 = or i1 %is_snan, %is_snan2, !dbg !1007
+  %23 = bitcast float %4 to i32, !dbg !1007
+  %24 = and i32 %23, 2139095040, !dbg !1007
+  %25 = icmp eq i32 %24, 2139095040, !dbg !1007
+  %26 = and i32 %23, 8388607, !dbg !1007
+  %27 = icmp eq i32 %26, 0, !dbg !1007
+  %is_inf = and i1 %25, %27, !dbg !1007
+  %28 = bitcast float %5 to i32, !dbg !1007
+  %29 = and i32 %28, 2139095040, !dbg !1007
+  %30 = icmp eq i32 %29, 2139095040, !dbg !1007
+  %31 = and i32 %28, 8388607, !dbg !1007
+  %32 = icmp eq i32 %31, 0, !dbg !1007
+  %is_inf3 = and i1 %30, %32, !dbg !1007
+  %33 = and i1 %is_inf, %is_inf3, !dbg !1007
+  %34 = bitcast float %4 to i32, !dbg !1007
+  %35 = bitcast float %5 to i32, !dbg !1007
+  %36 = and i32 %34, -2147483648, !dbg !1007
+  %37 = and i32 %35, -2147483648, !dbg !1007
+  %38 = icmp ne i32 %36, %37, !dbg !1007
+  %39 = and i1 %33, %38, !dbg !1007
+  %40 = or i1 %22, %39, !dbg !1007
+  br i1 %40, label %41, label %43, !dbg !1007
+
+41:                                               ; preds = %if.then
+  %42 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !1007
+  br label %43, !dbg !1007
+
+43:                                               ; preds = %if.then, %41
+  %44 = call float @llvm.nvvm.add.rn.f(float %4, float %5), !dbg !1007
+  %45 = bitcast float %4 to i32, !dbg !1008
+  %46 = and i32 %45, 2139095040, !dbg !1008
+  %is_finite = icmp ne i32 %46, 2139095040, !dbg !1008
+  %47 = and i1 true, %is_finite, !dbg !1008
+  %48 = bitcast float %5 to i32, !dbg !1008
+  %49 = and i32 %48, 2139095040, !dbg !1008
+  %is_finite4 = icmp ne i32 %49, 2139095040, !dbg !1008
+  %50 = and i1 %47, %is_finite4, !dbg !1008
+  %51 = bitcast float %44 to i32, !dbg !1008
+  %52 = and i32 %51, 2139095040, !dbg !1008
+  %53 = icmp eq i32 %52, 2139095040, !dbg !1008
+  %54 = and i32 %51, 8388607, !dbg !1008
+  %55 = icmp eq i32 %54, 0, !dbg !1008
+  %is_inf5 = and i1 %53, %55, !dbg !1008
+  %56 = bitcast float %44 to i32, !dbg !1008
+  %57 = and i32 %56, 2147483647, !dbg !1008
+  %is_maxfinite = icmp eq i32 %57, 2139095039, !dbg !1008
+  %58 = bitcast float %44 to i32, !dbg !1008
+  %59 = and i32 %58, -2147483648, !dbg !1008
+  %60 = icmp eq i32 %59, 0, !dbg !1008
+  %61 = icmp ne i32 %59, 0, !dbg !1008
+  %is_pos_inf = and i1 %is_inf5, %60, !dbg !1008
+  %is_neg_inf = and i1 %is_inf5, %61, !dbg !1008
+  %is_pos_max = and i1 %is_maxfinite, %60, !dbg !1008
+  %is_neg_max = and i1 %is_maxfinite, %61, !dbg !1008
+  %overflow_cond = and i1 %50, %is_inf5, !dbg !1008
+  br i1 %overflow_cond, label %62, label %64, !dbg !1008
+
+62:                                               ; preds = %43
+  %63 = atomicrmw add ptr addrspace(1) @fp_overflow_counter, i64 1 monotonic, align 8, !dbg !1008
+  br label %64, !dbg !1008
+
+64:                                               ; preds = %43, %62
+  %65 = load ptr, ptr %result.addr, align 8, !dbg !1008
+  %arrayidx = getelementptr inbounds float, ptr %65, i64 0, !dbg !1008
+  store float %44, ptr %arrayidx, align 4, !dbg !1009
+  %66 = load ptr, ptr %result.addr, align 8, !dbg !1010
+  %arrayidx2 = getelementptr inbounds float, ptr %66, i64 0, !dbg !1010
+  %67 = load float, ptr %arrayidx2, align 4, !dbg !1010
+  %call3 = call noundef zeroext i1 @_Z12is_subnormalf(float noundef %67) #4, !dbg !1011
+  %68 = zext i1 %call3 to i64, !dbg !1011
   %cond = select i1 %call3, i32 1, i32 0, !dbg !1011
-  %11 = load ptr, ptr %flags.addr, align 8, !dbg !1012
-  %arrayidx4 = getelementptr inbounds i32, ptr %11, i64 0, !dbg !1012
+  %69 = load ptr, ptr %flags.addr, align 8, !dbg !1012
+  %arrayidx4 = getelementptr inbounds i32, ptr %69, i64 0, !dbg !1012
   store i32 %cond, ptr %arrayidx4, align 4, !dbg !1013
   br label %if.end, !dbg !1014
 
-if.end:                                           ; preds = %if.then, %entry
-  %12 = load i32, ptr %idx, align 4, !dbg !1015
-  %cmp5 = icmp eq i32 %12, 1, !dbg !1017
+if.end:                                           ; preds = %64, %entry
+  %70 = load i32, ptr %idx, align 4, !dbg !1015
+  %cmp5 = icmp eq i32 %70, 1, !dbg !1017
   br i1 %cmp5, label %if.then6, label %if.end13, !dbg !1017
 
 if.then6:                                         ; preds = %if.end
-  %13 = load float, ptr %denorm, align 4, !dbg !1018
-  store float %13, ptr %__a.addr.i47, align 4
+  %71 = load float, ptr %denorm, align 4, !dbg !1018
+  store float %71, ptr %__a.addr.i47, align 4
     #dbg_declare(ptr %__a.addr.i47, !1020, !DIExpression(), !1022)
   store float 2.000000e+00, ptr %__b.addr.i48, align 4
     #dbg_declare(ptr %__b.addr.i48, !1024, !DIExpression(), !1025)
-  %14 = load float, ptr %__a.addr.i47, align 4, !dbg !1026
-  %15 = load float, ptr %__b.addr.i48, align 4, !dbg !1027
-  %16 = call float @llvm.nvvm.mul.rn.f(float %14, float %15), !dbg !1028
-  %17 = load ptr, ptr %result.addr, align 8, !dbg !1029
-  %arrayidx8 = getelementptr inbounds float, ptr %17, i64 1, !dbg !1029
-  store float %16, ptr %arrayidx8, align 4, !dbg !1030
-  %18 = load ptr, ptr %result.addr, align 8, !dbg !1031
-  %arrayidx9 = getelementptr inbounds float, ptr %18, i64 1, !dbg !1031
-  %19 = load float, ptr %arrayidx9, align 4, !dbg !1031
-  %call10 = call noundef zeroext i1 @_Z12is_subnormalf(float noundef %19) #4, !dbg !1032
-  %20 = zext i1 %call10 to i64, !dbg !1032
+  %72 = load float, ptr %__a.addr.i47, align 4, !dbg !1026
+  %73 = load float, ptr %__b.addr.i48, align 4, !dbg !1027
+  %74 = bitcast float %72 to i32, !dbg !1028
+  %75 = bitcast float %72 to i32, !dbg !1028
+  %76 = and i32 %75, 2139095040, !dbg !1028
+  %77 = icmp eq i32 %76, 2139095040, !dbg !1028
+  %78 = and i32 %75, 8388607, !dbg !1028
+  %79 = icmp ne i32 %78, 0, !dbg !1028
+  %is_nan6 = and i1 %77, %79, !dbg !1028
+  %80 = and i32 %74, 4194304, !dbg !1028
+  %81 = icmp eq i32 %80, 0, !dbg !1028
+  %is_snan7 = and i1 %is_nan6, %81, !dbg !1028
+  %82 = bitcast float %73 to i32, !dbg !1028
+  %83 = bitcast float %73 to i32, !dbg !1028
+  %84 = and i32 %83, 2139095040, !dbg !1028
+  %85 = icmp eq i32 %84, 2139095040, !dbg !1028
+  %86 = and i32 %83, 8388607, !dbg !1028
+  %87 = icmp ne i32 %86, 0, !dbg !1028
+  %is_nan8 = and i1 %85, %87, !dbg !1028
+  %88 = and i32 %82, 4194304, !dbg !1028
+  %89 = icmp eq i32 %88, 0, !dbg !1028
+  %is_snan9 = and i1 %is_nan8, %89, !dbg !1028
+  %90 = or i1 %is_snan7, %is_snan9, !dbg !1028
+  %91 = bitcast float %72 to i32, !dbg !1028
+  %92 = and i32 %91, 2147483647, !dbg !1028
+  %is_zero = icmp eq i32 %92, 0, !dbg !1028
+  %93 = bitcast float %73 to i32, !dbg !1028
+  %94 = and i32 %93, 2139095040, !dbg !1028
+  %95 = icmp eq i32 %94, 2139095040, !dbg !1028
+  %96 = and i32 %93, 8388607, !dbg !1028
+  %97 = icmp eq i32 %96, 0, !dbg !1028
+  %is_inf10 = and i1 %95, %97, !dbg !1028
+  %98 = and i1 %is_zero, %is_inf10, !dbg !1028
+  %99 = bitcast float %72 to i32, !dbg !1028
+  %100 = and i32 %99, 2139095040, !dbg !1028
+  %101 = icmp eq i32 %100, 2139095040, !dbg !1028
+  %102 = and i32 %99, 8388607, !dbg !1028
+  %103 = icmp eq i32 %102, 0, !dbg !1028
+  %is_inf11 = and i1 %101, %103, !dbg !1028
+  %104 = bitcast float %73 to i32, !dbg !1028
+  %105 = and i32 %104, 2147483647, !dbg !1028
+  %is_zero12 = icmp eq i32 %105, 0, !dbg !1028
+  %106 = and i1 %is_inf11, %is_zero12, !dbg !1028
+  %107 = or i1 %98, %106, !dbg !1028
+  %108 = or i1 %90, %107, !dbg !1028
+  br i1 %108, label %109, label %111, !dbg !1028
+
+109:                                              ; preds = %if.then6
+  %110 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !1028
+  br label %111, !dbg !1028
+
+111:                                              ; preds = %if.then6, %109
+  %112 = call float @llvm.nvvm.mul.rn.f(float %72, float %73), !dbg !1028
+  %113 = bitcast float %72 to i32, !dbg !1029
+  %114 = and i32 %113, 2139095040, !dbg !1029
+  %is_finite13 = icmp ne i32 %114, 2139095040, !dbg !1029
+  %115 = and i1 true, %is_finite13, !dbg !1029
+  %116 = bitcast float %73 to i32, !dbg !1029
+  %117 = and i32 %116, 2139095040, !dbg !1029
+  %is_finite14 = icmp ne i32 %117, 2139095040, !dbg !1029
+  %118 = and i1 %115, %is_finite14, !dbg !1029
+  %119 = bitcast float %112 to i32, !dbg !1029
+  %120 = and i32 %119, 2139095040, !dbg !1029
+  %121 = icmp eq i32 %120, 2139095040, !dbg !1029
+  %122 = and i32 %119, 8388607, !dbg !1029
+  %123 = icmp eq i32 %122, 0, !dbg !1029
+  %is_inf15 = and i1 %121, %123, !dbg !1029
+  %124 = bitcast float %112 to i32, !dbg !1029
+  %125 = and i32 %124, 2147483647, !dbg !1029
+  %is_maxfinite16 = icmp eq i32 %125, 2139095039, !dbg !1029
+  %126 = bitcast float %112 to i32, !dbg !1029
+  %127 = and i32 %126, -2147483648, !dbg !1029
+  %128 = icmp eq i32 %127, 0, !dbg !1029
+  %129 = icmp ne i32 %127, 0, !dbg !1029
+  %is_pos_inf17 = and i1 %is_inf15, %128, !dbg !1029
+  %is_neg_inf18 = and i1 %is_inf15, %129, !dbg !1029
+  %is_pos_max19 = and i1 %is_maxfinite16, %128, !dbg !1029
+  %is_neg_max20 = and i1 %is_maxfinite16, %129, !dbg !1029
+  %overflow_cond21 = and i1 %118, %is_inf15, !dbg !1029
+  br i1 %overflow_cond21, label %130, label %132, !dbg !1029
+
+130:                                              ; preds = %111
+  %131 = atomicrmw add ptr addrspace(1) @fp_overflow_counter, i64 1 monotonic, align 8, !dbg !1029
+  br label %132, !dbg !1029
+
+132:                                              ; preds = %111, %130
+  %133 = bitcast float %72 to i32, !dbg !1029
+  %134 = and i32 %133, 2139095040, !dbg !1029
+  %135 = icmp eq i32 %134, 0, !dbg !1029
+  %136 = and i32 %133, 8388607, !dbg !1029
+  %137 = icmp ne i32 %136, 0, !dbg !1029
+  %is_subnormal = and i1 %135, %137, !dbg !1029
+  %138 = xor i1 %is_subnormal, true, !dbg !1029
+  %139 = and i1 true, %138, !dbg !1029
+  %140 = bitcast float %73 to i32, !dbg !1029
+  %141 = and i32 %140, 2139095040, !dbg !1029
+  %142 = icmp eq i32 %141, 0, !dbg !1029
+  %143 = and i32 %140, 8388607, !dbg !1029
+  %144 = icmp ne i32 %143, 0, !dbg !1029
+  %is_subnormal22 = and i1 %142, %144, !dbg !1029
+  %145 = xor i1 %is_subnormal22, true, !dbg !1029
+  %146 = and i1 %139, %145, !dbg !1029
+  %147 = bitcast float %112 to i32, !dbg !1029
+  %148 = and i32 %147, 2139095040, !dbg !1029
+  %149 = icmp eq i32 %148, 0, !dbg !1029
+  %150 = and i32 %147, 8388607, !dbg !1029
+  %151 = icmp ne i32 %150, 0, !dbg !1029
+  %is_subnormal23 = and i1 %149, %151, !dbg !1029
+  %152 = bitcast float %112 to i32, !dbg !1029
+  %153 = and i32 %152, 2147483647, !dbg !1029
+  %is_zero24 = icmp eq i32 %153, 0, !dbg !1029
+  %154 = bitcast float %72 to i32, !dbg !1029
+  %155 = and i32 %154, 2147483647, !dbg !1029
+  %is_zero25 = icmp eq i32 %155, 0, !dbg !1029
+  %156 = xor i1 %is_zero25, true, !dbg !1029
+  %157 = bitcast float %73 to i32, !dbg !1029
+  %158 = and i32 %157, 2147483647, !dbg !1029
+  %is_zero26 = icmp eq i32 %158, 0, !dbg !1029
+  %159 = xor i1 %is_zero26, true, !dbg !1029
+  %160 = and i1 %156, %159, !dbg !1029
+  %161 = and i1 %is_zero24, %160, !dbg !1029
+  %is_tiny = or i1 %is_subnormal23, %161, !dbg !1029
+  %underflow_cond = and i1 %146, %is_tiny, !dbg !1029
+  br i1 %underflow_cond, label %162, label %164, !dbg !1029
+
+162:                                              ; preds = %132
+  %163 = atomicrmw add ptr addrspace(1) @fp_underflow_counter, i64 1 monotonic, align 8, !dbg !1029
+  br label %164, !dbg !1029
+
+164:                                              ; preds = %132, %162
+  %165 = load ptr, ptr %result.addr, align 8, !dbg !1029
+  %arrayidx8 = getelementptr inbounds float, ptr %165, i64 1, !dbg !1029
+  store float %112, ptr %arrayidx8, align 4, !dbg !1030
+  %166 = load ptr, ptr %result.addr, align 8, !dbg !1031
+  %arrayidx9 = getelementptr inbounds float, ptr %166, i64 1, !dbg !1031
+  %167 = load float, ptr %arrayidx9, align 4, !dbg !1031
+  %call10 = call noundef zeroext i1 @_Z12is_subnormalf(float noundef %167) #4, !dbg !1032
+  %168 = zext i1 %call10 to i64, !dbg !1032
   %cond11 = select i1 %call10, i32 1, i32 0, !dbg !1032
-  %21 = load ptr, ptr %flags.addr, align 8, !dbg !1033
-  %arrayidx12 = getelementptr inbounds i32, ptr %21, i64 1, !dbg !1033
+  %169 = load ptr, ptr %flags.addr, align 8, !dbg !1033
+  %arrayidx12 = getelementptr inbounds i32, ptr %169, i64 1, !dbg !1033
   store i32 %cond11, ptr %arrayidx12, align 4, !dbg !1034
   br label %if.end13, !dbg !1035
 
-if.end13:                                         ; preds = %if.then6, %if.end
-  %22 = load i32, ptr %idx, align 4, !dbg !1036
-  %cmp14 = icmp eq i32 %22, 2, !dbg !1038
+if.end13:                                         ; preds = %164, %if.end
+  %170 = load i32, ptr %idx, align 4, !dbg !1036
+  %cmp14 = icmp eq i32 %170, 2, !dbg !1038
   br i1 %cmp14, label %if.then15, label %if.end22, !dbg !1038
 
 if.then15:                                        ; preds = %if.end13
-  %23 = load float, ptr %denorm, align 4, !dbg !1039
-  store float %23, ptr %__a.addr.i50, align 4
+  %171 = load float, ptr %denorm, align 4, !dbg !1039
+  store float %171, ptr %__a.addr.i50, align 4
     #dbg_declare(ptr %__a.addr.i50, !1041, !DIExpression(), !1043)
   store float 1.500000e+00, ptr %__b.addr.i51, align 4
     #dbg_declare(ptr %__b.addr.i51, !1045, !DIExpression(), !1046)
-  %24 = load float, ptr %__a.addr.i50, align 4, !dbg !1047
-  %25 = load float, ptr %__b.addr.i51, align 4, !dbg !1048
-  %26 = call float @llvm.nvvm.div.rn.f(float %24, float %25), !dbg !1049
-  %27 = load ptr, ptr %result.addr, align 8, !dbg !1050
-  %arrayidx17 = getelementptr inbounds float, ptr %27, i64 2, !dbg !1050
-  store float %26, ptr %arrayidx17, align 4, !dbg !1051
-  %28 = load ptr, ptr %result.addr, align 8, !dbg !1052
-  %arrayidx18 = getelementptr inbounds float, ptr %28, i64 2, !dbg !1052
-  %29 = load float, ptr %arrayidx18, align 4, !dbg !1052
-  %call19 = call noundef zeroext i1 @_Z12is_subnormalf(float noundef %29) #4, !dbg !1053
-  %30 = zext i1 %call19 to i64, !dbg !1053
+  %172 = load float, ptr %__a.addr.i50, align 4, !dbg !1047
+  %173 = load float, ptr %__b.addr.i51, align 4, !dbg !1048
+  %174 = bitcast float %172 to i32, !dbg !1049
+  %175 = bitcast float %172 to i32, !dbg !1049
+  %176 = and i32 %175, 2139095040, !dbg !1049
+  %177 = icmp eq i32 %176, 2139095040, !dbg !1049
+  %178 = and i32 %175, 8388607, !dbg !1049
+  %179 = icmp ne i32 %178, 0, !dbg !1049
+  %is_nan27 = and i1 %177, %179, !dbg !1049
+  %180 = and i32 %174, 4194304, !dbg !1049
+  %181 = icmp eq i32 %180, 0, !dbg !1049
+  %is_snan28 = and i1 %is_nan27, %181, !dbg !1049
+  %182 = bitcast float %173 to i32, !dbg !1049
+  %183 = bitcast float %173 to i32, !dbg !1049
+  %184 = and i32 %183, 2139095040, !dbg !1049
+  %185 = icmp eq i32 %184, 2139095040, !dbg !1049
+  %186 = and i32 %183, 8388607, !dbg !1049
+  %187 = icmp ne i32 %186, 0, !dbg !1049
+  %is_nan29 = and i1 %185, %187, !dbg !1049
+  %188 = and i32 %182, 4194304, !dbg !1049
+  %189 = icmp eq i32 %188, 0, !dbg !1049
+  %is_snan30 = and i1 %is_nan29, %189, !dbg !1049
+  %190 = or i1 %is_snan28, %is_snan30, !dbg !1049
+  %191 = bitcast float %172 to i32, !dbg !1049
+  %192 = and i32 %191, 2147483647, !dbg !1049
+  %is_zero31 = icmp eq i32 %192, 0, !dbg !1049
+  %193 = bitcast float %173 to i32, !dbg !1049
+  %194 = and i32 %193, 2147483647, !dbg !1049
+  %is_zero32 = icmp eq i32 %194, 0, !dbg !1049
+  %195 = and i1 %is_zero31, %is_zero32, !dbg !1049
+  %196 = bitcast float %172 to i32, !dbg !1049
+  %197 = and i32 %196, 2139095040, !dbg !1049
+  %198 = icmp eq i32 %197, 2139095040, !dbg !1049
+  %199 = and i32 %196, 8388607, !dbg !1049
+  %200 = icmp eq i32 %199, 0, !dbg !1049
+  %is_inf33 = and i1 %198, %200, !dbg !1049
+  %201 = bitcast float %173 to i32, !dbg !1049
+  %202 = and i32 %201, 2139095040, !dbg !1049
+  %203 = icmp eq i32 %202, 2139095040, !dbg !1049
+  %204 = and i32 %201, 8388607, !dbg !1049
+  %205 = icmp eq i32 %204, 0, !dbg !1049
+  %is_inf34 = and i1 %203, %205, !dbg !1049
+  %206 = and i1 %is_inf33, %is_inf34, !dbg !1049
+  %207 = or i1 %195, %206, !dbg !1049
+  %208 = or i1 %190, %207, !dbg !1049
+  br i1 %208, label %209, label %211, !dbg !1049
+
+209:                                              ; preds = %if.then15
+  %210 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !1049
+  br label %211, !dbg !1049
+
+211:                                              ; preds = %if.then15, %209
+  %212 = bitcast float %173 to i32, !dbg !1049
+  %213 = and i32 %212, 2147483647, !dbg !1049
+  %is_zero35 = icmp eq i32 %213, 0, !dbg !1049
+  %214 = bitcast float %172 to i32, !dbg !1049
+  %215 = and i32 %214, 2139095040, !dbg !1049
+  %is_finite36 = icmp ne i32 %215, 2139095040, !dbg !1049
+  %216 = bitcast float %172 to i32, !dbg !1049
+  %217 = and i32 %216, 2147483647, !dbg !1049
+  %is_zero37 = icmp eq i32 %217, 0, !dbg !1049
+  %218 = xor i1 %is_zero37, true, !dbg !1049
+  %219 = and i1 %is_finite36, %218, !dbg !1049
+  %divzero_cond = and i1 %is_zero35, %219, !dbg !1049
+  br i1 %divzero_cond, label %220, label %222, !dbg !1049
+
+220:                                              ; preds = %211
+  %221 = atomicrmw add ptr addrspace(1) @fp_divbyzero_counter, i64 1 monotonic, align 8, !dbg !1049
+  br label %222, !dbg !1049
+
+222:                                              ; preds = %211, %220
+  %223 = call float @llvm.nvvm.div.rn.f(float %172, float %173), !dbg !1049
+  %224 = bitcast float %172 to i32, !dbg !1050
+  %225 = and i32 %224, 2139095040, !dbg !1050
+  %is_finite38 = icmp ne i32 %225, 2139095040, !dbg !1050
+  %226 = and i1 true, %is_finite38, !dbg !1050
+  %227 = bitcast float %173 to i32, !dbg !1050
+  %228 = and i32 %227, 2139095040, !dbg !1050
+  %is_finite39 = icmp ne i32 %228, 2139095040, !dbg !1050
+  %229 = and i1 %226, %is_finite39, !dbg !1050
+  %230 = bitcast float %173 to i32, !dbg !1050
+  %231 = and i32 %230, 2147483647, !dbg !1050
+  %is_zero40 = icmp eq i32 %231, 0, !dbg !1050
+  %232 = xor i1 %is_zero40, true, !dbg !1050
+  %overflow_denom_nonzero = and i1 %229, %232, !dbg !1050
+  %233 = bitcast float %223 to i32, !dbg !1050
+  %234 = and i32 %233, 2139095040, !dbg !1050
+  %235 = icmp eq i32 %234, 2139095040, !dbg !1050
+  %236 = and i32 %233, 8388607, !dbg !1050
+  %237 = icmp eq i32 %236, 0, !dbg !1050
+  %is_inf41 = and i1 %235, %237, !dbg !1050
+  %238 = bitcast float %223 to i32, !dbg !1050
+  %239 = and i32 %238, 2147483647, !dbg !1050
+  %is_maxfinite42 = icmp eq i32 %239, 2139095039, !dbg !1050
+  %240 = bitcast float %223 to i32, !dbg !1050
+  %241 = and i32 %240, -2147483648, !dbg !1050
+  %242 = icmp eq i32 %241, 0, !dbg !1050
+  %243 = icmp ne i32 %241, 0, !dbg !1050
+  %is_pos_inf43 = and i1 %is_inf41, %242, !dbg !1050
+  %is_neg_inf44 = and i1 %is_inf41, %243, !dbg !1050
+  %is_pos_max45 = and i1 %is_maxfinite42, %242, !dbg !1050
+  %is_neg_max46 = and i1 %is_maxfinite42, %243, !dbg !1050
+  %overflow_cond47 = and i1 %overflow_denom_nonzero, %is_inf41, !dbg !1050
+  br i1 %overflow_cond47, label %244, label %246, !dbg !1050
+
+244:                                              ; preds = %222
+  %245 = atomicrmw add ptr addrspace(1) @fp_overflow_counter, i64 1 monotonic, align 8, !dbg !1050
+  br label %246, !dbg !1050
+
+246:                                              ; preds = %222, %244
+  %247 = bitcast float %172 to i32, !dbg !1050
+  %248 = and i32 %247, 2139095040, !dbg !1050
+  %249 = icmp eq i32 %248, 0, !dbg !1050
+  %250 = and i32 %247, 8388607, !dbg !1050
+  %251 = icmp ne i32 %250, 0, !dbg !1050
+  %is_subnormal48 = and i1 %249, %251, !dbg !1050
+  %252 = xor i1 %is_subnormal48, true, !dbg !1050
+  %253 = and i1 true, %252, !dbg !1050
+  %254 = bitcast float %173 to i32, !dbg !1050
+  %255 = and i32 %254, 2139095040, !dbg !1050
+  %256 = icmp eq i32 %255, 0, !dbg !1050
+  %257 = and i32 %254, 8388607, !dbg !1050
+  %258 = icmp ne i32 %257, 0, !dbg !1050
+  %is_subnormal49 = and i1 %256, %258, !dbg !1050
+  %259 = xor i1 %is_subnormal49, true, !dbg !1050
+  %260 = and i1 %253, %259, !dbg !1050
+  %261 = bitcast float %223 to i32, !dbg !1050
+  %262 = and i32 %261, 2139095040, !dbg !1050
+  %263 = icmp eq i32 %262, 0, !dbg !1050
+  %264 = and i32 %261, 8388607, !dbg !1050
+  %265 = icmp ne i32 %264, 0, !dbg !1050
+  %is_subnormal50 = and i1 %263, %265, !dbg !1050
+  %266 = bitcast float %223 to i32, !dbg !1050
+  %267 = and i32 %266, 2147483647, !dbg !1050
+  %is_zero51 = icmp eq i32 %267, 0, !dbg !1050
+  %268 = bitcast float %172 to i32, !dbg !1050
+  %269 = and i32 %268, 2147483647, !dbg !1050
+  %is_zero52 = icmp eq i32 %269, 0, !dbg !1050
+  %270 = xor i1 %is_zero52, true, !dbg !1050
+  %271 = bitcast float %173 to i32, !dbg !1050
+  %272 = and i32 %271, 2147483647, !dbg !1050
+  %is_zero53 = icmp eq i32 %272, 0, !dbg !1050
+  %273 = xor i1 %is_zero53, true, !dbg !1050
+  %274 = and i1 %270, %273, !dbg !1050
+  %275 = and i1 %is_zero51, %274, !dbg !1050
+  %is_tiny54 = or i1 %is_subnormal50, %275, !dbg !1050
+  %underflow_cond55 = and i1 %260, %is_tiny54, !dbg !1050
+  br i1 %underflow_cond55, label %276, label %278, !dbg !1050
+
+276:                                              ; preds = %246
+  %277 = atomicrmw add ptr addrspace(1) @fp_underflow_counter, i64 1 monotonic, align 8, !dbg !1050
+  br label %278, !dbg !1050
+
+278:                                              ; preds = %246, %276
+  %279 = load ptr, ptr %result.addr, align 8, !dbg !1050
+  %arrayidx17 = getelementptr inbounds float, ptr %279, i64 2, !dbg !1050
+  store float %223, ptr %arrayidx17, align 4, !dbg !1051
+  %280 = load ptr, ptr %result.addr, align 8, !dbg !1052
+  %arrayidx18 = getelementptr inbounds float, ptr %280, i64 2, !dbg !1052
+  %281 = load float, ptr %arrayidx18, align 4, !dbg !1052
+  %call19 = call noundef zeroext i1 @_Z12is_subnormalf(float noundef %281) #4, !dbg !1053
+  %282 = zext i1 %call19 to i64, !dbg !1053
   %cond20 = select i1 %call19, i32 1, i32 0, !dbg !1053
-  %31 = load ptr, ptr %flags.addr, align 8, !dbg !1054
-  %arrayidx21 = getelementptr inbounds i32, ptr %31, i64 2, !dbg !1054
+  %283 = load ptr, ptr %flags.addr, align 8, !dbg !1054
+  %arrayidx21 = getelementptr inbounds i32, ptr %283, i64 2, !dbg !1054
   store i32 %cond20, ptr %arrayidx21, align 4, !dbg !1055
   br label %if.end22, !dbg !1056
 
-if.end22:                                         ; preds = %if.then15, %if.end13
-  %32 = load i32, ptr %idx, align 4, !dbg !1057
-  %cmp23 = icmp eq i32 %32, 3, !dbg !1059
+if.end22:                                         ; preds = %278, %if.end13
+  %284 = load i32, ptr %idx, align 4, !dbg !1057
+  %cmp23 = icmp eq i32 %284, 3, !dbg !1059
   br i1 %cmp23, label %if.then24, label %if.end34, !dbg !1059
 
 if.then24:                                        ; preds = %if.end22
-  %33 = load float, ptr %denorm, align 4, !dbg !1060
-  %34 = load float, ptr %denorm, align 4, !dbg !1062
-  store float %33, ptr %__a.addr.i44, align 4
+  %285 = load float, ptr %denorm, align 4, !dbg !1060
+  %286 = load float, ptr %denorm, align 4, !dbg !1062
+  store float %285, ptr %__a.addr.i44, align 4
     #dbg_declare(ptr %__a.addr.i44, !1020, !DIExpression(), !1063)
-  store float %34, ptr %__b.addr.i45, align 4
+  store float %286, ptr %__b.addr.i45, align 4
     #dbg_declare(ptr %__b.addr.i45, !1024, !DIExpression(), !1065)
-  %35 = load float, ptr %__a.addr.i44, align 4, !dbg !1066
-  %36 = load float, ptr %__b.addr.i45, align 4, !dbg !1067
-  %37 = call float @llvm.nvvm.mul.rn.f(float %35, float %36), !dbg !1068
-  %38 = load ptr, ptr %result.addr, align 8, !dbg !1069
-  %arrayidx26 = getelementptr inbounds float, ptr %38, i64 3, !dbg !1069
-  store float %37, ptr %arrayidx26, align 4, !dbg !1070
-  %39 = load ptr, ptr %result.addr, align 8, !dbg !1071
-  %arrayidx27 = getelementptr inbounds float, ptr %39, i64 3, !dbg !1071
-  %40 = load float, ptr %arrayidx27, align 4, !dbg !1071
-  %call28 = call noundef zeroext i1 @_Z12is_subnormalf(float noundef %40) #4, !dbg !1072
+  %287 = load float, ptr %__a.addr.i44, align 4, !dbg !1066
+  %288 = load float, ptr %__b.addr.i45, align 4, !dbg !1067
+  %289 = bitcast float %287 to i32, !dbg !1068
+  %290 = bitcast float %287 to i32, !dbg !1068
+  %291 = and i32 %290, 2139095040, !dbg !1068
+  %292 = icmp eq i32 %291, 2139095040, !dbg !1068
+  %293 = and i32 %290, 8388607, !dbg !1068
+  %294 = icmp ne i32 %293, 0, !dbg !1068
+  %is_nan56 = and i1 %292, %294, !dbg !1068
+  %295 = and i32 %289, 4194304, !dbg !1068
+  %296 = icmp eq i32 %295, 0, !dbg !1068
+  %is_snan57 = and i1 %is_nan56, %296, !dbg !1068
+  %297 = bitcast float %288 to i32, !dbg !1068
+  %298 = bitcast float %288 to i32, !dbg !1068
+  %299 = and i32 %298, 2139095040, !dbg !1068
+  %300 = icmp eq i32 %299, 2139095040, !dbg !1068
+  %301 = and i32 %298, 8388607, !dbg !1068
+  %302 = icmp ne i32 %301, 0, !dbg !1068
+  %is_nan58 = and i1 %300, %302, !dbg !1068
+  %303 = and i32 %297, 4194304, !dbg !1068
+  %304 = icmp eq i32 %303, 0, !dbg !1068
+  %is_snan59 = and i1 %is_nan58, %304, !dbg !1068
+  %305 = or i1 %is_snan57, %is_snan59, !dbg !1068
+  %306 = bitcast float %287 to i32, !dbg !1068
+  %307 = and i32 %306, 2147483647, !dbg !1068
+  %is_zero60 = icmp eq i32 %307, 0, !dbg !1068
+  %308 = bitcast float %288 to i32, !dbg !1068
+  %309 = and i32 %308, 2139095040, !dbg !1068
+  %310 = icmp eq i32 %309, 2139095040, !dbg !1068
+  %311 = and i32 %308, 8388607, !dbg !1068
+  %312 = icmp eq i32 %311, 0, !dbg !1068
+  %is_inf61 = and i1 %310, %312, !dbg !1068
+  %313 = and i1 %is_zero60, %is_inf61, !dbg !1068
+  %314 = bitcast float %287 to i32, !dbg !1068
+  %315 = and i32 %314, 2139095040, !dbg !1068
+  %316 = icmp eq i32 %315, 2139095040, !dbg !1068
+  %317 = and i32 %314, 8388607, !dbg !1068
+  %318 = icmp eq i32 %317, 0, !dbg !1068
+  %is_inf62 = and i1 %316, %318, !dbg !1068
+  %319 = bitcast float %288 to i32, !dbg !1068
+  %320 = and i32 %319, 2147483647, !dbg !1068
+  %is_zero63 = icmp eq i32 %320, 0, !dbg !1068
+  %321 = and i1 %is_inf62, %is_zero63, !dbg !1068
+  %322 = or i1 %313, %321, !dbg !1068
+  %323 = or i1 %305, %322, !dbg !1068
+  br i1 %323, label %324, label %326, !dbg !1068
+
+324:                                              ; preds = %if.then24
+  %325 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !1068
+  br label %326, !dbg !1068
+
+326:                                              ; preds = %if.then24, %324
+  %327 = call float @llvm.nvvm.mul.rn.f(float %287, float %288), !dbg !1068
+  %328 = bitcast float %287 to i32, !dbg !1069
+  %329 = and i32 %328, 2139095040, !dbg !1069
+  %is_finite64 = icmp ne i32 %329, 2139095040, !dbg !1069
+  %330 = and i1 true, %is_finite64, !dbg !1069
+  %331 = bitcast float %288 to i32, !dbg !1069
+  %332 = and i32 %331, 2139095040, !dbg !1069
+  %is_finite65 = icmp ne i32 %332, 2139095040, !dbg !1069
+  %333 = and i1 %330, %is_finite65, !dbg !1069
+  %334 = bitcast float %327 to i32, !dbg !1069
+  %335 = and i32 %334, 2139095040, !dbg !1069
+  %336 = icmp eq i32 %335, 2139095040, !dbg !1069
+  %337 = and i32 %334, 8388607, !dbg !1069
+  %338 = icmp eq i32 %337, 0, !dbg !1069
+  %is_inf66 = and i1 %336, %338, !dbg !1069
+  %339 = bitcast float %327 to i32, !dbg !1069
+  %340 = and i32 %339, 2147483647, !dbg !1069
+  %is_maxfinite67 = icmp eq i32 %340, 2139095039, !dbg !1069
+  %341 = bitcast float %327 to i32, !dbg !1069
+  %342 = and i32 %341, -2147483648, !dbg !1069
+  %343 = icmp eq i32 %342, 0, !dbg !1069
+  %344 = icmp ne i32 %342, 0, !dbg !1069
+  %is_pos_inf68 = and i1 %is_inf66, %343, !dbg !1069
+  %is_neg_inf69 = and i1 %is_inf66, %344, !dbg !1069
+  %is_pos_max70 = and i1 %is_maxfinite67, %343, !dbg !1069
+  %is_neg_max71 = and i1 %is_maxfinite67, %344, !dbg !1069
+  %overflow_cond72 = and i1 %333, %is_inf66, !dbg !1069
+  br i1 %overflow_cond72, label %345, label %347, !dbg !1069
+
+345:                                              ; preds = %326
+  %346 = atomicrmw add ptr addrspace(1) @fp_overflow_counter, i64 1 monotonic, align 8, !dbg !1069
+  br label %347, !dbg !1069
+
+347:                                              ; preds = %326, %345
+  %348 = bitcast float %287 to i32, !dbg !1069
+  %349 = and i32 %348, 2139095040, !dbg !1069
+  %350 = icmp eq i32 %349, 0, !dbg !1069
+  %351 = and i32 %348, 8388607, !dbg !1069
+  %352 = icmp ne i32 %351, 0, !dbg !1069
+  %is_subnormal73 = and i1 %350, %352, !dbg !1069
+  %353 = xor i1 %is_subnormal73, true, !dbg !1069
+  %354 = and i1 true, %353, !dbg !1069
+  %355 = bitcast float %288 to i32, !dbg !1069
+  %356 = and i32 %355, 2139095040, !dbg !1069
+  %357 = icmp eq i32 %356, 0, !dbg !1069
+  %358 = and i32 %355, 8388607, !dbg !1069
+  %359 = icmp ne i32 %358, 0, !dbg !1069
+  %is_subnormal74 = and i1 %357, %359, !dbg !1069
+  %360 = xor i1 %is_subnormal74, true, !dbg !1069
+  %361 = and i1 %354, %360, !dbg !1069
+  %362 = bitcast float %327 to i32, !dbg !1069
+  %363 = and i32 %362, 2139095040, !dbg !1069
+  %364 = icmp eq i32 %363, 0, !dbg !1069
+  %365 = and i32 %362, 8388607, !dbg !1069
+  %366 = icmp ne i32 %365, 0, !dbg !1069
+  %is_subnormal75 = and i1 %364, %366, !dbg !1069
+  %367 = bitcast float %327 to i32, !dbg !1069
+  %368 = and i32 %367, 2147483647, !dbg !1069
+  %is_zero76 = icmp eq i32 %368, 0, !dbg !1069
+  %369 = bitcast float %287 to i32, !dbg !1069
+  %370 = and i32 %369, 2147483647, !dbg !1069
+  %is_zero77 = icmp eq i32 %370, 0, !dbg !1069
+  %371 = xor i1 %is_zero77, true, !dbg !1069
+  %372 = bitcast float %288 to i32, !dbg !1069
+  %373 = and i32 %372, 2147483647, !dbg !1069
+  %is_zero78 = icmp eq i32 %373, 0, !dbg !1069
+  %374 = xor i1 %is_zero78, true, !dbg !1069
+  %375 = and i1 %371, %374, !dbg !1069
+  %376 = and i1 %is_zero76, %375, !dbg !1069
+  %is_tiny79 = or i1 %is_subnormal75, %376, !dbg !1069
+  %underflow_cond80 = and i1 %361, %is_tiny79, !dbg !1069
+  br i1 %underflow_cond80, label %377, label %379, !dbg !1069
+
+377:                                              ; preds = %347
+  %378 = atomicrmw add ptr addrspace(1) @fp_underflow_counter, i64 1 monotonic, align 8, !dbg !1069
+  br label %379, !dbg !1069
+
+379:                                              ; preds = %347, %377
+  %380 = load ptr, ptr %result.addr, align 8, !dbg !1069
+  %arrayidx26 = getelementptr inbounds float, ptr %380, i64 3, !dbg !1069
+  store float %327, ptr %arrayidx26, align 4, !dbg !1070
+  %381 = load ptr, ptr %result.addr, align 8, !dbg !1071
+  %arrayidx27 = getelementptr inbounds float, ptr %381, i64 3, !dbg !1071
+  %382 = load float, ptr %arrayidx27, align 4, !dbg !1071
+  %call28 = call noundef zeroext i1 @_Z12is_subnormalf(float noundef %382) #4, !dbg !1072
   br i1 %call28, label %cond.true, label %cond.false, !dbg !1072
 
-cond.true:                                        ; preds = %if.then24
+cond.true:                                        ; preds = %379
   br label %cond.end, !dbg !1072
 
-cond.false:                                       ; preds = %if.then24
-  %41 = load ptr, ptr %result.addr, align 8, !dbg !1073
-  %arrayidx29 = getelementptr inbounds float, ptr %41, i64 3, !dbg !1073
-  %42 = load float, ptr %arrayidx29, align 4, !dbg !1073
-  %cmp30 = fcmp contract oeq float %42, 0.000000e+00, !dbg !1074
-  %43 = zext i1 %cmp30 to i64, !dbg !1073
+cond.false:                                       ; preds = %379
+  %383 = load ptr, ptr %result.addr, align 8, !dbg !1073
+  %arrayidx29 = getelementptr inbounds float, ptr %383, i64 3, !dbg !1073
+  %384 = load float, ptr %arrayidx29, align 4, !dbg !1073
+  %cmp30 = fcmp contract oeq float %384, 0.000000e+00, !dbg !1074
+  %385 = zext i1 %cmp30 to i64, !dbg !1073
   %cond31 = select i1 %cmp30, i32 2, i32 0, !dbg !1073
   br label %cond.end, !dbg !1072
 
 cond.end:                                         ; preds = %cond.false, %cond.true
   %cond32 = phi i32 [ 1, %cond.true ], [ %cond31, %cond.false ], !dbg !1072
-  %44 = load ptr, ptr %flags.addr, align 8, !dbg !1075
-  %arrayidx33 = getelementptr inbounds i32, ptr %44, i64 3, !dbg !1075
+  %386 = load ptr, ptr %flags.addr, align 8, !dbg !1075
+  %arrayidx33 = getelementptr inbounds i32, ptr %386, i64 3, !dbg !1075
   store i32 %cond32, ptr %arrayidx33, align 4, !dbg !1076
   br label %if.end34, !dbg !1077
 
 if.end34:                                         ; preds = %cond.end, %if.end22
-  %45 = load i32, ptr %idx, align 4, !dbg !1078
-  %cmp35 = icmp eq i32 %45, 4, !dbg !1080
+  %387 = load i32, ptr %idx, align 4, !dbg !1078
+  %cmp35 = icmp eq i32 %387, 4, !dbg !1080
   br i1 %cmp35, label %if.then36, label %if.end43, !dbg !1080
 
 if.then36:                                        ; preds = %if.end34
@@ -203,26 +689,26 @@ if.then36:                                        ; preds = %if.end34
   store float 0x3818000000000000, ptr %a, align 4, !dbg !1083
     #dbg_declare(ptr %b, !1084, !DIExpression(), !1085)
   store float 0x3810000000000000, ptr %b, align 4, !dbg !1085
-  %46 = load float, ptr %a, align 4, !dbg !1086
-  %47 = load float, ptr %b, align 4, !dbg !1087
-  store float %46, ptr %__a.addr.i53, align 4
+  %388 = load float, ptr %a, align 4, !dbg !1086
+  %389 = load float, ptr %b, align 4, !dbg !1087
+  store float %388, ptr %__a.addr.i53, align 4
     #dbg_declare(ptr %__a.addr.i53, !1088, !DIExpression(), !1090)
-  store float %47, ptr %__b.addr.i54, align 4
+  store float %389, ptr %__b.addr.i54, align 4
     #dbg_declare(ptr %__b.addr.i54, !1092, !DIExpression(), !1093)
-  %48 = load float, ptr %__a.addr.i53, align 4, !dbg !1094
-  %49 = load float, ptr %__b.addr.i54, align 4, !dbg !1095
-  %50 = call float asm "sub.rn.f32 $0, $1, $2;", "=f,f,f"(float %48, float %49) #5, !dbg !1096, !srcloc !1097
-  %51 = load ptr, ptr %result.addr, align 8, !dbg !1098
-  %arrayidx38 = getelementptr inbounds float, ptr %51, i64 4, !dbg !1098
-  store float %50, ptr %arrayidx38, align 4, !dbg !1099
-  %52 = load ptr, ptr %result.addr, align 8, !dbg !1100
-  %arrayidx39 = getelementptr inbounds float, ptr %52, i64 4, !dbg !1100
-  %53 = load float, ptr %arrayidx39, align 4, !dbg !1100
-  %call40 = call noundef zeroext i1 @_Z12is_subnormalf(float noundef %53) #4, !dbg !1101
-  %54 = zext i1 %call40 to i64, !dbg !1101
+  %390 = load float, ptr %__a.addr.i53, align 4, !dbg !1094
+  %391 = load float, ptr %__b.addr.i54, align 4, !dbg !1095
+  %392 = call float asm "sub.rn.f32 $0, $1, $2;", "=f,f,f"(float %390, float %391) #5, !dbg !1096, !srcloc !1097
+  %393 = load ptr, ptr %result.addr, align 8, !dbg !1098
+  %arrayidx38 = getelementptr inbounds float, ptr %393, i64 4, !dbg !1098
+  store float %392, ptr %arrayidx38, align 4, !dbg !1099
+  %394 = load ptr, ptr %result.addr, align 8, !dbg !1100
+  %arrayidx39 = getelementptr inbounds float, ptr %394, i64 4, !dbg !1100
+  %395 = load float, ptr %arrayidx39, align 4, !dbg !1100
+  %call40 = call noundef zeroext i1 @_Z12is_subnormalf(float noundef %395) #4, !dbg !1101
+  %396 = zext i1 %call40 to i64, !dbg !1101
   %cond41 = select i1 %call40, i32 1, i32 0, !dbg !1101
-  %55 = load ptr, ptr %flags.addr, align 8, !dbg !1102
-  %arrayidx42 = getelementptr inbounds i32, ptr %55, i64 4, !dbg !1102
+  %397 = load ptr, ptr %flags.addr, align 8, !dbg !1102
+  %arrayidx42 = getelementptr inbounds i32, ptr %397, i64 4, !dbg !1102
   store i32 %cond41, ptr %arrayidx42, align 4, !dbg !1103
   br label %if.end43, !dbg !1104
 

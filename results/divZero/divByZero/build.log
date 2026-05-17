@@ -18,55 +18,46 @@
 [FPPass]   COLLECT fdiv @ _Z13testDivByZeroPfPiffff:60
 [FPPass]   Collected 9 instructions to instrument
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:12 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=12
 [FPPass]     -> Injected check: ex=1 op=3 line=12
 [FPPass]     -> Injected check: ex=2 op=3 line=12
 [FPPass]     -> Injected check: ex=3 op=3 line=12
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:18 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=18
 [FPPass]     -> Injected check: ex=1 op=3 line=18
 [FPPass]     -> Injected check: ex=2 op=3 line=18
 [FPPass]     -> Injected check: ex=3 op=3 line=18
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:24 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=24
 [FPPass]     -> Injected check: ex=1 op=3 line=24
 [FPPass]     -> Injected check: ex=2 op=3 line=24
 [FPPass]     -> Injected check: ex=3 op=3 line=24
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:30 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=30
 [FPPass]     -> Injected check: ex=1 op=3 line=30
 [FPPass]     -> Injected check: ex=2 op=3 line=30
 [FPPass]     -> Injected check: ex=3 op=3 line=30
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:36 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=36
 [FPPass]     -> Injected check: ex=1 op=3 line=36
 [FPPass]     -> Injected check: ex=2 op=3 line=36
 [FPPass]     -> Injected check: ex=3 op=3 line=36
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:42 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=42
 [FPPass]     -> Injected check: ex=1 op=3 line=42
 [FPPass]     -> Injected check: ex=2 op=3 line=42
 [FPPass]     -> Injected check: ex=3 op=3 line=42
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:48 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=48
 [FPPass]     -> Injected check: ex=1 op=3 line=48
 [FPPass]     -> Injected check: ex=2 op=3 line=48
 [FPPass]     -> Injected check: ex=3 op=3 line=48
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:54 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=54
 [FPPass]     -> Injected check: ex=1 op=3 line=54
 [FPPass]     -> Injected check: ex=2 op=3 line=54
 [FPPass]     -> Injected check: ex=3 op=3 line=54
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:60 op=3
-[DBG] detectInvalidOp: OpID=3 Op0=2 Ty=2
 [FPPass]     -> Injected check: ex=0 op=3 line=60
 [FPPass]     -> Injected check: ex=1 op=3 line=60
 [FPPass]     -> Injected check: ex=2 op=3 line=60

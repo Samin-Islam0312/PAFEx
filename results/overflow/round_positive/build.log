@@ -7,8 +7,26 @@
 [FPPass] Declared device counter: fp_total_counter
 [FPPass] Declared device counter: fp_subnormal_counter
 [FPPass] Visiting function: _Z26testOverflow_RoundPositivePf [KERNEL]
-[FPPass]   Collected 0 instructions to instrument
-[FPPass] SUMMARY: visited 1 functions, instrumented 0 instructions
+[FPPass]   COLLECT nvvm.add 'llvm.nvvm.add.rp.f' @ _Z26testOverflow_RoundPositivePf:204
+[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rp.f' @ _Z26testOverflow_RoundPositivePf:310
+[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rp.f' @ _Z26testOverflow_RoundPositivePf:310
+[FPPass]   COLLECT nvvm.add 'llvm.nvvm.add.rp.f' @ _Z26testOverflow_RoundPositivePf:204
+[FPPass]   Collected 4 instructions to instrument
+[FPPass]   INSTRUMENT _Z26testOverflow_RoundPositivePf:204 op=0
+[FPPass]     -> Injected check: ex=0 op=0 line=204
+[FPPass]     -> Injected check: ex=2 op=0 line=204
+[FPPass]   INSTRUMENT _Z26testOverflow_RoundPositivePf:310 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=310
+[FPPass]     -> Injected check: ex=2 op=2 line=310
+[FPPass]     -> Injected check: ex=3 op=2 line=310
+[FPPass]   INSTRUMENT _Z26testOverflow_RoundPositivePf:310 op=2
+[FPPass]     -> Injected check: ex=0 op=2 line=310
+[FPPass]     -> Injected check: ex=2 op=2 line=310
+[FPPass]     -> Injected check: ex=3 op=2 line=310
+[FPPass]   INSTRUMENT _Z26testOverflow_RoundPositivePf:204 op=0
+[FPPass]     -> Injected check: ex=0 op=0 line=204
+[FPPass]     -> Injected check: ex=2 op=0 line=204
+[FPPass] SUMMARY: visited 1 functions, instrumented 4 instructions
 === Part 3: Host pipeline ===
 [HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD/results/overflow/round_positive/host.bc
 [HostPass] Created host shadow: fp_invalid_counter

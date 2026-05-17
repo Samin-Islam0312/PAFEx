@@ -311,6 +311,39 @@ void DevicePass::collectInstructions(Function &F, std::vector<WorklistEntry> &WL
                             WL.push_back({&I, OP_FMA, FuncName, LineNum, FileName, isF64});
                         }
                     }
+                    // NVPTX rounding-mode arithmetic intrinsics
+                    // (llvm.nvvm.{add,sub,mul,div}.{rn,rz,rd,ru}.{f,d})
+                    // Emitted by clang when inlining libdevice transcendentals or when
+                    // user code calls __fadd_rn / __fmul_rd / etc.
+                    else if (Name.starts_with("llvm.nvvm.add.")) {
+                        if (isF32 || isF64) {
+                            WL.push_back({&I, OP_ADD, FuncName, LineNum, FileName, isF64});
+                            errs() << "[FPPass]   COLLECT nvvm.add '" << Name << "' @ "
+                                << FuncName << ":" << LineNum << "\n";
+                        }
+                    }
+                    else if (Name.starts_with("llvm.nvvm.sub.")) {
+                        if (isF32 || isF64) {
+                            WL.push_back({&I, OP_SUB, FuncName, LineNum, FileName, isF64});
+                            errs() << "[FPPass]   COLLECT nvvm.sub '" << Name << "' @ "
+                                << FuncName << ":" << LineNum << "\n";
+                        }
+                    }
+                    else if (Name.starts_with("llvm.nvvm.mul.")) {
+                        if (isF32 || isF64) {
+                            WL.push_back({&I, OP_MUL, FuncName, LineNum, FileName, isF64});
+                            errs() << "[FPPass]   COLLECT nvvm.mul '" << Name << "' @ "
+                                << FuncName << ":" << LineNum << "\n";
+                        }
+                    }
+                    else if (Name.starts_with("llvm.nvvm.div.")) {
+                        if (isF32 || isF64) {
+                            WL.push_back({&I, OP_DIV, FuncName, LineNum, FileName, isF64});
+                            errs() << "[FPPass]   COLLECT nvvm.div '" << Name << "' @ "
+                                << FuncName << ":" << LineNum << "\n";
+                        }
+                    }
+
                     else if (Name.contains("logb")) {
                         Type *ArgTy = CI->getArgOperand(0)->getType();
                         if (ArgTy->isFloatTy() || ArgTy->isDoubleTy()) {
@@ -660,9 +693,9 @@ bool DevicePass::detectInvalidOp(Instruction *I, IRBuilder<> &B, Module &M,
 
 
 
-    // errs() << "[DBG] detectInvalidOp: OpID=" << OpID 
-        << " Op0=" << (Op0 ? Op0->getType()->getTypeID() : -1)
-        << " Ty=" << Ty->getTypeID() << "\n";
+    // // errs() << "[DBG] detectInvalidOp: OpID=" << OpID 
+    //     << " Op0=" << (Op0 ? Op0->getType()->getTypeID() : -1)
+    //     << " Ty=" << Ty->getTypeID() << "\n";
         
     Value *AnySNaN = Op0 ? isSNaN(B, Op0, Ty) : nullptr;
     if (Op1 && OpID != OP_CVT)
