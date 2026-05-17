@@ -83,5 +83,4 @@ cp -r rodinia/cuda/gaussian SBAC-PAD/tests/benchmarks/rodinia
 cp -r rodinia/cuda/backprop SBAC-PAD/tests/benchmarks/rodinia
 cp -r rodinia/cuda/cfd SBAC-PAD/tests/benchmarks/rodinia
 cp -r rodinia/cuda/myocyte SBAC-PAD/tests/benchmarks/rodinia
-
-
+```
