@@ -44,5 +44,5 @@ Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
   [8] link
 
 DONE.
--rwxr-xr-x. 1 sislam3 prl_collab 1004344 May 17 13:55 /home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/hotspot/build/hotspot_baseline
--rwxr-xr-x. 1 sislam3 prl_collab  274016 May 17 13:55 /home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/hotspot/build/hotspot_instrumented
+-rwxr-xr-x. 1 sislam3 prl_collab 1001328 May 17 13:06 /home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/hotspot/build/hotspot_baseline
+-rwxr-xr-x. 1 sislam3 prl_collab  266696 May 17 13:06 /home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/hotspot/build/hotspot_instrumented
