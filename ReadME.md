@@ -84,3 +84,12 @@ cp -r rodinia/cuda/backprop SBAC-PAD/tests/benchmarks/rodinia
 cp -r rodinia/cuda/cfd SBAC-PAD/tests/benchmarks/rodinia
 cp -r rodinia/cuda/myocyte SBAC-PAD/tests/benchmarks/rodinia
 ```
+### Current Status
+
+- Generic build_bench.sh script for any single-TU Rodinia kernel
+- 3 benchmarks measured: hotspot 27x, gaussian 3-5x, cfd 51x
+- FTZ disable flag added for accurate subnormal detection
+- cfd produces 0 exceptions despite GPU-FPX reporting 13 subnormals
+  (compile-time difference between clang and nvcc)
+
+Next: warp-level dedup OR multi-TU host pass for backprop/myocyte, LULESH, MiniFPE

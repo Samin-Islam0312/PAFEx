@@ -2,3 +2,4 @@ benchmark,workload,kernel,baseline_ns,instrumented_ns,slowdown_x,exceptions_dete
 hotspot,grid_512_iter_60,calculate_temp,12928,345152,26.7,0
 gaussian,size_1024,Fan1,3008,9200,3.06,0
 gaussian,size_1024,Fan2,3520,16120,4.58,0
+cfd,fvcorr.097K,4_kernels_combined,188402816,9657343456,51.25,0

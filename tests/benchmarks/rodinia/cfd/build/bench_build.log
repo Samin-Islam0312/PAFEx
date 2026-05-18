@@ -14,6 +14,20 @@ Building: cfd  (source: /home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/cf
 
 === INSTRUMENTED ===
   [1] device bitcode
+/home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/cfd/euler3d.cu:555:2: warning: 'cudaThreadSynchronize' is deprecated [-Wdeprecated-declarations]
+  555 |         cudaThreadSynchronize();
+      |         ^
+/storage/packages/cuda/12.8.1/include/cuda_runtime_api.h:1172:8: note: 'cudaThreadSynchronize' has been explicitly marked deprecated here
+ 1172 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+      |        ^
+/storage/packages/cuda/12.8.1/include/cuda_runtime_api.h:280:42: note: expanded from macro '__CUDA_DEPRECATED'
+  280 | #define __CUDA_DEPRECATED __attribute__((deprecated))
+      |                                          ^
+/home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/cfd/euler3d.cu:585:2: warning: 'cudaThreadSynchronize' is deprecated [-Wdeprecated-declarations]
+  585 |         cudaThreadSynchronize();
+      |         ^
+/storage/packages/cuda/12.8.1/include/cuda_runtime_api.h:1172:8: note: 'cudaThreadSynchronize' has been explicitly marked deprecated here
+ 1172 | extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
       |        ^
 /storage/packages/cuda/12.8.1/include/cuda_runtime_api.h:280:42: note: expanded from macro '__CUDA_DEPRECATED'
   280 | #define __CUDA_DEPRECATED __attribute__((deprecated))
@@ -24,7 +38,6 @@ Building: cfd  (source: /home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/cf
 [FPPass] SUMMARY: visited 9 functions, instrumented 175 instructions
   [4] opt -O2
   [5] llc -> PTX
-  [6] host bitcode
       |        ^
 /storage/packages/cuda/12.8.1/include/cuda_runtime_api.h:280:42: note: expanded from macro '__CUDA_DEPRECATED'
   280 | #define __CUDA_DEPRECATED __attribute__((deprecated))
@@ -44,5 +57,5 @@ Building: cfd  (source: /home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/cf
   [8] link
 
 DONE: cfd
--rwxr-xr-x. 1 sislam3 prl_collab 1062120 May 17 15:33 /home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/cfd/build/cfd_baseline
--rwxr-xr-x. 1 sislam3 prl_collab 1187880 May 17 15:33 /home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/cfd/build/cfd_instrumented
+-rwxr-xr-x. 1 sislam3 prl_collab 1062120 May 17 21:14 /home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/cfd/build/cfd_baseline
+-rwxr-xr-x. 1 sislam3 prl_collab 1187880 May 17 21:14 /home/users/sislam3/SBAC-PAD/tests/benchmarks/rodinia/cfd/build/cfd_instrumented

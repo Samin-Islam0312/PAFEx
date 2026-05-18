@@ -50,7 +50,6 @@ INCLUDE_FLAGS=()
 [ -d "$UTIL" ] && INCLUDE_FLAGS+=("-I$UTIL")
 [ -d "/packages/cuda/11.4.1/samples/common/inc" ] && INCLUDE_FLAGS+=("-I/packages/cuda/11.4.1/samples/common/inc")
 # CUDA Samples headers (helper_cuda.h, helper_timer.h) — required for cfd
-[ -d "/packages/cuda/11.4.1/samples/common/inc" ] && INCLUDE_FLAGS+=("-I/packages/cuda/11.4.1/samples/common/inc")
 
 LOG="$OUTDIR/bench_build.log"
 exec > >(tee "$LOG") 2>&1
@@ -66,10 +65,18 @@ nvcc -O2 -arch=$GPU_ARCH "${STUB_FLAGS[@]}" "${INCLUDE_FLAGS[@]}" \
 echo ""
 echo "=== INSTRUMENTED ==="
 echo "  [1] device bitcode"
-$LLVM_DIR/bin/clang++ -O0 -g -emit-llvm --cuda-device-only \
+# $LLVM_DIR/bin/clang++ -O0 -g -emit-llvm --cuda-device-only -fno-cuda-flush-denormals-to-zero \
+#     "${STUB_FLAGS[@]}" "${INCLUDE_FLAGS[@]}" -x cuda "$SRC" \
+#     --cuda-gpu-arch=$GPU_ARCH -c -o "$OUTDIR/device.bc" 2>&1 | tail -5
+# [ ! -f "$OUTDIR/device.bc" ] && { echo "FAILED"; exit 1; }
+$LLVM_DIR/bin/clang++ -O0 -g -emit-llvm --cuda-device-only -fno-cuda-flush-denormals-to-zero \
+    -fno-cuda-flush-denormals-to-zero \
     "${STUB_FLAGS[@]}" "${INCLUDE_FLAGS[@]}" -x cuda "$SRC" \
-    --cuda-gpu-arch=$GPU_ARCH -c -o "$OUTDIR/device.bc" 2>&1 | tail -5
-[ ! -f "$OUTDIR/device.bc" ] && { echo "FAILED"; exit 1; }
+    --cuda-gpu-arch=$GPU_ARCH -c -o "$OUTDIR/device.bc"
+
+
+
+
 
 echo "  [2] llvm-link libdevice"
 $LLVM_DIR/bin/llvm-link --only-needed "$OUTDIR/device.bc" "$LIBDEVICE" \
@@ -93,11 +100,23 @@ ptxas --gpu-name $GPU_ARCH "$OUTDIR/instrumented.ptx" \
 fatbinary --64 --create "$OUTDIR/instrumented.fatbin" \
     --image3=kind=elf,sm=$GPU_SM,file="$OUTDIR/instrumented.cubin" 2>&1 | tail -3
 
-echo "  [6] host bitcode"
-$LLVM_DIR/bin/clang++ -O0 -emit-llvm --cuda-host-only \
+# echo "  [6] host bitcode"
+# $LLVM_DIR/bin/clang++ -O0 -emit-llvm --cuda-host-only -fno-cuda-flush-denormals-to-zero \
+#     "${STUB_FLAGS[@]}" "${INCLUDE_FLAGS[@]}" \
+#     -Xclang -fcuda-include-gpubinary -Xclang "$OUTDIR/instrumented.fatbin" \
+#     -x cuda "$SRC" -c -o "$OUTDIR/host.bc" 2>&1 | tail -5
+
+
+
+$LLVM_DIR/bin/clang++ -O0 -emit-llvm --cuda-host-only -fno-cuda-flush-denormals-to-zero \
+     -fno-cuda-flush-denormals-to-zero \
     "${STUB_FLAGS[@]}" "${INCLUDE_FLAGS[@]}" \
     -Xclang -fcuda-include-gpubinary -Xclang "$OUTDIR/instrumented.fatbin" \
     -x cuda "$SRC" -c -o "$OUTDIR/host.bc" 2>&1 | tail -5
+
+
+
+
 
 echo "  [7] host pass"
 $LLVM_DIR/bin/opt -load-pass-plugin="$PROJ_ROOT/build/lib/host/HostPass.so" \
