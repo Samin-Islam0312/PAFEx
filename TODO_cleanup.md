@@ -1,4 +1,4 @@
-# Deferred cleanups (post-paper)
+# Some cleanups 
 
 ## 1. Runtime printer (fp_sde_counters.cpp or wherever the [FP_INSTRUMENT] Summary lives)
 Remove or implement these metrics that currently print as 0:
@@ -11,7 +11,7 @@ Remove or implement these metrics that currently print as 0:
 - NaN Prop Rate
 - Instability Score
 
-Either delete from printer, or add atomic-RMW counters in device pass to populate them.
+Either delete from printer, or add atomic-RMW counters in device pass
 
 ## 2. Kernels Launched counter is incorrect
 The host pass reports "Kernels Launched: 1" but cfd actually runs 14,004 kernels.
