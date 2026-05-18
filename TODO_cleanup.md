@@ -6,7 +6,10 @@
 - cfd produces 0 exceptions despite GPU-FPX reporting 13 subnormals
   (compile-time difference between clang and nvcc)
 
-Next: warp-level dedup OR multi-TU host pass for backprop/myocyte, LULESH, MiniFPE
+Next: warp-level dedup 
+Then: multi-TU host pass for backprop/myocyte, LULESH, MiniFE
+Then: FTZ at cfd with disabling the option
+Then: XSBench, and if MiniFE doesnt work try out MiniMD
 
 # Some cleanups 
 ## 1. Runtime printer (fp_sde_counters.cpp or wherever the [FP_INSTRUMENT] Summary lives)
