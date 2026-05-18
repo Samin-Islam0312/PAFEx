@@ -1,5 +1,14 @@
-# Some cleanups 
+### Current Status
 
+- Generic build_bench.sh script for any single-TU Rodinia kernel
+- 3 benchmarks measured: hotspot 27x, gaussian 3-5x, cfd 51x
+- FTZ disable flag added for accurate subnormal detection
+- cfd produces 0 exceptions despite GPU-FPX reporting 13 subnormals
+  (compile-time difference between clang and nvcc)
+
+Next: warp-level dedup OR multi-TU host pass for backprop/myocyte, LULESH, MiniFPE
+
+# Some cleanups 
 ## 1. Runtime printer (fp_sde_counters.cpp or wherever the [FP_INSTRUMENT] Summary lives)
 Remove or implement these metrics that currently print as 0:
 - Total FP Ops
