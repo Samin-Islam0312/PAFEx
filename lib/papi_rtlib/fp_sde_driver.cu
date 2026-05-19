@@ -99,9 +99,11 @@ extern "C" void fp_instrument_read_and_publish(void) {
         return;
     }
 
+    if (getenv("FP_DEBUG")) {
     fprintf(stderr,
             "[DBG] invalid=%llu divzero=%llu overflow=%llu underflow=%llu total=%llu subnormal=%llu\n",
             h_invalid, h_divzero, h_overflow, h_underflow, h_total, h_subnormal);
+    }
 
     sde_publish_counts(
         h_total, h_divzero, h_invalid, h_overflow, h_underflow,
@@ -129,7 +131,7 @@ extern "C" void fp_instrument_region_start(void) {
 extern "C" void fp_instrument_region_stop(void) {
     if (!initialized || !papi_started) return;
     int ret;
-    cudaDeviceSynchronize();
+    //cudaDeviceSynchronize();
     fp_instrument_read_and_publish();
     if ((ret = PAPI_stop(EventSet, papi_values)) != PAPI_OK)
         fprintf(stderr, "PAPI_stop failed: %s\n", PAPI_strerror(ret));
@@ -137,7 +139,10 @@ extern "C" void fp_instrument_region_stop(void) {
 }
 
 extern "C" void fp_instrument_init(const char* name) {
-    if (initialized) return;
+    #ifdef FP_INSTRUMENT_QUIET
+        return;
+    #else
+        if (initialized) return;
 
     if (name) {
         strncpy(benchmark_name, name, sizeof(benchmark_name) - 1);
@@ -156,7 +161,8 @@ extern "C" void fp_instrument_init(const char* name) {
         fprintf(stderr, "PAPI_start (init) failed: %s\n", PAPI_strerror(ret));
     else
         papi_started = true;
-}
+    #endif
+    }
 
 static void fp_instrument_print_summary(void) {
     printf("\n[FP_INSTRUMENT] Summary for: %s\n", benchmark_name);
@@ -186,14 +192,18 @@ static void fp_instrument_print_summary(void) {
 }
 
 extern "C" void fp_instrument_finalize(void) {
+#ifdef FP_INSTRUMENT_QUIET
+    return;
+#else
     if (papi_started) {
         int ret;
-        cudaDeviceSynchronize();
+        //cudaDeviceSynchronize();
         fp_instrument_read_and_publish();
         if ((ret = PAPI_stop(EventSet, papi_values)) != PAPI_OK)
             fprintf(stderr, "PAPI_stop (finalize) failed: %s\n", PAPI_strerror(ret));
         papi_started = false;
     }
-    fp_instrument_print_summary();
+   fp_instrument_print_summary();
     printf("\n[FP_INSTRUMENT] Finalized.\n");
+#endif
 }

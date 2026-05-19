@@ -6,9 +6,9 @@ Counters:
   invalid              0
   divzero              0
   overflow             0
-  underflow            4
+  underflow            5
   total                0
-  subnormal            0
+  subnormal            5
   kernels_launched     1
 
 Full output: run.log

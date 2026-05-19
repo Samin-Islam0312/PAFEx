@@ -1,4 +1,3 @@
-[DBG] invalid=5 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
 [FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/invalid/sqrt/host.bc
 [FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
 ========================================

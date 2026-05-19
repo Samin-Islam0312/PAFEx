@@ -1,0 +1,36 @@
+[FP_INSTRUMENT] Initialized for: host.bc
+[FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
+Name:                     NVIDIA A100-SXM4-40GB
+Starting...
+0.00899006 seconds per iteration
+Saving solution...
+Saved solution...
+Cleaning up...
+Done...
+
+[FP_INSTRUMENT] Summary for: host.bc
+
+IEEE Exceptions According to the standard
+  Total FP Ops:       0
+  Div by Zero:        0
+  Invalid Ops:        0
+  Overflow:           0
+  Underflow:          308306
+
+Detailed Breakdown
+  NaNs (Input):       0
+  NaNs (Created):     0
+  Denormals Produced: 0
+
+Workload Stats
+  Kernels Launched:   1
+  Operations Total:   0
+
+Derived Metrics
+  Total Exceptions:   308306
+  Exception Density:  0 (per million ops)
+  NaN Prop Rate:      0 (per million NaNs)
+  Subnormal Rate:     0 (per million underflows)
+  Instability Score:  0
+
+[FP_INSTRUMENT] Finalized.

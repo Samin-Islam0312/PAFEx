@@ -7,12 +7,7 @@
 .address_size 64
 
 	// .globl	_Z13testDivByZeroPfPiffff // -- Begin function _Z13testDivByZeroPfPiffff
-.visible .global .align 8 .u64 fp_invalid_counter;
-.visible .global .align 8 .u64 fp_divbyzero_counter;
-.visible .global .align 8 .u64 fp_overflow_counter;
-.visible .global .align 8 .u64 fp_underflow_counter;
-.visible .global .align 8 .u64 fp_total_counter;
-.visible .global .align 8 .u64 fp_subnormal_counter;
+.visible .global .align 8 .b8 fp_counters[48];
                                         // @_Z13testDivByZeroPfPiffff
 .visible .entry _Z13testDivByZeroPfPiffff(
 	.param .u64 .ptr .align 1 _Z13testDivByZeroPfPiffff_param_0,
@@ -26,9 +21,9 @@
 	.local .align 8 .b8 	__local_depot0[104];
 	.reg .b64 	%SP;
 	.reg .b64 	%SPL;
-	.reg .pred 	%p<378>;
-	.reg .b32 	%r<260>;
-	.reg .b64 	%rd<65>;
+	.reg .pred 	%p<470>;
+	.reg .b32 	%r<306>;
+	.reg .b64 	%rd<74>;
 	.loc	4 7 0                           // tests/basic_tests/divZero/divByZero.cu:7:0
 $L__func_begin0:
 	.loc	4 7 0                           // tests/basic_tests/divZero/divByZero.cu:7:0
@@ -59,7 +54,7 @@ $L__tmp2:
 	ld.b32 	%r28, [%SP+96];
 	.loc	4 11 13                         // tests/basic_tests/divZero/divByZero.cu:11:13
 	setp.ne.b32 	%p1, %r28, 0;
-	@%p1 bra 	$L__BB0_10;
+	@%p1 bra 	$L__BB0_12;
 	bra.uni 	$L__BB0_1;
 $L__BB0_1:                              // %if.then
 $L__tmp3:
@@ -99,7 +94,7 @@ $L__tmp3:
 	@%p21 bra 	$L__BB0_3;
 	bra.uni 	$L__BB0_2;
 $L__BB0_2:
-	atom.global.add.u64 	%rd3, [fp_invalid_counter], 1;
+	atom.global.add.u64 	%rd3, [fp_counters], 1;
 	bra.uni 	$L__BB0_3;
 $L__BB0_3:
 	and.b32 	%r37, %r2, 2147483647;
@@ -113,7 +108,7 @@ $L__BB0_3:
 	@%p26 bra 	$L__BB0_5;
 	bra.uni 	$L__BB0_4;
 $L__BB0_4:
-	atom.global.add.u64 	%rd4, [fp_divbyzero_counter], 1;
+	atom.global.add.u64 	%rd4, [fp_counters+8], 1;
 	bra.uni 	$L__BB0_5;
 $L__BB0_5:
 	div.rn.f32 	%r3, %r1, %r2;
@@ -136,7 +131,7 @@ $L__BB0_5:
 	@%p36 bra 	$L__BB0_7;
 	bra.uni 	$L__BB0_6;
 $L__BB0_6:
-	atom.global.add.u64 	%rd5, [fp_overflow_counter], 1;
+	atom.global.add.u64 	%rd5, [fp_counters+16], 1;
 	bra.uni 	$L__BB0_7;
 $L__BB0_7:
 	and.b32 	%r45, %r1, 2139095040;
@@ -169,1023 +164,1215 @@ $L__BB0_7:
 	@%p54 bra 	$L__BB0_9;
 	bra.uni 	$L__BB0_8;
 $L__BB0_8:
-	atom.global.add.u64 	%rd6, [fp_underflow_counter], 1;
+	atom.global.add.u64 	%rd6, [fp_counters+24], 1;
 	bra.uni 	$L__BB0_9;
 $L__BB0_9:
-	ld.b64 	%rd7, [%SP+64];
-	.loc	4 12 19                         // tests/basic_tests/divZero/divByZero.cu:12:19
-	st.b32 	[%rd7], %r3;
-	.loc	4 13 33                         // tests/basic_tests/divZero/divByZero.cu:13:33
+	and.b32 	%r54, %r1, 2139095040;
+	setp.ne.b32 	%p55, %r54, 0;
+	and.b32 	%r55, %r1, 8388607;
+	setp.eq.b32 	%p56, %r55, 0;
+	or.pred 	%p57, %p55, %p56;
+	and.b32 	%r56, %r2, 2139095040;
+	setp.ne.b32 	%p58, %r56, 0;
+	and.b32 	%r57, %r2, 8388607;
+	setp.eq.b32 	%p59, %r57, 0;
+	or.pred 	%p60, %p58, %p59;
+	and.pred 	%p61, %p57, %p60;
+	and.b32 	%r58, %r3, 2139095040;
+	setp.eq.b32 	%p62, %r58, 0;
+	and.b32 	%r59, %r3, 8388607;
+	setp.ne.b32 	%p63, %r59, 0;
+	and.pred 	%p64, %p62, %p63;
+	and.pred 	%p65, %p61, %p64;
+	not.pred 	%p66, %p65;
+	@%p66 bra 	$L__BB0_11;
+	bra.uni 	$L__BB0_10;
+$L__BB0_10:
+	atom.global.add.u64 	%rd7, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_11;
+$L__BB0_11:
 	ld.b64 	%rd8, [%SP+64];
-	ld.b32 	%r54, [%rd8];
-	st.b32 	[%SP+32], %r54;
+	.loc	4 12 19                         // tests/basic_tests/divZero/divByZero.cu:12:19
+	st.b32 	[%rd8], %r3;
+	.loc	4 13 33                         // tests/basic_tests/divZero/divByZero.cu:13:33
+	ld.b64 	%rd9, [%SP+64];
+	ld.b32 	%r60, [%rd9];
+	st.b32 	[%SP+32], %r60;
 $L__tmp4:
 	.loc	5 170 58                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:58 @[ tests/basic_tests/divZero/divByZero.cu:13:25 ]
-	ld.b32 	%r55, [%SP+32];
-	st.b32 	[%SP+28], %r55;
+	ld.b32 	%r61, [%SP+32];
+	st.b32 	[%SP+28], %r61;
 $L__tmp5:
 	.loc	6 519 47                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:519:47 @[ /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:13:25 ] ]
-	ld.b32 	%r56, [%SP+28];
-	shr.u32 	%r57, %r56, 31;
+	ld.b32 	%r62, [%SP+28];
+	shr.u32 	%r63, %r62, 31;
 $L__tmp6:
 	.loc	5 170 45                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:13:25 ]
-	setp.ne.b32 	%p55, %r57, 0;
+	setp.ne.b32 	%p67, %r63, 0;
 $L__tmp7:
 	.loc	4 13 25                         // tests/basic_tests/divZero/divByZero.cu:13:25
-	selp.b32 	%r58, -1, 1, %p55;
+	selp.b32 	%r64, -1, 1, %p67;
 	.loc	4 13 9                          // tests/basic_tests/divZero/divByZero.cu:13:9
-	ld.b64 	%rd9, [%SP+72];
+	ld.b64 	%rd10, [%SP+72];
 	.loc	4 13 23                         // tests/basic_tests/divZero/divByZero.cu:13:23
-	st.b32 	[%rd9], %r58;
+	st.b32 	[%rd10], %r64;
 	.loc	4 14 5                          // tests/basic_tests/divZero/divByZero.cu:14:5
-	bra.uni 	$L__BB0_10;
+	bra.uni 	$L__BB0_12;
 $L__tmp8:
-$L__BB0_10:                             // %if.end
+$L__BB0_12:                             // %if.end
 	.loc	4 17 9                          // tests/basic_tests/divZero/divByZero.cu:17:9
-	ld.b32 	%r59, [%SP+96];
+	ld.b32 	%r65, [%SP+96];
 	.loc	4 17 13                         // tests/basic_tests/divZero/divByZero.cu:17:13
-	setp.ne.b32 	%p56, %r59, 1;
-	@%p56 bra 	$L__BB0_20;
-	bra.uni 	$L__BB0_11;
-$L__BB0_11:                             // %if.then5
+	setp.ne.b32 	%p68, %r65, 1;
+	@%p68 bra 	$L__BB0_24;
+	bra.uni 	$L__BB0_13;
+$L__BB0_13:                             // %if.then5
 $L__tmp9:
 	.loc	4 18 21                         // tests/basic_tests/divZero/divByZero.cu:18:21
 	ld.b32 	%r4, [%SP+80];
 	.loc	4 18 31                         // tests/basic_tests/divZero/divByZero.cu:18:31
 	ld.b32 	%r5, [%SP+92];
 	.loc	4 18 29                         // tests/basic_tests/divZero/divByZero.cu:18:29
-	and.b32 	%r60, %r4, 2139095040;
-	setp.eq.b32 	%p57, %r60, 2139095040;
-	and.b32 	%r61, %r4, 8388607;
-	setp.ne.b32 	%p58, %r61, 0;
-	and.b32 	%r62, %r4, 4194304;
-	setp.eq.b32 	%p59, %r62, 0;
-	and.pred 	%p60, %p57, %p59;
-	and.pred 	%p61, %p60, %p58;
-	and.b32 	%r63, %r5, 2139095040;
-	setp.eq.b32 	%p62, %r63, 2139095040;
-	and.b32 	%r64, %r5, 8388607;
-	setp.ne.b32 	%p63, %r64, 0;
-	and.b32 	%r65, %r5, 4194304;
-	setp.eq.b32 	%p64, %r65, 0;
-	and.pred 	%p65, %p62, %p64;
-	and.pred 	%p66, %p65, %p63;
-	or.pred 	%p67, %p61, %p66;
-	or.b32 	%r66, %r4, %r5;
-	and.b32 	%r67, %r66, 2147483647;
-	setp.eq.b32 	%p68, %r67, 0;
-	setp.eq.b32 	%p69, %r61, 0;
-	and.pred 	%p70, %p57, %p69;
-	setp.eq.b32 	%p71, %r64, 0;
-	and.pred 	%p72, %p62, %p71;
-	and.pred 	%p73, %p70, %p72;
-	or.pred 	%p74, %p68, %p73;
-	or.pred 	%p75, %p67, %p74;
-	not.pred 	%p76, %p75;
-	@%p76 bra 	$L__BB0_13;
-	bra.uni 	$L__BB0_12;
-$L__BB0_12:
-	atom.global.add.u64 	%rd10, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB0_13;
-$L__BB0_13:
-	and.b32 	%r68, %r5, 2147483647;
-	setp.ne.b32 	%p77, %r68, 0;
-	and.b32 	%r69, %r4, 2139095040;
-	setp.eq.b32 	%p78, %r69, 2139095040;
-	and.b32 	%r70, %r4, 2147483647;
-	setp.eq.b32 	%p79, %r70, 0;
-	or.pred 	%p80, %p78, %p79;
-	or.pred 	%p81, %p77, %p80;
-	@%p81 bra 	$L__BB0_15;
+	and.b32 	%r66, %r4, 2139095040;
+	setp.eq.b32 	%p69, %r66, 2139095040;
+	and.b32 	%r67, %r4, 8388607;
+	setp.ne.b32 	%p70, %r67, 0;
+	and.b32 	%r68, %r4, 4194304;
+	setp.eq.b32 	%p71, %r68, 0;
+	and.pred 	%p72, %p69, %p71;
+	and.pred 	%p73, %p72, %p70;
+	and.b32 	%r69, %r5, 2139095040;
+	setp.eq.b32 	%p74, %r69, 2139095040;
+	and.b32 	%r70, %r5, 8388607;
+	setp.ne.b32 	%p75, %r70, 0;
+	and.b32 	%r71, %r5, 4194304;
+	setp.eq.b32 	%p76, %r71, 0;
+	and.pred 	%p77, %p74, %p76;
+	and.pred 	%p78, %p77, %p75;
+	or.pred 	%p79, %p73, %p78;
+	or.b32 	%r72, %r4, %r5;
+	and.b32 	%r73, %r72, 2147483647;
+	setp.eq.b32 	%p80, %r73, 0;
+	setp.eq.b32 	%p81, %r67, 0;
+	and.pred 	%p82, %p69, %p81;
+	setp.eq.b32 	%p83, %r70, 0;
+	and.pred 	%p84, %p74, %p83;
+	and.pred 	%p85, %p82, %p84;
+	or.pred 	%p86, %p80, %p85;
+	or.pred 	%p87, %p79, %p86;
+	not.pred 	%p88, %p87;
+	@%p88 bra 	$L__BB0_15;
 	bra.uni 	$L__BB0_14;
 $L__BB0_14:
-	atom.global.add.u64 	%rd11, [fp_divbyzero_counter], 1;
+	atom.global.add.u64 	%rd11, [fp_counters], 1;
 	bra.uni 	$L__BB0_15;
 $L__BB0_15:
-	div.rn.f32 	%r6, %r4, %r5;
-	.loc	4 18 9                          // tests/basic_tests/divZero/divByZero.cu:18:9
-	and.b32 	%r71, %r4, 2139095040;
-	setp.ne.b32 	%p82, %r71, 2139095040;
-	and.b32 	%r72, %r5, 2139095040;
-	setp.ne.b32 	%p83, %r72, 2139095040;
-	and.pred 	%p84, %p82, %p83;
-	and.b32 	%r73, %r5, 2147483647;
-	setp.ne.b32 	%p85, %r73, 0;
-	and.pred 	%p86, %p84, %p85;
-	and.b32 	%r74, %r6, 2139095040;
-	setp.eq.b32 	%p87, %r74, 2139095040;
-	and.b32 	%r75, %r6, 8388607;
-	setp.eq.b32 	%p88, %r75, 0;
-	and.pred 	%p89, %p87, %p88;
-	and.pred 	%p90, %p86, %p89;
-	not.pred 	%p91, %p90;
-	@%p91 bra 	$L__BB0_17;
+	and.b32 	%r74, %r5, 2147483647;
+	setp.ne.b32 	%p89, %r74, 0;
+	and.b32 	%r75, %r4, 2139095040;
+	setp.eq.b32 	%p90, %r75, 2139095040;
+	and.b32 	%r76, %r4, 2147483647;
+	setp.eq.b32 	%p91, %r76, 0;
+	or.pred 	%p92, %p90, %p91;
+	or.pred 	%p93, %p89, %p92;
+	@%p93 bra 	$L__BB0_17;
 	bra.uni 	$L__BB0_16;
 $L__BB0_16:
-	atom.global.add.u64 	%rd12, [fp_overflow_counter], 1;
+	atom.global.add.u64 	%rd12, [fp_counters+8], 1;
 	bra.uni 	$L__BB0_17;
 $L__BB0_17:
-	and.b32 	%r76, %r4, 2139095040;
-	setp.ne.b32 	%p92, %r76, 0;
-	and.b32 	%r77, %r4, 8388607;
-	setp.eq.b32 	%p93, %r77, 0;
-	or.pred 	%p94, %p92, %p93;
+	div.rn.f32 	%r6, %r4, %r5;
+	.loc	4 18 9                          // tests/basic_tests/divZero/divByZero.cu:18:9
+	and.b32 	%r77, %r4, 2139095040;
+	setp.ne.b32 	%p94, %r77, 2139095040;
 	and.b32 	%r78, %r5, 2139095040;
-	setp.ne.b32 	%p95, %r78, 0;
-	and.b32 	%r79, %r5, 8388607;
-	setp.eq.b32 	%p96, %r79, 0;
-	or.pred 	%p97, %p95, %p96;
-	and.pred 	%p98, %p94, %p97;
+	setp.ne.b32 	%p95, %r78, 2139095040;
+	and.pred 	%p96, %p94, %p95;
+	and.b32 	%r79, %r5, 2147483647;
+	setp.ne.b32 	%p97, %r79, 0;
+	and.pred 	%p98, %p96, %p97;
 	and.b32 	%r80, %r6, 2139095040;
-	setp.eq.b32 	%p99, %r80, 0;
+	setp.eq.b32 	%p99, %r80, 2139095040;
 	and.b32 	%r81, %r6, 8388607;
-	setp.ne.b32 	%p100, %r81, 0;
+	setp.eq.b32 	%p100, %r81, 0;
 	and.pred 	%p101, %p99, %p100;
-	and.b32 	%r82, %r6, 2147483647;
-	setp.eq.b32 	%p102, %r82, 0;
-	and.b32 	%r83, %r4, 2147483647;
-	setp.ne.b32 	%p103, %r83, 0;
-	and.b32 	%r84, %r5, 2147483647;
-	setp.ne.b32 	%p104, %r84, 0;
-	and.pred 	%p105, %p103, %p104;
-	and.pred 	%p106, %p102, %p105;
-	or.pred 	%p107, %p101, %p106;
-	and.pred 	%p108, %p98, %p107;
-	not.pred 	%p109, %p108;
-	@%p109 bra 	$L__BB0_19;
+	and.pred 	%p102, %p98, %p101;
+	not.pred 	%p103, %p102;
+	@%p103 bra 	$L__BB0_19;
 	bra.uni 	$L__BB0_18;
 $L__BB0_18:
-	atom.global.add.u64 	%rd13, [fp_underflow_counter], 1;
+	atom.global.add.u64 	%rd13, [fp_counters+16], 1;
 	bra.uni 	$L__BB0_19;
 $L__BB0_19:
-	ld.b64 	%rd14, [%SP+64];
+	and.b32 	%r82, %r4, 2139095040;
+	setp.ne.b32 	%p104, %r82, 0;
+	and.b32 	%r83, %r4, 8388607;
+	setp.eq.b32 	%p105, %r83, 0;
+	or.pred 	%p106, %p104, %p105;
+	and.b32 	%r84, %r5, 2139095040;
+	setp.ne.b32 	%p107, %r84, 0;
+	and.b32 	%r85, %r5, 8388607;
+	setp.eq.b32 	%p108, %r85, 0;
+	or.pred 	%p109, %p107, %p108;
+	and.pred 	%p110, %p106, %p109;
+	and.b32 	%r86, %r6, 2139095040;
+	setp.eq.b32 	%p111, %r86, 0;
+	and.b32 	%r87, %r6, 8388607;
+	setp.ne.b32 	%p112, %r87, 0;
+	and.pred 	%p113, %p111, %p112;
+	and.b32 	%r88, %r6, 2147483647;
+	setp.eq.b32 	%p114, %r88, 0;
+	and.b32 	%r89, %r4, 2147483647;
+	setp.ne.b32 	%p115, %r89, 0;
+	and.b32 	%r90, %r5, 2147483647;
+	setp.ne.b32 	%p116, %r90, 0;
+	and.pred 	%p117, %p115, %p116;
+	and.pred 	%p118, %p114, %p117;
+	or.pred 	%p119, %p113, %p118;
+	and.pred 	%p120, %p110, %p119;
+	not.pred 	%p121, %p120;
+	@%p121 bra 	$L__BB0_21;
+	bra.uni 	$L__BB0_20;
+$L__BB0_20:
+	atom.global.add.u64 	%rd14, [fp_counters+24], 1;
+	bra.uni 	$L__BB0_21;
+$L__BB0_21:
+	and.b32 	%r91, %r4, 2139095040;
+	setp.ne.b32 	%p122, %r91, 0;
+	and.b32 	%r92, %r4, 8388607;
+	setp.eq.b32 	%p123, %r92, 0;
+	or.pred 	%p124, %p122, %p123;
+	and.b32 	%r93, %r5, 2139095040;
+	setp.ne.b32 	%p125, %r93, 0;
+	and.b32 	%r94, %r5, 8388607;
+	setp.eq.b32 	%p126, %r94, 0;
+	or.pred 	%p127, %p125, %p126;
+	and.pred 	%p128, %p124, %p127;
+	and.b32 	%r95, %r6, 2139095040;
+	setp.eq.b32 	%p129, %r95, 0;
+	and.b32 	%r96, %r6, 8388607;
+	setp.ne.b32 	%p130, %r96, 0;
+	and.pred 	%p131, %p129, %p130;
+	and.pred 	%p132, %p128, %p131;
+	not.pred 	%p133, %p132;
+	@%p133 bra 	$L__BB0_23;
+	bra.uni 	$L__BB0_22;
+$L__BB0_22:
+	atom.global.add.u64 	%rd15, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_23;
+$L__BB0_23:
+	ld.b64 	%rd16, [%SP+64];
 	.loc	4 18 19                         // tests/basic_tests/divZero/divByZero.cu:18:19
-	st.b32 	[%rd14+4], %r6;
+	st.b32 	[%rd16+4], %r6;
 	.loc	4 19 33                         // tests/basic_tests/divZero/divByZero.cu:19:33
-	ld.b64 	%rd15, [%SP+64];
-	ld.b32 	%r85, [%rd15+4];
-	st.b32 	[%SP+36], %r85;
+	ld.b64 	%rd17, [%SP+64];
+	ld.b32 	%r97, [%rd17+4];
+	st.b32 	[%SP+36], %r97;
 $L__tmp10:
 	.loc	5 170 58                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:58 @[ tests/basic_tests/divZero/divByZero.cu:19:25 ]
-	ld.b32 	%r86, [%SP+36];
-	st.b32 	[%SP+24], %r86;
+	ld.b32 	%r98, [%SP+36];
+	st.b32 	[%SP+24], %r98;
 $L__tmp11:
 	.loc	6 519 47                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:519:47 @[ /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:19:25 ] ]
-	ld.b32 	%r87, [%SP+24];
-	shr.u32 	%r88, %r87, 31;
+	ld.b32 	%r99, [%SP+24];
+	shr.u32 	%r100, %r99, 31;
 $L__tmp12:
 	.loc	5 170 45                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:19:25 ]
-	setp.ne.b32 	%p110, %r88, 0;
+	setp.ne.b32 	%p134, %r100, 0;
 $L__tmp13:
 	.loc	4 19 25                         // tests/basic_tests/divZero/divByZero.cu:19:25
-	selp.b32 	%r89, -1, 1, %p110;
+	selp.b32 	%r101, -1, 1, %p134;
 	.loc	4 19 9                          // tests/basic_tests/divZero/divByZero.cu:19:9
-	ld.b64 	%rd16, [%SP+72];
+	ld.b64 	%rd18, [%SP+72];
 	.loc	4 19 23                         // tests/basic_tests/divZero/divByZero.cu:19:23
-	st.b32 	[%rd16+4], %r89;
+	st.b32 	[%rd18+4], %r101;
 	.loc	4 20 5                          // tests/basic_tests/divZero/divByZero.cu:20:5
-	bra.uni 	$L__BB0_20;
+	bra.uni 	$L__BB0_24;
 $L__tmp14:
-$L__BB0_20:                             // %if.end12
+$L__BB0_24:                             // %if.end12
 	.loc	4 23 9                          // tests/basic_tests/divZero/divByZero.cu:23:9
-	ld.b32 	%r90, [%SP+96];
+	ld.b32 	%r102, [%SP+96];
 	.loc	4 23 13                         // tests/basic_tests/divZero/divByZero.cu:23:13
-	setp.ne.b32 	%p111, %r90, 2;
-	@%p111 bra 	$L__BB0_30;
-	bra.uni 	$L__BB0_21;
-$L__BB0_21:                             // %if.then14
+	setp.ne.b32 	%p135, %r102, 2;
+	@%p135 bra 	$L__BB0_36;
+	bra.uni 	$L__BB0_25;
+$L__BB0_25:                             // %if.then14
 $L__tmp15:
 	.loc	4 24 21                         // tests/basic_tests/divZero/divByZero.cu:24:21
 	ld.b32 	%r7, [%SP+84];
 	.loc	4 24 31                         // tests/basic_tests/divZero/divByZero.cu:24:31
 	ld.b32 	%r8, [%SP+88];
 	.loc	4 24 29                         // tests/basic_tests/divZero/divByZero.cu:24:29
-	and.b32 	%r91, %r7, 2139095040;
-	setp.eq.b32 	%p112, %r91, 2139095040;
-	and.b32 	%r92, %r7, 8388607;
-	setp.ne.b32 	%p113, %r92, 0;
-	and.b32 	%r93, %r7, 4194304;
-	setp.eq.b32 	%p114, %r93, 0;
-	and.pred 	%p115, %p112, %p114;
-	and.pred 	%p116, %p115, %p113;
-	and.b32 	%r94, %r8, 2139095040;
-	setp.eq.b32 	%p117, %r94, 2139095040;
-	and.b32 	%r95, %r8, 8388607;
-	setp.ne.b32 	%p118, %r95, 0;
-	and.b32 	%r96, %r8, 4194304;
-	setp.eq.b32 	%p119, %r96, 0;
-	and.pred 	%p120, %p117, %p119;
-	and.pred 	%p121, %p120, %p118;
-	or.pred 	%p122, %p116, %p121;
-	or.b32 	%r97, %r7, %r8;
-	and.b32 	%r98, %r97, 2147483647;
-	setp.eq.b32 	%p123, %r98, 0;
-	setp.eq.b32 	%p124, %r92, 0;
-	and.pred 	%p125, %p112, %p124;
-	setp.eq.b32 	%p126, %r95, 0;
-	and.pred 	%p127, %p117, %p126;
-	and.pred 	%p128, %p125, %p127;
-	or.pred 	%p129, %p123, %p128;
-	or.pred 	%p130, %p122, %p129;
-	not.pred 	%p131, %p130;
-	@%p131 bra 	$L__BB0_23;
-	bra.uni 	$L__BB0_22;
-$L__BB0_22:
-	atom.global.add.u64 	%rd17, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB0_23;
-$L__BB0_23:
-	and.b32 	%r99, %r8, 2147483647;
-	setp.ne.b32 	%p132, %r99, 0;
-	and.b32 	%r100, %r7, 2139095040;
-	setp.eq.b32 	%p133, %r100, 2139095040;
-	and.b32 	%r101, %r7, 2147483647;
-	setp.eq.b32 	%p134, %r101, 0;
-	or.pred 	%p135, %p133, %p134;
-	or.pred 	%p136, %p132, %p135;
-	@%p136 bra 	$L__BB0_25;
-	bra.uni 	$L__BB0_24;
-$L__BB0_24:
-	atom.global.add.u64 	%rd18, [fp_divbyzero_counter], 1;
-	bra.uni 	$L__BB0_25;
-$L__BB0_25:
-	div.rn.f32 	%r9, %r7, %r8;
-	.loc	4 24 9                          // tests/basic_tests/divZero/divByZero.cu:24:9
-	and.b32 	%r102, %r7, 2139095040;
-	setp.ne.b32 	%p137, %r102, 2139095040;
-	and.b32 	%r103, %r8, 2139095040;
-	setp.ne.b32 	%p138, %r103, 2139095040;
-	and.pred 	%p139, %p137, %p138;
-	and.b32 	%r104, %r8, 2147483647;
-	setp.ne.b32 	%p140, %r104, 0;
-	and.pred 	%p141, %p139, %p140;
-	and.b32 	%r105, %r9, 2139095040;
-	setp.eq.b32 	%p142, %r105, 2139095040;
-	and.b32 	%r106, %r9, 8388607;
-	setp.eq.b32 	%p143, %r106, 0;
-	and.pred 	%p144, %p142, %p143;
-	and.pred 	%p145, %p141, %p144;
-	not.pred 	%p146, %p145;
-	@%p146 bra 	$L__BB0_27;
+	and.b32 	%r103, %r7, 2139095040;
+	setp.eq.b32 	%p136, %r103, 2139095040;
+	and.b32 	%r104, %r7, 8388607;
+	setp.ne.b32 	%p137, %r104, 0;
+	and.b32 	%r105, %r7, 4194304;
+	setp.eq.b32 	%p138, %r105, 0;
+	and.pred 	%p139, %p136, %p138;
+	and.pred 	%p140, %p139, %p137;
+	and.b32 	%r106, %r8, 2139095040;
+	setp.eq.b32 	%p141, %r106, 2139095040;
+	and.b32 	%r107, %r8, 8388607;
+	setp.ne.b32 	%p142, %r107, 0;
+	and.b32 	%r108, %r8, 4194304;
+	setp.eq.b32 	%p143, %r108, 0;
+	and.pred 	%p144, %p141, %p143;
+	and.pred 	%p145, %p144, %p142;
+	or.pred 	%p146, %p140, %p145;
+	or.b32 	%r109, %r7, %r8;
+	and.b32 	%r110, %r109, 2147483647;
+	setp.eq.b32 	%p147, %r110, 0;
+	setp.eq.b32 	%p148, %r104, 0;
+	and.pred 	%p149, %p136, %p148;
+	setp.eq.b32 	%p150, %r107, 0;
+	and.pred 	%p151, %p141, %p150;
+	and.pred 	%p152, %p149, %p151;
+	or.pred 	%p153, %p147, %p152;
+	or.pred 	%p154, %p146, %p153;
+	not.pred 	%p155, %p154;
+	@%p155 bra 	$L__BB0_27;
 	bra.uni 	$L__BB0_26;
 $L__BB0_26:
-	atom.global.add.u64 	%rd19, [fp_overflow_counter], 1;
+	atom.global.add.u64 	%rd19, [fp_counters], 1;
 	bra.uni 	$L__BB0_27;
 $L__BB0_27:
-	and.b32 	%r107, %r7, 2139095040;
-	setp.ne.b32 	%p147, %r107, 0;
-	and.b32 	%r108, %r7, 8388607;
-	setp.eq.b32 	%p148, %r108, 0;
-	or.pred 	%p149, %p147, %p148;
-	and.b32 	%r109, %r8, 2139095040;
-	setp.ne.b32 	%p150, %r109, 0;
-	and.b32 	%r110, %r8, 8388607;
-	setp.eq.b32 	%p151, %r110, 0;
-	or.pred 	%p152, %p150, %p151;
-	and.pred 	%p153, %p149, %p152;
-	and.b32 	%r111, %r9, 2139095040;
-	setp.eq.b32 	%p154, %r111, 0;
-	and.b32 	%r112, %r9, 8388607;
-	setp.ne.b32 	%p155, %r112, 0;
-	and.pred 	%p156, %p154, %p155;
-	and.b32 	%r113, %r9, 2147483647;
-	setp.eq.b32 	%p157, %r113, 0;
-	and.b32 	%r114, %r7, 2147483647;
-	setp.ne.b32 	%p158, %r114, 0;
-	and.b32 	%r115, %r8, 2147483647;
-	setp.ne.b32 	%p159, %r115, 0;
-	and.pred 	%p160, %p158, %p159;
-	and.pred 	%p161, %p157, %p160;
-	or.pred 	%p162, %p156, %p161;
-	and.pred 	%p163, %p153, %p162;
-	not.pred 	%p164, %p163;
-	@%p164 bra 	$L__BB0_29;
+	and.b32 	%r111, %r8, 2147483647;
+	setp.ne.b32 	%p156, %r111, 0;
+	and.b32 	%r112, %r7, 2139095040;
+	setp.eq.b32 	%p157, %r112, 2139095040;
+	and.b32 	%r113, %r7, 2147483647;
+	setp.eq.b32 	%p158, %r113, 0;
+	or.pred 	%p159, %p157, %p158;
+	or.pred 	%p160, %p156, %p159;
+	@%p160 bra 	$L__BB0_29;
 	bra.uni 	$L__BB0_28;
 $L__BB0_28:
-	atom.global.add.u64 	%rd20, [fp_underflow_counter], 1;
+	atom.global.add.u64 	%rd20, [fp_counters+8], 1;
 	bra.uni 	$L__BB0_29;
 $L__BB0_29:
-	ld.b64 	%rd21, [%SP+64];
+	div.rn.f32 	%r9, %r7, %r8;
+	.loc	4 24 9                          // tests/basic_tests/divZero/divByZero.cu:24:9
+	and.b32 	%r114, %r7, 2139095040;
+	setp.ne.b32 	%p161, %r114, 2139095040;
+	and.b32 	%r115, %r8, 2139095040;
+	setp.ne.b32 	%p162, %r115, 2139095040;
+	and.pred 	%p163, %p161, %p162;
+	and.b32 	%r116, %r8, 2147483647;
+	setp.ne.b32 	%p164, %r116, 0;
+	and.pred 	%p165, %p163, %p164;
+	and.b32 	%r117, %r9, 2139095040;
+	setp.eq.b32 	%p166, %r117, 2139095040;
+	and.b32 	%r118, %r9, 8388607;
+	setp.eq.b32 	%p167, %r118, 0;
+	and.pred 	%p168, %p166, %p167;
+	and.pred 	%p169, %p165, %p168;
+	not.pred 	%p170, %p169;
+	@%p170 bra 	$L__BB0_31;
+	bra.uni 	$L__BB0_30;
+$L__BB0_30:
+	atom.global.add.u64 	%rd21, [fp_counters+16], 1;
+	bra.uni 	$L__BB0_31;
+$L__BB0_31:
+	and.b32 	%r119, %r7, 2139095040;
+	setp.ne.b32 	%p171, %r119, 0;
+	and.b32 	%r120, %r7, 8388607;
+	setp.eq.b32 	%p172, %r120, 0;
+	or.pred 	%p173, %p171, %p172;
+	and.b32 	%r121, %r8, 2139095040;
+	setp.ne.b32 	%p174, %r121, 0;
+	and.b32 	%r122, %r8, 8388607;
+	setp.eq.b32 	%p175, %r122, 0;
+	or.pred 	%p176, %p174, %p175;
+	and.pred 	%p177, %p173, %p176;
+	and.b32 	%r123, %r9, 2139095040;
+	setp.eq.b32 	%p178, %r123, 0;
+	and.b32 	%r124, %r9, 8388607;
+	setp.ne.b32 	%p179, %r124, 0;
+	and.pred 	%p180, %p178, %p179;
+	and.b32 	%r125, %r9, 2147483647;
+	setp.eq.b32 	%p181, %r125, 0;
+	and.b32 	%r126, %r7, 2147483647;
+	setp.ne.b32 	%p182, %r126, 0;
+	and.b32 	%r127, %r8, 2147483647;
+	setp.ne.b32 	%p183, %r127, 0;
+	and.pred 	%p184, %p182, %p183;
+	and.pred 	%p185, %p181, %p184;
+	or.pred 	%p186, %p180, %p185;
+	and.pred 	%p187, %p177, %p186;
+	not.pred 	%p188, %p187;
+	@%p188 bra 	$L__BB0_33;
+	bra.uni 	$L__BB0_32;
+$L__BB0_32:
+	atom.global.add.u64 	%rd22, [fp_counters+24], 1;
+	bra.uni 	$L__BB0_33;
+$L__BB0_33:
+	and.b32 	%r128, %r7, 2139095040;
+	setp.ne.b32 	%p189, %r128, 0;
+	and.b32 	%r129, %r7, 8388607;
+	setp.eq.b32 	%p190, %r129, 0;
+	or.pred 	%p191, %p189, %p190;
+	and.b32 	%r130, %r8, 2139095040;
+	setp.ne.b32 	%p192, %r130, 0;
+	and.b32 	%r131, %r8, 8388607;
+	setp.eq.b32 	%p193, %r131, 0;
+	or.pred 	%p194, %p192, %p193;
+	and.pred 	%p195, %p191, %p194;
+	and.b32 	%r132, %r9, 2139095040;
+	setp.eq.b32 	%p196, %r132, 0;
+	and.b32 	%r133, %r9, 8388607;
+	setp.ne.b32 	%p197, %r133, 0;
+	and.pred 	%p198, %p196, %p197;
+	and.pred 	%p199, %p195, %p198;
+	not.pred 	%p200, %p199;
+	@%p200 bra 	$L__BB0_35;
+	bra.uni 	$L__BB0_34;
+$L__BB0_34:
+	atom.global.add.u64 	%rd23, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_35;
+$L__BB0_35:
+	ld.b64 	%rd24, [%SP+64];
 	.loc	4 24 19                         // tests/basic_tests/divZero/divByZero.cu:24:19
-	st.b32 	[%rd21+8], %r9;
+	st.b32 	[%rd24+8], %r9;
 	.loc	4 25 33                         // tests/basic_tests/divZero/divByZero.cu:25:33
-	ld.b64 	%rd22, [%SP+64];
-	ld.b32 	%r116, [%rd22+8];
-	st.b32 	[%SP+40], %r116;
+	ld.b64 	%rd25, [%SP+64];
+	ld.b32 	%r134, [%rd25+8];
+	st.b32 	[%SP+40], %r134;
 $L__tmp16:
 	.loc	5 170 58                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:58 @[ tests/basic_tests/divZero/divByZero.cu:25:25 ]
-	ld.b32 	%r117, [%SP+40];
-	st.b32 	[%SP+20], %r117;
+	ld.b32 	%r135, [%SP+40];
+	st.b32 	[%SP+20], %r135;
 $L__tmp17:
 	.loc	6 519 47                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:519:47 @[ /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:25:25 ] ]
-	ld.b32 	%r118, [%SP+20];
-	shr.u32 	%r119, %r118, 31;
+	ld.b32 	%r136, [%SP+20];
+	shr.u32 	%r137, %r136, 31;
 $L__tmp18:
 	.loc	5 170 45                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:25:25 ]
-	setp.ne.b32 	%p165, %r119, 0;
+	setp.ne.b32 	%p201, %r137, 0;
 $L__tmp19:
 	.loc	4 25 25                         // tests/basic_tests/divZero/divByZero.cu:25:25
-	selp.b32 	%r120, -1, 1, %p165;
+	selp.b32 	%r138, -1, 1, %p201;
 	.loc	4 25 9                          // tests/basic_tests/divZero/divByZero.cu:25:9
-	ld.b64 	%rd23, [%SP+72];
+	ld.b64 	%rd26, [%SP+72];
 	.loc	4 25 23                         // tests/basic_tests/divZero/divByZero.cu:25:23
-	st.b32 	[%rd23+8], %r120;
+	st.b32 	[%rd26+8], %r138;
 	.loc	4 26 5                          // tests/basic_tests/divZero/divByZero.cu:26:5
-	bra.uni 	$L__BB0_30;
+	bra.uni 	$L__BB0_36;
 $L__tmp20:
-$L__BB0_30:                             // %if.end21
+$L__BB0_36:                             // %if.end21
 	.loc	4 29 9                          // tests/basic_tests/divZero/divByZero.cu:29:9
-	ld.b32 	%r121, [%SP+96];
+	ld.b32 	%r139, [%SP+96];
 	.loc	4 29 13                         // tests/basic_tests/divZero/divByZero.cu:29:13
-	setp.ne.b32 	%p166, %r121, 3;
-	@%p166 bra 	$L__BB0_40;
-	bra.uni 	$L__BB0_31;
-$L__BB0_31:                             // %if.then23
+	setp.ne.b32 	%p202, %r139, 3;
+	@%p202 bra 	$L__BB0_48;
+	bra.uni 	$L__BB0_37;
+$L__BB0_37:                             // %if.then23
 $L__tmp21:
 	.loc	4 30 21                         // tests/basic_tests/divZero/divByZero.cu:30:21
 	ld.b32 	%r10, [%SP+84];
 	.loc	4 30 31                         // tests/basic_tests/divZero/divByZero.cu:30:31
 	ld.b32 	%r11, [%SP+92];
 	.loc	4 30 29                         // tests/basic_tests/divZero/divByZero.cu:30:29
-	and.b32 	%r122, %r10, 2139095040;
-	setp.eq.b32 	%p167, %r122, 2139095040;
-	and.b32 	%r123, %r10, 8388607;
-	setp.ne.b32 	%p168, %r123, 0;
-	and.b32 	%r124, %r10, 4194304;
-	setp.eq.b32 	%p169, %r124, 0;
-	and.pred 	%p170, %p167, %p169;
-	and.pred 	%p171, %p170, %p168;
-	and.b32 	%r125, %r11, 2139095040;
-	setp.eq.b32 	%p172, %r125, 2139095040;
-	and.b32 	%r126, %r11, 8388607;
-	setp.ne.b32 	%p173, %r126, 0;
-	and.b32 	%r127, %r11, 4194304;
-	setp.eq.b32 	%p174, %r127, 0;
-	and.pred 	%p175, %p172, %p174;
-	and.pred 	%p176, %p175, %p173;
-	or.pred 	%p177, %p171, %p176;
-	or.b32 	%r128, %r10, %r11;
-	and.b32 	%r129, %r128, 2147483647;
-	setp.eq.b32 	%p178, %r129, 0;
-	setp.eq.b32 	%p179, %r123, 0;
-	and.pred 	%p180, %p167, %p179;
-	setp.eq.b32 	%p181, %r126, 0;
-	and.pred 	%p182, %p172, %p181;
-	and.pred 	%p183, %p180, %p182;
-	or.pred 	%p184, %p178, %p183;
-	or.pred 	%p185, %p177, %p184;
-	not.pred 	%p186, %p185;
-	@%p186 bra 	$L__BB0_33;
-	bra.uni 	$L__BB0_32;
-$L__BB0_32:
-	atom.global.add.u64 	%rd24, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB0_33;
-$L__BB0_33:
-	and.b32 	%r130, %r11, 2147483647;
-	setp.ne.b32 	%p187, %r130, 0;
-	and.b32 	%r131, %r10, 2139095040;
-	setp.eq.b32 	%p188, %r131, 2139095040;
-	and.b32 	%r132, %r10, 2147483647;
-	setp.eq.b32 	%p189, %r132, 0;
-	or.pred 	%p190, %p188, %p189;
-	or.pred 	%p191, %p187, %p190;
-	@%p191 bra 	$L__BB0_35;
-	bra.uni 	$L__BB0_34;
-$L__BB0_34:
-	atom.global.add.u64 	%rd25, [fp_divbyzero_counter], 1;
-	bra.uni 	$L__BB0_35;
-$L__BB0_35:
-	div.rn.f32 	%r12, %r10, %r11;
-	.loc	4 30 9                          // tests/basic_tests/divZero/divByZero.cu:30:9
-	and.b32 	%r133, %r10, 2139095040;
-	setp.ne.b32 	%p192, %r133, 2139095040;
-	and.b32 	%r134, %r11, 2139095040;
-	setp.ne.b32 	%p193, %r134, 2139095040;
-	and.pred 	%p194, %p192, %p193;
-	and.b32 	%r135, %r11, 2147483647;
-	setp.ne.b32 	%p195, %r135, 0;
-	and.pred 	%p196, %p194, %p195;
-	and.b32 	%r136, %r12, 2139095040;
-	setp.eq.b32 	%p197, %r136, 2139095040;
-	and.b32 	%r137, %r12, 8388607;
-	setp.eq.b32 	%p198, %r137, 0;
-	and.pred 	%p199, %p197, %p198;
-	and.pred 	%p200, %p196, %p199;
-	not.pred 	%p201, %p200;
-	@%p201 bra 	$L__BB0_37;
-	bra.uni 	$L__BB0_36;
-$L__BB0_36:
-	atom.global.add.u64 	%rd26, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB0_37;
-$L__BB0_37:
-	and.b32 	%r138, %r10, 2139095040;
-	setp.ne.b32 	%p202, %r138, 0;
-	and.b32 	%r139, %r10, 8388607;
-	setp.eq.b32 	%p203, %r139, 0;
-	or.pred 	%p204, %p202, %p203;
-	and.b32 	%r140, %r11, 2139095040;
-	setp.ne.b32 	%p205, %r140, 0;
-	and.b32 	%r141, %r11, 8388607;
-	setp.eq.b32 	%p206, %r141, 0;
-	or.pred 	%p207, %p205, %p206;
-	and.pred 	%p208, %p204, %p207;
-	and.b32 	%r142, %r12, 2139095040;
-	setp.eq.b32 	%p209, %r142, 0;
-	and.b32 	%r143, %r12, 8388607;
-	setp.ne.b32 	%p210, %r143, 0;
-	and.pred 	%p211, %p209, %p210;
-	and.b32 	%r144, %r12, 2147483647;
-	setp.eq.b32 	%p212, %r144, 0;
-	and.b32 	%r145, %r10, 2147483647;
-	setp.ne.b32 	%p213, %r145, 0;
-	and.b32 	%r146, %r11, 2147483647;
-	setp.ne.b32 	%p214, %r146, 0;
-	and.pred 	%p215, %p213, %p214;
-	and.pred 	%p216, %p212, %p215;
-	or.pred 	%p217, %p211, %p216;
+	and.b32 	%r140, %r10, 2139095040;
+	setp.eq.b32 	%p203, %r140, 2139095040;
+	and.b32 	%r141, %r10, 8388607;
+	setp.ne.b32 	%p204, %r141, 0;
+	and.b32 	%r142, %r10, 4194304;
+	setp.eq.b32 	%p205, %r142, 0;
+	and.pred 	%p206, %p203, %p205;
+	and.pred 	%p207, %p206, %p204;
+	and.b32 	%r143, %r11, 2139095040;
+	setp.eq.b32 	%p208, %r143, 2139095040;
+	and.b32 	%r144, %r11, 8388607;
+	setp.ne.b32 	%p209, %r144, 0;
+	and.b32 	%r145, %r11, 4194304;
+	setp.eq.b32 	%p210, %r145, 0;
+	and.pred 	%p211, %p208, %p210;
+	and.pred 	%p212, %p211, %p209;
+	or.pred 	%p213, %p207, %p212;
+	or.b32 	%r146, %r10, %r11;
+	and.b32 	%r147, %r146, 2147483647;
+	setp.eq.b32 	%p214, %r147, 0;
+	setp.eq.b32 	%p215, %r141, 0;
+	and.pred 	%p216, %p203, %p215;
+	setp.eq.b32 	%p217, %r144, 0;
 	and.pred 	%p218, %p208, %p217;
-	not.pred 	%p219, %p218;
-	@%p219 bra 	$L__BB0_39;
+	and.pred 	%p219, %p216, %p218;
+	or.pred 	%p220, %p214, %p219;
+	or.pred 	%p221, %p213, %p220;
+	not.pred 	%p222, %p221;
+	@%p222 bra 	$L__BB0_39;
 	bra.uni 	$L__BB0_38;
 $L__BB0_38:
-	atom.global.add.u64 	%rd27, [fp_underflow_counter], 1;
+	atom.global.add.u64 	%rd27, [fp_counters], 1;
 	bra.uni 	$L__BB0_39;
 $L__BB0_39:
-	ld.b64 	%rd28, [%SP+64];
+	and.b32 	%r148, %r11, 2147483647;
+	setp.ne.b32 	%p223, %r148, 0;
+	and.b32 	%r149, %r10, 2139095040;
+	setp.eq.b32 	%p224, %r149, 2139095040;
+	and.b32 	%r150, %r10, 2147483647;
+	setp.eq.b32 	%p225, %r150, 0;
+	or.pred 	%p226, %p224, %p225;
+	or.pred 	%p227, %p223, %p226;
+	@%p227 bra 	$L__BB0_41;
+	bra.uni 	$L__BB0_40;
+$L__BB0_40:
+	atom.global.add.u64 	%rd28, [fp_counters+8], 1;
+	bra.uni 	$L__BB0_41;
+$L__BB0_41:
+	div.rn.f32 	%r12, %r10, %r11;
+	.loc	4 30 9                          // tests/basic_tests/divZero/divByZero.cu:30:9
+	and.b32 	%r151, %r10, 2139095040;
+	setp.ne.b32 	%p228, %r151, 2139095040;
+	and.b32 	%r152, %r11, 2139095040;
+	setp.ne.b32 	%p229, %r152, 2139095040;
+	and.pred 	%p230, %p228, %p229;
+	and.b32 	%r153, %r11, 2147483647;
+	setp.ne.b32 	%p231, %r153, 0;
+	and.pred 	%p232, %p230, %p231;
+	and.b32 	%r154, %r12, 2139095040;
+	setp.eq.b32 	%p233, %r154, 2139095040;
+	and.b32 	%r155, %r12, 8388607;
+	setp.eq.b32 	%p234, %r155, 0;
+	and.pred 	%p235, %p233, %p234;
+	and.pred 	%p236, %p232, %p235;
+	not.pred 	%p237, %p236;
+	@%p237 bra 	$L__BB0_43;
+	bra.uni 	$L__BB0_42;
+$L__BB0_42:
+	atom.global.add.u64 	%rd29, [fp_counters+16], 1;
+	bra.uni 	$L__BB0_43;
+$L__BB0_43:
+	and.b32 	%r156, %r10, 2139095040;
+	setp.ne.b32 	%p238, %r156, 0;
+	and.b32 	%r157, %r10, 8388607;
+	setp.eq.b32 	%p239, %r157, 0;
+	or.pred 	%p240, %p238, %p239;
+	and.b32 	%r158, %r11, 2139095040;
+	setp.ne.b32 	%p241, %r158, 0;
+	and.b32 	%r159, %r11, 8388607;
+	setp.eq.b32 	%p242, %r159, 0;
+	or.pred 	%p243, %p241, %p242;
+	and.pred 	%p244, %p240, %p243;
+	and.b32 	%r160, %r12, 2139095040;
+	setp.eq.b32 	%p245, %r160, 0;
+	and.b32 	%r161, %r12, 8388607;
+	setp.ne.b32 	%p246, %r161, 0;
+	and.pred 	%p247, %p245, %p246;
+	and.b32 	%r162, %r12, 2147483647;
+	setp.eq.b32 	%p248, %r162, 0;
+	and.b32 	%r163, %r10, 2147483647;
+	setp.ne.b32 	%p249, %r163, 0;
+	and.b32 	%r164, %r11, 2147483647;
+	setp.ne.b32 	%p250, %r164, 0;
+	and.pred 	%p251, %p249, %p250;
+	and.pred 	%p252, %p248, %p251;
+	or.pred 	%p253, %p247, %p252;
+	and.pred 	%p254, %p244, %p253;
+	not.pred 	%p255, %p254;
+	@%p255 bra 	$L__BB0_45;
+	bra.uni 	$L__BB0_44;
+$L__BB0_44:
+	atom.global.add.u64 	%rd30, [fp_counters+24], 1;
+	bra.uni 	$L__BB0_45;
+$L__BB0_45:
+	and.b32 	%r165, %r10, 2139095040;
+	setp.ne.b32 	%p256, %r165, 0;
+	and.b32 	%r166, %r10, 8388607;
+	setp.eq.b32 	%p257, %r166, 0;
+	or.pred 	%p258, %p256, %p257;
+	and.b32 	%r167, %r11, 2139095040;
+	setp.ne.b32 	%p259, %r167, 0;
+	and.b32 	%r168, %r11, 8388607;
+	setp.eq.b32 	%p260, %r168, 0;
+	or.pred 	%p261, %p259, %p260;
+	and.pred 	%p262, %p258, %p261;
+	and.b32 	%r169, %r12, 2139095040;
+	setp.eq.b32 	%p263, %r169, 0;
+	and.b32 	%r170, %r12, 8388607;
+	setp.ne.b32 	%p264, %r170, 0;
+	and.pred 	%p265, %p263, %p264;
+	and.pred 	%p266, %p262, %p265;
+	not.pred 	%p267, %p266;
+	@%p267 bra 	$L__BB0_47;
+	bra.uni 	$L__BB0_46;
+$L__BB0_46:
+	atom.global.add.u64 	%rd31, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_47;
+$L__BB0_47:
+	ld.b64 	%rd32, [%SP+64];
 	.loc	4 30 19                         // tests/basic_tests/divZero/divByZero.cu:30:19
-	st.b32 	[%rd28+12], %r12;
+	st.b32 	[%rd32+12], %r12;
 	.loc	4 31 33                         // tests/basic_tests/divZero/divByZero.cu:31:33
-	ld.b64 	%rd29, [%SP+64];
-	ld.b32 	%r147, [%rd29+12];
-	st.b32 	[%SP+44], %r147;
+	ld.b64 	%rd33, [%SP+64];
+	ld.b32 	%r171, [%rd33+12];
+	st.b32 	[%SP+44], %r171;
 $L__tmp22:
 	.loc	5 170 58                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:58 @[ tests/basic_tests/divZero/divByZero.cu:31:25 ]
-	ld.b32 	%r148, [%SP+44];
-	st.b32 	[%SP+16], %r148;
+	ld.b32 	%r172, [%SP+44];
+	st.b32 	[%SP+16], %r172;
 $L__tmp23:
 	.loc	6 519 47                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:519:47 @[ /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:31:25 ] ]
-	ld.b32 	%r149, [%SP+16];
-	shr.u32 	%r150, %r149, 31;
+	ld.b32 	%r173, [%SP+16];
+	shr.u32 	%r174, %r173, 31;
 $L__tmp24:
 	.loc	5 170 45                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:31:25 ]
-	setp.ne.b32 	%p220, %r150, 0;
+	setp.ne.b32 	%p268, %r174, 0;
 $L__tmp25:
 	.loc	4 31 25                         // tests/basic_tests/divZero/divByZero.cu:31:25
-	selp.b32 	%r151, -1, 1, %p220;
+	selp.b32 	%r175, -1, 1, %p268;
 	.loc	4 31 9                          // tests/basic_tests/divZero/divByZero.cu:31:9
-	ld.b64 	%rd30, [%SP+72];
+	ld.b64 	%rd34, [%SP+72];
 	.loc	4 31 23                         // tests/basic_tests/divZero/divByZero.cu:31:23
-	st.b32 	[%rd30+12], %r151;
+	st.b32 	[%rd34+12], %r175;
 	.loc	4 32 5                          // tests/basic_tests/divZero/divByZero.cu:32:5
-	bra.uni 	$L__BB0_40;
+	bra.uni 	$L__BB0_48;
 $L__tmp26:
-$L__BB0_40:                             // %if.end30
+$L__BB0_48:                             // %if.end30
 	.loc	4 35 9                          // tests/basic_tests/divZero/divByZero.cu:35:9
-	ld.b32 	%r152, [%SP+96];
+	ld.b32 	%r176, [%SP+96];
 	.loc	4 35 13                         // tests/basic_tests/divZero/divByZero.cu:35:13
-	setp.ne.b32 	%p221, %r152, 4;
-	@%p221 bra 	$L__BB0_50;
-	bra.uni 	$L__BB0_41;
-$L__BB0_41:                             // %if.then32
+	setp.ne.b32 	%p269, %r176, 4;
+	@%p269 bra 	$L__BB0_60;
+	bra.uni 	$L__BB0_49;
+$L__BB0_49:                             // %if.then32
 $L__tmp27:
 	.loc	4 36 28                         // tests/basic_tests/divZero/divByZero.cu:36:28
 	ld.b32 	%r13, [%SP+88];
 	.loc	4 36 26                         // tests/basic_tests/divZero/divByZero.cu:36:26
-	and.b32 	%r153, %r13, 2139095040;
-	setp.ne.b32 	%p222, %r153, 2139095040;
-	and.b32 	%r154, %r13, 8388607;
-	setp.eq.b32 	%p223, %r154, 0;
-	or.pred 	%p224, %p222, %p223;
-	shr.u32 	%r155, %r13, 22;
-	and.b32 	%r156, %r155, 1;
-	setp.ne.b32 	%p225, %r156, 0;
-	or.pred 	%p226, %p224, %p225;
-	@%p226 bra 	$L__BB0_43;
-	bra.uni 	$L__BB0_42;
-$L__BB0_42:
-	atom.global.add.u64 	%rd31, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB0_43;
-$L__BB0_43:
-	and.b32 	%r157, %r13, 2147483647;
-	setp.ne.b32 	%p227, %r157, 0;
-	@%p227 bra 	$L__BB0_45;
-	bra.uni 	$L__BB0_44;
-$L__BB0_44:
-	atom.global.add.u64 	%rd32, [fp_divbyzero_counter], 1;
-	bra.uni 	$L__BB0_45;
-$L__BB0_45:
+	and.b32 	%r177, %r13, 2139095040;
+	setp.ne.b32 	%p270, %r177, 2139095040;
+	and.b32 	%r178, %r13, 8388607;
+	setp.eq.b32 	%p271, %r178, 0;
+	or.pred 	%p272, %p270, %p271;
+	shr.u32 	%r179, %r13, 22;
+	and.b32 	%r180, %r179, 1;
+	setp.ne.b32 	%p273, %r180, 0;
+	or.pred 	%p274, %p272, %p273;
+	@%p274 bra 	$L__BB0_51;
+	bra.uni 	$L__BB0_50;
+$L__BB0_50:
+	atom.global.add.u64 	%rd35, [fp_counters], 1;
+	bra.uni 	$L__BB0_51;
+$L__BB0_51:
+	and.b32 	%r181, %r13, 2147483647;
+	setp.ne.b32 	%p275, %r181, 0;
+	@%p275 bra 	$L__BB0_53;
+	bra.uni 	$L__BB0_52;
+$L__BB0_52:
+	atom.global.add.u64 	%rd36, [fp_counters+8], 1;
+	bra.uni 	$L__BB0_53;
+$L__BB0_53:
 	rcp.rn.f32 	%r14, %r13;
 	.loc	4 36 9                          // tests/basic_tests/divZero/divByZero.cu:36:9
-	and.b32 	%r158, %r13, 2139095040;
-	setp.ne.b32 	%p228, %r158, 2139095040;
-	and.b32 	%r159, %r13, 2147483647;
-	setp.ne.b32 	%p229, %r159, 0;
-	and.pred 	%p230, %p228, %p229;
-	and.b32 	%r160, %r14, 2139095040;
-	setp.eq.b32 	%p231, %r160, 2139095040;
-	and.b32 	%r161, %r14, 8388607;
-	setp.eq.b32 	%p232, %r161, 0;
-	and.pred 	%p233, %p231, %p232;
-	and.pred 	%p234, %p230, %p233;
-	not.pred 	%p235, %p234;
-	@%p235 bra 	$L__BB0_47;
-	bra.uni 	$L__BB0_46;
-$L__BB0_46:
-	atom.global.add.u64 	%rd33, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB0_47;
-$L__BB0_47:
-	and.b32 	%r162, %r13, 2139095040;
-	setp.ne.b32 	%p236, %r162, 0;
-	and.b32 	%r163, %r13, 8388607;
-	setp.eq.b32 	%p237, %r163, 0;
-	or.pred 	%p238, %p236, %p237;
-	and.b32 	%r164, %r14, 2139095040;
-	setp.eq.b32 	%p239, %r164, 0;
-	and.b32 	%r165, %r14, 8388607;
-	setp.ne.b32 	%p240, %r165, 0;
-	and.pred 	%p241, %p239, %p240;
-	and.b32 	%r166, %r14, 2147483647;
-	setp.eq.b32 	%p242, %r166, 0;
-	and.b32 	%r167, %r13, 2147483647;
-	setp.ne.b32 	%p243, %r167, 0;
-	and.pred 	%p244, %p242, %p243;
-	or.pred 	%p245, %p241, %p244;
-	and.pred 	%p246, %p238, %p245;
-	not.pred 	%p247, %p246;
-	@%p247 bra 	$L__BB0_49;
-	bra.uni 	$L__BB0_48;
-$L__BB0_48:
-	atom.global.add.u64 	%rd34, [fp_underflow_counter], 1;
-	bra.uni 	$L__BB0_49;
-$L__BB0_49:
-	ld.b64 	%rd35, [%SP+64];
+	and.b32 	%r182, %r13, 2139095040;
+	setp.ne.b32 	%p276, %r182, 2139095040;
+	and.b32 	%r183, %r13, 2147483647;
+	setp.ne.b32 	%p277, %r183, 0;
+	and.pred 	%p278, %p276, %p277;
+	and.b32 	%r184, %r14, 2139095040;
+	setp.eq.b32 	%p279, %r184, 2139095040;
+	and.b32 	%r185, %r14, 8388607;
+	setp.eq.b32 	%p280, %r185, 0;
+	and.pred 	%p281, %p279, %p280;
+	and.pred 	%p282, %p278, %p281;
+	not.pred 	%p283, %p282;
+	@%p283 bra 	$L__BB0_55;
+	bra.uni 	$L__BB0_54;
+$L__BB0_54:
+	atom.global.add.u64 	%rd37, [fp_counters+16], 1;
+	bra.uni 	$L__BB0_55;
+$L__BB0_55:
+	and.b32 	%r186, %r13, 2139095040;
+	setp.ne.b32 	%p284, %r186, 0;
+	and.b32 	%r187, %r13, 8388607;
+	setp.eq.b32 	%p285, %r187, 0;
+	or.pred 	%p286, %p284, %p285;
+	and.b32 	%r188, %r14, 2139095040;
+	setp.eq.b32 	%p287, %r188, 0;
+	and.b32 	%r189, %r14, 8388607;
+	setp.ne.b32 	%p288, %r189, 0;
+	and.pred 	%p289, %p287, %p288;
+	and.b32 	%r190, %r14, 2147483647;
+	setp.eq.b32 	%p290, %r190, 0;
+	and.b32 	%r191, %r13, 2147483647;
+	setp.ne.b32 	%p291, %r191, 0;
+	and.pred 	%p292, %p290, %p291;
+	or.pred 	%p293, %p289, %p292;
+	and.pred 	%p294, %p286, %p293;
+	not.pred 	%p295, %p294;
+	@%p295 bra 	$L__BB0_57;
+	bra.uni 	$L__BB0_56;
+$L__BB0_56:
+	atom.global.add.u64 	%rd38, [fp_counters+24], 1;
+	bra.uni 	$L__BB0_57;
+$L__BB0_57:
+	and.b32 	%r192, %r13, 2139095040;
+	setp.ne.b32 	%p296, %r192, 0;
+	and.b32 	%r193, %r13, 8388607;
+	setp.eq.b32 	%p297, %r193, 0;
+	or.pred 	%p298, %p296, %p297;
+	and.b32 	%r194, %r14, 2139095040;
+	setp.eq.b32 	%p299, %r194, 0;
+	and.b32 	%r195, %r14, 8388607;
+	setp.ne.b32 	%p300, %r195, 0;
+	and.pred 	%p301, %p299, %p300;
+	and.pred 	%p302, %p298, %p301;
+	not.pred 	%p303, %p302;
+	@%p303 bra 	$L__BB0_59;
+	bra.uni 	$L__BB0_58;
+$L__BB0_58:
+	atom.global.add.u64 	%rd39, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_59;
+$L__BB0_59:
+	ld.b64 	%rd40, [%SP+64];
 	.loc	4 36 19                         // tests/basic_tests/divZero/divByZero.cu:36:19
-	st.b32 	[%rd35+16], %r14;
+	st.b32 	[%rd40+16], %r14;
 	.loc	4 37 33                         // tests/basic_tests/divZero/divByZero.cu:37:33
-	ld.b64 	%rd36, [%SP+64];
-	ld.b32 	%r168, [%rd36+16];
-	st.b32 	[%SP+48], %r168;
+	ld.b64 	%rd41, [%SP+64];
+	ld.b32 	%r196, [%rd41+16];
+	st.b32 	[%SP+48], %r196;
 $L__tmp28:
 	.loc	5 170 58                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:58 @[ tests/basic_tests/divZero/divByZero.cu:37:25 ]
-	ld.b32 	%r169, [%SP+48];
-	st.b32 	[%SP+12], %r169;
+	ld.b32 	%r197, [%SP+48];
+	st.b32 	[%SP+12], %r197;
 $L__tmp29:
 	.loc	6 519 47                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:519:47 @[ /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:37:25 ] ]
-	ld.b32 	%r170, [%SP+12];
-	shr.u32 	%r171, %r170, 31;
+	ld.b32 	%r198, [%SP+12];
+	shr.u32 	%r199, %r198, 31;
 $L__tmp30:
 	.loc	5 170 45                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:37:25 ]
-	setp.ne.b32 	%p248, %r171, 0;
+	setp.ne.b32 	%p304, %r199, 0;
 $L__tmp31:
 	.loc	4 37 25                         // tests/basic_tests/divZero/divByZero.cu:37:25
-	selp.b32 	%r172, -1, 1, %p248;
+	selp.b32 	%r200, -1, 1, %p304;
 	.loc	4 37 9                          // tests/basic_tests/divZero/divByZero.cu:37:9
-	ld.b64 	%rd37, [%SP+72];
+	ld.b64 	%rd42, [%SP+72];
 	.loc	4 37 23                         // tests/basic_tests/divZero/divByZero.cu:37:23
-	st.b32 	[%rd37+16], %r172;
+	st.b32 	[%rd42+16], %r200;
 	.loc	4 38 5                          // tests/basic_tests/divZero/divByZero.cu:38:5
-	bra.uni 	$L__BB0_50;
+	bra.uni 	$L__BB0_60;
 $L__tmp32:
-$L__BB0_50:                             // %if.end39
+$L__BB0_60:                             // %if.end39
 	.loc	4 41 9                          // tests/basic_tests/divZero/divByZero.cu:41:9
-	ld.b32 	%r173, [%SP+96];
+	ld.b32 	%r201, [%SP+96];
 	.loc	4 41 13                         // tests/basic_tests/divZero/divByZero.cu:41:13
-	setp.ne.b32 	%p249, %r173, 5;
-	@%p249 bra 	$L__BB0_60;
-	bra.uni 	$L__BB0_51;
-$L__BB0_51:                             // %if.then41
+	setp.ne.b32 	%p305, %r201, 5;
+	@%p305 bra 	$L__BB0_72;
+	bra.uni 	$L__BB0_61;
+$L__BB0_61:                             // %if.then41
 $L__tmp33:
 	.loc	4 42 28                         // tests/basic_tests/divZero/divByZero.cu:42:28
 	ld.b32 	%r15, [%SP+92];
 	.loc	4 42 26                         // tests/basic_tests/divZero/divByZero.cu:42:26
-	and.b32 	%r174, %r15, 2139095040;
-	setp.ne.b32 	%p250, %r174, 2139095040;
-	and.b32 	%r175, %r15, 8388607;
-	setp.eq.b32 	%p251, %r175, 0;
-	or.pred 	%p252, %p250, %p251;
-	shr.u32 	%r176, %r15, 22;
-	and.b32 	%r177, %r176, 1;
-	setp.ne.b32 	%p253, %r177, 0;
-	or.pred 	%p254, %p252, %p253;
-	@%p254 bra 	$L__BB0_53;
-	bra.uni 	$L__BB0_52;
-$L__BB0_52:
-	atom.global.add.u64 	%rd38, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB0_53;
-$L__BB0_53:
-	and.b32 	%r178, %r15, 2147483647;
-	setp.ne.b32 	%p255, %r178, 0;
-	@%p255 bra 	$L__BB0_55;
-	bra.uni 	$L__BB0_54;
-$L__BB0_54:
-	atom.global.add.u64 	%rd39, [fp_divbyzero_counter], 1;
-	bra.uni 	$L__BB0_55;
-$L__BB0_55:
-	rcp.rn.f32 	%r16, %r15;
-	.loc	4 42 9                          // tests/basic_tests/divZero/divByZero.cu:42:9
-	and.b32 	%r179, %r15, 2139095040;
-	setp.ne.b32 	%p256, %r179, 2139095040;
-	and.b32 	%r180, %r15, 2147483647;
-	setp.ne.b32 	%p257, %r180, 0;
-	and.pred 	%p258, %p256, %p257;
-	and.b32 	%r181, %r16, 2139095040;
-	setp.eq.b32 	%p259, %r181, 2139095040;
-	and.b32 	%r182, %r16, 8388607;
-	setp.eq.b32 	%p260, %r182, 0;
-	and.pred 	%p261, %p259, %p260;
-	and.pred 	%p262, %p258, %p261;
-	not.pred 	%p263, %p262;
-	@%p263 bra 	$L__BB0_57;
-	bra.uni 	$L__BB0_56;
-$L__BB0_56:
-	atom.global.add.u64 	%rd40, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB0_57;
-$L__BB0_57:
-	and.b32 	%r183, %r15, 2139095040;
-	setp.ne.b32 	%p264, %r183, 0;
-	and.b32 	%r184, %r15, 8388607;
-	setp.eq.b32 	%p265, %r184, 0;
-	or.pred 	%p266, %p264, %p265;
-	and.b32 	%r185, %r16, 2139095040;
-	setp.eq.b32 	%p267, %r185, 0;
-	and.b32 	%r186, %r16, 8388607;
-	setp.ne.b32 	%p268, %r186, 0;
-	and.pred 	%p269, %p267, %p268;
-	and.b32 	%r187, %r16, 2147483647;
-	setp.eq.b32 	%p270, %r187, 0;
-	and.b32 	%r188, %r15, 2147483647;
-	setp.ne.b32 	%p271, %r188, 0;
-	and.pred 	%p272, %p270, %p271;
-	or.pred 	%p273, %p269, %p272;
-	and.pred 	%p274, %p266, %p273;
-	not.pred 	%p275, %p274;
-	@%p275 bra 	$L__BB0_59;
-	bra.uni 	$L__BB0_58;
-$L__BB0_58:
-	atom.global.add.u64 	%rd41, [fp_underflow_counter], 1;
-	bra.uni 	$L__BB0_59;
-$L__BB0_59:
-	ld.b64 	%rd42, [%SP+64];
-	.loc	4 42 19                         // tests/basic_tests/divZero/divByZero.cu:42:19
-	st.b32 	[%rd42+20], %r16;
-	.loc	4 43 33                         // tests/basic_tests/divZero/divByZero.cu:43:33
-	ld.b64 	%rd43, [%SP+64];
-	ld.b32 	%r189, [%rd43+20];
-	st.b32 	[%SP+52], %r189;
-$L__tmp34:
-	.loc	5 170 58                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:58 @[ tests/basic_tests/divZero/divByZero.cu:43:25 ]
-	ld.b32 	%r190, [%SP+52];
-	st.b32 	[%SP+8], %r190;
-$L__tmp35:
-	.loc	6 519 47                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:519:47 @[ /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:43:25 ] ]
-	ld.b32 	%r191, [%SP+8];
-	shr.u32 	%r192, %r191, 31;
-$L__tmp36:
-	.loc	5 170 45                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:43:25 ]
-	setp.ne.b32 	%p276, %r192, 0;
-$L__tmp37:
-	.loc	4 43 25                         // tests/basic_tests/divZero/divByZero.cu:43:25
-	selp.b32 	%r193, -1, 1, %p276;
-	.loc	4 43 9                          // tests/basic_tests/divZero/divByZero.cu:43:9
-	ld.b64 	%rd44, [%SP+72];
-	.loc	4 43 23                         // tests/basic_tests/divZero/divByZero.cu:43:23
-	st.b32 	[%rd44+20], %r193;
-	.loc	4 44 5                          // tests/basic_tests/divZero/divByZero.cu:44:5
-	bra.uni 	$L__BB0_60;
-$L__tmp38:
-$L__BB0_60:                             // %if.end48
-	.loc	4 47 9                          // tests/basic_tests/divZero/divByZero.cu:47:9
-	ld.b32 	%r194, [%SP+96];
-	.loc	4 47 13                         // tests/basic_tests/divZero/divByZero.cu:47:13
-	setp.ne.b32 	%p277, %r194, 6;
-	@%p277 bra 	$L__BB0_70;
-	bra.uni 	$L__BB0_61;
-$L__BB0_61:                             // %if.then50
-$L__tmp39:
-	.loc	4 48 31                         // tests/basic_tests/divZero/divByZero.cu:48:31
-	ld.b32 	%r17, [%SP+88];
-	.loc	4 48 29                         // tests/basic_tests/divZero/divByZero.cu:48:29
-	and.b32 	%r195, %r17, 2139095040;
-	setp.ne.b32 	%p278, %r195, 2139095040;
-	and.b32 	%r196, %r17, 8388607;
-	setp.eq.b32 	%p279, %r196, 0;
-	or.pred 	%p280, %p278, %p279;
-	shr.u32 	%r197, %r17, 22;
-	and.b32 	%r198, %r197, 1;
-	setp.ne.b32 	%p281, %r198, 0;
-	or.pred 	%p282, %p280, %p281;
-	@%p282 bra 	$L__BB0_63;
+	and.b32 	%r202, %r15, 2139095040;
+	setp.ne.b32 	%p306, %r202, 2139095040;
+	and.b32 	%r203, %r15, 8388607;
+	setp.eq.b32 	%p307, %r203, 0;
+	or.pred 	%p308, %p306, %p307;
+	shr.u32 	%r204, %r15, 22;
+	and.b32 	%r205, %r204, 1;
+	setp.ne.b32 	%p309, %r205, 0;
+	or.pred 	%p310, %p308, %p309;
+	@%p310 bra 	$L__BB0_63;
 	bra.uni 	$L__BB0_62;
 $L__BB0_62:
-	atom.global.add.u64 	%rd45, [fp_invalid_counter], 1;
+	atom.global.add.u64 	%rd43, [fp_counters], 1;
 	bra.uni 	$L__BB0_63;
 $L__BB0_63:
-	and.b32 	%r199, %r17, 2147483647;
-	setp.ne.b32 	%p283, %r199, 0;
-	@%p283 bra 	$L__BB0_65;
+	and.b32 	%r206, %r15, 2147483647;
+	setp.ne.b32 	%p311, %r206, 0;
+	@%p311 bra 	$L__BB0_65;
 	bra.uni 	$L__BB0_64;
 $L__BB0_64:
-	atom.global.add.u64 	%rd46, [fp_divbyzero_counter], 1;
+	atom.global.add.u64 	%rd44, [fp_counters+8], 1;
 	bra.uni 	$L__BB0_65;
 $L__BB0_65:
-	.loc	4 0 29                          // tests/basic_tests/divZero/divByZero.cu:0:29
-	mov.b32 	%r200, 0f38D1B717;
-	.loc	4 48 29                         // tests/basic_tests/divZero/divByZero.cu:48:29
-	div.rn.f32 	%r18, %r200, %r17;
-	.loc	4 48 9                          // tests/basic_tests/divZero/divByZero.cu:48:9
-	and.b32 	%r201, %r17, 2139095040;
-	setp.ne.b32 	%p284, %r201, 2139095040;
-	and.b32 	%r202, %r17, 2147483647;
-	setp.ne.b32 	%p285, %r202, 0;
-	and.pred 	%p286, %p284, %p285;
-	and.b32 	%r203, %r18, 2139095040;
-	setp.eq.b32 	%p287, %r203, 2139095040;
-	and.b32 	%r204, %r18, 8388607;
-	setp.eq.b32 	%p288, %r204, 0;
-	and.pred 	%p289, %p287, %p288;
-	and.pred 	%p290, %p286, %p289;
-	not.pred 	%p291, %p290;
-	@%p291 bra 	$L__BB0_67;
-	bra.uni 	$L__BB0_66;
-$L__BB0_66:
-	atom.global.add.u64 	%rd47, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB0_67;
-$L__BB0_67:
-	and.b32 	%r205, %r17, 2139095040;
-	setp.ne.b32 	%p292, %r205, 0;
-	and.b32 	%r206, %r17, 8388607;
-	setp.eq.b32 	%p293, %r206, 0;
-	or.pred 	%p294, %p292, %p293;
-	and.b32 	%r207, %r18, 2139095040;
-	setp.eq.b32 	%p295, %r207, 0;
-	and.b32 	%r208, %r18, 8388607;
-	setp.ne.b32 	%p296, %r208, 0;
-	and.pred 	%p297, %p295, %p296;
-	and.b32 	%r209, %r18, 2147483647;
-	setp.eq.b32 	%p298, %r209, 0;
-	and.b32 	%r210, %r17, 2147483647;
-	setp.ne.b32 	%p299, %r210, 0;
-	and.pred 	%p300, %p298, %p299;
-	or.pred 	%p301, %p297, %p300;
-	and.pred 	%p302, %p294, %p301;
-	not.pred 	%p303, %p302;
-	@%p303 bra 	$L__BB0_69;
-	bra.uni 	$L__BB0_68;
-$L__BB0_68:
-	atom.global.add.u64 	%rd48, [fp_underflow_counter], 1;
-	bra.uni 	$L__BB0_69;
-$L__BB0_69:
-	ld.b64 	%rd49, [%SP+64];
-	.loc	4 48 19                         // tests/basic_tests/divZero/divByZero.cu:48:19
-	st.b32 	[%rd49+24], %r18;
-	.loc	4 49 33                         // tests/basic_tests/divZero/divByZero.cu:49:33
-	ld.b64 	%rd50, [%SP+64];
-	ld.b32 	%r211, [%rd50+24];
-	st.b32 	[%SP+56], %r211;
-$L__tmp40:
-	.loc	5 170 58                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:58 @[ tests/basic_tests/divZero/divByZero.cu:49:25 ]
-	ld.b32 	%r212, [%SP+56];
-	st.b32 	[%SP+4], %r212;
-$L__tmp41:
-	.loc	6 519 47                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:519:47 @[ /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:49:25 ] ]
-	ld.b32 	%r213, [%SP+4];
-	shr.u32 	%r214, %r213, 31;
-$L__tmp42:
-	.loc	5 170 45                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:49:25 ]
-	setp.ne.b32 	%p304, %r214, 0;
-$L__tmp43:
-	.loc	4 49 25                         // tests/basic_tests/divZero/divByZero.cu:49:25
-	selp.b32 	%r215, -1, 1, %p304;
-	.loc	4 49 9                          // tests/basic_tests/divZero/divByZero.cu:49:9
-	ld.b64 	%rd51, [%SP+72];
-	.loc	4 49 23                         // tests/basic_tests/divZero/divByZero.cu:49:23
-	st.b32 	[%rd51+24], %r215;
-	.loc	4 50 5                          // tests/basic_tests/divZero/divByZero.cu:50:5
-	bra.uni 	$L__BB0_70;
-$L__tmp44:
-$L__BB0_70:                             // %if.end57
-	.loc	4 53 9                          // tests/basic_tests/divZero/divByZero.cu:53:9
-	ld.b32 	%r216, [%SP+96];
-	.loc	4 53 13                         // tests/basic_tests/divZero/divByZero.cu:53:13
-	setp.ne.b32 	%p305, %r216, 7;
-	@%p305 bra 	$L__BB0_80;
-	bra.uni 	$L__BB0_71;
-$L__BB0_71:                             // %if.then59
-$L__tmp45:
-	.loc	4 54 32                         // tests/basic_tests/divZero/divByZero.cu:54:32
-	ld.b32 	%r19, [%SP+88];
-	.loc	4 54 30                         // tests/basic_tests/divZero/divByZero.cu:54:30
-	and.b32 	%r217, %r19, 2139095040;
-	setp.ne.b32 	%p306, %r217, 2139095040;
-	and.b32 	%r218, %r19, 8388607;
-	setp.eq.b32 	%p307, %r218, 0;
-	or.pred 	%p308, %p306, %p307;
-	shr.u32 	%r219, %r19, 22;
-	and.b32 	%r220, %r219, 1;
-	setp.ne.b32 	%p309, %r220, 0;
-	or.pred 	%p310, %p308, %p309;
-	@%p310 bra 	$L__BB0_73;
-	bra.uni 	$L__BB0_72;
-$L__BB0_72:
-	atom.global.add.u64 	%rd52, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB0_73;
-$L__BB0_73:
-	and.b32 	%r221, %r19, 2147483647;
-	setp.ne.b32 	%p311, %r221, 0;
-	@%p311 bra 	$L__BB0_75;
-	bra.uni 	$L__BB0_74;
-$L__BB0_74:
-	atom.global.add.u64 	%rd53, [fp_divbyzero_counter], 1;
-	bra.uni 	$L__BB0_75;
-$L__BB0_75:
-	.loc	4 0 30                          // tests/basic_tests/divZero/divByZero.cu:0:30
-	mov.b32 	%r222, 0fB8D1B717;
-	.loc	4 54 30                         // tests/basic_tests/divZero/divByZero.cu:54:30
-	div.rn.f32 	%r20, %r222, %r19;
-	.loc	4 54 9                          // tests/basic_tests/divZero/divByZero.cu:54:9
-	and.b32 	%r223, %r19, 2139095040;
-	setp.ne.b32 	%p312, %r223, 2139095040;
-	and.b32 	%r224, %r19, 2147483647;
-	setp.ne.b32 	%p313, %r224, 0;
+	rcp.rn.f32 	%r16, %r15;
+	.loc	4 42 9                          // tests/basic_tests/divZero/divByZero.cu:42:9
+	and.b32 	%r207, %r15, 2139095040;
+	setp.ne.b32 	%p312, %r207, 2139095040;
+	and.b32 	%r208, %r15, 2147483647;
+	setp.ne.b32 	%p313, %r208, 0;
 	and.pred 	%p314, %p312, %p313;
-	and.b32 	%r225, %r20, 2139095040;
-	setp.eq.b32 	%p315, %r225, 2139095040;
-	and.b32 	%r226, %r20, 8388607;
-	setp.eq.b32 	%p316, %r226, 0;
+	and.b32 	%r209, %r16, 2139095040;
+	setp.eq.b32 	%p315, %r209, 2139095040;
+	and.b32 	%r210, %r16, 8388607;
+	setp.eq.b32 	%p316, %r210, 0;
 	and.pred 	%p317, %p315, %p316;
 	and.pred 	%p318, %p314, %p317;
 	not.pred 	%p319, %p318;
-	@%p319 bra 	$L__BB0_77;
-	bra.uni 	$L__BB0_76;
-$L__BB0_76:
-	atom.global.add.u64 	%rd54, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB0_77;
-$L__BB0_77:
-	and.b32 	%r227, %r19, 2139095040;
-	setp.ne.b32 	%p320, %r227, 0;
-	and.b32 	%r228, %r19, 8388607;
-	setp.eq.b32 	%p321, %r228, 0;
+	@%p319 bra 	$L__BB0_67;
+	bra.uni 	$L__BB0_66;
+$L__BB0_66:
+	atom.global.add.u64 	%rd45, [fp_counters+16], 1;
+	bra.uni 	$L__BB0_67;
+$L__BB0_67:
+	and.b32 	%r211, %r15, 2139095040;
+	setp.ne.b32 	%p320, %r211, 0;
+	and.b32 	%r212, %r15, 8388607;
+	setp.eq.b32 	%p321, %r212, 0;
 	or.pred 	%p322, %p320, %p321;
-	and.b32 	%r229, %r20, 2139095040;
-	setp.eq.b32 	%p323, %r229, 0;
-	and.b32 	%r230, %r20, 8388607;
-	setp.ne.b32 	%p324, %r230, 0;
+	and.b32 	%r213, %r16, 2139095040;
+	setp.eq.b32 	%p323, %r213, 0;
+	and.b32 	%r214, %r16, 8388607;
+	setp.ne.b32 	%p324, %r214, 0;
 	and.pred 	%p325, %p323, %p324;
-	and.b32 	%r231, %r20, 2147483647;
-	setp.eq.b32 	%p326, %r231, 0;
-	and.b32 	%r232, %r19, 2147483647;
-	setp.ne.b32 	%p327, %r232, 0;
+	and.b32 	%r215, %r16, 2147483647;
+	setp.eq.b32 	%p326, %r215, 0;
+	and.b32 	%r216, %r15, 2147483647;
+	setp.ne.b32 	%p327, %r216, 0;
 	and.pred 	%p328, %p326, %p327;
 	or.pred 	%p329, %p325, %p328;
 	and.pred 	%p330, %p322, %p329;
 	not.pred 	%p331, %p330;
-	@%p331 bra 	$L__BB0_79;
+	@%p331 bra 	$L__BB0_69;
+	bra.uni 	$L__BB0_68;
+$L__BB0_68:
+	atom.global.add.u64 	%rd46, [fp_counters+24], 1;
+	bra.uni 	$L__BB0_69;
+$L__BB0_69:
+	and.b32 	%r217, %r15, 2139095040;
+	setp.ne.b32 	%p332, %r217, 0;
+	and.b32 	%r218, %r15, 8388607;
+	setp.eq.b32 	%p333, %r218, 0;
+	or.pred 	%p334, %p332, %p333;
+	and.b32 	%r219, %r16, 2139095040;
+	setp.eq.b32 	%p335, %r219, 0;
+	and.b32 	%r220, %r16, 8388607;
+	setp.ne.b32 	%p336, %r220, 0;
+	and.pred 	%p337, %p335, %p336;
+	and.pred 	%p338, %p334, %p337;
+	not.pred 	%p339, %p338;
+	@%p339 bra 	$L__BB0_71;
+	bra.uni 	$L__BB0_70;
+$L__BB0_70:
+	atom.global.add.u64 	%rd47, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_71;
+$L__BB0_71:
+	ld.b64 	%rd48, [%SP+64];
+	.loc	4 42 19                         // tests/basic_tests/divZero/divByZero.cu:42:19
+	st.b32 	[%rd48+20], %r16;
+	.loc	4 43 33                         // tests/basic_tests/divZero/divByZero.cu:43:33
+	ld.b64 	%rd49, [%SP+64];
+	ld.b32 	%r221, [%rd49+20];
+	st.b32 	[%SP+52], %r221;
+$L__tmp34:
+	.loc	5 170 58                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:58 @[ tests/basic_tests/divZero/divByZero.cu:43:25 ]
+	ld.b32 	%r222, [%SP+52];
+	st.b32 	[%SP+8], %r222;
+$L__tmp35:
+	.loc	6 519 47                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:519:47 @[ /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:43:25 ] ]
+	ld.b32 	%r223, [%SP+8];
+	shr.u32 	%r224, %r223, 31;
+$L__tmp36:
+	.loc	5 170 45                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:43:25 ]
+	setp.ne.b32 	%p340, %r224, 0;
+$L__tmp37:
+	.loc	4 43 25                         // tests/basic_tests/divZero/divByZero.cu:43:25
+	selp.b32 	%r225, -1, 1, %p340;
+	.loc	4 43 9                          // tests/basic_tests/divZero/divByZero.cu:43:9
+	ld.b64 	%rd50, [%SP+72];
+	.loc	4 43 23                         // tests/basic_tests/divZero/divByZero.cu:43:23
+	st.b32 	[%rd50+20], %r225;
+	.loc	4 44 5                          // tests/basic_tests/divZero/divByZero.cu:44:5
+	bra.uni 	$L__BB0_72;
+$L__tmp38:
+$L__BB0_72:                             // %if.end48
+	.loc	4 47 9                          // tests/basic_tests/divZero/divByZero.cu:47:9
+	ld.b32 	%r226, [%SP+96];
+	.loc	4 47 13                         // tests/basic_tests/divZero/divByZero.cu:47:13
+	setp.ne.b32 	%p341, %r226, 6;
+	@%p341 bra 	$L__BB0_84;
+	bra.uni 	$L__BB0_73;
+$L__BB0_73:                             // %if.then50
+$L__tmp39:
+	.loc	4 48 31                         // tests/basic_tests/divZero/divByZero.cu:48:31
+	ld.b32 	%r17, [%SP+88];
+	.loc	4 48 29                         // tests/basic_tests/divZero/divByZero.cu:48:29
+	and.b32 	%r227, %r17, 2139095040;
+	setp.ne.b32 	%p342, %r227, 2139095040;
+	and.b32 	%r228, %r17, 8388607;
+	setp.eq.b32 	%p343, %r228, 0;
+	or.pred 	%p344, %p342, %p343;
+	shr.u32 	%r229, %r17, 22;
+	and.b32 	%r230, %r229, 1;
+	setp.ne.b32 	%p345, %r230, 0;
+	or.pred 	%p346, %p344, %p345;
+	@%p346 bra 	$L__BB0_75;
+	bra.uni 	$L__BB0_74;
+$L__BB0_74:
+	atom.global.add.u64 	%rd51, [fp_counters], 1;
+	bra.uni 	$L__BB0_75;
+$L__BB0_75:
+	and.b32 	%r231, %r17, 2147483647;
+	setp.ne.b32 	%p347, %r231, 0;
+	@%p347 bra 	$L__BB0_77;
+	bra.uni 	$L__BB0_76;
+$L__BB0_76:
+	atom.global.add.u64 	%rd52, [fp_counters+8], 1;
+	bra.uni 	$L__BB0_77;
+$L__BB0_77:
+	.loc	4 0 29                          // tests/basic_tests/divZero/divByZero.cu:0:29
+	mov.b32 	%r232, 0f38D1B717;
+	.loc	4 48 29                         // tests/basic_tests/divZero/divByZero.cu:48:29
+	div.rn.f32 	%r18, %r232, %r17;
+	.loc	4 48 9                          // tests/basic_tests/divZero/divByZero.cu:48:9
+	and.b32 	%r233, %r17, 2139095040;
+	setp.ne.b32 	%p348, %r233, 2139095040;
+	and.b32 	%r234, %r17, 2147483647;
+	setp.ne.b32 	%p349, %r234, 0;
+	and.pred 	%p350, %p348, %p349;
+	and.b32 	%r235, %r18, 2139095040;
+	setp.eq.b32 	%p351, %r235, 2139095040;
+	and.b32 	%r236, %r18, 8388607;
+	setp.eq.b32 	%p352, %r236, 0;
+	and.pred 	%p353, %p351, %p352;
+	and.pred 	%p354, %p350, %p353;
+	not.pred 	%p355, %p354;
+	@%p355 bra 	$L__BB0_79;
 	bra.uni 	$L__BB0_78;
 $L__BB0_78:
-	atom.global.add.u64 	%rd55, [fp_underflow_counter], 1;
+	atom.global.add.u64 	%rd53, [fp_counters+16], 1;
 	bra.uni 	$L__BB0_79;
 $L__BB0_79:
+	and.b32 	%r237, %r17, 2139095040;
+	setp.ne.b32 	%p356, %r237, 0;
+	and.b32 	%r238, %r17, 8388607;
+	setp.eq.b32 	%p357, %r238, 0;
+	or.pred 	%p358, %p356, %p357;
+	and.b32 	%r239, %r18, 2139095040;
+	setp.eq.b32 	%p359, %r239, 0;
+	and.b32 	%r240, %r18, 8388607;
+	setp.ne.b32 	%p360, %r240, 0;
+	and.pred 	%p361, %p359, %p360;
+	and.b32 	%r241, %r18, 2147483647;
+	setp.eq.b32 	%p362, %r241, 0;
+	and.b32 	%r242, %r17, 2147483647;
+	setp.ne.b32 	%p363, %r242, 0;
+	and.pred 	%p364, %p362, %p363;
+	or.pred 	%p365, %p361, %p364;
+	and.pred 	%p366, %p358, %p365;
+	not.pred 	%p367, %p366;
+	@%p367 bra 	$L__BB0_81;
+	bra.uni 	$L__BB0_80;
+$L__BB0_80:
+	atom.global.add.u64 	%rd54, [fp_counters+24], 1;
+	bra.uni 	$L__BB0_81;
+$L__BB0_81:
+	and.b32 	%r243, %r17, 2139095040;
+	setp.ne.b32 	%p368, %r243, 0;
+	and.b32 	%r244, %r17, 8388607;
+	setp.eq.b32 	%p369, %r244, 0;
+	or.pred 	%p370, %p368, %p369;
+	and.b32 	%r245, %r18, 2139095040;
+	setp.eq.b32 	%p371, %r245, 0;
+	and.b32 	%r246, %r18, 8388607;
+	setp.ne.b32 	%p372, %r246, 0;
+	and.pred 	%p373, %p371, %p372;
+	and.pred 	%p374, %p370, %p373;
+	not.pred 	%p375, %p374;
+	@%p375 bra 	$L__BB0_83;
+	bra.uni 	$L__BB0_82;
+$L__BB0_82:
+	atom.global.add.u64 	%rd55, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_83;
+$L__BB0_83:
 	ld.b64 	%rd56, [%SP+64];
-	.loc	4 54 19                         // tests/basic_tests/divZero/divByZero.cu:54:19
-	st.b32 	[%rd56+28], %r20;
-	.loc	4 55 33                         // tests/basic_tests/divZero/divByZero.cu:55:33
+	.loc	4 48 19                         // tests/basic_tests/divZero/divByZero.cu:48:19
+	st.b32 	[%rd56+24], %r18;
+	.loc	4 49 33                         // tests/basic_tests/divZero/divByZero.cu:49:33
 	ld.b64 	%rd57, [%SP+64];
-	ld.b32 	%r233, [%rd57+28];
-	st.b32 	[%SP+60], %r233;
+	ld.b32 	%r247, [%rd57+24];
+	st.b32 	[%SP+56], %r247;
+$L__tmp40:
+	.loc	5 170 58                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:58 @[ tests/basic_tests/divZero/divByZero.cu:49:25 ]
+	ld.b32 	%r248, [%SP+56];
+	st.b32 	[%SP+4], %r248;
+$L__tmp41:
+	.loc	6 519 47                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:519:47 @[ /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:49:25 ] ]
+	ld.b32 	%r249, [%SP+4];
+	shr.u32 	%r250, %r249, 31;
+$L__tmp42:
+	.loc	5 170 45                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:49:25 ]
+	setp.ne.b32 	%p376, %r250, 0;
+$L__tmp43:
+	.loc	4 49 25                         // tests/basic_tests/divZero/divByZero.cu:49:25
+	selp.b32 	%r251, -1, 1, %p376;
+	.loc	4 49 9                          // tests/basic_tests/divZero/divByZero.cu:49:9
+	ld.b64 	%rd58, [%SP+72];
+	.loc	4 49 23                         // tests/basic_tests/divZero/divByZero.cu:49:23
+	st.b32 	[%rd58+24], %r251;
+	.loc	4 50 5                          // tests/basic_tests/divZero/divByZero.cu:50:5
+	bra.uni 	$L__BB0_84;
+$L__tmp44:
+$L__BB0_84:                             // %if.end57
+	.loc	4 53 9                          // tests/basic_tests/divZero/divByZero.cu:53:9
+	ld.b32 	%r252, [%SP+96];
+	.loc	4 53 13                         // tests/basic_tests/divZero/divByZero.cu:53:13
+	setp.ne.b32 	%p377, %r252, 7;
+	@%p377 bra 	$L__BB0_96;
+	bra.uni 	$L__BB0_85;
+$L__BB0_85:                             // %if.then59
+$L__tmp45:
+	.loc	4 54 32                         // tests/basic_tests/divZero/divByZero.cu:54:32
+	ld.b32 	%r19, [%SP+88];
+	.loc	4 54 30                         // tests/basic_tests/divZero/divByZero.cu:54:30
+	and.b32 	%r253, %r19, 2139095040;
+	setp.ne.b32 	%p378, %r253, 2139095040;
+	and.b32 	%r254, %r19, 8388607;
+	setp.eq.b32 	%p379, %r254, 0;
+	or.pred 	%p380, %p378, %p379;
+	shr.u32 	%r255, %r19, 22;
+	and.b32 	%r256, %r255, 1;
+	setp.ne.b32 	%p381, %r256, 0;
+	or.pred 	%p382, %p380, %p381;
+	@%p382 bra 	$L__BB0_87;
+	bra.uni 	$L__BB0_86;
+$L__BB0_86:
+	atom.global.add.u64 	%rd59, [fp_counters], 1;
+	bra.uni 	$L__BB0_87;
+$L__BB0_87:
+	and.b32 	%r257, %r19, 2147483647;
+	setp.ne.b32 	%p383, %r257, 0;
+	@%p383 bra 	$L__BB0_89;
+	bra.uni 	$L__BB0_88;
+$L__BB0_88:
+	atom.global.add.u64 	%rd60, [fp_counters+8], 1;
+	bra.uni 	$L__BB0_89;
+$L__BB0_89:
+	.loc	4 0 30                          // tests/basic_tests/divZero/divByZero.cu:0:30
+	mov.b32 	%r258, 0fB8D1B717;
+	.loc	4 54 30                         // tests/basic_tests/divZero/divByZero.cu:54:30
+	div.rn.f32 	%r20, %r258, %r19;
+	.loc	4 54 9                          // tests/basic_tests/divZero/divByZero.cu:54:9
+	and.b32 	%r259, %r19, 2139095040;
+	setp.ne.b32 	%p384, %r259, 2139095040;
+	and.b32 	%r260, %r19, 2147483647;
+	setp.ne.b32 	%p385, %r260, 0;
+	and.pred 	%p386, %p384, %p385;
+	and.b32 	%r261, %r20, 2139095040;
+	setp.eq.b32 	%p387, %r261, 2139095040;
+	and.b32 	%r262, %r20, 8388607;
+	setp.eq.b32 	%p388, %r262, 0;
+	and.pred 	%p389, %p387, %p388;
+	and.pred 	%p390, %p386, %p389;
+	not.pred 	%p391, %p390;
+	@%p391 bra 	$L__BB0_91;
+	bra.uni 	$L__BB0_90;
+$L__BB0_90:
+	atom.global.add.u64 	%rd61, [fp_counters+16], 1;
+	bra.uni 	$L__BB0_91;
+$L__BB0_91:
+	and.b32 	%r263, %r19, 2139095040;
+	setp.ne.b32 	%p392, %r263, 0;
+	and.b32 	%r264, %r19, 8388607;
+	setp.eq.b32 	%p393, %r264, 0;
+	or.pred 	%p394, %p392, %p393;
+	and.b32 	%r265, %r20, 2139095040;
+	setp.eq.b32 	%p395, %r265, 0;
+	and.b32 	%r266, %r20, 8388607;
+	setp.ne.b32 	%p396, %r266, 0;
+	and.pred 	%p397, %p395, %p396;
+	and.b32 	%r267, %r20, 2147483647;
+	setp.eq.b32 	%p398, %r267, 0;
+	and.b32 	%r268, %r19, 2147483647;
+	setp.ne.b32 	%p399, %r268, 0;
+	and.pred 	%p400, %p398, %p399;
+	or.pred 	%p401, %p397, %p400;
+	and.pred 	%p402, %p394, %p401;
+	not.pred 	%p403, %p402;
+	@%p403 bra 	$L__BB0_93;
+	bra.uni 	$L__BB0_92;
+$L__BB0_92:
+	atom.global.add.u64 	%rd62, [fp_counters+24], 1;
+	bra.uni 	$L__BB0_93;
+$L__BB0_93:
+	and.b32 	%r269, %r19, 2139095040;
+	setp.ne.b32 	%p404, %r269, 0;
+	and.b32 	%r270, %r19, 8388607;
+	setp.eq.b32 	%p405, %r270, 0;
+	or.pred 	%p406, %p404, %p405;
+	and.b32 	%r271, %r20, 2139095040;
+	setp.eq.b32 	%p407, %r271, 0;
+	and.b32 	%r272, %r20, 8388607;
+	setp.ne.b32 	%p408, %r272, 0;
+	and.pred 	%p409, %p407, %p408;
+	and.pred 	%p410, %p406, %p409;
+	not.pred 	%p411, %p410;
+	@%p411 bra 	$L__BB0_95;
+	bra.uni 	$L__BB0_94;
+$L__BB0_94:
+	atom.global.add.u64 	%rd63, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_95;
+$L__BB0_95:
+	ld.b64 	%rd64, [%SP+64];
+	.loc	4 54 19                         // tests/basic_tests/divZero/divByZero.cu:54:19
+	st.b32 	[%rd64+28], %r20;
+	.loc	4 55 33                         // tests/basic_tests/divZero/divByZero.cu:55:33
+	ld.b64 	%rd65, [%SP+64];
+	ld.b32 	%r273, [%rd65+28];
+	st.b32 	[%SP+60], %r273;
 $L__tmp46:
 	.loc	5 170 58                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:58 @[ tests/basic_tests/divZero/divByZero.cu:55:25 ]
-	ld.b32 	%r234, [%SP+60];
-	st.b32 	[%SP], %r234;
+	ld.b32 	%r274, [%SP+60];
+	st.b32 	[%SP], %r274;
 $L__tmp47:
 	.loc	6 519 47                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:519:47 @[ /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:55:25 ] ]
-	ld.b32 	%r235, [%SP];
-	shr.u32 	%r236, %r235, 31;
+	ld.b32 	%r275, [%SP];
+	shr.u32 	%r276, %r275, 31;
 $L__tmp48:
 	.loc	5 170 45                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_cmath.h:170:45 @[ tests/basic_tests/divZero/divByZero.cu:55:25 ]
-	setp.ne.b32 	%p332, %r236, 0;
+	setp.ne.b32 	%p412, %r276, 0;
 $L__tmp49:
 	.loc	4 55 25                         // tests/basic_tests/divZero/divByZero.cu:55:25
-	selp.b32 	%r237, -1, 1, %p332;
+	selp.b32 	%r277, -1, 1, %p412;
 	.loc	4 55 9                          // tests/basic_tests/divZero/divByZero.cu:55:9
-	ld.b64 	%rd58, [%SP+72];
+	ld.b64 	%rd66, [%SP+72];
 	.loc	4 55 23                         // tests/basic_tests/divZero/divByZero.cu:55:23
-	st.b32 	[%rd58+28], %r237;
+	st.b32 	[%rd66+28], %r277;
 	.loc	4 56 5                          // tests/basic_tests/divZero/divByZero.cu:56:5
-	bra.uni 	$L__BB0_80;
+	bra.uni 	$L__BB0_96;
 $L__tmp50:
-$L__BB0_80:                             // %if.end66
+$L__BB0_96:                             // %if.end66
 	.loc	4 59 9                          // tests/basic_tests/divZero/divByZero.cu:59:9
-	ld.b32 	%r238, [%SP+96];
+	ld.b32 	%r278, [%SP+96];
 	.loc	4 59 13                         // tests/basic_tests/divZero/divByZero.cu:59:13
-	setp.ne.b32 	%p333, %r238, 8;
-	@%p333 bra 	$L__BB0_90;
-	bra.uni 	$L__BB0_81;
-$L__BB0_81:                             // %if.then68
+	setp.ne.b32 	%p413, %r278, 8;
+	@%p413 bra 	$L__BB0_108;
+	bra.uni 	$L__BB0_97;
+$L__BB0_97:                             // %if.then68
 $L__tmp51:
 	.loc	4 60 21                         // tests/basic_tests/divZero/divByZero.cu:60:21
 	ld.b32 	%r21, [%SP+88];
 	.loc	4 60 30                         // tests/basic_tests/divZero/divByZero.cu:60:30
-	and.b32 	%r239, %r21, 2139095040;
-	setp.eq.b32 	%p334, %r239, 2139095040;
-	and.b32 	%r240, %r21, 8388607;
-	setp.ne.b32 	%p335, %r240, 0;
-	and.b32 	%r241, %r21, 4194304;
-	setp.eq.b32 	%p336, %r241, 0;
-	and.pred 	%p337, %p334, %p336;
-	and.pred 	%p338, %p337, %p335;
-	and.b32 	%r242, %r21, 2147483647;
-	setp.eq.b32 	%p339, %r242, 0;
-	setp.eq.b32 	%p340, %r240, 0;
-	and.pred 	%p341, %p334, %p340;
-	or.pred 	%p342, %p339, %p341;
-	or.pred 	%p343, %p338, %p342;
-	not.pred 	%p344, %p343;
-	@%p344 bra 	$L__BB0_83;
-	bra.uni 	$L__BB0_82;
-$L__BB0_82:
-	atom.global.add.u64 	%rd59, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB0_83;
-$L__BB0_83:
-	and.b32 	%r243, %r21, 2147483647;
-	setp.ne.b32 	%p345, %r243, 0;
-	and.b32 	%r244, %r21, 2139095040;
-	setp.eq.b32 	%p346, %r244, 2139095040;
-	and.b32 	%r245, %r21, 2147483647;
-	setp.eq.b32 	%p347, %r245, 0;
-	or.pred 	%p348, %p346, %p347;
-	or.pred 	%p349, %p345, %p348;
-	@%p349 bra 	$L__BB0_85;
-	bra.uni 	$L__BB0_84;
-$L__BB0_84:
-	atom.global.add.u64 	%rd60, [fp_divbyzero_counter], 1;
-	bra.uni 	$L__BB0_85;
-$L__BB0_85:
+	and.b32 	%r279, %r21, 2139095040;
+	setp.eq.b32 	%p414, %r279, 2139095040;
+	and.b32 	%r280, %r21, 8388607;
+	setp.ne.b32 	%p415, %r280, 0;
+	and.b32 	%r281, %r21, 4194304;
+	setp.eq.b32 	%p416, %r281, 0;
+	and.pred 	%p417, %p414, %p416;
+	and.pred 	%p418, %p417, %p415;
+	and.b32 	%r282, %r21, 2147483647;
+	setp.eq.b32 	%p419, %r282, 0;
+	setp.eq.b32 	%p420, %r280, 0;
+	and.pred 	%p421, %p414, %p420;
+	or.pred 	%p422, %p419, %p421;
+	or.pred 	%p423, %p418, %p422;
+	not.pred 	%p424, %p423;
+	@%p424 bra 	$L__BB0_99;
+	bra.uni 	$L__BB0_98;
+$L__BB0_98:
+	atom.global.add.u64 	%rd67, [fp_counters], 1;
+	bra.uni 	$L__BB0_99;
+$L__BB0_99:
+	and.b32 	%r283, %r21, 2147483647;
+	setp.ne.b32 	%p425, %r283, 0;
+	and.b32 	%r284, %r21, 2139095040;
+	setp.eq.b32 	%p426, %r284, 2139095040;
+	and.b32 	%r285, %r21, 2147483647;
+	setp.eq.b32 	%p427, %r285, 0;
+	or.pred 	%p428, %p426, %p427;
+	or.pred 	%p429, %p425, %p428;
+	@%p429 bra 	$L__BB0_101;
+	bra.uni 	$L__BB0_100;
+$L__BB0_100:
+	atom.global.add.u64 	%rd68, [fp_counters+8], 1;
+	bra.uni 	$L__BB0_101;
+$L__BB0_101:
 	div.rn.f32 	%r22, %r21, %r21;
 	.loc	4 60 9                          // tests/basic_tests/divZero/divByZero.cu:60:9
-	and.b32 	%r246, %r21, 2139095040;
-	setp.ne.b32 	%p350, %r246, 2139095040;
-	and.b32 	%r247, %r21, 2139095040;
-	setp.ne.b32 	%p351, %r247, 2139095040;
-	and.pred 	%p352, %p350, %p351;
-	and.b32 	%r248, %r21, 2147483647;
-	setp.ne.b32 	%p353, %r248, 0;
-	and.pred 	%p354, %p352, %p353;
-	and.b32 	%r249, %r22, 2139095040;
-	setp.eq.b32 	%p355, %r249, 2139095040;
-	and.b32 	%r250, %r22, 8388607;
-	setp.eq.b32 	%p356, %r250, 0;
-	and.pred 	%p357, %p355, %p356;
-	and.pred 	%p358, %p354, %p357;
-	not.pred 	%p359, %p358;
-	@%p359 bra 	$L__BB0_87;
-	bra.uni 	$L__BB0_86;
-$L__BB0_86:
-	atom.global.add.u64 	%rd61, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB0_87;
-$L__BB0_87:
-	and.b32 	%r251, %r21, 2139095040;
-	setp.ne.b32 	%p360, %r251, 0;
-	and.b32 	%r252, %r21, 8388607;
-	setp.eq.b32 	%p361, %r252, 0;
-	or.pred 	%p362, %p360, %p361;
-	and.b32 	%r253, %r21, 2139095040;
-	setp.ne.b32 	%p363, %r253, 0;
-	and.b32 	%r254, %r21, 8388607;
-	setp.eq.b32 	%p364, %r254, 0;
-	or.pred 	%p365, %p363, %p364;
-	and.pred 	%p366, %p362, %p365;
-	and.b32 	%r255, %r22, 2139095040;
-	setp.eq.b32 	%p367, %r255, 0;
-	and.b32 	%r256, %r22, 8388607;
-	setp.ne.b32 	%p368, %r256, 0;
-	and.pred 	%p369, %p367, %p368;
-	and.b32 	%r257, %r22, 2147483647;
-	setp.eq.b32 	%p370, %r257, 0;
-	and.b32 	%r258, %r21, 2147483647;
-	setp.ne.b32 	%p371, %r258, 0;
-	and.b32 	%r259, %r21, 2147483647;
-	setp.ne.b32 	%p372, %r259, 0;
-	and.pred 	%p373, %p371, %p372;
-	and.pred 	%p374, %p370, %p373;
-	or.pred 	%p375, %p369, %p374;
-	and.pred 	%p376, %p366, %p375;
-	not.pred 	%p377, %p376;
-	@%p377 bra 	$L__BB0_89;
-	bra.uni 	$L__BB0_88;
-$L__BB0_88:
-	atom.global.add.u64 	%rd62, [fp_underflow_counter], 1;
-	bra.uni 	$L__BB0_89;
-$L__BB0_89:
-	ld.b64 	%rd63, [%SP+64];
+	and.b32 	%r286, %r21, 2139095040;
+	setp.ne.b32 	%p430, %r286, 2139095040;
+	and.b32 	%r287, %r21, 2139095040;
+	setp.ne.b32 	%p431, %r287, 2139095040;
+	and.pred 	%p432, %p430, %p431;
+	and.b32 	%r288, %r21, 2147483647;
+	setp.ne.b32 	%p433, %r288, 0;
+	and.pred 	%p434, %p432, %p433;
+	and.b32 	%r289, %r22, 2139095040;
+	setp.eq.b32 	%p435, %r289, 2139095040;
+	and.b32 	%r290, %r22, 8388607;
+	setp.eq.b32 	%p436, %r290, 0;
+	and.pred 	%p437, %p435, %p436;
+	and.pred 	%p438, %p434, %p437;
+	not.pred 	%p439, %p438;
+	@%p439 bra 	$L__BB0_103;
+	bra.uni 	$L__BB0_102;
+$L__BB0_102:
+	atom.global.add.u64 	%rd69, [fp_counters+16], 1;
+	bra.uni 	$L__BB0_103;
+$L__BB0_103:
+	and.b32 	%r291, %r21, 2139095040;
+	setp.ne.b32 	%p440, %r291, 0;
+	and.b32 	%r292, %r21, 8388607;
+	setp.eq.b32 	%p441, %r292, 0;
+	or.pred 	%p442, %p440, %p441;
+	and.b32 	%r293, %r21, 2139095040;
+	setp.ne.b32 	%p443, %r293, 0;
+	and.b32 	%r294, %r21, 8388607;
+	setp.eq.b32 	%p444, %r294, 0;
+	or.pred 	%p445, %p443, %p444;
+	and.pred 	%p446, %p442, %p445;
+	and.b32 	%r295, %r22, 2139095040;
+	setp.eq.b32 	%p447, %r295, 0;
+	and.b32 	%r296, %r22, 8388607;
+	setp.ne.b32 	%p448, %r296, 0;
+	and.pred 	%p449, %p447, %p448;
+	and.b32 	%r297, %r22, 2147483647;
+	setp.eq.b32 	%p450, %r297, 0;
+	and.b32 	%r298, %r21, 2147483647;
+	setp.ne.b32 	%p451, %r298, 0;
+	and.b32 	%r299, %r21, 2147483647;
+	setp.ne.b32 	%p452, %r299, 0;
+	and.pred 	%p453, %p451, %p452;
+	and.pred 	%p454, %p450, %p453;
+	or.pred 	%p455, %p449, %p454;
+	and.pred 	%p456, %p446, %p455;
+	not.pred 	%p457, %p456;
+	@%p457 bra 	$L__BB0_105;
+	bra.uni 	$L__BB0_104;
+$L__BB0_104:
+	atom.global.add.u64 	%rd70, [fp_counters+24], 1;
+	bra.uni 	$L__BB0_105;
+$L__BB0_105:
+	and.b32 	%r300, %r21, 2139095040;
+	setp.ne.b32 	%p458, %r300, 0;
+	and.b32 	%r301, %r21, 8388607;
+	setp.eq.b32 	%p459, %r301, 0;
+	or.pred 	%p460, %p458, %p459;
+	and.b32 	%r302, %r21, 2139095040;
+	setp.ne.b32 	%p461, %r302, 0;
+	and.b32 	%r303, %r21, 8388607;
+	setp.eq.b32 	%p462, %r303, 0;
+	or.pred 	%p463, %p461, %p462;
+	and.pred 	%p464, %p460, %p463;
+	and.b32 	%r304, %r22, 2139095040;
+	setp.eq.b32 	%p465, %r304, 0;
+	and.b32 	%r305, %r22, 8388607;
+	setp.ne.b32 	%p466, %r305, 0;
+	and.pred 	%p467, %p465, %p466;
+	and.pred 	%p468, %p464, %p467;
+	not.pred 	%p469, %p468;
+	@%p469 bra 	$L__BB0_107;
+	bra.uni 	$L__BB0_106;
+$L__BB0_106:
+	atom.global.add.u64 	%rd71, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_107;
+$L__BB0_107:
+	ld.b64 	%rd72, [%SP+64];
 	.loc	4 60 19                         // tests/basic_tests/divZero/divByZero.cu:60:19
-	st.b32 	[%rd63+32], %r22;
+	st.b32 	[%rd72+32], %r22;
 	.loc	4 61 9                          // tests/basic_tests/divZero/divByZero.cu:61:9
-	ld.b64 	%rd64, [%SP+72];
+	ld.b64 	%rd73, [%SP+72];
 	.loc	4 61 23                         // tests/basic_tests/divZero/divByZero.cu:61:23
-	st.b32 	[%rd64+32], 0;
+	st.b32 	[%rd73+32], 0;
 	.loc	4 62 5                          // tests/basic_tests/divZero/divByZero.cu:62:5
-	bra.uni 	$L__BB0_90;
+	bra.uni 	$L__BB0_108;
 $L__tmp52:
-$L__BB0_90:                             // %if.end72
+$L__BB0_108:                            // %if.end72
 	.loc	4 63 1                          // tests/basic_tests/divZero/divByZero.cu:63:1
 	ret;
 $L__tmp53:

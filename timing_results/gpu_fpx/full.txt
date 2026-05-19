@@ -1,0 +1,40 @@
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.36
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.39
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.39
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.39
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.35
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.39
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.38
+[DBG] invalid=12 divzero=0 overflow=0 underflow=0 total=0 subnormal=0
+0.37

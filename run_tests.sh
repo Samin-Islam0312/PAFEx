@@ -157,24 +157,23 @@ run_one_test() {
     timeout 30 $outdir/instrumented_app > $run 2>&1
     local rc=$?
 
-    # PARSE the [DBG] line and Kernels Launched
-    local dbg_line=$(grep -E "^\[DBG\]" $run | tail -1)
-    local kl=$(grep -E "Kernels Launched:" $run | head -1 | awk '{print $NF}')
-    kl=${kl:-0}
+    # PARSE counters from the PAPI Summary output
+local kl=$(grep -E "Kernels Launched:" $run | head -1 | awk '{print $NF}')
+kl=${kl:-0}
 
-    if [ -z "$dbg_line" ]; then
-        echo "  STATUS: RUN FAILED (no [DBG] output, rc=$rc). See $run"
-        echo "$category,$test_name,run_failed,,,,,,,$kl,rc=$rc" >> $CSV
-        return
-    fi
+local invalid=$(grep -E "^  Invalid Ops:"        $run | head -1 | awk '{print $NF}')
+local divzero=$(grep -E "^  Div by Zero:"        $run | head -1 | awk '{print $NF}')
+local overflow=$(grep -E "^  Overflow:"          $run | head -1 | awk '{print $NF}')
+local underflow=$(grep -E "^  Underflow:"        $run | head -1 | awk '{print $NF}')
+local total=$(grep -E "^  Total FP Ops:"         $run | head -1 | awk '{print $NF}')
+local subnormal=$(grep -E "^  Denormals Produced:" $run | head -1 | awk '{print $NF}')
 
-    # Extract counter values: "[DBG] invalid=X divzero=Y overflow=Z underflow=W total=A subnormal=B"
-    local invalid=$(echo "$dbg_line"   | grep -oP 'invalid=\K[0-9]+')
-    local divzero=$(echo "$dbg_line"   | grep -oP 'divzero=\K[0-9]+')
-    local overflow=$(echo "$dbg_line"  | grep -oP 'overflow=\K[0-9]+')
-    local underflow=$(echo "$dbg_line" | grep -oP 'underflow=\K[0-9]+')
-    local total=$(echo "$dbg_line"     | grep -oP 'total=\K[0-9]+')
-    local subnormal=$(echo "$dbg_line" | grep -oP 'subnormal=\K[0-9]+')
+# Sanity check: if we got no Invalid Ops field, the run actually failed
+if [ -z "$invalid" ]; then
+    echo "  STATUS: RUN FAILED (no PAPI summary, rc=$rc). See $run"
+    echo "$category,$test_name,run_failed,,,,,,,$kl,rc=$rc" >> $CSV
+    return
+fi
 
     # Write per-test summary
     {

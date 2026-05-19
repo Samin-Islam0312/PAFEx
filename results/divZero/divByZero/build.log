@@ -1,11 +1,6 @@
 === Part 2: Device pipeline ===
 [FPPass] Running on device module: nvptx64-nvidia-cuda
-[FPPass] Declared device counter: fp_invalid_counter
-[FPPass] Declared device counter: fp_divbyzero_counter
-[FPPass] Declared device counter: fp_overflow_counter
-[FPPass] Declared device counter: fp_underflow_counter
-[FPPass] Declared device counter: fp_total_counter
-[FPPass] Declared device counter: fp_subnormal_counter
+[FPPass] Declared device counter array: fp_counters[6]
 [FPPass] Visiting function: _Z13testDivByZeroPfPiffff [KERNEL]
 [FPPass]   COLLECT fdiv @ _Z13testDivByZeroPfPiffff:12
 [FPPass]   COLLECT fdiv @ _Z13testDivByZeroPfPiffff:18
@@ -22,61 +17,59 @@
 [FPPass]     -> Injected check: ex=1 op=3 line=12
 [FPPass]     -> Injected check: ex=2 op=3 line=12
 [FPPass]     -> Injected check: ex=3 op=3 line=12
+[FPPass]     -> Injected check: ex=5 op=3 line=12
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:18 op=3
 [FPPass]     -> Injected check: ex=0 op=3 line=18
 [FPPass]     -> Injected check: ex=1 op=3 line=18
 [FPPass]     -> Injected check: ex=2 op=3 line=18
 [FPPass]     -> Injected check: ex=3 op=3 line=18
+[FPPass]     -> Injected check: ex=5 op=3 line=18
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:24 op=3
 [FPPass]     -> Injected check: ex=0 op=3 line=24
 [FPPass]     -> Injected check: ex=1 op=3 line=24
 [FPPass]     -> Injected check: ex=2 op=3 line=24
 [FPPass]     -> Injected check: ex=3 op=3 line=24
+[FPPass]     -> Injected check: ex=5 op=3 line=24
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:30 op=3
 [FPPass]     -> Injected check: ex=0 op=3 line=30
 [FPPass]     -> Injected check: ex=1 op=3 line=30
 [FPPass]     -> Injected check: ex=2 op=3 line=30
 [FPPass]     -> Injected check: ex=3 op=3 line=30
+[FPPass]     -> Injected check: ex=5 op=3 line=30
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:36 op=3
 [FPPass]     -> Injected check: ex=0 op=3 line=36
 [FPPass]     -> Injected check: ex=1 op=3 line=36
 [FPPass]     -> Injected check: ex=2 op=3 line=36
 [FPPass]     -> Injected check: ex=3 op=3 line=36
+[FPPass]     -> Injected check: ex=5 op=3 line=36
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:42 op=3
 [FPPass]     -> Injected check: ex=0 op=3 line=42
 [FPPass]     -> Injected check: ex=1 op=3 line=42
 [FPPass]     -> Injected check: ex=2 op=3 line=42
 [FPPass]     -> Injected check: ex=3 op=3 line=42
+[FPPass]     -> Injected check: ex=5 op=3 line=42
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:48 op=3
 [FPPass]     -> Injected check: ex=0 op=3 line=48
 [FPPass]     -> Injected check: ex=1 op=3 line=48
 [FPPass]     -> Injected check: ex=2 op=3 line=48
 [FPPass]     -> Injected check: ex=3 op=3 line=48
+[FPPass]     -> Injected check: ex=5 op=3 line=48
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:54 op=3
 [FPPass]     -> Injected check: ex=0 op=3 line=54
 [FPPass]     -> Injected check: ex=1 op=3 line=54
 [FPPass]     -> Injected check: ex=2 op=3 line=54
 [FPPass]     -> Injected check: ex=3 op=3 line=54
+[FPPass]     -> Injected check: ex=5 op=3 line=54
 [FPPass]   INSTRUMENT _Z13testDivByZeroPfPiffff:60 op=3
 [FPPass]     -> Injected check: ex=0 op=3 line=60
 [FPPass]     -> Injected check: ex=1 op=3 line=60
 [FPPass]     -> Injected check: ex=2 op=3 line=60
 [FPPass]     -> Injected check: ex=3 op=3 line=60
+[FPPass]     -> Injected check: ex=5 op=3 line=60
 [FPPass] SUMMARY: visited 1 functions, instrumented 9 instructions
 === Part 3: Host pipeline ===
 [HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD/results/divZero/divByZero/host.bc
-[HostPass] Created host shadow: fp_invalid_counter
-[HostPass] Created host shadow: fp_divbyzero_counter
-[HostPass] Created host shadow: fp_overflow_counter
-[HostPass] Created host shadow: fp_underflow_counter
-[HostPass] Created host shadow: fp_total_counter
-[HostPass] Created host shadow: fp_subnormal_counter
-[HostPass] Registered shadow: fp_invalid_counter
-[HostPass] Registered shadow: fp_divbyzero_counter
-[HostPass] Registered shadow: fp_overflow_counter
-[HostPass] Registered shadow: fp_underflow_counter
-[HostPass] Registered shadow: fp_total_counter
-[HostPass] Registered shadow: fp_subnormal_counter
+[HostPass] Created host shadow: fp_counters[6]
+[HostPass] Registered shadow: fp_counters[6] (48 bytes)
 [HostPass] Found main(), injecting PAPI lifecycle.
-[HostPass] Instrumented 1 kernel launches.
 === Part 4: Link ===

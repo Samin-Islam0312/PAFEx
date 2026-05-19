@@ -7,12 +7,7 @@
 .address_size 64
 
 	// .globl	_Z12is_subnormalf       // -- Begin function _Z12is_subnormalf
-.visible .global .align 8 .u64 fp_invalid_counter;
-.visible .global .align 8 .u64 fp_divbyzero_counter;
-.visible .global .align 8 .u64 fp_overflow_counter;
-.visible .global .align 8 .u64 fp_underflow_counter;
-.visible .global .align 8 .u64 fp_total_counter;
-.visible .global .align 8 .u64 fp_subnormal_counter;
+.visible .global .align 8 .b8 fp_counters[48];
                                         // @_Z12is_subnormalf
 .visible .func  (.param .b32 func_retval0) _Z12is_subnormalf(
 	.param .b32 _Z12is_subnormalf_param_0
@@ -72,9 +67,9 @@ $L__func_end0:
 	.local .align 8 .b8 	__local_depot1[72];
 	.reg .b64 	%SP;
 	.reg .b64 	%SPL;
-	.reg .pred 	%p<186>;
-	.reg .b32 	%r<124>;
-	.reg .b64 	%rd<31>;
+	.reg .pred 	%p<234>;
+	.reg .b32 	%r<148>;
+	.reg .b64 	%rd<35>;
 	.loc	4 10 0                          // tests/basic_tests/underflow/denormal.cu:10:0
 $L__func_begin1:
 	.loc	4 10 0                          // tests/basic_tests/underflow/denormal.cu:10:0
@@ -99,7 +94,7 @@ $L__tmp6:
 	ld.b32 	%r14, [%SP+56];
 	.loc	4 18 13                         // tests/basic_tests/underflow/denormal.cu:18:13
 	setp.ne.b32 	%p1, %r14, 0;
-	@%p1 bra 	$L__BB1_6;
+	@%p1 bra 	$L__BB1_8;
 	bra.uni 	$L__BB1_1;
 $L__BB1_1:                              // %if.then
 $L__tmp7:
@@ -144,7 +139,7 @@ $L__tmp8:
 	@%p21 bra 	$L__BB1_3;
 	bra.uni 	$L__BB1_2;
 $L__BB1_2:
-	atom.global.add.u64 	%rd3, [fp_invalid_counter], 1;
+	atom.global.add.u64 	%rd3, [fp_counters], 1;
 	bra.uni 	$L__BB1_3;
 $L__BB1_3:
 	add.rn.f32 	%r3, %r1, %r2;
@@ -165,43 +160,67 @@ $L__tmp9:
 	@%p29 bra 	$L__BB1_5;
 	bra.uni 	$L__BB1_4;
 $L__BB1_4:
-	atom.global.add.u64 	%rd4, [fp_overflow_counter], 1;
+	atom.global.add.u64 	%rd4, [fp_counters+16], 1;
 	bra.uni 	$L__BB1_5;
 $L__BB1_5:
-	ld.b64 	%rd5, [%SP+40];
-	.loc	4 20 19                         // tests/basic_tests/underflow/denormal.cu:20:19
-	st.b32 	[%rd5], %r3;
-	.loc	4 21 33                         // tests/basic_tests/underflow/denormal.cu:21:33
+	and.b32 	%r28, %r1, 2139095040;
+	setp.ne.b32 	%p30, %r28, 0;
+	and.b32 	%r29, %r1, 8388607;
+	setp.eq.b32 	%p31, %r29, 0;
+	or.pred 	%p32, %p30, %p31;
+	and.b32 	%r30, %r2, 2139095040;
+	setp.ne.b32 	%p33, %r30, 0;
+	and.b32 	%r31, %r2, 8388607;
+	setp.eq.b32 	%p34, %r31, 0;
+	or.pred 	%p35, %p33, %p34;
+	and.pred 	%p36, %p32, %p35;
+	and.b32 	%r32, %r3, 2139095040;
+	setp.eq.b32 	%p37, %r32, 0;
+	and.b32 	%r33, %r3, 8388607;
+	setp.ne.b32 	%p38, %r33, 0;
+	and.pred 	%p39, %p37, %p38;
+	and.pred 	%p40, %p36, %p39;
+	not.pred 	%p41, %p40;
+	@%p41 bra 	$L__BB1_7;
+	bra.uni 	$L__BB1_6;
+$L__BB1_6:
+	atom.global.add.u64 	%rd5, [fp_counters+40], 1;
+	bra.uni 	$L__BB1_7;
+$L__BB1_7:
 	ld.b64 	%rd6, [%SP+40];
-	ld.b32 	%r28, [%rd6];
+	.loc	4 20 19                         // tests/basic_tests/underflow/denormal.cu:20:19
+	st.b32 	[%rd6], %r3;
+	.loc	4 21 33                         // tests/basic_tests/underflow/denormal.cu:21:33
+	ld.b64 	%rd7, [%SP+40];
+	ld.b32 	%r34, [%rd7];
 	.loc	4 21 20                         // tests/basic_tests/underflow/denormal.cu:21:20
 	{ // callseq 0, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r28;
+	st.param.b32 	[param0], %r34;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r29, [retval0];
+	ld.param.b32 	%r35, [retval0];
 	} // callseq 0
-	and.b32 	%r30, %r29, 1;
+	and.b32 	%r36, %r35, 1;
 	.loc	4 21 9                          // tests/basic_tests/underflow/denormal.cu:21:9
-	ld.b64 	%rd7, [%SP+48];
+	ld.b64 	%rd8, [%SP+48];
 	.loc	4 21 18                         // tests/basic_tests/underflow/denormal.cu:21:18
-	st.b32 	[%rd7], %r30;
+	st.b32 	[%rd8], %r36;
 	.loc	4 22 5                          // tests/basic_tests/underflow/denormal.cu:22:5
-	bra.uni 	$L__BB1_6;
+	bra.uni 	$L__BB1_8;
 $L__tmp10:
-$L__BB1_6:                              // %if.end
+$L__BB1_8:                              // %if.end
 	.loc	4 24 9                          // tests/basic_tests/underflow/denormal.cu:24:9
-	ld.b32 	%r31, [%SP+56];
+	ld.b32 	%r37, [%SP+56];
 	.loc	4 24 13                         // tests/basic_tests/underflow/denormal.cu:24:13
-	setp.ne.b32 	%p30, %r31, 1;
-	@%p30 bra 	$L__BB1_14;
-	bra.uni 	$L__BB1_7;
-$L__BB1_7:                              // %if.then6
+	setp.ne.b32 	%p42, %r37, 1;
+	@%p42 bra 	$L__BB1_18;
+	bra.uni 	$L__BB1_9;
+$L__BB1_9:                              // %if.then6
 $L__tmp11:
 	.loc	4 26 31                         // tests/basic_tests/underflow/denormal.cu:26:31
-	ld.b32 	%r32, [%SP+60];
-	st.b32 	[%SP+16], %r32;
+	ld.b32 	%r38, [%SP+60];
+	st.b32 	[%SP+16], %r38;
 	st.b32 	[%SP+20], 1073741824;
 $L__tmp12:
 	.loc	6 307 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:307:23 @[ tests/basic_tests/underflow/denormal.cu:26:21 ]
@@ -209,130 +228,154 @@ $L__tmp12:
 	.loc	6 307 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:307:28 @[ tests/basic_tests/underflow/denormal.cu:26:21 ]
 	ld.b32 	%r5, [%SP+20];
 	.loc	6 307 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:307:10 @[ tests/basic_tests/underflow/denormal.cu:26:21 ]
-	and.b32 	%r33, %r4, 2139095040;
-	setp.eq.b32 	%p31, %r33, 2139095040;
-	and.b32 	%r34, %r4, 8388607;
-	setp.ne.b32 	%p32, %r34, 0;
-	and.b32 	%r35, %r4, 4194304;
-	setp.eq.b32 	%p33, %r35, 0;
-	and.pred 	%p34, %p31, %p33;
-	and.pred 	%p35, %p34, %p32;
-	and.b32 	%r36, %r5, 2139095040;
-	setp.eq.b32 	%p36, %r36, 2139095040;
-	and.b32 	%r37, %r5, 8388607;
-	setp.ne.b32 	%p37, %r37, 0;
-	and.b32 	%r38, %r5, 4194304;
-	setp.eq.b32 	%p38, %r38, 0;
-	and.pred 	%p39, %p36, %p38;
-	and.pred 	%p40, %p39, %p37;
-	or.pred 	%p41, %p35, %p40;
-	and.b32 	%r39, %r4, 2147483647;
-	setp.eq.b32 	%p42, %r39, 0;
-	setp.eq.b32 	%p43, %r37, 0;
-	and.pred 	%p44, %p36, %p43;
-	and.pred 	%p45, %p42, %p44;
-	setp.eq.b32 	%p46, %r34, 0;
-	and.pred 	%p47, %p31, %p46;
-	and.b32 	%r40, %r5, 2147483647;
-	setp.eq.b32 	%p48, %r40, 0;
-	and.pred 	%p49, %p47, %p48;
-	or.pred 	%p50, %p45, %p49;
-	or.pred 	%p51, %p41, %p50;
-	not.pred 	%p52, %p51;
-	@%p52 bra 	$L__BB1_9;
-	bra.uni 	$L__BB1_8;
-$L__BB1_8:
-	atom.global.add.u64 	%rd8, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB1_9;
-$L__BB1_9:
+	and.b32 	%r39, %r4, 2139095040;
+	setp.eq.b32 	%p43, %r39, 2139095040;
+	and.b32 	%r40, %r4, 8388607;
+	setp.ne.b32 	%p44, %r40, 0;
+	and.b32 	%r41, %r4, 4194304;
+	setp.eq.b32 	%p45, %r41, 0;
+	and.pred 	%p46, %p43, %p45;
+	and.pred 	%p47, %p46, %p44;
+	and.b32 	%r42, %r5, 2139095040;
+	setp.eq.b32 	%p48, %r42, 2139095040;
+	and.b32 	%r43, %r5, 8388607;
+	setp.ne.b32 	%p49, %r43, 0;
+	and.b32 	%r44, %r5, 4194304;
+	setp.eq.b32 	%p50, %r44, 0;
+	and.pred 	%p51, %p48, %p50;
+	and.pred 	%p52, %p51, %p49;
+	or.pred 	%p53, %p47, %p52;
+	and.b32 	%r45, %r4, 2147483647;
+	setp.eq.b32 	%p54, %r45, 0;
+	setp.eq.b32 	%p55, %r43, 0;
+	and.pred 	%p56, %p48, %p55;
+	and.pred 	%p57, %p54, %p56;
+	setp.eq.b32 	%p58, %r40, 0;
+	and.pred 	%p59, %p43, %p58;
+	and.b32 	%r46, %r5, 2147483647;
+	setp.eq.b32 	%p60, %r46, 0;
+	and.pred 	%p61, %p59, %p60;
+	or.pred 	%p62, %p57, %p61;
+	or.pred 	%p63, %p53, %p62;
+	not.pred 	%p64, %p63;
+	@%p64 bra 	$L__BB1_11;
+	bra.uni 	$L__BB1_10;
+$L__BB1_10:
+	atom.global.add.u64 	%rd9, [fp_counters], 1;
+	bra.uni 	$L__BB1_11;
+$L__BB1_11:
 	mul.rn.f32 	%r6, %r4, %r5;
 $L__tmp13:
 	.loc	4 26 9                          // tests/basic_tests/underflow/denormal.cu:26:9
-	and.b32 	%r41, %r4, 2139095040;
-	setp.ne.b32 	%p53, %r41, 2139095040;
-	and.b32 	%r42, %r5, 2139095040;
-	setp.ne.b32 	%p54, %r42, 2139095040;
-	and.pred 	%p55, %p53, %p54;
-	and.b32 	%r43, %r6, 2139095040;
-	setp.eq.b32 	%p56, %r43, 2139095040;
-	and.b32 	%r44, %r6, 8388607;
-	setp.eq.b32 	%p57, %r44, 0;
-	and.pred 	%p58, %p56, %p57;
-	and.pred 	%p59, %p55, %p58;
-	not.pred 	%p60, %p59;
-	@%p60 bra 	$L__BB1_11;
-	bra.uni 	$L__BB1_10;
-$L__BB1_10:
-	atom.global.add.u64 	%rd9, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB1_11;
-$L__BB1_11:
-	and.b32 	%r45, %r4, 2139095040;
-	setp.ne.b32 	%p61, %r45, 0;
-	and.b32 	%r46, %r4, 8388607;
-	setp.eq.b32 	%p62, %r46, 0;
-	or.pred 	%p63, %p61, %p62;
-	and.b32 	%r47, %r5, 2139095040;
-	setp.ne.b32 	%p64, %r47, 0;
-	and.b32 	%r48, %r5, 8388607;
-	setp.eq.b32 	%p65, %r48, 0;
-	or.pred 	%p66, %p64, %p65;
-	and.pred 	%p67, %p63, %p66;
+	and.b32 	%r47, %r4, 2139095040;
+	setp.ne.b32 	%p65, %r47, 2139095040;
+	and.b32 	%r48, %r5, 2139095040;
+	setp.ne.b32 	%p66, %r48, 2139095040;
+	and.pred 	%p67, %p65, %p66;
 	and.b32 	%r49, %r6, 2139095040;
-	setp.eq.b32 	%p68, %r49, 0;
+	setp.eq.b32 	%p68, %r49, 2139095040;
 	and.b32 	%r50, %r6, 8388607;
-	setp.ne.b32 	%p69, %r50, 0;
+	setp.eq.b32 	%p69, %r50, 0;
 	and.pred 	%p70, %p68, %p69;
-	and.b32 	%r51, %r6, 2147483647;
-	setp.eq.b32 	%p71, %r51, 0;
-	and.b32 	%r52, %r4, 2147483647;
-	setp.ne.b32 	%p72, %r52, 0;
-	and.b32 	%r53, %r5, 2147483647;
-	setp.ne.b32 	%p73, %r53, 0;
-	and.pred 	%p74, %p72, %p73;
-	and.pred 	%p75, %p71, %p74;
-	or.pred 	%p76, %p70, %p75;
-	and.pred 	%p77, %p67, %p76;
-	not.pred 	%p78, %p77;
-	@%p78 bra 	$L__BB1_13;
+	and.pred 	%p71, %p67, %p70;
+	not.pred 	%p72, %p71;
+	@%p72 bra 	$L__BB1_13;
 	bra.uni 	$L__BB1_12;
 $L__BB1_12:
-	atom.global.add.u64 	%rd10, [fp_underflow_counter], 1;
+	atom.global.add.u64 	%rd10, [fp_counters+16], 1;
 	bra.uni 	$L__BB1_13;
 $L__BB1_13:
-	ld.b64 	%rd11, [%SP+40];
+	and.b32 	%r51, %r4, 2139095040;
+	setp.ne.b32 	%p73, %r51, 0;
+	and.b32 	%r52, %r4, 8388607;
+	setp.eq.b32 	%p74, %r52, 0;
+	or.pred 	%p75, %p73, %p74;
+	and.b32 	%r53, %r5, 2139095040;
+	setp.ne.b32 	%p76, %r53, 0;
+	and.b32 	%r54, %r5, 8388607;
+	setp.eq.b32 	%p77, %r54, 0;
+	or.pred 	%p78, %p76, %p77;
+	and.pred 	%p79, %p75, %p78;
+	and.b32 	%r55, %r6, 2139095040;
+	setp.eq.b32 	%p80, %r55, 0;
+	and.b32 	%r56, %r6, 8388607;
+	setp.ne.b32 	%p81, %r56, 0;
+	and.pred 	%p82, %p80, %p81;
+	and.b32 	%r57, %r6, 2147483647;
+	setp.eq.b32 	%p83, %r57, 0;
+	and.b32 	%r58, %r4, 2147483647;
+	setp.ne.b32 	%p84, %r58, 0;
+	and.b32 	%r59, %r5, 2147483647;
+	setp.ne.b32 	%p85, %r59, 0;
+	and.pred 	%p86, %p84, %p85;
+	and.pred 	%p87, %p83, %p86;
+	or.pred 	%p88, %p82, %p87;
+	and.pred 	%p89, %p79, %p88;
+	not.pred 	%p90, %p89;
+	@%p90 bra 	$L__BB1_15;
+	bra.uni 	$L__BB1_14;
+$L__BB1_14:
+	atom.global.add.u64 	%rd11, [fp_counters+24], 1;
+	bra.uni 	$L__BB1_15;
+$L__BB1_15:
+	and.b32 	%r60, %r4, 2139095040;
+	setp.ne.b32 	%p91, %r60, 0;
+	and.b32 	%r61, %r4, 8388607;
+	setp.eq.b32 	%p92, %r61, 0;
+	or.pred 	%p93, %p91, %p92;
+	and.b32 	%r62, %r5, 2139095040;
+	setp.ne.b32 	%p94, %r62, 0;
+	and.b32 	%r63, %r5, 8388607;
+	setp.eq.b32 	%p95, %r63, 0;
+	or.pred 	%p96, %p94, %p95;
+	and.pred 	%p97, %p93, %p96;
+	and.b32 	%r64, %r6, 2139095040;
+	setp.eq.b32 	%p98, %r64, 0;
+	and.b32 	%r65, %r6, 8388607;
+	setp.ne.b32 	%p99, %r65, 0;
+	and.pred 	%p100, %p98, %p99;
+	and.pred 	%p101, %p97, %p100;
+	not.pred 	%p102, %p101;
+	@%p102 bra 	$L__BB1_17;
+	bra.uni 	$L__BB1_16;
+$L__BB1_16:
+	atom.global.add.u64 	%rd12, [fp_counters+40], 1;
+	bra.uni 	$L__BB1_17;
+$L__BB1_17:
+	ld.b64 	%rd13, [%SP+40];
 	.loc	4 26 19                         // tests/basic_tests/underflow/denormal.cu:26:19
-	st.b32 	[%rd11+4], %r6;
+	st.b32 	[%rd13+4], %r6;
 	.loc	4 27 33                         // tests/basic_tests/underflow/denormal.cu:27:33
-	ld.b64 	%rd12, [%SP+40];
-	ld.b32 	%r54, [%rd12+4];
+	ld.b64 	%rd14, [%SP+40];
+	ld.b32 	%r66, [%rd14+4];
 	.loc	4 27 20                         // tests/basic_tests/underflow/denormal.cu:27:20
 	{ // callseq 1, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r54;
+	st.param.b32 	[param0], %r66;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r55, [retval0];
+	ld.param.b32 	%r67, [retval0];
 	} // callseq 1
-	and.b32 	%r56, %r55, 1;
+	and.b32 	%r68, %r67, 1;
 	.loc	4 27 9                          // tests/basic_tests/underflow/denormal.cu:27:9
-	ld.b64 	%rd13, [%SP+48];
+	ld.b64 	%rd15, [%SP+48];
 	.loc	4 27 18                         // tests/basic_tests/underflow/denormal.cu:27:18
-	st.b32 	[%rd13+4], %r56;
+	st.b32 	[%rd15+4], %r68;
 	.loc	4 28 5                          // tests/basic_tests/underflow/denormal.cu:28:5
-	bra.uni 	$L__BB1_14;
+	bra.uni 	$L__BB1_18;
 $L__tmp14:
-$L__BB1_14:                             // %if.end13
+$L__BB1_18:                             // %if.end13
 	.loc	4 30 9                          // tests/basic_tests/underflow/denormal.cu:30:9
-	ld.b32 	%r57, [%SP+56];
+	ld.b32 	%r69, [%SP+56];
 	.loc	4 30 13                         // tests/basic_tests/underflow/denormal.cu:30:13
-	setp.ne.b32 	%p79, %r57, 2;
-	@%p79 bra 	$L__BB1_24;
-	bra.uni 	$L__BB1_15;
-$L__BB1_15:                             // %if.then15
+	setp.ne.b32 	%p103, %r69, 2;
+	@%p103 bra 	$L__BB1_30;
+	bra.uni 	$L__BB1_19;
+$L__BB1_19:                             // %if.then15
 $L__tmp15:
 	.loc	4 32 31                         // tests/basic_tests/underflow/denormal.cu:32:31
-	ld.b32 	%r58, [%SP+60];
-	st.b32 	[%SP+8], %r58;
+	ld.b32 	%r70, [%SP+60];
+	st.b32 	[%SP+8], %r70;
 	st.b32 	[%SP+12], 1069547520;
 $L__tmp16:
 	.loc	6 213 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:213:23 @[ tests/basic_tests/underflow/denormal.cu:32:21 ]
@@ -340,335 +383,383 @@ $L__tmp16:
 	.loc	6 213 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:213:28 @[ tests/basic_tests/underflow/denormal.cu:32:21 ]
 	ld.b32 	%r8, [%SP+12];
 	.loc	6 213 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:213:10 @[ tests/basic_tests/underflow/denormal.cu:32:21 ]
-	and.b32 	%r59, %r7, 2139095040;
-	setp.eq.b32 	%p80, %r59, 2139095040;
-	and.b32 	%r60, %r7, 8388607;
-	setp.ne.b32 	%p81, %r60, 0;
-	and.b32 	%r61, %r7, 4194304;
-	setp.eq.b32 	%p82, %r61, 0;
-	and.pred 	%p83, %p80, %p82;
-	and.pred 	%p84, %p83, %p81;
-	and.b32 	%r62, %r8, 2139095040;
-	setp.eq.b32 	%p85, %r62, 2139095040;
-	and.b32 	%r63, %r8, 8388607;
-	setp.ne.b32 	%p86, %r63, 0;
-	and.b32 	%r64, %r8, 4194304;
-	setp.eq.b32 	%p87, %r64, 0;
-	and.pred 	%p88, %p85, %p87;
-	and.pred 	%p89, %p88, %p86;
-	or.pred 	%p90, %p84, %p89;
-	or.b32 	%r65, %r7, %r8;
-	and.b32 	%r66, %r65, 2147483647;
-	setp.eq.b32 	%p91, %r66, 0;
-	setp.eq.b32 	%p92, %r60, 0;
-	and.pred 	%p93, %p80, %p92;
-	setp.eq.b32 	%p94, %r63, 0;
-	and.pred 	%p95, %p85, %p94;
-	and.pred 	%p96, %p93, %p95;
-	or.pred 	%p97, %p91, %p96;
-	or.pred 	%p98, %p90, %p97;
-	not.pred 	%p99, %p98;
-	@%p99 bra 	$L__BB1_17;
-	bra.uni 	$L__BB1_16;
-$L__BB1_16:
-	atom.global.add.u64 	%rd14, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB1_17;
-$L__BB1_17:
-	and.b32 	%r67, %r8, 2147483647;
-	setp.ne.b32 	%p100, %r67, 0;
-	and.b32 	%r68, %r7, 2139095040;
-	setp.eq.b32 	%p101, %r68, 2139095040;
-	and.b32 	%r69, %r7, 2147483647;
-	setp.eq.b32 	%p102, %r69, 0;
-	or.pred 	%p103, %p101, %p102;
-	or.pred 	%p104, %p100, %p103;
-	@%p104 bra 	$L__BB1_19;
-	bra.uni 	$L__BB1_18;
-$L__BB1_18:
-	atom.global.add.u64 	%rd15, [fp_divbyzero_counter], 1;
-	bra.uni 	$L__BB1_19;
-$L__BB1_19:
+	and.b32 	%r71, %r7, 2139095040;
+	setp.eq.b32 	%p104, %r71, 2139095040;
+	and.b32 	%r72, %r7, 8388607;
+	setp.ne.b32 	%p105, %r72, 0;
+	and.b32 	%r73, %r7, 4194304;
+	setp.eq.b32 	%p106, %r73, 0;
+	and.pred 	%p107, %p104, %p106;
+	and.pred 	%p108, %p107, %p105;
+	and.b32 	%r74, %r8, 2139095040;
+	setp.eq.b32 	%p109, %r74, 2139095040;
+	and.b32 	%r75, %r8, 8388607;
+	setp.ne.b32 	%p110, %r75, 0;
+	and.b32 	%r76, %r8, 4194304;
+	setp.eq.b32 	%p111, %r76, 0;
+	and.pred 	%p112, %p109, %p111;
+	and.pred 	%p113, %p112, %p110;
+	or.pred 	%p114, %p108, %p113;
+	or.b32 	%r77, %r7, %r8;
+	and.b32 	%r78, %r77, 2147483647;
+	setp.eq.b32 	%p115, %r78, 0;
+	setp.eq.b32 	%p116, %r72, 0;
+	and.pred 	%p117, %p104, %p116;
+	setp.eq.b32 	%p118, %r75, 0;
+	and.pred 	%p119, %p109, %p118;
+	and.pred 	%p120, %p117, %p119;
+	or.pred 	%p121, %p115, %p120;
+	or.pred 	%p122, %p114, %p121;
+	not.pred 	%p123, %p122;
+	@%p123 bra 	$L__BB1_21;
+	bra.uni 	$L__BB1_20;
+$L__BB1_20:
+	atom.global.add.u64 	%rd16, [fp_counters], 1;
+	bra.uni 	$L__BB1_21;
+$L__BB1_21:
+	and.b32 	%r79, %r8, 2147483647;
+	setp.ne.b32 	%p124, %r79, 0;
+	and.b32 	%r80, %r7, 2139095040;
+	setp.eq.b32 	%p125, %r80, 2139095040;
+	and.b32 	%r81, %r7, 2147483647;
+	setp.eq.b32 	%p126, %r81, 0;
+	or.pred 	%p127, %p125, %p126;
+	or.pred 	%p128, %p124, %p127;
+	@%p128 bra 	$L__BB1_23;
+	bra.uni 	$L__BB1_22;
+$L__BB1_22:
+	atom.global.add.u64 	%rd17, [fp_counters+8], 1;
+	bra.uni 	$L__BB1_23;
+$L__BB1_23:
 	div.rn.f32 	%r9, %r7, %r8;
 $L__tmp17:
 	.loc	4 32 9                          // tests/basic_tests/underflow/denormal.cu:32:9
-	and.b32 	%r70, %r7, 2139095040;
-	setp.ne.b32 	%p105, %r70, 2139095040;
-	and.b32 	%r71, %r8, 2139095040;
-	setp.ne.b32 	%p106, %r71, 2139095040;
-	and.pred 	%p107, %p105, %p106;
-	and.b32 	%r72, %r8, 2147483647;
-	setp.ne.b32 	%p108, %r72, 0;
-	and.pred 	%p109, %p107, %p108;
-	and.b32 	%r73, %r9, 2139095040;
-	setp.eq.b32 	%p110, %r73, 2139095040;
-	and.b32 	%r74, %r9, 8388607;
-	setp.eq.b32 	%p111, %r74, 0;
-	and.pred 	%p112, %p110, %p111;
-	and.pred 	%p113, %p109, %p112;
-	not.pred 	%p114, %p113;
-	@%p114 bra 	$L__BB1_21;
-	bra.uni 	$L__BB1_20;
-$L__BB1_20:
-	atom.global.add.u64 	%rd16, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB1_21;
-$L__BB1_21:
-	and.b32 	%r75, %r7, 2139095040;
-	setp.ne.b32 	%p115, %r75, 0;
-	and.b32 	%r76, %r7, 8388607;
-	setp.eq.b32 	%p116, %r76, 0;
-	or.pred 	%p117, %p115, %p116;
-	and.b32 	%r77, %r8, 2139095040;
-	setp.ne.b32 	%p118, %r77, 0;
-	and.b32 	%r78, %r8, 8388607;
-	setp.eq.b32 	%p119, %r78, 0;
-	or.pred 	%p120, %p118, %p119;
-	and.pred 	%p121, %p117, %p120;
-	and.b32 	%r79, %r9, 2139095040;
-	setp.eq.b32 	%p122, %r79, 0;
-	and.b32 	%r80, %r9, 8388607;
-	setp.ne.b32 	%p123, %r80, 0;
-	and.pred 	%p124, %p122, %p123;
-	and.b32 	%r81, %r9, 2147483647;
-	setp.eq.b32 	%p125, %r81, 0;
-	and.b32 	%r82, %r7, 2147483647;
-	setp.ne.b32 	%p126, %r82, 0;
-	and.b32 	%r83, %r8, 2147483647;
-	setp.ne.b32 	%p127, %r83, 0;
-	and.pred 	%p128, %p126, %p127;
-	and.pred 	%p129, %p125, %p128;
-	or.pred 	%p130, %p124, %p129;
-	and.pred 	%p131, %p121, %p130;
-	not.pred 	%p132, %p131;
-	@%p132 bra 	$L__BB1_23;
-	bra.uni 	$L__BB1_22;
-$L__BB1_22:
-	atom.global.add.u64 	%rd17, [fp_underflow_counter], 1;
-	bra.uni 	$L__BB1_23;
-$L__BB1_23:
-	ld.b64 	%rd18, [%SP+40];
+	and.b32 	%r82, %r7, 2139095040;
+	setp.ne.b32 	%p129, %r82, 2139095040;
+	and.b32 	%r83, %r8, 2139095040;
+	setp.ne.b32 	%p130, %r83, 2139095040;
+	and.pred 	%p131, %p129, %p130;
+	and.b32 	%r84, %r8, 2147483647;
+	setp.ne.b32 	%p132, %r84, 0;
+	and.pred 	%p133, %p131, %p132;
+	and.b32 	%r85, %r9, 2139095040;
+	setp.eq.b32 	%p134, %r85, 2139095040;
+	and.b32 	%r86, %r9, 8388607;
+	setp.eq.b32 	%p135, %r86, 0;
+	and.pred 	%p136, %p134, %p135;
+	and.pred 	%p137, %p133, %p136;
+	not.pred 	%p138, %p137;
+	@%p138 bra 	$L__BB1_25;
+	bra.uni 	$L__BB1_24;
+$L__BB1_24:
+	atom.global.add.u64 	%rd18, [fp_counters+16], 1;
+	bra.uni 	$L__BB1_25;
+$L__BB1_25:
+	and.b32 	%r87, %r7, 2139095040;
+	setp.ne.b32 	%p139, %r87, 0;
+	and.b32 	%r88, %r7, 8388607;
+	setp.eq.b32 	%p140, %r88, 0;
+	or.pred 	%p141, %p139, %p140;
+	and.b32 	%r89, %r8, 2139095040;
+	setp.ne.b32 	%p142, %r89, 0;
+	and.b32 	%r90, %r8, 8388607;
+	setp.eq.b32 	%p143, %r90, 0;
+	or.pred 	%p144, %p142, %p143;
+	and.pred 	%p145, %p141, %p144;
+	and.b32 	%r91, %r9, 2139095040;
+	setp.eq.b32 	%p146, %r91, 0;
+	and.b32 	%r92, %r9, 8388607;
+	setp.ne.b32 	%p147, %r92, 0;
+	and.pred 	%p148, %p146, %p147;
+	and.b32 	%r93, %r9, 2147483647;
+	setp.eq.b32 	%p149, %r93, 0;
+	and.b32 	%r94, %r7, 2147483647;
+	setp.ne.b32 	%p150, %r94, 0;
+	and.b32 	%r95, %r8, 2147483647;
+	setp.ne.b32 	%p151, %r95, 0;
+	and.pred 	%p152, %p150, %p151;
+	and.pred 	%p153, %p149, %p152;
+	or.pred 	%p154, %p148, %p153;
+	and.pred 	%p155, %p145, %p154;
+	not.pred 	%p156, %p155;
+	@%p156 bra 	$L__BB1_27;
+	bra.uni 	$L__BB1_26;
+$L__BB1_26:
+	atom.global.add.u64 	%rd19, [fp_counters+24], 1;
+	bra.uni 	$L__BB1_27;
+$L__BB1_27:
+	and.b32 	%r96, %r7, 2139095040;
+	setp.ne.b32 	%p157, %r96, 0;
+	and.b32 	%r97, %r7, 8388607;
+	setp.eq.b32 	%p158, %r97, 0;
+	or.pred 	%p159, %p157, %p158;
+	and.b32 	%r98, %r8, 2139095040;
+	setp.ne.b32 	%p160, %r98, 0;
+	and.b32 	%r99, %r8, 8388607;
+	setp.eq.b32 	%p161, %r99, 0;
+	or.pred 	%p162, %p160, %p161;
+	and.pred 	%p163, %p159, %p162;
+	and.b32 	%r100, %r9, 2139095040;
+	setp.eq.b32 	%p164, %r100, 0;
+	and.b32 	%r101, %r9, 8388607;
+	setp.ne.b32 	%p165, %r101, 0;
+	and.pred 	%p166, %p164, %p165;
+	and.pred 	%p167, %p163, %p166;
+	not.pred 	%p168, %p167;
+	@%p168 bra 	$L__BB1_29;
+	bra.uni 	$L__BB1_28;
+$L__BB1_28:
+	atom.global.add.u64 	%rd20, [fp_counters+40], 1;
+	bra.uni 	$L__BB1_29;
+$L__BB1_29:
+	ld.b64 	%rd21, [%SP+40];
 	.loc	4 32 19                         // tests/basic_tests/underflow/denormal.cu:32:19
-	st.b32 	[%rd18+8], %r9;
+	st.b32 	[%rd21+8], %r9;
 	.loc	4 33 33                         // tests/basic_tests/underflow/denormal.cu:33:33
-	ld.b64 	%rd19, [%SP+40];
-	ld.b32 	%r84, [%rd19+8];
+	ld.b64 	%rd22, [%SP+40];
+	ld.b32 	%r102, [%rd22+8];
 	.loc	4 33 20                         // tests/basic_tests/underflow/denormal.cu:33:20
 	{ // callseq 2, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r84;
+	st.param.b32 	[param0], %r102;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r85, [retval0];
+	ld.param.b32 	%r103, [retval0];
 	} // callseq 2
-	and.b32 	%r86, %r85, 1;
+	and.b32 	%r104, %r103, 1;
 	.loc	4 33 9                          // tests/basic_tests/underflow/denormal.cu:33:9
-	ld.b64 	%rd20, [%SP+48];
+	ld.b64 	%rd23, [%SP+48];
 	.loc	4 33 18                         // tests/basic_tests/underflow/denormal.cu:33:18
-	st.b32 	[%rd20+8], %r86;
+	st.b32 	[%rd23+8], %r104;
 	.loc	4 34 5                          // tests/basic_tests/underflow/denormal.cu:34:5
-	bra.uni 	$L__BB1_24;
+	bra.uni 	$L__BB1_30;
 $L__tmp18:
-$L__BB1_24:                             // %if.end22
+$L__BB1_30:                             // %if.end22
 	.loc	4 36 9                          // tests/basic_tests/underflow/denormal.cu:36:9
-	ld.b32 	%r87, [%SP+56];
+	ld.b32 	%r105, [%SP+56];
 	.loc	4 36 13                         // tests/basic_tests/underflow/denormal.cu:36:13
-	setp.ne.b32 	%p133, %r87, 3;
-	@%p133 bra 	$L__BB1_35;
-	bra.uni 	$L__BB1_25;
-$L__BB1_25:                             // %if.then24
+	setp.ne.b32 	%p169, %r105, 3;
+	@%p169 bra 	$L__BB1_43;
+	bra.uni 	$L__BB1_31;
+$L__BB1_31:                             // %if.then24
 $L__tmp19:
 	.loc	4 38 31                         // tests/basic_tests/underflow/denormal.cu:38:31
-	ld.b32 	%r88, [%SP+60];
-	st.b32 	[%SP+24], %r88;
-	st.b32 	[%SP+28], %r88;
+	ld.b32 	%r106, [%SP+60];
+	st.b32 	[%SP+24], %r106;
+	st.b32 	[%SP+28], %r106;
 $L__tmp20:
 	.loc	6 307 23                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:307:23 @[ tests/basic_tests/underflow/denormal.cu:38:21 ]
 	ld.b32 	%r10, [%SP+24];
 	.loc	6 307 28                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:307:28 @[ tests/basic_tests/underflow/denormal.cu:38:21 ]
 	ld.b32 	%r11, [%SP+28];
 	.loc	6 307 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:307:10 @[ tests/basic_tests/underflow/denormal.cu:38:21 ]
-	and.b32 	%r89, %r10, 2139095040;
-	setp.eq.b32 	%p134, %r89, 2139095040;
-	and.b32 	%r90, %r10, 8388607;
-	setp.ne.b32 	%p135, %r90, 0;
-	and.b32 	%r91, %r10, 4194304;
-	setp.eq.b32 	%p136, %r91, 0;
-	and.pred 	%p137, %p134, %p136;
-	and.pred 	%p138, %p137, %p135;
-	and.b32 	%r92, %r11, 2139095040;
-	setp.eq.b32 	%p139, %r92, 2139095040;
-	and.b32 	%r93, %r11, 8388607;
-	setp.ne.b32 	%p140, %r93, 0;
-	and.b32 	%r94, %r11, 4194304;
-	setp.eq.b32 	%p141, %r94, 0;
-	and.pred 	%p142, %p139, %p141;
-	and.pred 	%p143, %p142, %p140;
-	or.pred 	%p144, %p138, %p143;
-	and.b32 	%r95, %r10, 2147483647;
-	setp.eq.b32 	%p145, %r95, 0;
-	setp.eq.b32 	%p146, %r93, 0;
-	and.pred 	%p147, %p139, %p146;
-	and.pred 	%p148, %p145, %p147;
-	setp.eq.b32 	%p149, %r90, 0;
-	and.pred 	%p150, %p134, %p149;
-	and.b32 	%r96, %r11, 2147483647;
-	setp.eq.b32 	%p151, %r96, 0;
-	and.pred 	%p152, %p150, %p151;
-	or.pred 	%p153, %p148, %p152;
-	or.pred 	%p154, %p144, %p153;
-	not.pred 	%p155, %p154;
-	@%p155 bra 	$L__BB1_27;
-	bra.uni 	$L__BB1_26;
-$L__BB1_26:
-	atom.global.add.u64 	%rd21, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB1_27;
-$L__BB1_27:
+	and.b32 	%r107, %r10, 2139095040;
+	setp.eq.b32 	%p170, %r107, 2139095040;
+	and.b32 	%r108, %r10, 8388607;
+	setp.ne.b32 	%p171, %r108, 0;
+	and.b32 	%r109, %r10, 4194304;
+	setp.eq.b32 	%p172, %r109, 0;
+	and.pred 	%p173, %p170, %p172;
+	and.pred 	%p174, %p173, %p171;
+	and.b32 	%r110, %r11, 2139095040;
+	setp.eq.b32 	%p175, %r110, 2139095040;
+	and.b32 	%r111, %r11, 8388607;
+	setp.ne.b32 	%p176, %r111, 0;
+	and.b32 	%r112, %r11, 4194304;
+	setp.eq.b32 	%p177, %r112, 0;
+	and.pred 	%p178, %p175, %p177;
+	and.pred 	%p179, %p178, %p176;
+	or.pred 	%p180, %p174, %p179;
+	and.b32 	%r113, %r10, 2147483647;
+	setp.eq.b32 	%p181, %r113, 0;
+	setp.eq.b32 	%p182, %r111, 0;
+	and.pred 	%p183, %p175, %p182;
+	and.pred 	%p184, %p181, %p183;
+	setp.eq.b32 	%p185, %r108, 0;
+	and.pred 	%p186, %p170, %p185;
+	and.b32 	%r114, %r11, 2147483647;
+	setp.eq.b32 	%p187, %r114, 0;
+	and.pred 	%p188, %p186, %p187;
+	or.pred 	%p189, %p184, %p188;
+	or.pred 	%p190, %p180, %p189;
+	not.pred 	%p191, %p190;
+	@%p191 bra 	$L__BB1_33;
+	bra.uni 	$L__BB1_32;
+$L__BB1_32:
+	atom.global.add.u64 	%rd24, [fp_counters], 1;
+	bra.uni 	$L__BB1_33;
+$L__BB1_33:
 	mul.rn.f32 	%r12, %r10, %r11;
 $L__tmp21:
 	.loc	4 38 9                          // tests/basic_tests/underflow/denormal.cu:38:9
-	and.b32 	%r97, %r10, 2139095040;
-	setp.ne.b32 	%p156, %r97, 2139095040;
-	and.b32 	%r98, %r11, 2139095040;
-	setp.ne.b32 	%p157, %r98, 2139095040;
-	and.pred 	%p158, %p156, %p157;
-	and.b32 	%r99, %r12, 2139095040;
-	setp.eq.b32 	%p159, %r99, 2139095040;
-	and.b32 	%r100, %r12, 8388607;
-	setp.eq.b32 	%p160, %r100, 0;
-	and.pred 	%p161, %p159, %p160;
-	and.pred 	%p162, %p158, %p161;
-	not.pred 	%p163, %p162;
-	@%p163 bra 	$L__BB1_29;
-	bra.uni 	$L__BB1_28;
-$L__BB1_28:
-	atom.global.add.u64 	%rd22, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB1_29;
-$L__BB1_29:
-	and.b32 	%r101, %r10, 2139095040;
-	setp.ne.b32 	%p164, %r101, 0;
-	and.b32 	%r102, %r10, 8388607;
-	setp.eq.b32 	%p165, %r102, 0;
-	or.pred 	%p166, %p164, %p165;
-	and.b32 	%r103, %r11, 2139095040;
-	setp.ne.b32 	%p167, %r103, 0;
-	and.b32 	%r104, %r11, 8388607;
-	setp.eq.b32 	%p168, %r104, 0;
-	or.pred 	%p169, %p167, %p168;
-	and.pred 	%p170, %p166, %p169;
-	and.b32 	%r105, %r12, 2139095040;
-	setp.eq.b32 	%p171, %r105, 0;
-	and.b32 	%r106, %r12, 8388607;
-	setp.ne.b32 	%p172, %r106, 0;
-	and.pred 	%p173, %p171, %p172;
-	and.b32 	%r107, %r12, 2147483647;
-	setp.eq.b32 	%p174, %r107, 0;
-	and.b32 	%r108, %r10, 2147483647;
-	setp.ne.b32 	%p175, %r108, 0;
-	and.b32 	%r109, %r11, 2147483647;
-	setp.ne.b32 	%p176, %r109, 0;
-	and.pred 	%p177, %p175, %p176;
-	and.pred 	%p178, %p174, %p177;
-	or.pred 	%p179, %p173, %p178;
-	and.pred 	%p180, %p170, %p179;
-	not.pred 	%p181, %p180;
-	@%p181 bra 	$L__BB1_31;
-	bra.uni 	$L__BB1_30;
-$L__BB1_30:
-	atom.global.add.u64 	%rd23, [fp_underflow_counter], 1;
-	bra.uni 	$L__BB1_31;
-$L__BB1_31:
-	ld.b64 	%rd24, [%SP+40];
+	and.b32 	%r115, %r10, 2139095040;
+	setp.ne.b32 	%p192, %r115, 2139095040;
+	and.b32 	%r116, %r11, 2139095040;
+	setp.ne.b32 	%p193, %r116, 2139095040;
+	and.pred 	%p194, %p192, %p193;
+	and.b32 	%r117, %r12, 2139095040;
+	setp.eq.b32 	%p195, %r117, 2139095040;
+	and.b32 	%r118, %r12, 8388607;
+	setp.eq.b32 	%p196, %r118, 0;
+	and.pred 	%p197, %p195, %p196;
+	and.pred 	%p198, %p194, %p197;
+	not.pred 	%p199, %p198;
+	@%p199 bra 	$L__BB1_35;
+	bra.uni 	$L__BB1_34;
+$L__BB1_34:
+	atom.global.add.u64 	%rd25, [fp_counters+16], 1;
+	bra.uni 	$L__BB1_35;
+$L__BB1_35:
+	and.b32 	%r119, %r10, 2139095040;
+	setp.ne.b32 	%p200, %r119, 0;
+	and.b32 	%r120, %r10, 8388607;
+	setp.eq.b32 	%p201, %r120, 0;
+	or.pred 	%p202, %p200, %p201;
+	and.b32 	%r121, %r11, 2139095040;
+	setp.ne.b32 	%p203, %r121, 0;
+	and.b32 	%r122, %r11, 8388607;
+	setp.eq.b32 	%p204, %r122, 0;
+	or.pred 	%p205, %p203, %p204;
+	and.pred 	%p206, %p202, %p205;
+	and.b32 	%r123, %r12, 2139095040;
+	setp.eq.b32 	%p207, %r123, 0;
+	and.b32 	%r124, %r12, 8388607;
+	setp.ne.b32 	%p208, %r124, 0;
+	and.pred 	%p209, %p207, %p208;
+	and.b32 	%r125, %r12, 2147483647;
+	setp.eq.b32 	%p210, %r125, 0;
+	and.b32 	%r126, %r10, 2147483647;
+	setp.ne.b32 	%p211, %r126, 0;
+	and.b32 	%r127, %r11, 2147483647;
+	setp.ne.b32 	%p212, %r127, 0;
+	and.pred 	%p213, %p211, %p212;
+	and.pred 	%p214, %p210, %p213;
+	or.pred 	%p215, %p209, %p214;
+	and.pred 	%p216, %p206, %p215;
+	not.pred 	%p217, %p216;
+	@%p217 bra 	$L__BB1_37;
+	bra.uni 	$L__BB1_36;
+$L__BB1_36:
+	atom.global.add.u64 	%rd26, [fp_counters+24], 1;
+	bra.uni 	$L__BB1_37;
+$L__BB1_37:
+	and.b32 	%r128, %r10, 2139095040;
+	setp.ne.b32 	%p218, %r128, 0;
+	and.b32 	%r129, %r10, 8388607;
+	setp.eq.b32 	%p219, %r129, 0;
+	or.pred 	%p220, %p218, %p219;
+	and.b32 	%r130, %r11, 2139095040;
+	setp.ne.b32 	%p221, %r130, 0;
+	and.b32 	%r131, %r11, 8388607;
+	setp.eq.b32 	%p222, %r131, 0;
+	or.pred 	%p223, %p221, %p222;
+	and.pred 	%p224, %p220, %p223;
+	and.b32 	%r132, %r12, 2139095040;
+	setp.eq.b32 	%p225, %r132, 0;
+	and.b32 	%r133, %r12, 8388607;
+	setp.ne.b32 	%p226, %r133, 0;
+	and.pred 	%p227, %p225, %p226;
+	and.pred 	%p228, %p224, %p227;
+	not.pred 	%p229, %p228;
+	@%p229 bra 	$L__BB1_39;
+	bra.uni 	$L__BB1_38;
+$L__BB1_38:
+	atom.global.add.u64 	%rd27, [fp_counters+40], 1;
+	bra.uni 	$L__BB1_39;
+$L__BB1_39:
+	ld.b64 	%rd28, [%SP+40];
 	.loc	4 38 19                         // tests/basic_tests/underflow/denormal.cu:38:19
-	st.b32 	[%rd24+12], %r12;
+	st.b32 	[%rd28+12], %r12;
 	.loc	4 39 33                         // tests/basic_tests/underflow/denormal.cu:39:33
-	ld.b64 	%rd25, [%SP+40];
-	ld.b32 	%r110, [%rd25+12];
+	ld.b64 	%rd29, [%SP+40];
+	ld.b32 	%r134, [%rd29+12];
 	.loc	4 39 20                         // tests/basic_tests/underflow/denormal.cu:39:20
 	{ // callseq 3, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r110;
+	st.param.b32 	[param0], %r134;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r111, [retval0];
+	ld.param.b32 	%r135, [retval0];
 	} // callseq 3
-	and.b32 	%r112, %r111, 1;
-	setp.ne.b32 	%p182, %r112, 0;
-	not.pred 	%p183, %p182;
-	@%p183 bra 	$L__BB1_33;
-	bra.uni 	$L__BB1_32;
-$L__BB1_32:                             // %cond.true
+	and.b32 	%r136, %r135, 1;
+	setp.ne.b32 	%p230, %r136, 0;
+	not.pred 	%p231, %p230;
+	@%p231 bra 	$L__BB1_41;
+	bra.uni 	$L__BB1_40;
+$L__BB1_40:                             // %cond.true
 	.loc	4 0 20                          // tests/basic_tests/underflow/denormal.cu:0:20
-	mov.b32 	%r123, 1;
+	mov.b32 	%r147, 1;
 	.loc	4 39 20                         // tests/basic_tests/underflow/denormal.cu:39:20
-	bra.uni 	$L__BB1_34;
-$L__BB1_33:                             // %cond.false
+	bra.uni 	$L__BB1_42;
+$L__BB1_41:                             // %cond.false
 	.loc	4 39 51                         // tests/basic_tests/underflow/denormal.cu:39:51
-	ld.b64 	%rd26, [%SP+40];
-	ld.b32 	%r113, [%rd26+12];
+	ld.b64 	%rd30, [%SP+40];
+	ld.b32 	%r137, [%rd30+12];
 	.loc	4 39 61                         // tests/basic_tests/underflow/denormal.cu:39:61
-	setp.eq.f32 	%p184, %r113, 0f00000000;
+	setp.eq.f32 	%p232, %r137, 0f00000000;
 	.loc	4 39 51                         // tests/basic_tests/underflow/denormal.cu:39:51
-	selp.b32 	%r123, 2, 0, %p184;
+	selp.b32 	%r147, 2, 0, %p232;
 	.loc	4 39 20                         // tests/basic_tests/underflow/denormal.cu:39:20
-	bra.uni 	$L__BB1_34;
-$L__BB1_34:                             // %cond.end
+	bra.uni 	$L__BB1_42;
+$L__BB1_42:                             // %cond.end
 	.loc	4 39 9                          // tests/basic_tests/underflow/denormal.cu:39:9
-	ld.b64 	%rd27, [%SP+48];
+	ld.b64 	%rd31, [%SP+48];
 	.loc	4 39 18                         // tests/basic_tests/underflow/denormal.cu:39:18
-	st.b32 	[%rd27+12], %r123;
+	st.b32 	[%rd31+12], %r147;
 	.loc	4 40 5                          // tests/basic_tests/underflow/denormal.cu:40:5
-	bra.uni 	$L__BB1_35;
+	bra.uni 	$L__BB1_43;
 $L__tmp22:
-$L__BB1_35:                             // %if.end34
+$L__BB1_43:                             // %if.end34
 	.loc	4 42 9                          // tests/basic_tests/underflow/denormal.cu:42:9
-	ld.b32 	%r114, [%SP+56];
+	ld.b32 	%r138, [%SP+56];
 	.loc	4 42 13                         // tests/basic_tests/underflow/denormal.cu:42:13
-	setp.ne.b32 	%p185, %r114, 4;
-	@%p185 bra 	$L__BB1_37;
-	bra.uni 	$L__BB1_36;
-$L__BB1_36:                             // %if.then36
+	setp.ne.b32 	%p233, %r138, 4;
+	@%p233 bra 	$L__BB1_45;
+	bra.uni 	$L__BB1_44;
+$L__BB1_44:                             // %if.then36
 $L__tmp23:
 	.loc	4 44 15                         // tests/basic_tests/underflow/denormal.cu:44:15
 	st.b32 	[%SP+64], 12582912;
 	.loc	4 45 15                         // tests/basic_tests/underflow/denormal.cu:45:15
 	st.b32 	[%SP+68], 8388608;
 	.loc	4 46 31                         // tests/basic_tests/underflow/denormal.cu:46:31
-	ld.b32 	%r118, [%SP+64];
+	ld.b32 	%r142, [%SP+64];
 	.loc	4 46 34                         // tests/basic_tests/underflow/denormal.cu:46:34
-	ld.b32 	%r119, [%SP+68];
-	st.b32 	[%SP], %r118;
-	st.b32 	[%SP+4], %r119;
+	ld.b32 	%r143, [%SP+68];
+	st.b32 	[%SP], %r142;
+	st.b32 	[%SP+4], %r143;
 $L__tmp24:
 	.loc	6 328 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_device_functions.h:328:10 @[ tests/basic_tests/underflow/denormal.cu:46:21 ]
-	ld.b32 	%r116, [%SP];
-	ld.b32 	%r117, [%SP+4];
+	ld.b32 	%r140, [%SP];
+	ld.b32 	%r141, [%SP+4];
 	// begin inline asm
-	sub.rn.f32 %r115, %r116, %r117;
+	sub.rn.f32 %r139, %r140, %r141;
 	// end inline asm
 $L__tmp25:
 	.loc	4 46 9                          // tests/basic_tests/underflow/denormal.cu:46:9
-	ld.b64 	%rd28, [%SP+40];
+	ld.b64 	%rd32, [%SP+40];
 	.loc	4 46 19                         // tests/basic_tests/underflow/denormal.cu:46:19
-	st.b32 	[%rd28+16], %r115;
+	st.b32 	[%rd32+16], %r139;
 	.loc	4 47 33                         // tests/basic_tests/underflow/denormal.cu:47:33
-	ld.b64 	%rd29, [%SP+40];
-	ld.b32 	%r120, [%rd29+16];
+	ld.b64 	%rd33, [%SP+40];
+	ld.b32 	%r144, [%rd33+16];
 	.loc	4 47 20                         // tests/basic_tests/underflow/denormal.cu:47:20
 	{ // callseq 4, 0
 	.param .b32 	param0;
 	.param .b32 	retval0;
-	st.param.b32 	[param0], %r120;
+	st.param.b32 	[param0], %r144;
 	call.uni (retval0), _Z12is_subnormalf, (param0);
-	ld.param.b32 	%r121, [retval0];
+	ld.param.b32 	%r145, [retval0];
 	} // callseq 4
-	and.b32 	%r122, %r121, 1;
+	and.b32 	%r146, %r145, 1;
 	.loc	4 47 9                          // tests/basic_tests/underflow/denormal.cu:47:9
-	ld.b64 	%rd30, [%SP+48];
+	ld.b64 	%rd34, [%SP+48];
 	.loc	4 47 18                         // tests/basic_tests/underflow/denormal.cu:47:18
-	st.b32 	[%rd30+16], %r122;
+	st.b32 	[%rd34+16], %r146;
 	.loc	4 48 5                          // tests/basic_tests/underflow/denormal.cu:48:5
-	bra.uni 	$L__BB1_37;
+	bra.uni 	$L__BB1_45;
 $L__tmp26:
-$L__BB1_37:                             // %if.end43
+$L__BB1_45:                             // %if.end43
 	.loc	4 49 1                          // tests/basic_tests/underflow/denormal.cu:49:1
 	ret;
 $L__tmp27:

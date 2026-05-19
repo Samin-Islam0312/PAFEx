@@ -1,11 +1,6 @@
 === Part 2: Device pipeline ===
 [FPPass] Running on device module: nvptx64-nvidia-cuda
-[FPPass] Declared device counter: fp_invalid_counter
-[FPPass] Declared device counter: fp_divbyzero_counter
-[FPPass] Declared device counter: fp_overflow_counter
-[FPPass] Declared device counter: fp_underflow_counter
-[FPPass] Declared device counter: fp_total_counter
-[FPPass] Declared device counter: fp_subnormal_counter
+[FPPass] Declared device counter array: fp_counters[6]
 [FPPass] Visiting function: _Z15testInvalidSqrtPf [KERNEL]
 [FPPass]   COLLECT sqrt @ _Z15testInvalidSqrtPf:318
 [FPPass]   COLLECT sqrt @ _Z15testInvalidSqrtPf:318
@@ -32,18 +27,7 @@
 [FPPass] SUMMARY: visited 1 functions, instrumented 7 instructions
 === Part 3: Host pipeline ===
 [HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD/results/invalid/sqrt/host.bc
-[HostPass] Created host shadow: fp_invalid_counter
-[HostPass] Created host shadow: fp_divbyzero_counter
-[HostPass] Created host shadow: fp_overflow_counter
-[HostPass] Created host shadow: fp_underflow_counter
-[HostPass] Created host shadow: fp_total_counter
-[HostPass] Created host shadow: fp_subnormal_counter
-[HostPass] Registered shadow: fp_invalid_counter
-[HostPass] Registered shadow: fp_divbyzero_counter
-[HostPass] Registered shadow: fp_overflow_counter
-[HostPass] Registered shadow: fp_underflow_counter
-[HostPass] Registered shadow: fp_total_counter
-[HostPass] Registered shadow: fp_subnormal_counter
+[HostPass] Created host shadow: fp_counters[6]
+[HostPass] Registered shadow: fp_counters[6] (48 bytes)
 [HostPass] Found main(), injecting PAPI lifecycle.
-[HostPass] Instrumented 1 kernel launches.
 === Part 4: Link ===

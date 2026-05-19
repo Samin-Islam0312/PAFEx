@@ -3,12 +3,7 @@ source_filename = "llvm-link"
 target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
 target triple = "nvptx64-nvidia-cuda"
 
-@fp_invalid_counter = addrspace(1) global i64 0, align 8
-@fp_divbyzero_counter = addrspace(1) global i64 0, align 8
-@fp_overflow_counter = addrspace(1) global i64 0, align 8
-@fp_underflow_counter = addrspace(1) global i64 0, align 8
-@fp_total_counter = addrspace(1) global i64 0, align 8
-@fp_subnormal_counter = addrspace(1) global i64 0, align 8
+@fp_counters = addrspace(1) global [6 x i64] zeroinitializer, align 8
 
 ; Function Attrs: convergent noinline nounwind optnone
 define dso_local noundef zeroext i1 @_Z12is_subnormalf(float noundef %x) #0 !dbg !956 {
@@ -125,7 +120,7 @@ for.body:                                         ; preds = %for.cond
   br i1 %40, label %41, label %43, !dbg !1004
 
 41:                                               ; preds = %for.body
-  %42 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !1004
+  %42 = atomicrmw add ptr addrspace(1) @fp_counters, i64 1 monotonic, align 8, !dbg !1004
   br label %43, !dbg !1004
 
 43:                                               ; preds = %for.body, %41
@@ -159,7 +154,7 @@ for.body:                                         ; preds = %for.cond
   br i1 %overflow_cond, label %61, label %63, !dbg !1004
 
 61:                                               ; preds = %43
-  %62 = atomicrmw add ptr addrspace(1) @fp_overflow_counter, i64 1 monotonic, align 8, !dbg !1004
+  %62 = atomicrmw add ptr addrspace(1) getelementptr inbounds ([6 x i64], ptr addrspace(1) @fp_counters, i32 0, i32 2), i64 1 monotonic, align 8, !dbg !1004
   br label %63, !dbg !1004
 
 63:                                               ; preds = %43, %61
@@ -203,107 +198,137 @@ for.body:                                         ; preds = %for.cond
   br i1 %underflow_cond, label %93, label %95, !dbg !1004
 
 93:                                               ; preds = %63
-  %94 = atomicrmw add ptr addrspace(1) @fp_underflow_counter, i64 1 monotonic, align 8, !dbg !1004
+  %94 = atomicrmw add ptr addrspace(1) getelementptr inbounds ([6 x i64], ptr addrspace(1) @fp_counters, i32 0, i32 3), i64 1 monotonic, align 8, !dbg !1004
   br label %95, !dbg !1004
 
 95:                                               ; preds = %63, %93
+  %96 = bitcast float %5 to i32, !dbg !1004
+  %97 = and i32 %96, 2139095040, !dbg !1004
+  %98 = icmp eq i32 %97, 0, !dbg !1004
+  %99 = and i32 %96, 8388607, !dbg !1004
+  %100 = icmp ne i32 %99, 0, !dbg !1004
+  %is_subnormal12 = and i1 %98, %100, !dbg !1004
+  %101 = xor i1 %is_subnormal12, true, !dbg !1004
+  %102 = and i1 true, %101, !dbg !1004
+  %103 = bitcast float %4 to i32, !dbg !1004
+  %104 = and i32 %103, 2139095040, !dbg !1004
+  %105 = icmp eq i32 %104, 0, !dbg !1004
+  %106 = and i32 %103, 8388607, !dbg !1004
+  %107 = icmp ne i32 %106, 0, !dbg !1004
+  %is_subnormal13 = and i1 %105, %107, !dbg !1004
+  %108 = xor i1 %is_subnormal13, true, !dbg !1004
+  %109 = and i1 %102, %108, !dbg !1004
+  %110 = bitcast float %mul to i32, !dbg !1004
+  %111 = and i32 %110, 2139095040, !dbg !1004
+  %112 = icmp eq i32 %111, 0, !dbg !1004
+  %113 = and i32 %110, 8388607, !dbg !1004
+  %114 = icmp ne i32 %113, 0, !dbg !1004
+  %is_subnormal14 = and i1 %112, %114, !dbg !1004
+  %subnormal_cond = and i1 %109, %is_subnormal14, !dbg !1004
+  br i1 %subnormal_cond, label %115, label %117, !dbg !1004
+
+115:                                              ; preds = %95
+  %116 = atomicrmw add ptr addrspace(1) getelementptr inbounds ([6 x i64], ptr addrspace(1) @fp_counters, i32 0, i32 5), i64 1 monotonic, align 8, !dbg !1004
+  br label %117, !dbg !1004
+
+117:                                              ; preds = %95, %115
   store float %mul, ptr %value, align 4, !dbg !1004
-  %96 = load float, ptr %value, align 4, !dbg !1005
-  %call2 = call noundef zeroext i1 @_Z12is_subnormalf(float noundef %96) #3, !dbg !1007
+  %118 = load float, ptr %value, align 4, !dbg !1005
+  %call2 = call noundef zeroext i1 @_Z12is_subnormalf(float noundef %118) #3, !dbg !1007
   br i1 %call2, label %land.lhs.true, label %if.end, !dbg !1008
 
-land.lhs.true:                                    ; preds = %95
-  %97 = load ptr, ptr %underflow_step.addr, align 8, !dbg !1009
-  %arrayidx = getelementptr inbounds i32, ptr %97, i64 0, !dbg !1009
-  %98 = load i32, ptr %arrayidx, align 4, !dbg !1009
-  %cmp3 = icmp eq i32 %98, 0, !dbg !1010
+land.lhs.true:                                    ; preds = %117
+  %119 = load ptr, ptr %underflow_step.addr, align 8, !dbg !1009
+  %arrayidx = getelementptr inbounds i32, ptr %119, i64 0, !dbg !1009
+  %120 = load i32, ptr %arrayidx, align 4, !dbg !1009
+  %cmp3 = icmp eq i32 %120, 0, !dbg !1010
   br i1 %cmp3, label %if.then4, label %if.end, !dbg !1008
 
 if.then4:                                         ; preds = %land.lhs.true
-  %99 = load i32, ptr %i, align 4, !dbg !1011
-  %100 = load ptr, ptr %underflow_step.addr, align 8, !dbg !1013
-  %arrayidx5 = getelementptr inbounds i32, ptr %100, i64 0, !dbg !1013
-  store i32 %99, ptr %arrayidx5, align 4, !dbg !1014
+  %121 = load i32, ptr %i, align 4, !dbg !1011
+  %122 = load ptr, ptr %underflow_step.addr, align 8, !dbg !1013
+  %arrayidx5 = getelementptr inbounds i32, ptr %122, i64 0, !dbg !1013
+  store i32 %121, ptr %arrayidx5, align 4, !dbg !1014
   br label %if.end, !dbg !1015
 
-if.end:                                           ; preds = %if.then4, %land.lhs.true, %95
-  %101 = load i32, ptr %i, align 4, !dbg !1016
-  %cmp6 = icmp eq i32 %101, 125, !dbg !1018
+if.end:                                           ; preds = %if.then4, %land.lhs.true, %117
+  %123 = load i32, ptr %i, align 4, !dbg !1016
+  %cmp6 = icmp eq i32 %123, 125, !dbg !1018
   br i1 %cmp6, label %if.then7, label %if.end9, !dbg !1018
 
 if.then7:                                         ; preds = %if.end
-  %102 = load float, ptr %value, align 4, !dbg !1019
-  %103 = load ptr, ptr %results.addr, align 8, !dbg !1020
-  %arrayidx8 = getelementptr inbounds float, ptr %103, i64 0, !dbg !1020
-  store float %102, ptr %arrayidx8, align 4, !dbg !1021
+  %124 = load float, ptr %value, align 4, !dbg !1019
+  %125 = load ptr, ptr %results.addr, align 8, !dbg !1020
+  %arrayidx8 = getelementptr inbounds float, ptr %125, i64 0, !dbg !1020
+  store float %124, ptr %arrayidx8, align 4, !dbg !1021
   br label %if.end9, !dbg !1020
 
 if.end9:                                          ; preds = %if.then7, %if.end
-  %104 = load i32, ptr %i, align 4, !dbg !1022
-  %cmp10 = icmp eq i32 %104, 130, !dbg !1024
+  %126 = load i32, ptr %i, align 4, !dbg !1022
+  %cmp10 = icmp eq i32 %126, 130, !dbg !1024
   br i1 %cmp10, label %if.then11, label %if.end13, !dbg !1024
 
 if.then11:                                        ; preds = %if.end9
-  %105 = load float, ptr %value, align 4, !dbg !1025
-  %106 = load ptr, ptr %results.addr, align 8, !dbg !1026
-  %arrayidx12 = getelementptr inbounds float, ptr %106, i64 1, !dbg !1026
-  store float %105, ptr %arrayidx12, align 4, !dbg !1027
+  %127 = load float, ptr %value, align 4, !dbg !1025
+  %128 = load ptr, ptr %results.addr, align 8, !dbg !1026
+  %arrayidx12 = getelementptr inbounds float, ptr %128, i64 1, !dbg !1026
+  store float %127, ptr %arrayidx12, align 4, !dbg !1027
   br label %if.end13, !dbg !1026
 
 if.end13:                                         ; preds = %if.then11, %if.end9
-  %107 = load i32, ptr %i, align 4, !dbg !1028
-  %cmp14 = icmp eq i32 %107, 135, !dbg !1030
+  %129 = load i32, ptr %i, align 4, !dbg !1028
+  %cmp14 = icmp eq i32 %129, 135, !dbg !1030
   br i1 %cmp14, label %if.then15, label %if.end17, !dbg !1030
 
 if.then15:                                        ; preds = %if.end13
-  %108 = load float, ptr %value, align 4, !dbg !1031
-  %109 = load ptr, ptr %results.addr, align 8, !dbg !1032
-  %arrayidx16 = getelementptr inbounds float, ptr %109, i64 2, !dbg !1032
-  store float %108, ptr %arrayidx16, align 4, !dbg !1033
+  %130 = load float, ptr %value, align 4, !dbg !1031
+  %131 = load ptr, ptr %results.addr, align 8, !dbg !1032
+  %arrayidx16 = getelementptr inbounds float, ptr %131, i64 2, !dbg !1032
+  store float %130, ptr %arrayidx16, align 4, !dbg !1033
   br label %if.end17, !dbg !1032
 
 if.end17:                                         ; preds = %if.then15, %if.end13
-  %110 = load i32, ptr %i, align 4, !dbg !1034
-  %cmp18 = icmp eq i32 %110, 140, !dbg !1036
+  %132 = load i32, ptr %i, align 4, !dbg !1034
+  %cmp18 = icmp eq i32 %132, 140, !dbg !1036
   br i1 %cmp18, label %if.then19, label %if.end21, !dbg !1036
 
 if.then19:                                        ; preds = %if.end17
-  %111 = load float, ptr %value, align 4, !dbg !1037
-  %112 = load ptr, ptr %results.addr, align 8, !dbg !1038
-  %arrayidx20 = getelementptr inbounds float, ptr %112, i64 3, !dbg !1038
-  store float %111, ptr %arrayidx20, align 4, !dbg !1039
+  %133 = load float, ptr %value, align 4, !dbg !1037
+  %134 = load ptr, ptr %results.addr, align 8, !dbg !1038
+  %arrayidx20 = getelementptr inbounds float, ptr %134, i64 3, !dbg !1038
+  store float %133, ptr %arrayidx20, align 4, !dbg !1039
   br label %if.end21, !dbg !1038
 
 if.end21:                                         ; preds = %if.then19, %if.end17
-  %113 = load i32, ptr %i, align 4, !dbg !1040
-  %cmp22 = icmp eq i32 %113, 145, !dbg !1042
+  %135 = load i32, ptr %i, align 4, !dbg !1040
+  %cmp22 = icmp eq i32 %135, 145, !dbg !1042
   br i1 %cmp22, label %if.then23, label %if.end25, !dbg !1042
 
 if.then23:                                        ; preds = %if.end21
-  %114 = load float, ptr %value, align 4, !dbg !1043
-  %115 = load ptr, ptr %results.addr, align 8, !dbg !1044
-  %arrayidx24 = getelementptr inbounds float, ptr %115, i64 4, !dbg !1044
-  store float %114, ptr %arrayidx24, align 4, !dbg !1045
+  %136 = load float, ptr %value, align 4, !dbg !1043
+  %137 = load ptr, ptr %results.addr, align 8, !dbg !1044
+  %arrayidx24 = getelementptr inbounds float, ptr %137, i64 4, !dbg !1044
+  store float %136, ptr %arrayidx24, align 4, !dbg !1045
   br label %if.end25, !dbg !1044
 
 if.end25:                                         ; preds = %if.then23, %if.end21
-  %116 = load i32, ptr %i, align 4, !dbg !1046
-  %cmp26 = icmp eq i32 %116, 149, !dbg !1048
+  %138 = load i32, ptr %i, align 4, !dbg !1046
+  %cmp26 = icmp eq i32 %138, 149, !dbg !1048
   br i1 %cmp26, label %if.then27, label %if.end29, !dbg !1048
 
 if.then27:                                        ; preds = %if.end25
-  %117 = load float, ptr %value, align 4, !dbg !1049
-  %118 = load ptr, ptr %results.addr, align 8, !dbg !1050
-  %arrayidx28 = getelementptr inbounds float, ptr %118, i64 5, !dbg !1050
-  store float %117, ptr %arrayidx28, align 4, !dbg !1051
+  %139 = load float, ptr %value, align 4, !dbg !1049
+  %140 = load ptr, ptr %results.addr, align 8, !dbg !1050
+  %arrayidx28 = getelementptr inbounds float, ptr %140, i64 5, !dbg !1050
+  store float %139, ptr %arrayidx28, align 4, !dbg !1051
   br label %if.end29, !dbg !1050
 
 if.end29:                                         ; preds = %if.then27, %if.end25
   br label %for.inc, !dbg !1052
 
 for.inc:                                          ; preds = %if.end29
-  %119 = load i32, ptr %i, align 4, !dbg !1053
-  %inc = add nsw i32 %119, 1, !dbg !1053
+  %141 = load i32, ptr %i, align 4, !dbg !1053
+  %inc = add nsw i32 %141, 1, !dbg !1053
   store i32 %inc, ptr %i, align 4, !dbg !1053
   br label %for.cond, !dbg !1054, !llvm.loop !1055
 
@@ -395,7 +420,7 @@ for.body:                                         ; preds = %for.cond
   br i1 %39, label %40, label %42, !dbg !1087
 
 40:                                               ; preds = %for.body
-  %41 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !1087
+  %41 = atomicrmw add ptr addrspace(1) @fp_counters, i64 1 monotonic, align 8, !dbg !1087
   br label %42, !dbg !1087
 
 42:                                               ; preds = %for.body, %40
@@ -429,24 +454,54 @@ for.body:                                         ; preds = %for.cond
   br i1 %overflow_cond, label %60, label %62, !dbg !1087
 
 60:                                               ; preds = %42
-  %61 = atomicrmw add ptr addrspace(1) @fp_overflow_counter, i64 1 monotonic, align 8, !dbg !1087
+  %61 = atomicrmw add ptr addrspace(1) getelementptr inbounds ([6 x i64], ptr addrspace(1) @fp_counters, i32 0, i32 2), i64 1 monotonic, align 8, !dbg !1087
   br label %62, !dbg !1087
 
 62:                                               ; preds = %42, %60
+  %63 = bitcast float %4 to i32, !dbg !1087
+  %64 = and i32 %63, 2139095040, !dbg !1087
+  %65 = icmp eq i32 %64, 0, !dbg !1087
+  %66 = and i32 %63, 8388607, !dbg !1087
+  %67 = icmp ne i32 %66, 0, !dbg !1087
+  %is_subnormal = and i1 %65, %67, !dbg !1087
+  %68 = xor i1 %is_subnormal, true, !dbg !1087
+  %69 = and i1 true, %68, !dbg !1087
+  %70 = bitcast float %3 to i32, !dbg !1087
+  %71 = and i32 %70, 2139095040, !dbg !1087
+  %72 = icmp eq i32 %71, 0, !dbg !1087
+  %73 = and i32 %70, 8388607, !dbg !1087
+  %74 = icmp ne i32 %73, 0, !dbg !1087
+  %is_subnormal6 = and i1 %72, %74, !dbg !1087
+  %75 = xor i1 %is_subnormal6, true, !dbg !1087
+  %76 = and i1 %69, %75, !dbg !1087
+  %77 = bitcast float %add to i32, !dbg !1087
+  %78 = and i32 %77, 2139095040, !dbg !1087
+  %79 = icmp eq i32 %78, 0, !dbg !1087
+  %80 = and i32 %77, 8388607, !dbg !1087
+  %81 = icmp ne i32 %80, 0, !dbg !1087
+  %is_subnormal7 = and i1 %79, %81, !dbg !1087
+  %subnormal_cond = and i1 %76, %is_subnormal7, !dbg !1087
+  br i1 %subnormal_cond, label %82, label %84, !dbg !1087
+
+82:                                               ; preds = %62
+  %83 = atomicrmw add ptr addrspace(1) getelementptr inbounds ([6 x i64], ptr addrspace(1) @fp_counters, i32 0, i32 5), i64 1 monotonic, align 8, !dbg !1087
+  br label %84, !dbg !1087
+
+84:                                               ; preds = %62, %82
   store float %add, ptr %sum, align 4, !dbg !1087
   br label %for.inc, !dbg !1088
 
-for.inc:                                          ; preds = %62
-  %63 = load i32, ptr %i, align 4, !dbg !1089
-  %inc = add nsw i32 %63, 1, !dbg !1089
+for.inc:                                          ; preds = %84
+  %85 = load i32, ptr %i, align 4, !dbg !1089
+  %inc = add nsw i32 %85, 1, !dbg !1089
   store i32 %inc, ptr %i, align 4, !dbg !1089
   br label %for.cond, !dbg !1090, !llvm.loop !1091
 
 for.end:                                          ; preds = %for.cond
-  %64 = load float, ptr %sum, align 4, !dbg !1093
-  %65 = load ptr, ptr %result.addr, align 8, !dbg !1094
-  %arrayidx = getelementptr inbounds float, ptr %65, i64 0, !dbg !1094
-  store float %64, ptr %arrayidx, align 4, !dbg !1095
+  %86 = load float, ptr %sum, align 4, !dbg !1093
+  %87 = load ptr, ptr %result.addr, align 8, !dbg !1094
+  %arrayidx = getelementptr inbounds float, ptr %87, i64 0, !dbg !1094
+  store float %86, ptr %arrayidx, align 4, !dbg !1095
   br label %if.end, !dbg !1096
 
 if.end:                                           ; preds = %for.end, %entry

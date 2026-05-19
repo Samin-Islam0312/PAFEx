@@ -1,4 +1,3 @@
-[DBG] invalid=0 divzero=0 overflow=0 underflow=7 total=0 subnormal=0
 [FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/underflow/gradual/host.bc
 [FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
 ========================================
@@ -37,7 +36,7 @@ IEEE Exceptions According to the standard
 Detailed Breakdown
   NaNs (Input):       0
   NaNs (Created):     0
-  Denormals Produced: 0
+  Denormals Produced: 6
 
 Workload Stats
   Kernels Launched:   1
@@ -47,7 +46,7 @@ Derived Metrics
   Total Exceptions:   7
   Exception Density:  0 (per million ops)
   NaN Prop Rate:      0 (per million NaNs)
-  Subnormal Rate:     0 (per million underflows)
+  Subnormal Rate:     857142 (per million underflows)
   Instability Score:  0
 
 [FP_INSTRUMENT] Finalized.

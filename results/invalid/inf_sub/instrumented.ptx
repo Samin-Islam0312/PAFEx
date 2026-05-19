@@ -7,12 +7,7 @@
 .address_size 64
 
 	// .globl	_Z17testInvalidInfSubPf // -- Begin function _Z17testInvalidInfSubPf
-.visible .global .align 8 .u64 fp_invalid_counter;
-.visible .global .align 8 .u64 fp_divbyzero_counter;
-.visible .global .align 8 .u64 fp_overflow_counter;
-.visible .global .align 8 .u64 fp_underflow_counter;
-.visible .global .align 8 .u64 fp_total_counter;
-.visible .global .align 8 .u64 fp_subnormal_counter;
+.visible .global .align 8 .b8 fp_counters[48];
                                         // @_Z17testInvalidInfSubPf
 .visible .entry _Z17testInvalidInfSubPf(
 	.param .u64 .ptr .align 1 _Z17testInvalidInfSubPf_param_0
@@ -21,9 +16,9 @@
 	.local .align 8 .b8 	__local_depot0[40];
 	.reg .b64 	%SP;
 	.reg .b64 	%SPL;
-	.reg .pred 	%p<148>;
-	.reg .b32 	%r<84>;
-	.reg .b64 	%rd<18>;
+	.reg .pred 	%p<220>;
+	.reg .b32 	%r<120>;
+	.reg .b64 	%rd<23>;
 	.loc	4 5 0                           // tests/basic_tests/invalid/inf_sub.cu:5:0
 $L__func_begin0:
 	.loc	4 5 0                           // tests/basic_tests/invalid/inf_sub.cu:5:0
@@ -48,7 +43,7 @@ $L__tmp2:
 	ld.b32 	%r16, [%SP+24];
 	.loc	4 12 13                         // tests/basic_tests/invalid/inf_sub.cu:12:13
 	setp.ne.b32 	%p1, %r16, 0;
-	@%p1 bra 	$L__BB0_6;
+	@%p1 bra 	$L__BB0_8;
 	bra.uni 	$L__BB0_1;
 $L__BB0_1:                              // %if.then
 	.loc	4 12 31                         // tests/basic_tests/invalid/inf_sub.cu:12:31
@@ -87,7 +82,7 @@ $L__BB0_1:                              // %if.then
 	@%p21 bra 	$L__BB0_3;
 	bra.uni 	$L__BB0_2;
 $L__BB0_2:
-	atom.global.add.u64 	%rd2, [fp_invalid_counter], 1;
+	atom.global.add.u64 	%rd2, [fp_counters], 1;
 	bra.uni 	$L__BB0_3;
 $L__BB0_3:
 	add.f32 	%r3, %r1, %r2;
@@ -107,214 +102,310 @@ $L__BB0_3:
 	@%p29 bra 	$L__BB0_5;
 	bra.uni 	$L__BB0_4;
 $L__BB0_4:
-	atom.global.add.u64 	%rd3, [fp_overflow_counter], 1;
+	atom.global.add.u64 	%rd3, [fp_counters+16], 1;
 	bra.uni 	$L__BB0_5;
 $L__BB0_5:
-	ld.b64 	%rd4, [%SP+16];
-	.loc	4 12 29                         // tests/basic_tests/invalid/inf_sub.cu:12:29
-	st.b32 	[%rd4], %r3;
-	.loc	4 12 19                         // tests/basic_tests/invalid/inf_sub.cu:12:19
+	and.b32 	%r29, %r1, 2139095040;
+	setp.ne.b32 	%p30, %r29, 0;
+	and.b32 	%r30, %r1, 8388607;
+	setp.eq.b32 	%p31, %r30, 0;
+	or.pred 	%p32, %p30, %p31;
+	and.b32 	%r31, %r2, 2139095040;
+	setp.ne.b32 	%p33, %r31, 0;
+	and.b32 	%r32, %r2, 8388607;
+	setp.eq.b32 	%p34, %r32, 0;
+	or.pred 	%p35, %p33, %p34;
+	and.pred 	%p36, %p32, %p35;
+	and.b32 	%r33, %r3, 2139095040;
+	setp.eq.b32 	%p37, %r33, 0;
+	and.b32 	%r34, %r3, 8388607;
+	setp.ne.b32 	%p38, %r34, 0;
+	and.pred 	%p39, %p37, %p38;
+	and.pred 	%p40, %p36, %p39;
+	not.pred 	%p41, %p40;
+	@%p41 bra 	$L__BB0_7;
 	bra.uni 	$L__BB0_6;
-$L__tmp3:
-$L__BB0_6:                              // %if.end
-	.loc	4 13 9                          // tests/basic_tests/invalid/inf_sub.cu:13:9
-	ld.b32 	%r29, [%SP+24];
-	.loc	4 13 13                         // tests/basic_tests/invalid/inf_sub.cu:13:13
-	setp.ne.b32 	%p30, %r29, 1;
-	@%p30 bra 	$L__BB0_12;
+$L__BB0_6:
+	atom.global.add.u64 	%rd4, [fp_counters+40], 1;
 	bra.uni 	$L__BB0_7;
-$L__BB0_7:                              // %if.then2
+$L__BB0_7:
+	ld.b64 	%rd5, [%SP+16];
+	.loc	4 12 29                         // tests/basic_tests/invalid/inf_sub.cu:12:29
+	st.b32 	[%rd5], %r3;
+	.loc	4 12 19                         // tests/basic_tests/invalid/inf_sub.cu:12:19
+	bra.uni 	$L__BB0_8;
+$L__tmp3:
+$L__BB0_8:                              // %if.end
+	.loc	4 13 9                          // tests/basic_tests/invalid/inf_sub.cu:13:9
+	ld.b32 	%r35, [%SP+24];
+	.loc	4 13 13                         // tests/basic_tests/invalid/inf_sub.cu:13:13
+	setp.ne.b32 	%p42, %r35, 1;
+	@%p42 bra 	$L__BB0_16;
+	bra.uni 	$L__BB0_9;
+$L__BB0_9:                              // %if.then2
 	.loc	4 13 31                         // tests/basic_tests/invalid/inf_sub.cu:13:31
 	ld.b32 	%r4, [%SP+28];
 	.loc	4 13 39                         // tests/basic_tests/invalid/inf_sub.cu:13:39
-	and.b32 	%r30, %r4, 2139095040;
-	setp.eq.b32 	%p31, %r30, 2139095040;
-	and.b32 	%r31, %r4, 8388607;
-	setp.ne.b32 	%p32, %r31, 0;
-	and.b32 	%r32, %r4, 4194304;
-	setp.eq.b32 	%p33, %r32, 0;
-	and.pred 	%p34, %p31, %p33;
-	and.pred 	%p35, %p34, %p32;
-	setp.eq.b32 	%p36, %r31, 0;
-	and.pred 	%p37, %p31, %p36;
-	or.pred 	%p38, %p35, %p37;
-	not.pred 	%p39, %p38;
-	@%p39 bra 	$L__BB0_9;
-	bra.uni 	$L__BB0_8;
-$L__BB0_8:
-	atom.global.add.u64 	%rd5, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB0_9;
-$L__BB0_9:
-	sub.f32 	%r5, %r4, %r4;
-	.loc	4 13 19                         // tests/basic_tests/invalid/inf_sub.cu:13:19
-	and.b32 	%r33, %r4, 2139095040;
-	setp.ne.b32 	%p40, %r33, 2139095040;
-	and.b32 	%r34, %r4, 2139095040;
-	setp.ne.b32 	%p41, %r34, 2139095040;
-	and.pred 	%p42, %p40, %p41;
-	and.b32 	%r35, %r5, 2139095040;
-	setp.eq.b32 	%p43, %r35, 2139095040;
-	and.b32 	%r36, %r5, 8388607;
-	setp.eq.b32 	%p44, %r36, 0;
-	and.pred 	%p45, %p43, %p44;
-	and.pred 	%p46, %p42, %p45;
-	not.pred 	%p47, %p46;
-	@%p47 bra 	$L__BB0_11;
+	and.b32 	%r36, %r4, 2139095040;
+	setp.eq.b32 	%p43, %r36, 2139095040;
+	and.b32 	%r37, %r4, 8388607;
+	setp.ne.b32 	%p44, %r37, 0;
+	and.b32 	%r38, %r4, 4194304;
+	setp.eq.b32 	%p45, %r38, 0;
+	and.pred 	%p46, %p43, %p45;
+	and.pred 	%p47, %p46, %p44;
+	setp.eq.b32 	%p48, %r37, 0;
+	and.pred 	%p49, %p43, %p48;
+	or.pred 	%p50, %p47, %p49;
+	not.pred 	%p51, %p50;
+	@%p51 bra 	$L__BB0_11;
 	bra.uni 	$L__BB0_10;
 $L__BB0_10:
-	atom.global.add.u64 	%rd6, [fp_overflow_counter], 1;
+	atom.global.add.u64 	%rd6, [fp_counters], 1;
 	bra.uni 	$L__BB0_11;
 $L__BB0_11:
-	ld.b64 	%rd7, [%SP+16];
-	.loc	4 13 29                         // tests/basic_tests/invalid/inf_sub.cu:13:29
-	st.b32 	[%rd7+4], %r5;
+	sub.f32 	%r5, %r4, %r4;
 	.loc	4 13 19                         // tests/basic_tests/invalid/inf_sub.cu:13:19
+	and.b32 	%r39, %r4, 2139095040;
+	setp.ne.b32 	%p52, %r39, 2139095040;
+	and.b32 	%r40, %r4, 2139095040;
+	setp.ne.b32 	%p53, %r40, 2139095040;
+	and.pred 	%p54, %p52, %p53;
+	and.b32 	%r41, %r5, 2139095040;
+	setp.eq.b32 	%p55, %r41, 2139095040;
+	and.b32 	%r42, %r5, 8388607;
+	setp.eq.b32 	%p56, %r42, 0;
+	and.pred 	%p57, %p55, %p56;
+	and.pred 	%p58, %p54, %p57;
+	not.pred 	%p59, %p58;
+	@%p59 bra 	$L__BB0_13;
 	bra.uni 	$L__BB0_12;
-$L__tmp4:
-$L__BB0_12:                             // %if.end4
-	.loc	4 14 9                          // tests/basic_tests/invalid/inf_sub.cu:14:9
-	ld.b32 	%r37, [%SP+24];
-	.loc	4 14 13                         // tests/basic_tests/invalid/inf_sub.cu:14:13
-	setp.ne.b32 	%p48, %r37, 2;
-	@%p48 bra 	$L__BB0_18;
+$L__BB0_12:
+	atom.global.add.u64 	%rd7, [fp_counters+16], 1;
 	bra.uni 	$L__BB0_13;
-$L__BB0_13:                             // %if.then6
+$L__BB0_13:
+	and.b32 	%r43, %r4, 2139095040;
+	setp.ne.b32 	%p60, %r43, 0;
+	and.b32 	%r44, %r4, 8388607;
+	setp.eq.b32 	%p61, %r44, 0;
+	or.pred 	%p62, %p60, %p61;
+	and.b32 	%r45, %r4, 2139095040;
+	setp.ne.b32 	%p63, %r45, 0;
+	and.b32 	%r46, %r4, 8388607;
+	setp.eq.b32 	%p64, %r46, 0;
+	or.pred 	%p65, %p63, %p64;
+	and.pred 	%p66, %p62, %p65;
+	and.b32 	%r47, %r5, 2139095040;
+	setp.eq.b32 	%p67, %r47, 0;
+	and.b32 	%r48, %r5, 8388607;
+	setp.ne.b32 	%p68, %r48, 0;
+	and.pred 	%p69, %p67, %p68;
+	and.pred 	%p70, %p66, %p69;
+	not.pred 	%p71, %p70;
+	@%p71 bra 	$L__BB0_15;
+	bra.uni 	$L__BB0_14;
+$L__BB0_14:
+	atom.global.add.u64 	%rd8, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_15;
+$L__BB0_15:
+	ld.b64 	%rd9, [%SP+16];
+	.loc	4 13 29                         // tests/basic_tests/invalid/inf_sub.cu:13:29
+	st.b32 	[%rd9+4], %r5;
+	.loc	4 13 19                         // tests/basic_tests/invalid/inf_sub.cu:13:19
+	bra.uni 	$L__BB0_16;
+$L__tmp4:
+$L__BB0_16:                             // %if.end4
+	.loc	4 14 9                          // tests/basic_tests/invalid/inf_sub.cu:14:9
+	ld.b32 	%r49, [%SP+24];
+	.loc	4 14 13                         // tests/basic_tests/invalid/inf_sub.cu:14:13
+	setp.ne.b32 	%p72, %r49, 2;
+	@%p72 bra 	$L__BB0_24;
+	bra.uni 	$L__BB0_17;
+$L__BB0_17:                             // %if.then6
 	.loc	4 14 31                         // tests/basic_tests/invalid/inf_sub.cu:14:31
 	ld.b32 	%r6, [%SP+32];
 	.loc	4 14 39                         // tests/basic_tests/invalid/inf_sub.cu:14:39
-	and.b32 	%r38, %r6, 2139095040;
-	setp.eq.b32 	%p49, %r38, 2139095040;
-	and.b32 	%r39, %r6, 8388607;
-	setp.ne.b32 	%p50, %r39, 0;
-	and.b32 	%r40, %r6, 4194304;
-	setp.eq.b32 	%p51, %r40, 0;
-	and.pred 	%p52, %p49, %p51;
-	and.pred 	%p53, %p52, %p50;
-	setp.eq.b32 	%p54, %r39, 0;
-	and.pred 	%p55, %p49, %p54;
-	or.pred 	%p56, %p53, %p55;
-	not.pred 	%p57, %p56;
-	@%p57 bra 	$L__BB0_15;
-	bra.uni 	$L__BB0_14;
-$L__BB0_14:
-	atom.global.add.u64 	%rd8, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB0_15;
-$L__BB0_15:
+	and.b32 	%r50, %r6, 2139095040;
+	setp.eq.b32 	%p73, %r50, 2139095040;
+	and.b32 	%r51, %r6, 8388607;
+	setp.ne.b32 	%p74, %r51, 0;
+	and.b32 	%r52, %r6, 4194304;
+	setp.eq.b32 	%p75, %r52, 0;
+	and.pred 	%p76, %p73, %p75;
+	and.pred 	%p77, %p76, %p74;
+	setp.eq.b32 	%p78, %r51, 0;
+	and.pred 	%p79, %p73, %p78;
+	or.pred 	%p80, %p77, %p79;
+	not.pred 	%p81, %p80;
+	@%p81 bra 	$L__BB0_19;
+	bra.uni 	$L__BB0_18;
+$L__BB0_18:
+	atom.global.add.u64 	%rd10, [fp_counters], 1;
+	bra.uni 	$L__BB0_19;
+$L__BB0_19:
 	sub.f32 	%r7, %r6, %r6;
 	.loc	4 14 19                         // tests/basic_tests/invalid/inf_sub.cu:14:19
-	and.b32 	%r41, %r6, 2139095040;
-	setp.ne.b32 	%p58, %r41, 2139095040;
-	and.b32 	%r42, %r6, 2139095040;
-	setp.ne.b32 	%p59, %r42, 2139095040;
-	and.pred 	%p60, %p58, %p59;
-	and.b32 	%r43, %r7, 2139095040;
-	setp.eq.b32 	%p61, %r43, 2139095040;
-	and.b32 	%r44, %r7, 8388607;
-	setp.eq.b32 	%p62, %r44, 0;
-	and.pred 	%p63, %p61, %p62;
-	and.pred 	%p64, %p60, %p63;
-	not.pred 	%p65, %p64;
-	@%p65 bra 	$L__BB0_17;
-	bra.uni 	$L__BB0_16;
-$L__BB0_16:
-	atom.global.add.u64 	%rd9, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB0_17;
-$L__BB0_17:
-	ld.b64 	%rd10, [%SP+16];
+	and.b32 	%r53, %r6, 2139095040;
+	setp.ne.b32 	%p82, %r53, 2139095040;
+	and.b32 	%r54, %r6, 2139095040;
+	setp.ne.b32 	%p83, %r54, 2139095040;
+	and.pred 	%p84, %p82, %p83;
+	and.b32 	%r55, %r7, 2139095040;
+	setp.eq.b32 	%p85, %r55, 2139095040;
+	and.b32 	%r56, %r7, 8388607;
+	setp.eq.b32 	%p86, %r56, 0;
+	and.pred 	%p87, %p85, %p86;
+	and.pred 	%p88, %p84, %p87;
+	not.pred 	%p89, %p88;
+	@%p89 bra 	$L__BB0_21;
+	bra.uni 	$L__BB0_20;
+$L__BB0_20:
+	atom.global.add.u64 	%rd11, [fp_counters+16], 1;
+	bra.uni 	$L__BB0_21;
+$L__BB0_21:
+	and.b32 	%r57, %r6, 2139095040;
+	setp.ne.b32 	%p90, %r57, 0;
+	and.b32 	%r58, %r6, 8388607;
+	setp.eq.b32 	%p91, %r58, 0;
+	or.pred 	%p92, %p90, %p91;
+	and.b32 	%r59, %r6, 2139095040;
+	setp.ne.b32 	%p93, %r59, 0;
+	and.b32 	%r60, %r6, 8388607;
+	setp.eq.b32 	%p94, %r60, 0;
+	or.pred 	%p95, %p93, %p94;
+	and.pred 	%p96, %p92, %p95;
+	and.b32 	%r61, %r7, 2139095040;
+	setp.eq.b32 	%p97, %r61, 0;
+	and.b32 	%r62, %r7, 8388607;
+	setp.ne.b32 	%p98, %r62, 0;
+	and.pred 	%p99, %p97, %p98;
+	and.pred 	%p100, %p96, %p99;
+	not.pred 	%p101, %p100;
+	@%p101 bra 	$L__BB0_23;
+	bra.uni 	$L__BB0_22;
+$L__BB0_22:
+	atom.global.add.u64 	%rd12, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_23;
+$L__BB0_23:
+	ld.b64 	%rd13, [%SP+16];
 	.loc	4 14 29                         // tests/basic_tests/invalid/inf_sub.cu:14:29
-	st.b32 	[%rd10+8], %r7;
+	st.b32 	[%rd13+8], %r7;
 	.loc	4 14 19                         // tests/basic_tests/invalid/inf_sub.cu:14:19
-	bra.uni 	$L__BB0_18;
+	bra.uni 	$L__BB0_24;
 $L__tmp5:
-$L__BB0_18:                             // %if.end9
+$L__BB0_24:                             // %if.end9
 	.loc	4 15 9                          // tests/basic_tests/invalid/inf_sub.cu:15:9
-	ld.b32 	%r45, [%SP+24];
+	ld.b32 	%r63, [%SP+24];
 	.loc	4 15 13                         // tests/basic_tests/invalid/inf_sub.cu:15:13
-	setp.ne.b32 	%p66, %r45, 3;
-	@%p66 bra 	$L__BB0_24;
-	bra.uni 	$L__BB0_19;
-$L__BB0_19:                             // %if.then11
+	setp.ne.b32 	%p102, %r63, 3;
+	@%p102 bra 	$L__BB0_32;
+	bra.uni 	$L__BB0_25;
+$L__BB0_25:                             // %if.then11
 	.loc	4 15 31                         // tests/basic_tests/invalid/inf_sub.cu:15:31
 	ld.b32 	%r8, [%SP+32];
 	.loc	4 15 41                         // tests/basic_tests/invalid/inf_sub.cu:15:41
 	ld.b32 	%r9, [%SP+28];
 	.loc	4 15 39                         // tests/basic_tests/invalid/inf_sub.cu:15:39
-	and.b32 	%r46, %r8, 2139095040;
-	setp.eq.b32 	%p67, %r46, 2139095040;
-	and.b32 	%r47, %r8, 8388607;
-	setp.ne.b32 	%p68, %r47, 0;
-	and.b32 	%r48, %r8, 4194304;
-	setp.eq.b32 	%p69, %r48, 0;
-	and.pred 	%p70, %p67, %p69;
-	and.pred 	%p71, %p70, %p68;
-	and.b32 	%r49, %r9, 2139095040;
-	setp.eq.b32 	%p72, %r49, 2139095040;
-	and.b32 	%r50, %r9, 8388607;
-	setp.ne.b32 	%p73, %r50, 0;
-	and.b32 	%r51, %r9, 4194304;
-	setp.eq.b32 	%p74, %r51, 0;
-	and.pred 	%p75, %p72, %p74;
-	and.pred 	%p76, %p75, %p73;
-	or.pred 	%p77, %p71, %p76;
-	setp.eq.b32 	%p78, %r47, 0;
-	and.pred 	%p79, %p67, %p78;
-	setp.eq.b32 	%p80, %r50, 0;
-	and.pred 	%p81, %p72, %p80;
-	and.pred 	%p82, %p79, %p81;
-	and.b32 	%r52, %r8, -2147483648;
-	and.b32 	%r53, %r9, -2147483648;
-	setp.ne.b32 	%p83, %r52, %r53;
-	and.pred 	%p84, %p82, %p83;
-	or.pred 	%p85, %p77, %p84;
-	not.pred 	%p86, %p85;
-	@%p86 bra 	$L__BB0_21;
-	bra.uni 	$L__BB0_20;
-$L__BB0_20:
-	atom.global.add.u64 	%rd11, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB0_21;
-$L__BB0_21:
+	and.b32 	%r64, %r8, 2139095040;
+	setp.eq.b32 	%p103, %r64, 2139095040;
+	and.b32 	%r65, %r8, 8388607;
+	setp.ne.b32 	%p104, %r65, 0;
+	and.b32 	%r66, %r8, 4194304;
+	setp.eq.b32 	%p105, %r66, 0;
+	and.pred 	%p106, %p103, %p105;
+	and.pred 	%p107, %p106, %p104;
+	and.b32 	%r67, %r9, 2139095040;
+	setp.eq.b32 	%p108, %r67, 2139095040;
+	and.b32 	%r68, %r9, 8388607;
+	setp.ne.b32 	%p109, %r68, 0;
+	and.b32 	%r69, %r9, 4194304;
+	setp.eq.b32 	%p110, %r69, 0;
+	and.pred 	%p111, %p108, %p110;
+	and.pred 	%p112, %p111, %p109;
+	or.pred 	%p113, %p107, %p112;
+	setp.eq.b32 	%p114, %r65, 0;
+	and.pred 	%p115, %p103, %p114;
+	setp.eq.b32 	%p116, %r68, 0;
+	and.pred 	%p117, %p108, %p116;
+	and.pred 	%p118, %p115, %p117;
+	and.b32 	%r70, %r8, -2147483648;
+	and.b32 	%r71, %r9, -2147483648;
+	setp.ne.b32 	%p119, %r70, %r71;
+	and.pred 	%p120, %p118, %p119;
+	or.pred 	%p121, %p113, %p120;
+	not.pred 	%p122, %p121;
+	@%p122 bra 	$L__BB0_27;
+	bra.uni 	$L__BB0_26;
+$L__BB0_26:
+	atom.global.add.u64 	%rd14, [fp_counters], 1;
+	bra.uni 	$L__BB0_27;
+$L__BB0_27:
 	add.f32 	%r10, %r8, %r9;
 	.loc	4 15 19                         // tests/basic_tests/invalid/inf_sub.cu:15:19
-	and.b32 	%r54, %r8, 2139095040;
-	setp.ne.b32 	%p87, %r54, 2139095040;
-	and.b32 	%r55, %r9, 2139095040;
-	setp.ne.b32 	%p88, %r55, 2139095040;
-	and.pred 	%p89, %p87, %p88;
-	and.b32 	%r56, %r10, 2139095040;
-	setp.eq.b32 	%p90, %r56, 2139095040;
-	and.b32 	%r57, %r10, 8388607;
-	setp.eq.b32 	%p91, %r57, 0;
-	and.pred 	%p92, %p90, %p91;
-	and.pred 	%p93, %p89, %p92;
-	not.pred 	%p94, %p93;
-	@%p94 bra 	$L__BB0_23;
-	bra.uni 	$L__BB0_22;
-$L__BB0_22:
-	atom.global.add.u64 	%rd12, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB0_23;
-$L__BB0_23:
-	ld.b64 	%rd13, [%SP+16];
+	and.b32 	%r72, %r8, 2139095040;
+	setp.ne.b32 	%p123, %r72, 2139095040;
+	and.b32 	%r73, %r9, 2139095040;
+	setp.ne.b32 	%p124, %r73, 2139095040;
+	and.pred 	%p125, %p123, %p124;
+	and.b32 	%r74, %r10, 2139095040;
+	setp.eq.b32 	%p126, %r74, 2139095040;
+	and.b32 	%r75, %r10, 8388607;
+	setp.eq.b32 	%p127, %r75, 0;
+	and.pred 	%p128, %p126, %p127;
+	and.pred 	%p129, %p125, %p128;
+	not.pred 	%p130, %p129;
+	@%p130 bra 	$L__BB0_29;
+	bra.uni 	$L__BB0_28;
+$L__BB0_28:
+	atom.global.add.u64 	%rd15, [fp_counters+16], 1;
+	bra.uni 	$L__BB0_29;
+$L__BB0_29:
+	and.b32 	%r76, %r8, 2139095040;
+	setp.ne.b32 	%p131, %r76, 0;
+	and.b32 	%r77, %r8, 8388607;
+	setp.eq.b32 	%p132, %r77, 0;
+	or.pred 	%p133, %p131, %p132;
+	and.b32 	%r78, %r9, 2139095040;
+	setp.ne.b32 	%p134, %r78, 0;
+	and.b32 	%r79, %r9, 8388607;
+	setp.eq.b32 	%p135, %r79, 0;
+	or.pred 	%p136, %p134, %p135;
+	and.pred 	%p137, %p133, %p136;
+	and.b32 	%r80, %r10, 2139095040;
+	setp.eq.b32 	%p138, %r80, 0;
+	and.b32 	%r81, %r10, 8388607;
+	setp.ne.b32 	%p139, %r81, 0;
+	and.pred 	%p140, %p138, %p139;
+	and.pred 	%p141, %p137, %p140;
+	not.pred 	%p142, %p141;
+	@%p142 bra 	$L__BB0_31;
+	bra.uni 	$L__BB0_30;
+$L__BB0_30:
+	atom.global.add.u64 	%rd16, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_31;
+$L__BB0_31:
+	ld.b64 	%rd17, [%SP+16];
 	.loc	4 15 29                         // tests/basic_tests/invalid/inf_sub.cu:15:29
-	st.b32 	[%rd13+12], %r10;
+	st.b32 	[%rd17+12], %r10;
 	.loc	4 15 19                         // tests/basic_tests/invalid/inf_sub.cu:15:19
-	bra.uni 	$L__BB0_24;
+	bra.uni 	$L__BB0_32;
 $L__tmp6:
-$L__BB0_24:                             // %if.end14
+$L__BB0_32:                             // %if.end14
 	.loc	4 18 9                          // tests/basic_tests/invalid/inf_sub.cu:18:9
-	ld.b32 	%r58, [%SP+24];
+	ld.b32 	%r82, [%SP+24];
 	.loc	4 18 13                         // tests/basic_tests/invalid/inf_sub.cu:18:13
-	setp.ne.b32 	%p95, %r58, 4;
-	@%p95 bra 	$L__BB0_32;
-	bra.uni 	$L__BB0_25;
-$L__BB0_25:                             // %if.then16
+	setp.ne.b32 	%p143, %r82, 4;
+	@%p143 bra 	$L__BB0_42;
+	bra.uni 	$L__BB0_33;
+$L__BB0_33:                             // %if.then16
 $L__tmp7:
 	.loc	4 19 32                         // tests/basic_tests/invalid/inf_sub.cu:19:32
-	ld.b32 	%r59, [%SP+28];
+	ld.b32 	%r83, [%SP+28];
 	.loc	4 19 41                         // tests/basic_tests/invalid/inf_sub.cu:19:41
-	ld.b32 	%r60, [%SP+32];
+	ld.b32 	%r84, [%SP+32];
 	st.b32 	[%SP], 1073741824;
-	st.b32 	[%SP+4], %r59;
-	st.b32 	[%SP+8], %r60;
+	st.b32 	[%SP+4], %r83;
+	st.b32 	[%SP+8], %r84;
 $L__tmp8:
 	.loc	5 133 20                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_math.h:133:20 @[ tests/basic_tests/invalid/inf_sub.cu:19:21 ]
 	ld.b32 	%r11, [%SP];
@@ -323,109 +414,151 @@ $L__tmp8:
 	.loc	5 133 30                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_math.h:133:30 @[ tests/basic_tests/invalid/inf_sub.cu:19:21 ]
 	ld.b32 	%r13, [%SP+8];
 	.loc	5 133 10                        // /storage/users/sislam3/opt/llvm-22/lib/clang/22/include/__clang_cuda_math.h:133:10 @[ tests/basic_tests/invalid/inf_sub.cu:19:21 ]
-	and.b32 	%r61, %r11, 2139095040;
-	setp.eq.b32 	%p96, %r61, 2139095040;
-	and.b32 	%r62, %r11, 8388607;
-	setp.ne.b32 	%p97, %r62, 0;
-	and.b32 	%r63, %r11, 4194304;
-	setp.eq.b32 	%p98, %r63, 0;
-	and.pred 	%p99, %p96, %p98;
-	and.pred 	%p100, %p99, %p97;
-	and.b32 	%r64, %r12, 2139095040;
-	setp.eq.b32 	%p101, %r64, 2139095040;
-	and.b32 	%r65, %r12, 8388607;
-	setp.ne.b32 	%p102, %r65, 0;
-	and.b32 	%r66, %r12, 4194304;
-	setp.eq.b32 	%p103, %r66, 0;
-	and.pred 	%p104, %p101, %p103;
-	and.pred 	%p105, %p104, %p102;
-	or.pred 	%p106, %p100, %p105;
-	and.b32 	%r67, %r13, 2139095040;
-	setp.eq.b32 	%p107, %r67, 2139095040;
-	and.b32 	%r68, %r13, 8388607;
-	setp.ne.b32 	%p108, %r68, 0;
-	and.b32 	%r69, %r13, 4194304;
-	setp.eq.b32 	%p109, %r69, 0;
-	and.pred 	%p110, %p107, %p109;
-	and.pred 	%p111, %p110, %p108;
-	or.pred 	%p112, %p106, %p111;
-	and.b32 	%r70, %r11, 2147483647;
-	setp.eq.b32 	%p113, %r70, 0;
-	setp.eq.b32 	%p114, %r65, 0;
-	and.pred 	%p115, %p101, %p114;
-	and.pred 	%p116, %p113, %p115;
-	setp.eq.b32 	%p117, %r62, 0;
-	and.pred 	%p118, %p96, %p117;
-	and.b32 	%r71, %r12, 2147483647;
-	setp.eq.b32 	%p119, %r71, 0;
-	and.pred 	%p120, %p118, %p119;
-	or.pred 	%p121, %p116, %p120;
-	or.pred 	%p122, %p112, %p121;
-	not.pred 	%p123, %p122;
-	@%p123 bra 	$L__BB0_27;
-	bra.uni 	$L__BB0_26;
-$L__BB0_26:
-	atom.global.add.u64 	%rd14, [fp_invalid_counter], 1;
-	bra.uni 	$L__BB0_27;
-$L__BB0_27:
+	and.b32 	%r85, %r11, 2139095040;
+	setp.eq.b32 	%p144, %r85, 2139095040;
+	and.b32 	%r86, %r11, 8388607;
+	setp.ne.b32 	%p145, %r86, 0;
+	and.b32 	%r87, %r11, 4194304;
+	setp.eq.b32 	%p146, %r87, 0;
+	and.pred 	%p147, %p144, %p146;
+	and.pred 	%p148, %p147, %p145;
+	and.b32 	%r88, %r12, 2139095040;
+	setp.eq.b32 	%p149, %r88, 2139095040;
+	and.b32 	%r89, %r12, 8388607;
+	setp.ne.b32 	%p150, %r89, 0;
+	and.b32 	%r90, %r12, 4194304;
+	setp.eq.b32 	%p151, %r90, 0;
+	and.pred 	%p152, %p149, %p151;
+	and.pred 	%p153, %p152, %p150;
+	or.pred 	%p154, %p148, %p153;
+	and.b32 	%r91, %r13, 2139095040;
+	setp.eq.b32 	%p155, %r91, 2139095040;
+	and.b32 	%r92, %r13, 8388607;
+	setp.ne.b32 	%p156, %r92, 0;
+	and.b32 	%r93, %r13, 4194304;
+	setp.eq.b32 	%p157, %r93, 0;
+	and.pred 	%p158, %p155, %p157;
+	and.pred 	%p159, %p158, %p156;
+	or.pred 	%p160, %p154, %p159;
+	and.b32 	%r94, %r11, 2147483647;
+	setp.eq.b32 	%p161, %r94, 0;
+	setp.eq.b32 	%p162, %r89, 0;
+	and.pred 	%p163, %p149, %p162;
+	and.pred 	%p164, %p161, %p163;
+	setp.eq.b32 	%p165, %r86, 0;
+	and.pred 	%p166, %p144, %p165;
+	and.b32 	%r95, %r12, 2147483647;
+	setp.eq.b32 	%p167, %r95, 0;
+	and.pred 	%p168, %p166, %p167;
+	or.pred 	%p169, %p164, %p168;
+	or.pred 	%p170, %p160, %p169;
+	not.pred 	%p171, %p170;
+	@%p171 bra 	$L__BB0_35;
+	bra.uni 	$L__BB0_34;
+$L__BB0_34:
+	atom.global.add.u64 	%rd18, [fp_counters], 1;
+	bra.uni 	$L__BB0_35;
+$L__BB0_35:
 	fma.rn.f32 	%r14, %r11, %r12, %r13;
 $L__tmp9:
 	.loc	4 19 9                          // tests/basic_tests/invalid/inf_sub.cu:19:9
-	and.b32 	%r72, %r11, 2139095040;
-	setp.ne.b32 	%p124, %r72, 2139095040;
-	and.b32 	%r73, %r12, 2139095040;
-	setp.ne.b32 	%p125, %r73, 2139095040;
-	and.pred 	%p126, %p124, %p125;
-	and.b32 	%r74, %r14, 2139095040;
-	setp.eq.b32 	%p127, %r74, 2139095040;
-	and.b32 	%r75, %r14, 8388607;
-	setp.eq.b32 	%p128, %r75, 0;
-	and.pred 	%p129, %p127, %p128;
-	and.pred 	%p130, %p126, %p129;
-	not.pred 	%p131, %p130;
-	@%p131 bra 	$L__BB0_29;
-	bra.uni 	$L__BB0_28;
-$L__BB0_28:
-	atom.global.add.u64 	%rd15, [fp_overflow_counter], 1;
-	bra.uni 	$L__BB0_29;
-$L__BB0_29:
-	and.b32 	%r76, %r11, 2139095040;
-	setp.ne.b32 	%p132, %r76, 0;
-	and.b32 	%r77, %r11, 8388607;
-	setp.eq.b32 	%p133, %r77, 0;
-	or.pred 	%p134, %p132, %p133;
-	and.b32 	%r78, %r12, 2139095040;
-	setp.ne.b32 	%p135, %r78, 0;
-	and.b32 	%r79, %r12, 8388607;
-	setp.eq.b32 	%p136, %r79, 0;
-	or.pred 	%p137, %p135, %p136;
-	and.pred 	%p138, %p134, %p137;
-	and.b32 	%r80, %r13, 2139095040;
-	setp.ne.b32 	%p139, %r80, 0;
-	and.b32 	%r81, %r13, 8388607;
-	setp.eq.b32 	%p140, %r81, 0;
-	or.pred 	%p141, %p139, %p140;
-	and.pred 	%p142, %p138, %p141;
-	and.b32 	%r82, %r14, 2139095040;
-	setp.eq.b32 	%p143, %r82, 0;
-	and.b32 	%r83, %r14, 8388607;
-	setp.ne.b32 	%p144, %r83, 0;
-	and.pred 	%p145, %p143, %p144;
-	and.pred 	%p146, %p142, %p145;
-	not.pred 	%p147, %p146;
-	@%p147 bra 	$L__BB0_31;
-	bra.uni 	$L__BB0_30;
-$L__BB0_30:
-	atom.global.add.u64 	%rd16, [fp_underflow_counter], 1;
-	bra.uni 	$L__BB0_31;
-$L__BB0_31:
-	ld.b64 	%rd17, [%SP+16];
+	and.b32 	%r96, %r11, 2139095040;
+	setp.ne.b32 	%p172, %r96, 2139095040;
+	and.b32 	%r97, %r12, 2139095040;
+	setp.ne.b32 	%p173, %r97, 2139095040;
+	and.pred 	%p174, %p172, %p173;
+	and.b32 	%r98, %r14, 2139095040;
+	setp.eq.b32 	%p175, %r98, 2139095040;
+	and.b32 	%r99, %r14, 8388607;
+	setp.eq.b32 	%p176, %r99, 0;
+	and.pred 	%p177, %p175, %p176;
+	and.pred 	%p178, %p174, %p177;
+	not.pred 	%p179, %p178;
+	@%p179 bra 	$L__BB0_37;
+	bra.uni 	$L__BB0_36;
+$L__BB0_36:
+	atom.global.add.u64 	%rd19, [fp_counters+16], 1;
+	bra.uni 	$L__BB0_37;
+$L__BB0_37:
+	and.b32 	%r100, %r11, 2139095040;
+	setp.ne.b32 	%p180, %r100, 0;
+	and.b32 	%r101, %r11, 8388607;
+	setp.eq.b32 	%p181, %r101, 0;
+	or.pred 	%p182, %p180, %p181;
+	and.b32 	%r102, %r12, 2139095040;
+	setp.ne.b32 	%p183, %r102, 0;
+	and.b32 	%r103, %r12, 8388607;
+	setp.eq.b32 	%p184, %r103, 0;
+	or.pred 	%p185, %p183, %p184;
+	and.pred 	%p186, %p182, %p185;
+	and.b32 	%r104, %r13, 2139095040;
+	setp.ne.b32 	%p187, %r104, 0;
+	and.b32 	%r105, %r13, 8388607;
+	setp.eq.b32 	%p188, %r105, 0;
+	or.pred 	%p189, %p187, %p188;
+	and.pred 	%p190, %p186, %p189;
+	and.b32 	%r106, %r14, 2139095040;
+	setp.eq.b32 	%p191, %r106, 0;
+	and.b32 	%r107, %r14, 8388607;
+	setp.ne.b32 	%p192, %r107, 0;
+	and.pred 	%p193, %p191, %p192;
+	and.b32 	%r108, %r14, 2147483647;
+	setp.eq.b32 	%p194, %r108, 0;
+	and.b32 	%r109, %r11, 2147483647;
+	setp.ne.b32 	%p195, %r109, 0;
+	and.b32 	%r110, %r12, 2147483647;
+	setp.ne.b32 	%p196, %r110, 0;
+	and.b32 	%r111, %r13, 2147483647;
+	setp.ne.b32 	%p197, %r111, 0;
+	and.pred 	%p198, %p195, %p196;
+	and.pred 	%p199, %p198, %p197;
+	and.pred 	%p200, %p194, %p199;
+	or.pred 	%p201, %p193, %p200;
+	and.pred 	%p202, %p190, %p201;
+	not.pred 	%p203, %p202;
+	@%p203 bra 	$L__BB0_39;
+	bra.uni 	$L__BB0_38;
+$L__BB0_38:
+	atom.global.add.u64 	%rd20, [fp_counters+24], 1;
+	bra.uni 	$L__BB0_39;
+$L__BB0_39:
+	and.b32 	%r112, %r11, 2139095040;
+	setp.ne.b32 	%p204, %r112, 0;
+	and.b32 	%r113, %r11, 8388607;
+	setp.eq.b32 	%p205, %r113, 0;
+	or.pred 	%p206, %p204, %p205;
+	and.b32 	%r114, %r12, 2139095040;
+	setp.ne.b32 	%p207, %r114, 0;
+	and.b32 	%r115, %r12, 8388607;
+	setp.eq.b32 	%p208, %r115, 0;
+	or.pred 	%p209, %p207, %p208;
+	and.pred 	%p210, %p206, %p209;
+	and.b32 	%r116, %r13, 2139095040;
+	setp.ne.b32 	%p211, %r116, 0;
+	and.b32 	%r117, %r13, 8388607;
+	setp.eq.b32 	%p212, %r117, 0;
+	or.pred 	%p213, %p211, %p212;
+	and.pred 	%p214, %p210, %p213;
+	and.b32 	%r118, %r14, 2139095040;
+	setp.eq.b32 	%p215, %r118, 0;
+	and.b32 	%r119, %r14, 8388607;
+	setp.ne.b32 	%p216, %r119, 0;
+	and.pred 	%p217, %p215, %p216;
+	and.pred 	%p218, %p214, %p217;
+	not.pred 	%p219, %p218;
+	@%p219 bra 	$L__BB0_41;
+	bra.uni 	$L__BB0_40;
+$L__BB0_40:
+	atom.global.add.u64 	%rd21, [fp_counters+40], 1;
+	bra.uni 	$L__BB0_41;
+$L__BB0_41:
+	ld.b64 	%rd22, [%SP+16];
 	.loc	4 19 19                         // tests/basic_tests/invalid/inf_sub.cu:19:19
-	st.b32 	[%rd17+16], %r14;
+	st.b32 	[%rd22+16], %r14;
 	.loc	4 20 5                          // tests/basic_tests/invalid/inf_sub.cu:20:5
-	bra.uni 	$L__BB0_32;
+	bra.uni 	$L__BB0_42;
 $L__tmp10:
-$L__BB0_32:                             // %if.end19
+$L__BB0_42:                             // %if.end19
 	.loc	4 21 1                          // tests/basic_tests/invalid/inf_sub.cu:21:1
 	ret;
 $L__tmp11:

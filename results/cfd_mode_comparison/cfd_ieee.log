@@ -1,0 +1,37 @@
+[FP_INSTRUMENT] Initialized for: host.bc
+[FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
+WG size of kernel:initialize = 192, WG size of kernel:compute_step_factor = 192, WG size of kernel:compute_flux = 192, WG size of kernel:time_step = 192
+Name:                     NVIDIA A100-SXM4-40GB
+Starting...
+0.00934196 seconds per iteration
+Saving solution...
+Saved solution...
+Cleaning up...
+Done...
+
+[FP_INSTRUMENT] Summary for: host.bc
+
+IEEE Exceptions According to the standard
+  Total FP Ops:       0
+  Div by Zero:        0
+  Invalid Ops:        0
+  Overflow:           0
+  Underflow:          395422
+
+Detailed Breakdown
+  NaNs (Input):       0
+  NaNs (Created):     0
+  Denormals Produced: 304432
+
+Workload Stats
+  Kernels Launched:   1
+  Operations Total:   0
+
+Derived Metrics
+  Total Exceptions:   395422
+  Exception Density:  0 (per million ops)
+  NaN Prop Rate:      0 (per million NaNs)
+  Subnormal Rate:     769891 (per million underflows)
+  Instability Score:  0
+
+[FP_INSTRUMENT] Finalized.

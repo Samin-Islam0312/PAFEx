@@ -4,13 +4,11 @@ ARCHITECTURE:
    - Worklist: collect instructions first, instrument after. Avoids causing undefined behavior
    - Only runs on nvptx64 target triple
    - Declares () which runtime lib must implement
-
 EXCEPTION COVERAGE (per IEEE 754-2019):
    EX_DIVZERO   §7.3  — fdiv(finite_nonzero, ±0), logB(0)
    EX_INVALID   §7.2  — 0/0, ∞/∞, 0×∞, ∞-∞, sqrt(neg), sNaN operands
    EX_OVERFLOW  §7.4  — result exceeds MAX_FINITE (rounding-mode aware)
    EX_UNDERFLOW §7.5  — result is subnormal (rounding-mode aware)
-
 CALLING CONVENTION into runtime lib:
 (int fmt_idx,       // 1=f32, 2=f64
                 int exception_id,  // ExceptionID enum
@@ -19,7 +17,8 @@ CALLING CONVENTION into runtime lib:
                 int line_number,   // from DILocation, -1 if unavailable
                 int func_name_idx) // reserved for future string table
 */ 
-
+#include <vector>
+#include <string>
 #include "llvm/IR/Module.h"
 #include "llvm/IR/Function.h"
 #include "llvm/IR/Constants.h"
@@ -33,32 +32,25 @@ CALLING CONVENTION into runtime lib:
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/PassManager.h"
 #include "llvm/Passes/PassBuilder.h"
-
+#include "llvm/TargetParser/Triple.h"
+#include "llvm/IR/InstIterator.h"
+#include "llvm/ADT/APInt.h"
+#include "llvm/ADT/StringRef.h"
+#include "llvm/ADT/SmallVector.h"
+#include "llvm/Support/raw_ostream.h"
+#include "llvm/Transforms/Utils/ModuleUtils.h"
+#include "llvm/Transforms/Utils/BasicBlockUtils.h"
+#include "llvm/IR/DebugInfoMetadata.h"   
+#include "llvm/IR/DebugLoc.h"
 #if __has_include("llvm/Plugins/PassPlugin.h")
   #include "llvm/Plugins/PassPlugin.h"   // LLVM 22+
 #else
   #include "llvm/Passes/PassPlugin.h"   // LLVM 21 and older
 #endif
 
-#include "llvm/TargetParser/Triple.h"
-#include "llvm/IR/InstIterator.h"
-#include "llvm/ADT/APInt.h"
-#include "llvm/ADT/StringRef.h"
-#include "llvm/ADT/SmallVector.h"
-#include <vector>
-#include <string>
-#include "llvm/Support/raw_ostream.h"
-#include "llvm/Transforms/Utils/ModuleUtils.h"
-#include "llvm/Transforms/Utils/BasicBlockUtils.h"
-#include "llvm/IR/DebugInfoMetadata.h"   
-#include "llvm/IR/DebugLoc.h"
-
 using namespace llvm;
-
 namespace {
- 
     constexpr unsigned NVPTX_GLOBAL_AS = 1;
-
     // FP32 masks 
     constexpr uint32_t F32_SIGN_MASK = 0x80000000;
     constexpr uint32_t F32_EXP_MASK  = 0x7F800000;
@@ -81,7 +73,9 @@ namespace {
         EX_INVALID   = 0,   
         EX_DIVZERO   = 1,   
         EX_OVERFLOW  = 2,   
-        EX_UNDERFLOW = 3    
+        EX_UNDERFLOW = 3,
+        EX_FP_TOTAL = 4,   
+        EX_SUBNORMAL = 5
     };
 
     enum OperationID {
@@ -149,6 +143,8 @@ namespace {
                         OperationID OpID, const WorklistEntry &Entry);
         bool detectOverflow(Instruction *I, Instruction *NextI, Module &M,
                         OperationID OpID, const WorklistEntry &Entry);
+        bool detectSubnormal(Instruction *I, Instruction *NextI, Module &M,
+                     OperationID OpID, const WorklistEntry &Entry);
         bool detectUnderflow(Instruction *I, Instruction *NextI, Module &M,
                         OperationID OpID, const WorklistEntry &Entry);
         bool isKernelFunction(const Function &F);
@@ -210,30 +206,21 @@ PreservedAnalyses DevicePass::run(Module &M, ModuleAnalysisManager &MAM) {
 void DevicePass::declareDeviceCounters(Module &M) {
     LLVMContext &Ctx = M.getContext();
     Type *I64 = Type::getInt64Ty(Ctx);
+    ArrayType *ArrTy = ArrayType::get(I64, 6);
+    const char *Name = "fp_counters";
 
-    const char *CounterNames[] = {
-    "fp_invalid_counter",
-    "fp_divbyzero_counter",
-    "fp_overflow_counter",
-    "fp_underflow_counter",
-    "fp_total_counter",
-    "fp_subnormal_counter"
-    };
+    if (M.getNamedGlobal(Name)) return;  // already declared (e.g., from another TU)
 
-    for (const char *Name : CounterNames) {
-        if (M.getNamedGlobal(Name)) continue;
-
-        GlobalVariable *GV = new GlobalVariable(
-            M, I64, false,
-            GlobalValue::ExternalLinkage,
-            ConstantInt::get(I64, 0),
-            Name, nullptr,
-            GlobalValue::NotThreadLocal,
-            NVPTX_GLOBAL_AS
-        );
-        GV->setAlignment(MaybeAlign(8));
-        errs() << "[FPPass] Declared device counter: " << Name << "\n";
-    }
+    GlobalVariable *GV = new GlobalVariable(
+        M, ArrTy, /*isConstant=*/false,
+        GlobalValue::ExternalLinkage,
+        ConstantAggregateZero::get(ArrTy),
+        Name, nullptr,
+        GlobalValue::NotThreadLocal,
+        NVPTX_GLOBAL_AS
+    );
+    GV->setAlignment(MaybeAlign(8));
+    errs() << "[FPPass] Declared device counter array: " << Name << "[6]\n";
 }
 
 void DevicePass::collectInstructions(Function &F, std::vector<WorklistEntry> &WL) {
@@ -384,24 +371,28 @@ bool DevicePass::instrumentInstruction(WorklistEntry &Entry, Module &M) {
             Changed |= detectDivByZero(I, B, M, OP_DIV, Entry);
             Changed |= detectOverflow(I, NextI, M, OP_DIV, Entry);
             Changed |= detectUnderflow(I, NextI, M, OP_DIV, Entry);
+            Changed |= detectSubnormal(I, NextI, M, OP_DIV, Entry);
             break;
         
         case OP_ADD:
         case OP_SUB:
             Changed |= detectInvalidOp(I, B, M, OpID, Entry);
             Changed |= detectOverflow(I, NextI, M, OpID, Entry);
+            Changed |= detectSubnormal(I, NextI, M, OpID, Entry);
             break;
         
         case OP_MUL:
             Changed |= detectInvalidOp(I, B, M, OP_MUL, Entry);
             Changed |= detectOverflow(I, NextI, M, OP_MUL, Entry);
             Changed |= detectUnderflow(I, NextI, M, OP_MUL, Entry);
+            Changed |= detectSubnormal(I, NextI, M, OP_MUL, Entry);
             break;
         
         case OP_FMA:
             Changed |= detectInvalidOp(I, B, M, OP_FMA, Entry);
             Changed |= detectOverflow(I, NextI, M, OP_FMA, Entry);
             Changed |= detectUnderflow(I, NextI, M, OP_FMA, Entry);
+            Changed |= detectSubnormal(I, NextI, M, OP_FMA, Entry);
             break;
         
         case OP_SQRT:
@@ -580,19 +571,19 @@ void DevicePass::injectExceptionCheck(Value *Condition, Instruction *InsertBefor
     Instruction *ThenTerm = SplitBlockAndInsertIfThen(Condition, InsertBefore, false);
     IRBuilder<> B(ThenTerm);
 
-    const char *CounterNames[] = {
-        "fp_invalid_counter",
-        "fp_divbyzero_counter",
-        "fp_overflow_counter",
-        "fp_underflow_counter"
-    };
-    
-    GlobalVariable *Counter = M.getNamedGlobal(CounterNames[ExID]);
-    if (Counter) {
+    GlobalVariable *Counters = M.getNamedGlobal("fp_counters");
+    if (Counters) {
+        Type *I32 = Type::getInt32Ty(Ctx);
+        Type *I64 = Type::getInt64Ty(Ctx);
+        Value *Idx[] = {
+            ConstantInt::get(I32, 0),       // strip outer pointer
+            ConstantInt::get(I32, ExID)     // pick element [ExID]
+        };
+        Value *Ptr = B.CreateInBoundsGEP(Counters->getValueType(), Counters, Idx);
         B.CreateAtomicRMW(
             AtomicRMWInst::Add,
-            Counter,
-            ConstantInt::get(Type::getInt64Ty(Ctx), 1),
+            Ptr,
+            ConstantInt::get(I64, 1),
             MaybeAlign(8),
             AtomicOrdering::Monotonic
         );
@@ -865,12 +856,34 @@ bool DevicePass::detectUnderflow(Instruction *I, Instruction *NextI, Module &M,
     Value *IsSubnorm = isSubnormal(B, I, Ty);
 
     Value *FlushedToZero = ConstantInt::getFalse(B.getContext());
+
     if ((OpID == OP_MUL || OpID == OP_DIV) && Op0 && Op1) {
+        // Multiplicative: result is exactly zero but neither operand was zero.
         Value *ResultZero = isZero(B, I, Ty);
         Value *Op0NonZero = B.CreateNot(isZero(B, Op0, Ty));
         Value *Op1NonZero = B.CreateNot(isZero(B, Op1, Ty));
         Value *BothNonZero = B.CreateAnd(Op0NonZero, Op1NonZero);
         FlushedToZero = B.CreateAnd(ResultZero, BothNonZero);
+    }
+    else if ((OpID == OP_ADD || OpID == OP_SUB) && Op0 && Op1) {
+        // Additive: result is zero, at least one operand non-zero.
+        // Approximation: may misattribute genuine cancellation (e.g., 1.0 + -1.0);
+        // in practice rare and the contribution is small.
+        Value *ResultZero = isZero(B, I, Ty);
+        Value *Op0NonZero = B.CreateNot(isZero(B, Op0, Ty));
+        Value *Op1NonZero = B.CreateNot(isZero(B, Op1, Ty));
+        Value *EitherNonZero = B.CreateOr(Op0NonZero, Op1NonZero);
+        FlushedToZero = B.CreateAnd(ResultZero, EitherNonZero);
+    }
+    else if (OpID == OP_FMA && Op0 && Op1 && Op2) {
+        // FMA: result is zero, all three operands non-zero. Same cancellation caveat.
+        Value *ResultZero = isZero(B, I, Ty);
+        Value *Op0NonZero = B.CreateNot(isZero(B, Op0, Ty));
+        Value *Op1NonZero = B.CreateNot(isZero(B, Op1, Ty));
+        Value *Op2NonZero = B.CreateNot(isZero(B, Op2, Ty));
+        Value *ProdNonZero = B.CreateAnd(Op0NonZero, Op1NonZero);
+        Value *AllRelevantNonZero = B.CreateAnd(ProdNonZero, Op2NonZero);
+        FlushedToZero = B.CreateAnd(ResultZero, AllRelevantNonZero);
     }
 
     Value *IsTiny = B.CreateOr(IsSubnorm, FlushedToZero, "is_tiny");
@@ -882,7 +895,46 @@ bool DevicePass::detectUnderflow(Instruction *I, Instruction *NextI, Module &M,
                         RMode, Ty->isDoubleTy(), Entry, M);
     return true;
 }
+bool DevicePass::detectSubnormal(Instruction *I, Instruction *NextI, Module &M,
+                        OperationID OpID, const WorklistEntry &Entry) {
+    Type *Ty = I->getType();
+    if (!Ty->isFloatTy() && !Ty->isDoubleTy()) return false;
+    if (!NextI) return false;
 
+    IRBuilder<> B(NextI);
+
+    Value *Op0 = nullptr;
+    Value *Op1 = nullptr;
+    Value *Op2 = nullptr;
+    if (auto *CI = dyn_cast<CallInst>(I)) {
+        unsigned NArgs = CI->arg_size();
+        if (NArgs > 0) Op0 = CI->getArgOperand(0);
+        if (NArgs > 1) Op1 = CI->getArgOperand(1);
+        if (NArgs > 2) Op2 = CI->getArgOperand(2);
+    } else {
+        if (I->getNumOperands() > 0) Op0 = I->getOperand(0);
+        if (I->getNumOperands() > 1) Op1 = I->getOperand(1);
+    }
+
+    // "Subnormal originated here": result is subnormal AND none of the inputs
+    // were already subnormal. Distinct from underflow because we DON'T fold in
+    // FlushedToZero — under FTZ mode subnormal count stays 0 while underflow
+    // count includes flushed events. The gap (underflow - subnormal) is exactly
+    // the count of flushed-to-zero events that IEEE 754 says should have raised
+    // underflow but the GPU silently discarded.
+    Value *InputsNotTiny = ConstantInt::getTrue(M.getContext());
+    if (Op0) InputsNotTiny = B.CreateAnd(InputsNotTiny, B.CreateNot(isSubnormal(B, Op0, Ty)));
+    if (Op1) InputsNotTiny = B.CreateAnd(InputsNotTiny, B.CreateNot(isSubnormal(B, Op1, Ty)));
+    if (Op2) InputsNotTiny = B.CreateAnd(InputsNotTiny, B.CreateNot(isSubnormal(B, Op2, Ty)));
+
+    Value *IsSubnorm = isSubnormal(B, I, Ty);
+    Value *FinalCondition = B.CreateAnd(InputsNotTiny, IsSubnorm, "subnormal_cond");
+
+    RoundingModeID RMode = getRoundingMode(I);
+    injectExceptionCheck(FinalCondition, NextI, EX_SUBNORMAL, OpID,
+                        RMode, Ty->isDoubleTy(), Entry, M);
+    return true;
+}
 bool DevicePass::isKernelFunction(const Function &F) {
     // LLVM 21+: kernels are marked by ptx_kernel calling convention
     if (F.getCallingConv() == CallingConv::PTX_Kernel)

@@ -8,7 +8,7 @@ Counters:
   overflow             0
   underflow            7
   total                0
-  subnormal            0
+  subnormal            6
   kernels_launched     1
 
 Full output: run.log

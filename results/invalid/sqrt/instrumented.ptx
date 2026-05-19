@@ -7,12 +7,7 @@
 .address_size 64
 
 	// .globl	_Z15testInvalidSqrtPf   // -- Begin function _Z15testInvalidSqrtPf
-.visible .global .align 8 .u64 fp_invalid_counter;
-.visible .global .align 8 .u64 fp_divbyzero_counter;
-.visible .global .align 8 .u64 fp_overflow_counter;
-.visible .global .align 8 .u64 fp_underflow_counter;
-.visible .global .align 8 .u64 fp_total_counter;
-.visible .global .align 8 .u64 fp_subnormal_counter;
+.visible .global .align 8 .b8 fp_counters[48];
                                         // @_Z15testInvalidSqrtPf
 .visible .entry _Z15testInvalidSqrtPf(
 	.param .u64 .ptr .align 1 _Z15testInvalidSqrtPf_param_0
@@ -68,7 +63,7 @@ $L__tmp3:
 	@%p8 bra 	$L__BB0_3;
 	bra.uni 	$L__BB0_2;
 $L__BB0_2:
-	atom.global.add.u64 	%rd2, [fp_invalid_counter], 1;
+	atom.global.add.u64 	%rd2, [fp_counters], 1;
 	bra.uni 	$L__BB0_3;
 $L__BB0_3:
 	sqrt.approx.f32 	%r15, %r1;
@@ -109,7 +104,7 @@ $L__tmp6:
 	@%p16 bra 	$L__BB0_7;
 	bra.uni 	$L__BB0_6;
 $L__BB0_6:
-	atom.global.add.u64 	%rd4, [fp_invalid_counter], 1;
+	atom.global.add.u64 	%rd4, [fp_counters], 1;
 	bra.uni 	$L__BB0_7;
 $L__BB0_7:
 	sqrt.approx.f32 	%r22, %r2;
@@ -150,7 +145,7 @@ $L__tmp9:
 	@%p24 bra 	$L__BB0_11;
 	bra.uni 	$L__BB0_10;
 $L__BB0_10:
-	atom.global.add.u64 	%rd6, [fp_invalid_counter], 1;
+	atom.global.add.u64 	%rd6, [fp_counters], 1;
 	bra.uni 	$L__BB0_11;
 $L__BB0_11:
 	sqrt.approx.f32 	%r29, %r3;
@@ -191,7 +186,7 @@ $L__tmp12:
 	@%p32 bra 	$L__BB0_15;
 	bra.uni 	$L__BB0_14;
 $L__BB0_14:
-	atom.global.add.u64 	%rd8, [fp_invalid_counter], 1;
+	atom.global.add.u64 	%rd8, [fp_counters], 1;
 	bra.uni 	$L__BB0_15;
 $L__BB0_15:
 	sqrt.approx.f32 	%r36, %r4;
@@ -232,7 +227,7 @@ $L__tmp15:
 	@%p40 bra 	$L__BB0_19;
 	bra.uni 	$L__BB0_18;
 $L__BB0_18:
-	atom.global.add.u64 	%rd10, [fp_invalid_counter], 1;
+	atom.global.add.u64 	%rd10, [fp_counters], 1;
 	bra.uni 	$L__BB0_19;
 $L__BB0_19:
 	sqrt.approx.f32 	%r43, %r5;
@@ -273,7 +268,7 @@ $L__tmp18:
 	@%p48 bra 	$L__BB0_23;
 	bra.uni 	$L__BB0_22;
 $L__BB0_22:
-	atom.global.add.u64 	%rd12, [fp_invalid_counter], 1;
+	atom.global.add.u64 	%rd12, [fp_counters], 1;
 	bra.uni 	$L__BB0_23;
 $L__BB0_23:
 	sqrt.approx.f32 	%r50, %r6;
@@ -318,7 +313,7 @@ $L__tmp22:
 	@%p56 bra 	$L__BB0_27;
 	bra.uni 	$L__BB0_26;
 $L__BB0_26:
-	atom.global.add.u64 	%rd14, [fp_invalid_counter], 1;
+	atom.global.add.u64 	%rd14, [fp_counters], 1;
 	bra.uni 	$L__BB0_27;
 $L__BB0_27:
 	sqrt.approx.f32 	%r58, %r7;

@@ -3,12 +3,7 @@ source_filename = "llvm-link"
 target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
 target triple = "nvptx64-nvidia-cuda"
 
-@fp_invalid_counter = addrspace(1) global i64 0, align 8
-@fp_divbyzero_counter = addrspace(1) global i64 0, align 8
-@fp_overflow_counter = addrspace(1) global i64 0, align 8
-@fp_underflow_counter = addrspace(1) global i64 0, align 8
-@fp_total_counter = addrspace(1) global i64 0, align 8
-@fp_subnormal_counter = addrspace(1) global i64 0, align 8
+@fp_counters = addrspace(1) global [6 x i64] zeroinitializer, align 8
 
 ; Function Attrs: convergent noinline norecurse nounwind optnone
 define dso_local ptx_kernel void @_Z15testInvalidSqrtPf(ptr noundef %result) #0 !dbg !963 {
@@ -53,7 +48,7 @@ if.then:                                          ; preds = %entry
   br i1 %13, label %14, label %16, !dbg !980
 
 14:                                               ; preds = %if.then
-  %15 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !980
+  %15 = atomicrmw add ptr addrspace(1) @fp_counters, i64 1 monotonic, align 8, !dbg !980
   br label %16, !dbg !980
 
 16:                                               ; preds = %if.then, %14
@@ -89,7 +84,7 @@ if.then3:                                         ; preds = %if.end
   br i1 %31, label %32, label %34, !dbg !989
 
 32:                                               ; preds = %if.then3
-  %33 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !989
+  %33 = atomicrmw add ptr addrspace(1) @fp_counters, i64 1 monotonic, align 8, !dbg !989
   br label %34, !dbg !989
 
 34:                                               ; preds = %if.then3, %32
@@ -125,7 +120,7 @@ if.then8:                                         ; preds = %if.end6
   br i1 %49, label %50, label %52, !dbg !998
 
 50:                                               ; preds = %if.then8
-  %51 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !998
+  %51 = atomicrmw add ptr addrspace(1) @fp_counters, i64 1 monotonic, align 8, !dbg !998
   br label %52, !dbg !998
 
 52:                                               ; preds = %if.then8, %50
@@ -161,7 +156,7 @@ if.then13:                                        ; preds = %if.end11
   br i1 %67, label %68, label %70, !dbg !1007
 
 68:                                               ; preds = %if.then13
-  %69 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !1007
+  %69 = atomicrmw add ptr addrspace(1) @fp_counters, i64 1 monotonic, align 8, !dbg !1007
   br label %70, !dbg !1007
 
 70:                                               ; preds = %if.then13, %68
@@ -197,7 +192,7 @@ if.then18:                                        ; preds = %if.end16
   br i1 %85, label %86, label %88, !dbg !1016
 
 86:                                               ; preds = %if.then18
-  %87 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !1016
+  %87 = atomicrmw add ptr addrspace(1) @fp_counters, i64 1 monotonic, align 8, !dbg !1016
   br label %88, !dbg !1016
 
 88:                                               ; preds = %if.then18, %86
@@ -233,7 +228,7 @@ if.then23:                                        ; preds = %if.end21
   br i1 %103, label %104, label %106, !dbg !1025
 
 104:                                              ; preds = %if.then23
-  %105 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !1025
+  %105 = atomicrmw add ptr addrspace(1) @fp_counters, i64 1 monotonic, align 8, !dbg !1025
   br label %106, !dbg !1025
 
 106:                                              ; preds = %if.then23, %104
@@ -272,7 +267,7 @@ if.then28:                                        ; preds = %if.end26
   br i1 %122, label %123, label %125, !dbg !1037
 
 123:                                              ; preds = %if.then28
-  %124 = atomicrmw add ptr addrspace(1) @fp_invalid_counter, i64 1 monotonic, align 8, !dbg !1037
+  %124 = atomicrmw add ptr addrspace(1) @fp_counters, i64 1 monotonic, align 8, !dbg !1037
   br label %125, !dbg !1037
 
 125:                                              ; preds = %if.then28, %123

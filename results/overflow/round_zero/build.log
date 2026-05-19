@@ -1,11 +1,6 @@
 === Part 2: Device pipeline ===
 [FPPass] Running on device module: nvptx64-nvidia-cuda
-[FPPass] Declared device counter: fp_invalid_counter
-[FPPass] Declared device counter: fp_divbyzero_counter
-[FPPass] Declared device counter: fp_overflow_counter
-[FPPass] Declared device counter: fp_underflow_counter
-[FPPass] Declared device counter: fp_total_counter
-[FPPass] Declared device counter: fp_subnormal_counter
+[FPPass] Declared device counter array: fp_counters[6]
 [FPPass] Visiting function: _Z22testOverflow_RoundZeroPf [KERNEL]
 [FPPass]   COLLECT nvvm.add 'llvm.nvvm.add.rz.f' @ _Z22testOverflow_RoundZeroPf:207
 [FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rz.f' @ _Z22testOverflow_RoundZeroPf:313
@@ -14,33 +9,26 @@
 [FPPass]   INSTRUMENT _Z22testOverflow_RoundZeroPf:207 op=0
 [FPPass]     -> Injected check: ex=0 op=0 line=207
 [FPPass]     -> Injected check: ex=2 op=0 line=207
+[FPPass]     -> Injected check: ex=5 op=0 line=207
 [FPPass]   INSTRUMENT _Z22testOverflow_RoundZeroPf:313 op=2
 [FPPass]     -> Injected check: ex=0 op=2 line=313
 [FPPass]     -> Injected check: ex=2 op=2 line=313
 [FPPass]     -> Injected check: ex=3 op=2 line=313
+[FPPass]     -> Injected check: ex=5 op=2 line=313
 [FPPass]   INSTRUMENT _Z22testOverflow_RoundZeroPf:313 op=2
 [FPPass]     -> Injected check: ex=0 op=2 line=313
 [FPPass]     -> Injected check: ex=2 op=2 line=313
 [FPPass]     -> Injected check: ex=3 op=2 line=313
+[FPPass]     -> Injected check: ex=5 op=2 line=313
 [FPPass]   INSTRUMENT _Z22testOverflow_RoundZeroPf:301 op=6
 [FPPass]     -> Injected check: ex=0 op=6 line=301
 [FPPass]     -> Injected check: ex=2 op=6 line=301
 [FPPass]     -> Injected check: ex=3 op=6 line=301
+[FPPass]     -> Injected check: ex=5 op=6 line=301
 [FPPass] SUMMARY: visited 1 functions, instrumented 4 instructions
 === Part 3: Host pipeline ===
 [HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD/results/overflow/round_zero/host.bc
-[HostPass] Created host shadow: fp_invalid_counter
-[HostPass] Created host shadow: fp_divbyzero_counter
-[HostPass] Created host shadow: fp_overflow_counter
-[HostPass] Created host shadow: fp_underflow_counter
-[HostPass] Created host shadow: fp_total_counter
-[HostPass] Created host shadow: fp_subnormal_counter
-[HostPass] Registered shadow: fp_invalid_counter
-[HostPass] Registered shadow: fp_divbyzero_counter
-[HostPass] Registered shadow: fp_overflow_counter
-[HostPass] Registered shadow: fp_underflow_counter
-[HostPass] Registered shadow: fp_total_counter
-[HostPass] Registered shadow: fp_subnormal_counter
+[HostPass] Created host shadow: fp_counters[6]
+[HostPass] Registered shadow: fp_counters[6] (48 bytes)
 [HostPass] Found main(), injecting PAPI lifecycle.
-[HostPass] Instrumented 1 kernel launches.
 === Part 4: Link ===
