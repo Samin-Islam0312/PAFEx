@@ -173,6 +173,16 @@ PreservedAnalyses DevicePass::run(Module &M, ModuleAnalysisManager &MAM) {
         if (F.isDeclaration()) continue;
         if (F.getName().starts_with("__fppass_")) continue;
 
+
+// --- NEW THRUST/CUB FILTER ---
+        StringRef FuncName = F.getName();
+        // Ignore any function whose mangled name contains thrust or cub namespaces
+        if (FuncName.contains("thrust") || FuncName.contains("cub")) {
+            // Optional: Uncomment the line below if you want to see exactly what is being skipped during debugging
+            // errs() << "[FPPass] Skipping Thrust/CUB internal: " << FuncName << "\n";
+            continue;
+        }
+        // -----------------------------
         totalFunctions++;
         errs() << "[FPPass] Visiting function: " << F.getName();
 
@@ -212,12 +222,12 @@ void DevicePass::declareDeviceCounters(Module &M) {
     if (M.getNamedGlobal(Name)) return;  // already declared (e.g., from another TU)
 
     GlobalVariable *GV = new GlobalVariable(
-        M, ArrTy, /*isConstant=*/false,
-        GlobalValue::ExternalLinkage,
-        ConstantAggregateZero::get(ArrTy),
-        Name, nullptr,
-        GlobalValue::NotThreadLocal,
-        NVPTX_GLOBAL_AS
+    M, ArrTy, /*isConstant=*/false,
+    GlobalValue::LinkOnceODRLinkage,        // ← was ExternalLinkage
+    ConstantAggregateZero::get(ArrTy),
+    Name, nullptr,
+    GlobalValue::NotThreadLocal,
+    NVPTX_GLOBAL_AS
     );
     GV->setAlignment(MaybeAlign(8));
     errs() << "[FPPass] Declared device counter array: " << Name << "[6]\n";
@@ -378,6 +388,7 @@ bool DevicePass::instrumentInstruction(WorklistEntry &Entry, Module &M) {
         case OP_SUB:
             Changed |= detectInvalidOp(I, B, M, OpID, Entry);
             Changed |= detectOverflow(I, NextI, M, OpID, Entry);
+            Changed |= detectUnderflow(I, NextI, M, OpID, Entry);
             Changed |= detectSubnormal(I, NextI, M, OpID, Entry);
             break;
         

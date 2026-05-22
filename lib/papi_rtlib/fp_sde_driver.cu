@@ -131,7 +131,7 @@ extern "C" void fp_instrument_region_start(void) {
 extern "C" void fp_instrument_region_stop(void) {
     if (!initialized || !papi_started) return;
     int ret;
-    //cudaDeviceSynchronize();
+    cudaDeviceSynchronize();
     fp_instrument_read_and_publish();
     if ((ret = PAPI_stop(EventSet, papi_values)) != PAPI_OK)
         fprintf(stderr, "PAPI_stop failed: %s\n", PAPI_strerror(ret));
@@ -197,7 +197,7 @@ extern "C" void fp_instrument_finalize(void) {
 #else
     if (papi_started) {
         int ret;
-        //cudaDeviceSynchronize();
+        cudaDeviceSynchronize();
         fp_instrument_read_and_publish();
         if ((ret = PAPI_stop(EventSet, papi_values)) != PAPI_OK)
             fprintf(stderr, "PAPI_stop (finalize) failed: %s\n", PAPI_strerror(ret));
