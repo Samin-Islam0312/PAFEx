@@ -66,7 +66,7 @@ IEEE Exceptions According to the standard
   Div by Zero:        0
   Invalid Ops:        0
   Overflow:           0
-  Underflow:          5
+  Underflow:          8
 
 Detailed Breakdown
   NaNs (Input):       0
@@ -78,10 +78,10 @@ Workload Stats
   Operations Total:   0
 
 Derived Metrics
-  Total Exceptions:   5
+  Total Exceptions:   8
   Exception Density:  0 (per million ops)
   NaN Prop Rate:      0 (per million NaNs)
-  Subnormal Rate:     1000000 (per million underflows)
+  Subnormal Rate:     625000 (per million underflows)
   Instability Score:  0
 
 [FP_INSTRUMENT] Finalized.

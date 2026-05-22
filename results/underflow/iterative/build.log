@@ -17,6 +17,7 @@
 [FPPass]   INSTRUMENT _Z23testUnderflow_SummationPf:50 op=0
 [FPPass]     -> Injected check: ex=0 op=0 line=50
 [FPPass]     -> Injected check: ex=2 op=0 line=50
+[FPPass]     -> Injected check: ex=3 op=0 line=50
 [FPPass]     -> Injected check: ex=5 op=0 line=50
 [FPPass] SUMMARY: visited 3 functions, instrumented 2 instructions
 === Part 3: Host pipeline ===

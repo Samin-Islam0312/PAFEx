@@ -10,6 +10,7 @@
 [FPPass]   INSTRUMENT _Z26testOverflow_RoundPositivePf:204 op=0
 [FPPass]     -> Injected check: ex=0 op=0 line=204
 [FPPass]     -> Injected check: ex=2 op=0 line=204
+[FPPass]     -> Injected check: ex=3 op=0 line=204
 [FPPass]     -> Injected check: ex=5 op=0 line=204
 [FPPass]   INSTRUMENT _Z26testOverflow_RoundPositivePf:310 op=2
 [FPPass]     -> Injected check: ex=0 op=2 line=310
@@ -24,6 +25,7 @@
 [FPPass]   INSTRUMENT _Z26testOverflow_RoundPositivePf:204 op=0
 [FPPass]     -> Injected check: ex=0 op=0 line=204
 [FPPass]     -> Injected check: ex=2 op=0 line=204
+[FPPass]     -> Injected check: ex=3 op=0 line=204
 [FPPass]     -> Injected check: ex=5 op=0 line=204
 [FPPass] SUMMARY: visited 1 functions, instrumented 4 instructions
 === Part 3: Host pipeline ===

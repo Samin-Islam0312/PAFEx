@@ -9,6 +9,7 @@
 [FPPass]   INSTRUMENT _Z22testOverflow_RoundZeroPf:207 op=0
 [FPPass]     -> Injected check: ex=0 op=0 line=207
 [FPPass]     -> Injected check: ex=2 op=0 line=207
+[FPPass]     -> Injected check: ex=3 op=0 line=207
 [FPPass]     -> Injected check: ex=5 op=0 line=207
 [FPPass]   INSTRUMENT _Z22testOverflow_RoundZeroPf:313 op=2
 [FPPass]     -> Injected check: ex=0 op=2 line=313
