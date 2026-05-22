@@ -1,0 +1,16 @@
+build/
+*.o
+*.so
+*.bc
+*.ll
+*.cubin
+*.fatbin
+*.ptx
+app_*
+instrumented*
+device.bc
+device_linked.bc
+optimized_*.bc
+host.bc
+results/**/instrumented_app
+results/**/host.o
