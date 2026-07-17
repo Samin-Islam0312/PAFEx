@@ -17,5 +17,6 @@ include_directories(${LLVM_INCLUDE_DIRS})
 # Point CMake to the subdirectories containing the passes
 add_subdirectory(lib/device)
 add_subdirectory(lib/host)
+add_subdirectory(lib/tag)
 
 # We will add add_subdirectory(runtime) and add_subdirectory(tests) later!
