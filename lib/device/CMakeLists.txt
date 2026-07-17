@@ -1,4 +1,5 @@
-# Target for the GPU Device Pass (Phase 1 & 2)
+# lib/device/CMakeLists.txt
 add_llvm_pass_plugin(DevicePass
-  pass.cpp
+  device_pass.cpp
 )
+target_include_directories(DevicePass PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../include)

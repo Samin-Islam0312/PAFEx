@@ -1,0 +1,17 @@
+# sweep.manifest — exception-inducing benchmarks for the opt-flag study
+# format: name | group | src | inc | args | expect
+# 'expect' is informational here; the sweep scrapes the [DBG] counts directly.
+#
+# CONFIDENT (single .cu, should build single-TU):
+LU       | invalid   | tests/benchmarks/polybench/CUDA/LU/lu.cu                       | - | - | invalid
+GRAMSCHM | invalid   | tests/benchmarks/polybench/CUDA/GRAMSCHM/gramschmidt.cu        | - | - | invalid
+#
+# MULTI-FILE — main.cu #includes the rest; needs its own dir on the include path.
+# May or may not build single-TU depending on how the includes are written:
+myocyte  | divZero   | tests/benchmarks/rodinia/myocyte/main.cu                       | tests/benchmarks/rodinia/myocyte | - | divzero
+#
+# RISKY — framework / split-kernel benchmarks. Single-TU likely NOT enough:
+#   S3D    needs the SHOC common infrastructure (not standalone)
+#   stencil is parboil: host (main.cu) and kernel (kernels.cu) are separate TUs
+S3D      | underflow | tests/benchmarks/shoc/src/cuda/level2/s3d/S3D.cu              | - | - | underflow
+stencil  | underflow | tests/benchmarks/parboil/benchmarks/stencil/src/cuda/main.cu  | - | - | underflow

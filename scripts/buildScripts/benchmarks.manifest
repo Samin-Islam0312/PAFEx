@@ -1,0 +1,89 @@
+# PaeFEx single-TU benchmark manifest
+# Pipe-delimited. '#' = comment, blank lines ignored. '-' = empty field.
+# Fields:  name | group | src | inc | args | expect
+#   name   : unique key (also the scratch/results subdir; may contain no spaces)
+#   group  : basic | micro | rodinia | shoc | ecp | parboil  (drives run order)
+#   src    : .cu to compile (the single TU; #includes pull in the rest)
+#   inc    : one include dir, or '-' for none
+#   args   : runtime argv (space-separated, passed through verbatim), or '-'
+#   expect : for basics only — the ONE exception class the test must fire
+#            (invalid|divzero|overflow|underflow); '-' for everything else.
+#            NOTE: subnormal is not a class here; it is the allowed companion
+#            of underflow and is never counted as a cross-class leak.
+#
+# Run order (item 5): micro + basic first (fast validation), then rodinia, then
+# the rest. The harness can sort by group; within a group, file order is fine.
+
+# ---------- micro ----------
+contention_stress | micro | tests/contention_stress.cu | tests | - | -
+# TODO confirm paths/args for the other micros:
+# gpu_fpx   | micro | tests/gpu_fpx.cu        | tests | - | -
+# libdevice | micro | TODO/libdevice.cu       | -     | - | -
+
+# ---------- basic_tests (ground truth: each fires exactly its named class) ----------
+divByZero      | basic | tests/basic_tests/divZero/divByZero.cu       | - | - | divzero
+logB_test      | basic | tests/basic_tests/divZero/logB_test.cu       | - | - | divzero
+inv_div        | basic | tests/basic_tests/invalid/div.cu             | - | - | invalid
+fma_zero_inf   | basic | tests/basic_tests/invalid/fma_zero_inf.cu    | - | - | invalid
+inf_sub        | basic | tests/basic_tests/invalid/inf_sub.cu         | - | - | invalid
+mul_zero_inf   | basic | tests/basic_tests/invalid/mul_zero_inf.cu    | - | - | invalid
+sqrt_invalid   | basic | tests/basic_tests/invalid/sqrt.cu            | - | - | invalid
+round_nearest  | basic | tests/basic_tests/overflow/round_nearest.cu  | - | - | overflow
+round_negative | basic | tests/basic_tests/overflow/round_negative.cu | - | - | overflow
+round_positive | basic | tests/basic_tests/overflow/round_positive.cu | - | - | overflow
+round_zero     | basic | tests/basic_tests/overflow/round_zero.cu     | - | - | overflow
+uf_basic       | basic | tests/basic_tests/underflow/basic.cu         | - | - | underflow
+uf_denormal    | basic | tests/basic_tests/underflow/denormal.cu      | - | - | underflow
+uf_gradual     | basic | tests/basic_tests/underflow/gradual.cu       | - | - | underflow
+uf_iterative   | basic | tests/basic_tests/underflow/iterative.cu     | - | - | underflow
+uf_rounding    | basic | tests/basic_tests/underflow/rounding.cu      | - | - | underflow
+
+# ---------- rodinia (single-TU) ----------
+myocyte  | rodinia | tests/benchmarks/rodinia/myocyte/main.cu       | tests/benchmarks/rodinia/myocyte       | 100 1 0       | -
+srad     | rodinia | tests/benchmarks/rodinia/srad/srad_v1/main.cu  | tests/benchmarks/rodinia/srad/srad_v1  | 100 0.5 502 458 | -
+
+hotspot  | rodinia | tests/benchmarks/rodinia/hotspot/hotspot.cu       | tests/benchmarks/rodinia/hotspot       | 512 2 2 tests/benchmarks/rodinia/hotspot/data/temp_512 tests/benchmarks/rodinia/hotspot/data/power_512 output.out | -
+gaussian | rodinia | tests/benchmarks/rodinia/gaussian/gaussian.cu     | tests/benchmarks/rodinia/gaussian      | -s 16    | -
+nw       | rodinia | tests/benchmarks/rodinia/nw/needle.cu             | tests/benchmarks/rodinia/nw            | 2048 10  | -
+backprop | rodinia | tests/benchmarks/rodinia/backprop/backprop_cuda.cu | tests/benchmarks/rodinia/backprop    | 2097152  | -
+
+# ---------- shoc / ecp / parboil (fill as confirmed single-TU) ----------
+# s3d     | shoc    | TODO | TODO | TODO | -
+# xsbench | ecp     | TODO | TODO | TODO | -   # NOTE: was multi-TU; only if single-TU variant
+
+
+# ---- PolyBench/GPU ----------------------------------------------------------
+# Each kernel is single-TU: one .cu, no argv (sizes are compile-time #defines),
+# no data files. inc='-' because the kernel's #include "../../common/..." paths
+# are relative to the source file and clang resolves them automatically.
+# DEFAULT DATA_TYPE IS FLOAT — flip to double in each .cuh for FP64 coverage.
+# Build through run_single_tu.sh on ONE kernel (gemm) first: the textual
+# include of ../../common/polybench.c + driver-API cuda.h may need a small tweak.
+gemm        | polybench | tests/benchmarks/polybench/CUDA/GEMM/gemm.cu            | - | - | -
+gramschmidt | polybench | tests/benchmarks/polybench/CUDA/GRAMSCHM/gramschmidt.cu | - | - | -
+2mm         | polybench | tests/benchmarks/polybench/CUDA/2MM/2mm.cu              | - | - | -
+3mm         | polybench | tests/benchmarks/polybench/CUDA/3MM/3mm.cu              | - | - | -
+fdtd2d      | polybench | tests/benchmarks/polybench/CUDA/FDTD-2D/fdtd2d.cu       | - | - | -
+correlation | polybench | tests/benchmarks/polybench/CUDA/CORR/correlation.cu     | - | - | -
+covariance  | polybench | tests/benchmarks/polybench/CUDA/COVAR/covariance.cu     | - | - | -
+syrk        | polybench | tests/benchmarks/polybench/CUDA/SYRK/syrk.cu            | - | - | -
+syr2k       | polybench | tests/benchmarks/polybench/CUDA/SYR2K/syr2k.cu          | - | - | -
+gesummv     | polybench | tests/benchmarks/polybench/CUDA/GESUMMV/gesummv.cu      | - | - | -
+mvt         | polybench | tests/benchmarks/polybench/CUDA/MVT/mvt.cu              | - | - | -
+atax        | polybench | tests/benchmarks/polybench/CUDA/ATAX/atax.cu            | - | - | -
+bicg        | polybench | tests/benchmarks/polybench/CUDA/BICG/bicg.cu            | - | - | -
+# (also available, all single-TU FP: 2DCONV, 3DCONV, ADI, DOITGEN, GEMVER,
+#  JACOBI1D, JACOBI2D, LU — add the same way if you want more breadth.)
+
+# ---- Parboil (FP-relevant) --------------------------------------------------
+# COMMENTED: paths + args UNVERIFIED. Parboil splits across src/cuda/ and feeds
+# datasets through its driver. Discover the real main .cu and dataset per bench:
+#   find tests/benchmarks/parboil/benchmarks/<name>/src/cuda -name '*.cu'
+#   ls   tests/benchmarks/parboil/benchmarks/<name>/run        # dataset dirs
+# Then fill src + args (args are usually -i <input files> -o <output>).
+# stencil | parboil | tests/benchmarks/parboil/benchmarks/stencil/src/cuda/TODO.cu | - | TODO_ARGS | -
+# spmv    | parboil | tests/benchmarks/parboil/benchmarks/spmv/src/cuda/TODO.cu    | - | TODO_ARGS | -
+# sgemm   | parboil | tests/benchmarks/parboil/benchmarks/sgemm/src/cuda/TODO.cu   | - | TODO_ARGS | -
+# cutcp   | parboil | tests/benchmarks/parboil/benchmarks/cutcp/src/cuda/TODO.cu   | - | TODO_ARGS | -
+# mri-q   | parboil | tests/benchmarks/parboil/benchmarks/mri-q/src/cuda/TODO.cu   | - | TODO_ARGS | -
+lu | polybench | tests/benchmarks/polybench/CUDA/LU/lu.cu | - | - | -
