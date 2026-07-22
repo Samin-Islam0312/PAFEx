@@ -122,7 +122,13 @@ namespace {
         llvm::cl::desc("Instrument inside vendor math libraries (OCML/libdevice) and "
                     "inline math-header shims instead of counting at the call "
                     "boundary. Default off: library-internal FP ops are filtered "
-                    "for cross-vendor comparability."),
+                    "for cross-vendor comparability. Disables BOTH filter "
+                    "mechanisms: the callee-name filter (catches library bodies "
+                    "that still exist as functions) and the !pafex.libinternal "
+                    "metadata filter (catches bodies already inlined into user "
+                    "kernels; requires -fpass-plugin=TagPass.so at the clang step, "
+                    "without which no tags exist and this flag only affects the "
+                    "name filter)."),
         llvm::cl::init(false));
     // FP32 masks
     constexpr uint32_t F32_SIGN_MASK = 0x80000000;
@@ -177,6 +183,7 @@ namespace {
         std::string   FileName;
         bool          IsF64;
         unsigned      SiteIndex = 0;   // dense per-(file:func:line) index, assigned post-collection
+        std::string   OpTag; 
     };
 
     enum class GPUTarget { None, NVPTX, AMDGCN };
@@ -306,15 +313,50 @@ namespace {
         std::map<std::string, unsigned> SiteMap;     // "file:func:line" -> dense index
         std::vector<std::string> SiteList;           // index -> CSV row tail (tab-separated)
         unsigned UnknownLocSites = 0;                // sites with no debug location
+        unsigned SpilledSites = 0;                   // distinct keys folded into the spill bucket
 
-        unsigned getSiteIndex(const std::string &File,
+        // The last slot of the per-site array is RESERVED as the spill bucket and
+        // is never interned to a real source location. Interning a real site there
+        // (the previous behavior: clamp at kMaxSites, hand back kMaxSites-1) meant
+        // every overflowing site atomically incremented the same columns as the
+        // legitimate site that had already claimed that index — a silent, plausible
+        // wrong answer, and it also kept the driver's SPILL branch permanently dead
+        // because the slot had a real CSV row.
+        static constexpr unsigned kSpillSite = kMaxSites - 1;
+
+unsigned getSiteIndex(const std::string &File,
                               const std::string &Func, int Line,
-                              bool IsKernel) {
+                              bool IsKernel, const std::string &Op) {
             std::string Key = File + ":" + Func + ":" + std::to_string(Line);
             auto It = SiteMap.find(Key);
             if (It != SiteMap.end()) return It->second;
             unsigned Idx = (unsigned)SiteList.size();
-            if (Idx >= kMaxSites) return kMaxSites - 1;  // clamp; last slot is "spill"
+            if (Idx >= kSpillSite) {
+                // Deliberately do NOT push a SiteList row for the spill slot.
+                // The driver's report keys the SPILL diagnostic on the ABSENCE
+                // of a site-table entry at kMaxSites-1:
+                //     if (g_sites && g_sites[s].valid)      -> print location
+                //     else if (s == kMaxSites - 1)          -> print SPILL
+                // Emitting a synthetic "<spill>" row into fp_sites.csv would set
+                // valid=1 for that index and keep the SPILL branch dead — the
+                // same dead branch as before this fix, for a new reason. No row
+                // means load_site_table leaves the slot invalid and the driver
+                // reports the overflow itself, which is where that message
+                // belongs (it is the component that knows the counts).
+                if (SpilledSites == 0) {
+                    errs() << "[FPPass] WARNING: site table full (" << kSpillSite
+                           << " addressable slots). Further sites fold into the "
+                           << "reserved spill bucket at index " << kSpillSite
+                           << "; their counts are NOT attributable to a source "
+                           << "location. Raise kMaxSites in fp_abi.h and rebuild "
+                           << "BOTH passes and the driver.\n";
+                }
+                // Intern the key to the spill slot so a repeated site is counted
+                // once here, and so subsequent lookups short-circuit above.
+                SiteMap[Key] = kSpillSite;
+                ++SpilledSites;
+                return kSpillSite;
+            }
             SiteMap[Key] = Idx;
             if (Line < 0) ++UnknownLocSites;
             // Columns 1-3 (file, func, line) keep the original layout so
@@ -322,8 +364,9 @@ namespace {
             // are unaffected; func_pretty and is_kernel are appended.
             std::string Pretty = demangle(Func);
             const std::string &FileOut = File.empty() ? std::string("<unknown>") : File;
-            SiteList.push_back(FileOut + "\t" + Func + "\t" + std::to_string(Line) +
-                               "\t" + Pretty + "\t" + (IsKernel ? "1" : "0"));
+SiteList.push_back(FileOut + "\t" + Func + "\t" + std::to_string(Line) +
+                               "\t" + Pretty + "\t" + (IsKernel ? "1" : "0") +
+                               "\t" + Op);
             return Idx;
         }
     };
@@ -354,9 +397,18 @@ bool DevicePass::isLibraryInternal(StringRef FuncName) const {
 
     if (Target == GPUTarget::AMDGCN) {
         // ROCm device libraries (linked in as bitcode pre-codegen) and HIP
-        // runtime internals. Once these are inlined into user kernels the
-        // inlined bodies ARE instrumented as part of the user function,
-        // which is the desired origination-level coverage.
+        // runtime internals.
+        //
+        // This name filter only sees library code that still EXISTS as a
+        // function. Once the inliner pastes an OCML body into a user kernel and
+        // deletes the callee, there is no name left to match and the library's
+        // internals get counted as user code — at -O1+ on myocyte that was ~7k
+        // spurious ops, enough to reverse the sign of the optimization-level
+        // trend. Nor is file:line separable: prebuilt ocml.bc ships without
+        // debug info, so inlined instructions inherit the CALL SITE's
+        // DILocation. The !pafex.libinternal metadata stamped by TagPass at
+        // PipelineStartEP (before any inliner runs) is what covers that regime;
+        // this filter covers the not-yet-inlined one. See collectInstructions.
         return FuncName.contains("__ocml")  ||  // math library
                FuncName.contains("__ockl")  ||  // kernel library
                FuncName.contains("__oclc_")  ||  // control constants
@@ -403,7 +455,7 @@ PreservedAnalyses DevicePass::run(Module &M, ModuleAnalysisManager &MAM) {
         // Assign dense per-(file:func:line) site indices. SiteMap is a pass
         // member, so indices stay consistent across all functions in the module.
         for (WorklistEntry &E : Worklist) {
-            E.SiteIndex = getSiteIndex(E.FileName, E.FuncName, E.LineNumber, IsKern);
+            E.SiteIndex = getSiteIndex(E.FileName, E.FuncName, E.LineNumber, IsKern, E.OpTag);        
         }
 
         if (Verbose)
@@ -422,6 +474,11 @@ PreservedAnalyses DevicePass::run(Module &M, ModuleAnalysisManager &MAM) {
     errs() << "[FPPass] SUMMARY: visited " << totalFunctions
         << " functions, instrumented " << totalInstructions
         << " instructions, " << SiteList.size() << " sites\n";
+    if (SpilledSites > 0)
+        errs() << "[FPPass] WARNING: " << SpilledSites
+               << " distinct site(s) exceeded kMaxSites and were folded into the "
+               << "spill bucket (index " << kSpillSite << "). Per-site numbers for "
+               << "this module are incomplete.\n";
     if (UnknownLocSites > 0)
         errs() << "[FPPass] NOTE: " << UnknownLocSites
                << " site(s) have no source location. Compile device code with "
@@ -434,7 +491,7 @@ PreservedAnalyses DevicePass::run(Module &M, ModuleAnalysisManager &MAM) {
         std::error_code EC;
         raw_fd_ostream CSV(SitesCSVPath, EC);
         if (!EC) {
-            CSV << "index\tfile\tfunc\tline\tfunc_pretty\tis_kernel\n";
+            CSV << "index\tfile\tfunc\tline\tfunc_pretty\tis_kernel\top\n";
             for (unsigned i = 0; i < SiteList.size(); ++i)
                 CSV << i << "\t" << SiteList[i] << "\n";
             errs() << "[FPPass] Wrote " << SitesCSVPath << " with "
@@ -539,7 +596,7 @@ void DevicePass::collectInstructions(Function &F, std::vector<WorklistEntry> &WL
 
             auto collect = [&](OperationID Op, bool F64Flag, const char *Tag,
                                StringRef Detail = "") {
-                WL.push_back({&I, Op, FuncName, LineNum, FileName, F64Flag});
+                WL.push_back({&I, Op, FuncName, LineNum, FileName, F64Flag, 0, Tag});
                 if (Verbose)
                     errs() << "[FPPass]   COLLECT " << Tag
                            << (Detail.empty() ? "" : " '") << Detail
@@ -627,6 +684,70 @@ void DevicePass::collectInstructions(Function &F, std::vector<WorklistEntry> &WL
                     else if (Name.starts_with("llvm.nvvm.div.")) {
                         if (isF32 || isF64) collect(OP_DIV, isF64, "nvvm.div", Name);
                     }
+                    // AMDGPU rounding-mode arithmetic wrappers
+                    // (__ocml_{add,sub,mul,fma}_rt{e,n,p,z}_f{16,32,64})
+                    //
+                    // HIP's __fadd_rz / __fmul_rd / __fmaf_ru / __dadd_rz etc.
+                    // lower to these -- but ONLY when the translation unit is
+                    // compiled with -DOCML_BASIC_ROUNDED_OPERATIONS. Without
+                    // that macro the identifiers do not exist at all (hard
+                    // front-end error) and the only rounding entry points are
+                    // __fadd_rn / __fmul_rn / __fmaf_rn, which expand to plain
+                    // fadd / fmul / llvm.fma and are collected by those cases.
+                    //
+                    // Unlike NVPTX, the mode is NOT in the instruction. The
+                    // wrapper body is:
+                    //     llvm.amdgcn.s.setreg(hwreg(HW_REG_MODE,0,2), <mode>)
+                    //     llvm.experimental.constrained.fadd.f32(
+                    //         ..., metadata !"round.dynamic", ...)
+                    //     llvm.amdgcn.s.setreg(hwreg(HW_REG_MODE,0,2), 0)
+                    // The constrained intrinsic says "round.dynamic" -- it
+                    // deliberately does not name the mode, which lives in the
+                    // MODE.FP_ROUND hardware register. The callee NAME is the
+                    // only place the rounding mode is legible in the IR, which
+                    // is why getRoundingMode matches on it.
+                    //
+                    // That name survives optimization: these wrappers carry
+                    // `strictfp`, and LLVM refuses to inline a strictfp callee
+                    // into a non-strictfp caller (it would have to convert every
+                    // FP op in the caller to constrained form). Under the
+                    // default FP model a HIP kernel is never strictfp, so the
+                    // calls remain intact at -O0 through -O3. Verified on
+                    // gfx942/ROCm 7.2.4. NOTE: -ffp-model=strict would make the
+                    // caller strictfp and this property would no longer hold.
+                    //
+                    // _rte_ (round-to-nearest-even) is collected here even
+                    // though it maps to RM_DEFAULT: with the macro on, __fadd_rn
+                    // is a CALL to __ocml_add_rte_f32 at -O0 and there is no
+                    // fadd for the FAdd case to catch. The rte wrapper is the
+                    // one that lacks `strictfp` (its mode is the default, so the
+                    // setreg pair is a no-op sandwich), so at -O1+ it inlines
+                    // and folds back to a bare fadd. Collecting the call keeps
+                    // -O0 and -O1+ counting the same operation.
+                    else if (Name.starts_with("__ocml_add_rt")) {
+                        if (isF32 || isF64) collect(OP_ADD, isF64, "ocml.add", Name);
+                    }
+                    else if (Name.starts_with("__ocml_sub_rt")) {
+                        if (isF32 || isF64) collect(OP_SUB, isF64, "ocml.sub", Name);
+                    }
+                    else if (Name.starts_with("__ocml_mul_rt")) {
+                        if (isF32 || isF64) collect(OP_MUL, isF64, "ocml.mul", Name);
+                    }
+                    else if (Name.starts_with("__ocml_fma_rt")) {
+                        if (isF32 || isF64) collect(OP_FMA, isF64, "ocml.fma", Name);
+                    }
+                    // __ocml_div_rt{e,n,p,z}_f{32,64}: deliberately NOT
+                    // collected. ROCm 7.2.4 declares __fdiv_rd/rn/ru/rz and
+                    // __ddiv_* in __clang_hip_math.h, and they compile, but NO
+                    // device-lib bitcode in the distribution defines the
+                    // corresponding __ocml_div_rt* symbols -- they appear in the
+                    // IR as `declare`, never `define`. Instrumenting a call that
+                    // cannot resolve buys nothing. This is a vendor gap, not a
+                    // PaFEx limitation: NVPTX has llvm.nvvm.div.{rn,rz,rm,rp},
+                    // AMD has no counterpart to compare against.
+                    // f16 wrappers (__ocml_add_rtz_f16 etc.) also exist but are
+                    // filtered by the isF32/isF64 guards above -- the detectors
+                    // only model f32/f64 exception semantics.
                     // logb / __ocml_logb_*; excludes ilogb (integer result, no
                     // FP exception semantics at the result level)
                     else if (Name.contains("logb") && !Name.contains("ilogb")) {
@@ -875,9 +996,22 @@ RoundingModeID DevicePass::getRoundingMode(Instruction *I) {
     if (auto *CI = dyn_cast<CallInst>(I)) {
         if (Function *F = CI->getCalledFunction()) {
             StringRef Name = F->getName();
+            // NVPTX: llvm.nvvm.{add,sub,mul,div}.{rn,rz,rm,rp}.{f,d}
+            // (.rm = toward -inf, .rp = toward +inf; .rd/.ru are cvt's
+            //  spelling, not arithmetic's, and never appear here.)
             if (Name.contains(".rz")) return RM_ZERO;
             if (Name.contains(".rm")) return RM_MINF;
             if (Name.contains(".rp")) return RM_PINF;
+            // AMDGPU: __ocml_{add,sub,mul,fma}_rt{e,n,p,z}_f{16,32,64}
+            // (_rtn_ = toward negative inf, _rtp_ = toward positive inf.)
+            // No collision with the NVPTX arms above: NVVM spells the mode
+            // with dots, OCML with underscores.
+            if (Name.contains("_rtz_")) return RM_ZERO;
+            if (Name.contains("_rtn_")) return RM_MINF;
+            if (Name.contains("_rtp_")) return RM_PINF;
+            // _rte_ / .rn = round-to-nearest-even = the IEEE default; both
+            // fall through to RM_DEFAULT below. Listing them explicitly would
+            // be a no-op.
         }
     }
     return RM_DEFAULT;
@@ -1002,9 +1136,17 @@ void DevicePass::injectTotalIncrement(Instruction *InsertBefore, Module &M) {
 
 bool DevicePass::detectDivByZero(Instruction *I, Module &M,
                                 OperationID OpID, const WorklistEntry &Entry) {
-    Type *Ty = (OpID == OP_LOGB || OpID == OP_RCP)
-            ? cast<CallInst>(I)->getArgOperand(0)->getType()
-            : I->getType();
+    // OP_LOGB/OP_RCP take their type from the argument, not the result. The
+    // OP_LOGB arm is unreachable today (instrumentInstruction routes OP_LOGB to
+    // detectLogB, which handles both the call and the decomposed-bitcast form),
+    // but an unconditional cast<CallInst> here would abort if it ever were
+    // reached with the bitcast anchor. dyn_cast + bail instead of cast + crash.
+    Type *Ty = I->getType();
+    if (OpID == OP_LOGB || OpID == OP_RCP) {
+        auto *CI = dyn_cast<CallInst>(I);
+        if (!CI || CI->arg_size() < 1) return false;
+        Ty = CI->getArgOperand(0)->getType();
+    }
 
     if (!Ty->isFloatTy() && !Ty->isDoubleTy()) return false;
 
