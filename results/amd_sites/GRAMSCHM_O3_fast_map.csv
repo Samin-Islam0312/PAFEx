@@ -1,0 +1,6 @@
+index	file	func	line	func_pretty	is_kernel	op
+0	tests/amd/benchmarks/polybench/CUDA/GRAMSCHM/gramschmidt.cu	_Z19gramschmidt_kernel1iiPfS_S_i	135	gramschmidt_kernel1(int, int, float*, float*, float*, int)	1	fmul
+1	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z19gramschmidt_kernel1iiPfS_S_i	722	gramschmidt_kernel1(int, int, float*, float*, float*, int)	1	sqrt
+2	tests/amd/benchmarks/polybench/CUDA/GRAMSCHM/gramschmidt.cu	_Z19gramschmidt_kernel2iiPfS_S_i	148	gramschmidt_kernel2(int, int, float*, float*, float*, int)	1	fdiv
+3	tests/amd/benchmarks/polybench/CUDA/GRAMSCHM/gramschmidt.cu	_Z19gramschmidt_kernel3iiPfS_S_i	164	gramschmidt_kernel3(int, int, float*, float*, float*, int)	1	fmul
+4	tests/amd/benchmarks/polybench/CUDA/GRAMSCHM/gramschmidt.cu	_Z19gramschmidt_kernel3iiPfS_S_i	169	gramschmidt_kernel3(int, int, float*, float*, float*, int)	1	fmul

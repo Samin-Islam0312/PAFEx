@@ -85,7 +85,7 @@ case "$FP_MODE" in ieee|fast) ;; *) echo "ERROR: FP_MODE must be ieee|fast" >&2;
 # NOTE: the legacy spelling -fcuda-flush-denormals-to-zero was REMOVED from
 # clang; on LLVM 22 it is a hard driver error. Do not reintroduce it.
 FAST_FLAGS=""
-[ "$FP_MODE" = "fast" ] && FAST_FLAGS="-ffast-math -fdenormal-fp-math-f32=preserve-sign"
+[ "$FP_MODE" = "fast" ] && FAST_FLAGS="-ffast-math -Xclang -fdenormal-fp-math-f32=preserve-sign"
 
 # -----------------------------------------------------------------------------
 # 1. Environment (mirrors the existing per-benchmark scripts exactly)
@@ -242,8 +242,28 @@ $LLVM_DIR/bin/llvm-link --only-needed "$S/device.bc" "$LIBDEVICE" -o "$S/device_
 #     are kept unconditionally so every configuration runs the SAME pipeline.
 #     (If preopt ever appears to do nothing at -O0, the cause is clang's
 #     optnone attribute — add `-Xclang -disable-O0-optnone` to step (1).)
+# ---- (2.5) TAG libdevice BEFORE the preopt inlines it ----------------------
+# device_linked.bc (step 2) still has __nv_*/__internal_* as separate functions,
+# so pafex-tag can stamp !pafex.libinternal on them. always-inline (below) folds
+# libdevice into the kernel, copying the tag along; DevicePass's collectInstructions
+# then skips tagged instrs. TAGGED=0 skips this block and is byte-identical to the
+# old untagged build (A/B control).
+TAG_PASS=$ROOT/build/lib/tag/TagPass.so
+DEVTAG="$S/device_linked.bc"
+if [ "$INSTRUMENT" -eq 1 ] && [ "${TAGGED:-1}" -eq 1 ]; then
+    if [ ! -f "$TAG_PASS" ]; then
+        echo "ERROR: TAGGED=1 but tag plugin not found: $TAG_PASS" >&2
+        echo "       Build it into build/ (same tree as DevicePass), or run TAGGED=0." >&2
+        exit 1
+    fi
+    $LLVM_DIR/bin/opt -load-pass-plugin="$TAG_PASS" -passes="pafex-tag" \
+        "$S/device_linked.bc" -o "$S/device_tagged.bc"
+    DEVTAG="$S/device_tagged.bc"
+    echo "pafex-tag: tagged -> $DEVTAG (libinternal instrs: $($LLVM_DIR/bin/llvm-dis -o - "$DEVTAG" 2>/dev/null | grep -c 'pafex.libinternal' || true))"
+fi
+
 $LLVM_DIR/bin/opt -passes="always-inline,function(mem2reg,instcombine)" \
-    "$S/device_linked.bc" -o "$S/device_preopt.bc"
+    "$DEVTAG" -o "$S/device_preopt.bc"
 
 if [ "$INSTRUMENT" -eq 1 ]; then
     # (4) Instrument. The site table is written into the scratch dir so the

@@ -1,0 +1,5 @@
+bench	opt	fp	wall_base_s	wall_instr_s	wall_ratio	wall_base_minmax	wall_instr_minmax
+myocyte	O0	ieee	5.9100	33.8400	5.725	3.600-6.170	32.540-35.230
+cfd	O0	ieee	2.2700	24.8700	10.955	2.160-2.430	23.090-26.190
+CORR	O0	ieee	54.3500	81.4000	1.497	52.740-62.060	75.840-84.300
+GRAMSCHM	O0	ieee	158.9500	207.0800	1.302	155.930-161.950	205.470-213.800

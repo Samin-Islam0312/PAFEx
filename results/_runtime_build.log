@@ -1,2 +1,32 @@
 nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
 nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+lib/papi_rtlib/fp_sde_driver.cu:38:10: fatal error: fp_abi.h: No such file or directory
+ #include "fp_abi.h"
+          ^~~~~~~~~~
+compilation terminated.
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+lib/papi_rtlib/fp_sde_driver.cu:38:10: fatal error: fp_abi.h: No such file or directory
+ #include "fp_abi.h"
+          ^~~~~~~~~~
+compilation terminated.
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+lib/papi_rtlib/fp_sde_driver.cu:38:10: fatal error: fp_abi.h: No such file or directory
+ #include "fp_abi.h"
+          ^~~~~~~~~~
+compilation terminated.
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+lib/papi_rtlib/fp_sde_driver.cu:38:10: fatal error: fp_abi.h: No such file or directory
+   38 | #include "fp_abi.h"
+      |          ^~~~~~~~~~
+compilation terminated.
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+lib/papi_rtlib/fp_sde_driver.cu:38:10: fatal error: fp_abi.h: No such file or directory
+   38 | #include "fp_abi.h"
+      |          ^~~~~~~~~~
+compilation terminated.
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+lib/papi_rtlib/fp_sde_driver.cu:38:10: fatal error: fp_abi.h: No such file or directory
+   38 | #include "fp_abi.h"
+      |          ^~~~~~~~~~
+compilation terminated.

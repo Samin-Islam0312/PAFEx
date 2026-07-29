@@ -1,35 +1,18 @@
 === Part 2: Device pipeline ===
-[FPPass] Running on device module: nvptx64-nvidia-cuda
+[FPPass] Running on device module (nvptx64): nvptx64-nvidia-cuda
 [FPPass] Declared device counter array: fp_counters[6]
-[FPPass] Visiting function: _Z25testOverflow_RoundNearestPf [KERNEL]
-[FPPass]   COLLECT nvvm.add 'llvm.nvvm.add.rn.f' @ _Z25testOverflow_RoundNearestPf:201
-[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rn.f' @ _Z25testOverflow_RoundNearestPf:307
-[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rn.f' @ _Z25testOverflow_RoundNearestPf:307
-[FPPass]   Collected 4 instructions to instrument
-[FPPass]   INSTRUMENT _Z25testOverflow_RoundNearestPf:201 op=0
-[FPPass]     -> Injected check: ex=0 op=0 line=201
-[FPPass]     -> Injected check: ex=2 op=0 line=201
-[FPPass]     -> Injected check: ex=3 op=0 line=201
-[FPPass]     -> Injected check: ex=5 op=0 line=201
-[FPPass]   INSTRUMENT _Z25testOverflow_RoundNearestPf:307 op=2
-[FPPass]     -> Injected check: ex=0 op=2 line=307
-[FPPass]     -> Injected check: ex=2 op=2 line=307
-[FPPass]     -> Injected check: ex=3 op=2 line=307
-[FPPass]     -> Injected check: ex=5 op=2 line=307
-[FPPass]   INSTRUMENT _Z25testOverflow_RoundNearestPf:307 op=2
-[FPPass]     -> Injected check: ex=0 op=2 line=307
-[FPPass]     -> Injected check: ex=2 op=2 line=307
-[FPPass]     -> Injected check: ex=3 op=2 line=307
-[FPPass]     -> Injected check: ex=5 op=2 line=307
-[FPPass]   INSTRUMENT _Z25testOverflow_RoundNearestPf:295 op=6
-[FPPass]     -> Injected check: ex=0 op=6 line=295
-[FPPass]     -> Injected check: ex=2 op=6 line=295
-[FPPass]     -> Injected check: ex=3 op=6 line=295
-[FPPass]     -> Injected check: ex=5 op=6 line=295
-[FPPass] SUMMARY: visited 1 functions, instrumented 4 instructions
+[FPPass] Declared device site array: fp_site_counters[49152]
+[FPPass] Declared device result-class array: fp_result_counters[32768]
+[FPPass] SUMMARY: visited 1 functions, instrumented 4 instructions, 3 sites
+[FPPass] Wrote fp_sites.csv with 3 sites
 === Part 3: Host pipeline ===
-[HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD/results/overflow/round_nearest/host.bc
+[HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD-opt/results/overflow/round_nearest/host.bc
+[HostPass] TU has __cuda_register_globals (CUDA); emitting shadows, register calls, and accessors.
 [HostPass] Created host shadow: fp_counters[6]
-[HostPass] Registered shadow: fp_counters[6] (48 bytes)
-[HostPass] Found main(), injecting PAPI lifecycle.
+[HostPass] Registered shadow: fp_counters (48 bytes)
+[HostPass] Created host shadow: fp_site_counters[49152]
+[HostPass] Registered shadow: fp_site_counters (393216 bytes)
+[HostPass] Created host shadow: fp_result_counters[32768]
+[HostPass] Registered shadow: fp_result_counters (262144 bytes)
+[HostPass] TU has main; injecting PAPI lifecycle.
 === Part 4: Link ===

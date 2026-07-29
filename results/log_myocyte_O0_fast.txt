@@ -1,0 +1,13 @@
+=== myocyte [instrumented]  (group=divzero, O0, fast)
+    src=tests/cuda/benchmarks/rodinia/myocyte/main.cu  inc=tests/cuda/benchmarks/rodinia/myocyte  args=100 1 0  expect=none
+    scratch=/home/users/sislam3/SBAC-PAD-opt/scratch/myocyte/instrumented_fast
+    libdevice=/storage/packages/cuda/12.8.1/nvvm/libdevice/libdevice.10.bc
+--- device pipeline
+--- host pipeline
+--- link
+    device counter symbol in cubin: present
+    atomicrmw sites in instrumented device IR: 50508
+--- run x1
+    wall (best of 1): 31.2682s   -> /home/users/sislam3/SBAC-PAD-opt/scratch/myocyte/instrumented_fast/timing_instrumented_fast.txt
+    counts: invalid=39 divzero=4467 overflow=0 underflow=27 total=11348595 subnormal=0 kernels=1
+=== done: myocyte [instrumented_fast]

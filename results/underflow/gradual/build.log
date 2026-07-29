@@ -1,63 +1,18 @@
 === Part 2: Device pipeline ===
-[FPPass] Running on device module: nvptx64-nvidia-cuda
+[FPPass] Running on device module (nvptx64): nvptx64-nvidia-cuda
 [FPPass] Declared device counter array: fp_counters[6]
-[FPPass] Visiting function: _Z12is_subnormalf [device]
-[FPPass]   Collected 0 instructions to instrument
-[FPPass] Visiting function: _Z20testGradualUnderflowPfPi [KERNEL]
-[FPPass]   COLLECT fdiv @ _Z20testGradualUnderflowPfPi:23
-[FPPass]   COLLECT fdiv @ _Z20testGradualUnderflowPfPi:28
-[FPPass]   COLLECT fdiv @ _Z20testGradualUnderflowPfPi:33
-[FPPass]   COLLECT fdiv @ _Z20testGradualUnderflowPfPi:38
-[FPPass]   COLLECT fdiv @ _Z20testGradualUnderflowPfPi:43
-[FPPass]   COLLECT fdiv @ _Z20testGradualUnderflowPfPi:48
-[FPPass]   COLLECT fdiv @ _Z20testGradualUnderflowPfPi:53
-[FPPass]   Collected 7 instructions to instrument
-[FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:23 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=23
-[FPPass]     -> Injected check: ex=1 op=3 line=23
-[FPPass]     -> Injected check: ex=2 op=3 line=23
-[FPPass]     -> Injected check: ex=3 op=3 line=23
-[FPPass]     -> Injected check: ex=5 op=3 line=23
-[FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:28 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=28
-[FPPass]     -> Injected check: ex=1 op=3 line=28
-[FPPass]     -> Injected check: ex=2 op=3 line=28
-[FPPass]     -> Injected check: ex=3 op=3 line=28
-[FPPass]     -> Injected check: ex=5 op=3 line=28
-[FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:33 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=33
-[FPPass]     -> Injected check: ex=1 op=3 line=33
-[FPPass]     -> Injected check: ex=2 op=3 line=33
-[FPPass]     -> Injected check: ex=3 op=3 line=33
-[FPPass]     -> Injected check: ex=5 op=3 line=33
-[FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:38 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=38
-[FPPass]     -> Injected check: ex=1 op=3 line=38
-[FPPass]     -> Injected check: ex=2 op=3 line=38
-[FPPass]     -> Injected check: ex=3 op=3 line=38
-[FPPass]     -> Injected check: ex=5 op=3 line=38
-[FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:43 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=43
-[FPPass]     -> Injected check: ex=1 op=3 line=43
-[FPPass]     -> Injected check: ex=2 op=3 line=43
-[FPPass]     -> Injected check: ex=3 op=3 line=43
-[FPPass]     -> Injected check: ex=5 op=3 line=43
-[FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:48 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=48
-[FPPass]     -> Injected check: ex=1 op=3 line=48
-[FPPass]     -> Injected check: ex=2 op=3 line=48
-[FPPass]     -> Injected check: ex=3 op=3 line=48
-[FPPass]     -> Injected check: ex=5 op=3 line=48
-[FPPass]   INSTRUMENT _Z20testGradualUnderflowPfPi:53 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=53
-[FPPass]     -> Injected check: ex=1 op=3 line=53
-[FPPass]     -> Injected check: ex=2 op=3 line=53
-[FPPass]     -> Injected check: ex=3 op=3 line=53
-[FPPass]     -> Injected check: ex=5 op=3 line=53
-[FPPass] SUMMARY: visited 2 functions, instrumented 7 instructions
+[FPPass] Declared device site array: fp_site_counters[49152]
+[FPPass] Declared device result-class array: fp_result_counters[32768]
+[FPPass] SUMMARY: visited 2 functions, instrumented 7 instructions, 7 sites
+[FPPass] Wrote fp_sites.csv with 7 sites
 === Part 3: Host pipeline ===
-[HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD/results/underflow/gradual/host.bc
+[HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD-opt/results/underflow/gradual/host.bc
+[HostPass] TU has __cuda_register_globals (CUDA); emitting shadows, register calls, and accessors.
 [HostPass] Created host shadow: fp_counters[6]
-[HostPass] Registered shadow: fp_counters[6] (48 bytes)
-[HostPass] Found main(), injecting PAPI lifecycle.
+[HostPass] Registered shadow: fp_counters (48 bytes)
+[HostPass] Created host shadow: fp_site_counters[49152]
+[HostPass] Registered shadow: fp_site_counters (393216 bytes)
+[HostPass] Created host shadow: fp_result_counters[32768]
+[HostPass] Registered shadow: fp_result_counters (262144 bytes)
+[HostPass] TU has main; injecting PAPI lifecycle.
 === Part 4: Link ===

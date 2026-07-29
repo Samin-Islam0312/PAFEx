@@ -1,0 +1,4 @@
+index	file	func	line	func_pretty	is_kernel	op
+0	tests/amd/benchmarks/rodinia/gaussian/gaussian.cu	_Z4Fan1PfS_ii	316	Fan1(float*, float*, int, int)	1	fdiv
+1	tests/amd/benchmarks/rodinia/gaussian/gaussian.cu	_Z4Fan2PfS_S_iii	333	Fan2(float*, float*, float*, int, int, int)	1	fmul
+2	tests/amd/benchmarks/rodinia/gaussian/gaussian.cu	_Z4Fan2PfS_S_iii	338	Fan2(float*, float*, float*, int, int, int)	1	fmul

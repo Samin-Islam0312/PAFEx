@@ -1,0 +1,2 @@
+bench	opt	fp	wall_base_s	wall_instr_s	wall_ratio	wall_base_minmax	wall_instr_minmax
+cfd	O0	ieee	0.7700	0.8100	1.051	0.770-0.780	0.780-0.810

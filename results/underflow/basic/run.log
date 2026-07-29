@@ -1,4 +1,4 @@
-[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/underflow/basic/host.bc
+[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD-opt/results/underflow/basic/host.bc
 [FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
 ========================================
 [TEST] Underflow - Different Operations
@@ -59,29 +59,29 @@ Testing: DIV, MUL, SUB, ADD, SQRT, EXP, POW, LOG
 Underflow operations: 6/8
 ========================================
 
-[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD/results/underflow/basic/host.bc
+[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD-opt/results/underflow/basic/host.bc
 
 IEEE Exceptions According to the standard
-  Total FP Ops:       0
+  Total FP Ops:       70
   Div by Zero:        0
   Invalid Ops:        0
   Overflow:           0
-  Underflow:          8
+  Underflow:          5
 
 Detailed Breakdown
-  NaNs (Input):       0
-  NaNs (Created):     0
-  Denormals Produced: 5
+  NaNs (Input):       -1
+  NaNs (Created):     -1
+  Denormals Produced: 0
 
 Workload Stats
   Kernels Launched:   1
   Operations Total:   0
 
 Derived Metrics
-  Total Exceptions:   8
-  Exception Density:  0 (per million ops)
-  NaN Prop Rate:      0 (per million NaNs)
-  Subnormal Rate:     625000 (per million underflows)
-  Instability Score:  0
+  Total Exceptions:   5
+  Exception Density:  71428 (per million ops)
+  NaN Prop Rate:      -1 (per million NaNs)
+  Subnormal Rate:     -1 (per million underflows)
+  Instability Score:  -1
 
 [FP_INSTRUMENT] Finalized.

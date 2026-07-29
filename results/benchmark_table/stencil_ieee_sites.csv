@@ -1,0 +1,5 @@
+index	file	func	line
+0	tests/benchmarks/parboil/benchmarks/stencil/src/cuda/kernels.cu	_Z24block2D_hybrid_coarsen_xffPfS_iii	72
+1	tests/benchmarks/parboil/benchmarks/stencil/src/cuda/kernels.cu	_Z24block2D_hybrid_coarsen_xffPfS_iii	73
+2	tests/benchmarks/parboil/benchmarks/stencil/src/cuda/kernels.cu	_Z24block2D_hybrid_coarsen_xffPfS_iii	88
+3	tests/benchmarks/parboil/benchmarks/stencil/src/cuda/kernels.cu	_Z24block2D_hybrid_coarsen_xffPfS_iii	89

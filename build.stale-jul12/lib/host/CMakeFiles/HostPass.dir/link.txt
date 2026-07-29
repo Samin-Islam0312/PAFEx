@@ -1,0 +1,1 @@
+/home/users/sislam3/opt/llvm-22/bin/clang++ -fPIC -O3 -DNDEBUG  -Wl,--gc-sections -shared  -o HostPass.so CMakeFiles/HostPass.dir/host_pass.cpp.o   -L/opt/rocm-7.2.4/lib/llvm/lib  -Wl,-rpath,"\$ORIGIN/../lib:/opt/rocm-7.2.4/lib/llvm/lib:"

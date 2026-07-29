@@ -40,3 +40,34 @@ fp_site_counts.csv
 fp_result_counts.csv
 *.bak
 *.working
+tests/**/data/
+tests/**/*.bin
+tests/**/result.txt
+tests/**/out.txt
+tests/amd/probe.*
+
+# run outputs / sweeps
+runs/
+runs_inlining/
+# binaries & backups
+*.hsaco
+*.hipfb
+*.o
+*.out
+*.bin
+*.bak
+*.bak-*
+app
+stress_baseline
+# stray root data
+/sgemm_*.txt
+/stencil_*.bin
+/tpacf_*.txt
+/xyz.asc
+build-cuda/
+/build
+/EOF
+tests/cuda/benchmarks/parboil/
+tests/cuda/benchmarks/polybench/
+tests/cuda/benchmarks/shoc/
+tests/cuda/benchmarks/ECP_proxy/

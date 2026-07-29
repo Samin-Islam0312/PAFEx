@@ -7,7 +7,7 @@ Counters:
   divzero              1
   overflow             0
   underflow            0
-  total                0
+  total                6
   subnormal            0
   kernels_launched     1
 

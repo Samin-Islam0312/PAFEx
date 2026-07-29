@@ -1,0 +1,107 @@
+odyssey env: REPO=/home/users/sislam3/SBAC-PAD-opt  clang=ok
+(base) [sislam3@odyssey SBAC-PAD-opt]$
+(base) [sislam3@odyssey SBAC-PAD-opt]$ source scripts/odyssey_env.sh && source scripts/overhead.sh
+odyssey env: REPO=/home/users/sislam3/SBAC-PAD-opt  clang=ok
+(base) [sislam3@odyssey SBAC-PAD-opt]$ export TIMEOUT=3600 PASS_FLAGS="-count-total=false"
+(base) [sislam3@odyssey SBAC-PAD-opt]$ BENCHES="LU ADI CORR myocyte cfd gaussian hotspot GRAMSCHM" overhead_all
+bench   opt     wall_base_s     wall_instr_s    wall_ratio      kern_base_s     kern_instr_s    kern_ratio      wall_instr_min-max
+=== LU (O0 ieee) args='none' ===
+LU      O0      7.074493        7.163217        1.012   .051674 .228540 4.422   7.112332571-7.234489638
+=== ADI (O0 ieee) args='none' ===
+ADI     O0      0.568132        0.694211        1.221   .017841 .047333 2.653   .583524795-.931717442
+=== CORR (O0 ieee) args='none' ===
+CORR    O0      28.527655       29.261147       1.025   11.668899       15.829927       1.356   27.588459508-35.048379387
+=== myocyte (O0 ieee) args='100 1 0' ===
+myocyte O0      0.743299        6.378325        8.581   .035720 .136380 3.818   4.646106220-18.844068180
+=== cfd (O0 ieee) args='/home/users/sislam3/SBAC-PAD-opt/tests/amd/benchmarks/rodinia/cfd/data/fvcorr.domn.097K' ===
+cfd     O0      1.373493        3.577880        2.604   .154183 .654717 4.246   1.619754031-5.791326710
+=== gaussian (O0 ieee) args='none' ===
+gaussian        O0      0.019688        0.026045        1.322   NA      NA      NA      .025706371-.037585607
+=== hotspot (O0 ieee) args='512 2 2 /home/users/sislam3/SBAC-PAD-opt/tests/amd/benchmarks/rodinia/hotspot/data/temp_512 /home/users/sislam3/SBAC-PAD-opt/tests/amd
+/benchmarks/rodinia/hotspot/data/power_512 output.out' ===
+hotspot O0      0.672324        0.649145        .965    .000116 .000427 3.681   .603869171-1.120644691
+=== GRAMSCHM (O0 ieee) args='none' ===
+GRAMSCHM        O0      63.429981       69.299292       1.092   25.648352       36.427705       1.420   61.475080626-76.043500522
+
+warm-up discarded: 3   timed runs: 10   profiled runs: 3
+=== wrote /home/users/sislam3/SBAC-PAD-opt/results/summary/overhead.tsv ===
+(base) [sislam3@odyssey SBAC-PAD-opt]$ cd runs/amd_bench/gaussian/O0-ieee-tag1-baseline
+(base) [sislam3@odyssey O0-ieee-tag1-baseline]$ rocprofv3 --kernel-trace --stats --output-format csv -d /tmp/gt -o prof -- ./app 2>&1 | tail -20
+
+-q (quiet) suppresses printing the matrix and result values.
+-f (filename) path of input file
+-s (size) size of matrix. Create matrix and rhs in this program
+The first line of the file contains the dimension of the matrix, n.The second line of the file is a newline.
+The next n lines contain n tab separated values for the matrix.The next line of the file is a newline.
+The next line of the file is a 1xn vector with tab separated values.
+The next line of the file is a newline. (optional)
+The final line of the file is the pre-computed solution. (optional)
+Example: matrix4.txt:
+4
+
+-0.6    -0.5    0.7     0.3
+-0.3    -0.9    0.3     0.7
+-0.4    -0.5    -0.3    -0.8
+0.0     -0.1    0.2     0.9
+
+-0.85   -0.68   0.24    -0.53
+
+0.7     0.0     -0.4    -0.5
+(base) [sislam3@odyssey O0-ieee-tag1-baseline]$ find /tmp/gt -name '*.csv' -exec basename {} \;
+find: ‘/tmp/gt’: No such file or directory
+(base) [sislam3@odyssey O0-ieee-tag1-baseline]$ cd runs/amd_bench/gaussian/O0-ieee-tag1-baselinegrep -n 'gaussian' scripts/buildScripts/sweep_hip.manifest
+-bash: cd: too many arguments
+(base) [sislam3@odyssey O0-ieee-tag1-baseline]$ grep -rn 'KERNELS_LAUNCHED\|kernel' runs/amd_bench/gaussian/O0-ieee-tag1-instrumented/run.1.log | head
+grep: runs/amd_bench/gaussian/O0-ieee-tag1-instrumented/run.1.log: No such file or directory
+(base) [sislam3@odyssey O0-ieee-tag1-baseline]$ cat runs/amd_bench/gaussian/O0-ieee-tag1-instrumented/fp_site_counts.csv
+cat: runs/amd_bench/gaussian/O0-ieee-tag1-instrumented/fp_site_counts.csv: No such file or directory
+(base) [sislam3@odyssey O0-ieee-tag1-baseline]$ clear
+(base) [sislam3@odyssey O0-ieee-tag1-baseline]$ BENCHES="gaussian" ARGS_OVERRIDE="-s 1024" overhead_all   # if the harness supports it
+bench   opt     wall_base_s     wall_instr_s    wall_ratio      kern_base_s     kern_instr_s    kern_ratio      wall_instr_min-max
+=== gaussian (O0 ieee) args='none' ===
+
+gaussian        O0      0.019811        0.033092        1.670   NA      NA      NA      .026206837-.041107073
+
+warm-up discarded: 3   timed runs: 10   profiled runs: 3
+=== wrote /home/users/sislam3/SBAC-PAD-opt/results/summary/overhead.tsv ===
+(base) [sislam3@odyssey O0-ieee-tag1-baseline]$ # otherwise fix the manifest args column and re-run
+(base) [sislam3@odyssey O0-ieee-tag1-baseline]$ tmux capture-pane -t sweep -pS -10000 > ~/SBAC-PAD-opt/results/summary/sweep_scrollback_0724.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

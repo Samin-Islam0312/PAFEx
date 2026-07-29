@@ -1,0 +1,443 @@
+index	file	func	line	func_pretty	is_kernel	op
+0	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	0	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+1	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	219	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+2	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	220	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+3	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	223	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+4	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	224	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+5	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z10kernel_camdPdS_iS_iS_id	1028	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+6	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	276	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+7	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	277	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+8	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	280	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+9	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	281	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+10	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	282	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+11	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	283	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+12	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	284	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+13	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	285	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+14	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	288	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+15	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	289	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+16	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	290	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+17	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	291	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+18	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	292	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+19	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	293	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+20	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	294	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+21	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	297	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+22	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	298	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+23	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	299	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+24	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	300	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+25	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	301	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+26	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	302	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+27	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	303	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+28	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	304	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+29	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	305	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+30	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	306	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+31	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	307	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+32	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	308	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+33	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	311	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+34	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	312	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+35	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	313	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+36	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	314	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+37	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	315	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+38	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	316	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+39	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	319	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+40	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	320	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+41	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	321	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+42	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	322	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+43	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	323	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+44	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	326	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+45	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	327	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+46	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	328	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+47	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	329	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+48	tests/amd/benchmarks/rodinia/myocyte/kernel_cam.cu	_Z10kernel_camdPdS_iS_iS_id	349	kernel_cam(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+49	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	583	kernel(int, double*, double*, double*, double*)	1	fdiv
+50	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z6kerneliPdS_S_S_	925	kernel(int, double*, double*, double*, double*)	1	fsub
+51	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	584	kernel(int, double*, double*, double*, double*)	1	fdiv
+52	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	586	kernel(int, double*, double*, double*, double*)	1	fdiv
+53	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	587	kernel(int, double*, double*, double*, double*)	1	fdiv
+54	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	682	kernel(int, double*, double*, double*, double*)	1	fadd
+55	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	683	kernel(int, double*, double*, double*, double*)	1	fmul
+56	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	686	kernel(int, double*, double*, double*, double*)	1	fmul
+57	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	690	kernel(int, double*, double*, double*, double*)	1	fmul
+58	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	691	kernel(int, double*, double*, double*, double*)	1	fmul
+59	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	692	kernel(int, double*, double*, double*, double*)	1	fmul
+60	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	0	kernel(int, double*, double*, double*, double*)	1	fmul
+61	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z6kerneliPdS_S_S_	831	kernel(int, double*, double*, double*, double*)	1	fmul
+62	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	695	kernel(int, double*, double*, double*, double*)	1	fmul
+63	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	696	kernel(int, double*, double*, double*, double*)	1	fsub
+64	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	697	kernel(int, double*, double*, double*, double*)	1	fsub
+65	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z6kerneliPdS_S_S_	1028	kernel(int, double*, double*, double*, double*)	1	fsub
+66	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	698	kernel(int, double*, double*, double*, double*)	1	fmul
+67	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	699	kernel(int, double*, double*, double*, double*)	1	fmul
+68	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	709	kernel(int, double*, double*, double*, double*)	1	fmul
+69	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	710	kernel(int, double*, double*, double*, double*)	1	fdiv
+70	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	711	kernel(int, double*, double*, double*, double*)	1	fdiv
+71	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	716	kernel(int, double*, double*, double*, double*)	1	fmul
+72	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	717	kernel(int, double*, double*, double*, double*)	1	fadd
+73	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	718	kernel(int, double*, double*, double*, double*)	1	fsub
+74	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	728	kernel(int, double*, double*, double*, double*)	1	fmul
+75	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	729	kernel(int, double*, double*, double*, double*)	1	fadd
+76	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	730	kernel(int, double*, double*, double*, double*)	1	fsub
+77	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	742	kernel(int, double*, double*, double*, double*)	1	fadd
+78	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	743	kernel(int, double*, double*, double*, double*)	1	fmul
+79	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	745	kernel(int, double*, double*, double*, double*)	1	fmul
+80	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	746	kernel(int, double*, double*, double*, double*)	1	fadd
+81	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	747	kernel(int, double*, double*, double*, double*)	1	fdiv
+82	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	748	kernel(int, double*, double*, double*, double*)	1	fsub
+83	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	749	kernel(int, double*, double*, double*, double*)	1	fsub
+84	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	750	kernel(int, double*, double*, double*, double*)	1	fsub
+85	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	754	kernel(int, double*, double*, double*, double*)	1	fmul
+86	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	755	kernel(int, double*, double*, double*, double*)	1	fdiv
+87	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	756	kernel(int, double*, double*, double*, double*)	1	fsub
+88	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	757	kernel(int, double*, double*, double*, double*)	1	fsub
+89	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	774	kernel(int, double*, double*, double*, double*)	1	fadd
+90	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	775	kernel(int, double*, double*, double*, double*)	1	fsub
+91	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	776	kernel(int, double*, double*, double*, double*)	1	fmul
+92	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	777	kernel(int, double*, double*, double*, double*)	1	fmul
+93	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	778	kernel(int, double*, double*, double*, double*)	1	fsub
+94	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	779	kernel(int, double*, double*, double*, double*)	1	fadd
+95	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	780	kernel(int, double*, double*, double*, double*)	1	fsub
+96	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	781	kernel(int, double*, double*, double*, double*)	1	fsub
+97	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	784	kernel(int, double*, double*, double*, double*)	1	fmul
+98	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	785	kernel(int, double*, double*, double*, double*)	1	fmul
+99	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	786	kernel(int, double*, double*, double*, double*)	1	fmul
+100	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	787	kernel(int, double*, double*, double*, double*)	1	fmul
+101	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	788	kernel(int, double*, double*, double*, double*)	1	fmul
+102	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	789	kernel(int, double*, double*, double*, double*)	1	fmul
+103	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	790	kernel(int, double*, double*, double*, double*)	1	fmul
+104	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	791	kernel(int, double*, double*, double*, double*)	1	fadd
+105	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	792	kernel(int, double*, double*, double*, double*)	1	fmul
+106	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	794	kernel(int, double*, double*, double*, double*)	1	fmul
+107	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	795	kernel(int, double*, double*, double*, double*)	1	fmul
+108	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	800	kernel(int, double*, double*, double*, double*)	1	fdiv
+109	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	801	kernel(int, double*, double*, double*, double*)	1	fdiv
+110	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	802	kernel(int, double*, double*, double*, double*)	1	fmul
+111	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	803	kernel(int, double*, double*, double*, double*)	1	fmul
+112	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	804	kernel(int, double*, double*, double*, double*)	1	fmul
+113	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	805	kernel(int, double*, double*, double*, double*)	1	fmul
+114	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	806	kernel(int, double*, double*, double*, double*)	1	fmul
+115	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	807	kernel(int, double*, double*, double*, double*)	1	fmul
+116	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	808	kernel(int, double*, double*, double*, double*)	1	fsub
+117	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	809	kernel(int, double*, double*, double*, double*)	1	fsub
+118	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	810	kernel(int, double*, double*, double*, double*)	1	fadd
+119	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	811	kernel(int, double*, double*, double*, double*)	1	fmul
+120	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z6kerneliPdS_S_S_	1025	kernel(int, double*, double*, double*, double*)	1	fsub
+121	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	814	kernel(int, double*, double*, double*, double*)	1	fmul
+122	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	815	kernel(int, double*, double*, double*, double*)	1	fmul
+123	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	816	kernel(int, double*, double*, double*, double*)	1	fadd
+124	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	817	kernel(int, double*, double*, double*, double*)	1	fmul
+125	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	820	kernel(int, double*, double*, double*, double*)	1	fsub
+126	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	821	kernel(int, double*, double*, double*, double*)	1	fsub
+127	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	822	kernel(int, double*, double*, double*, double*)	1	fadd
+128	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	823	kernel(int, double*, double*, double*, double*)	1	fmul
+129	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	828	kernel(int, double*, double*, double*, double*)	1	fdiv
+130	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	831	kernel(int, double*, double*, double*, double*)	1	fadd
+131	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	832	kernel(int, double*, double*, double*, double*)	1	fmul
+132	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	830	kernel(int, double*, double*, double*, double*)	1	fmul
+133	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	833	kernel(int, double*, double*, double*, double*)	1	fmul
+134	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	834	kernel(int, double*, double*, double*, double*)	1	fmul
+135	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	835	kernel(int, double*, double*, double*, double*)	1	fmul
+136	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	836	kernel(int, double*, double*, double*, double*)	1	fmul
+137	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	837	kernel(int, double*, double*, double*, double*)	1	fadd
+138	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	841	kernel(int, double*, double*, double*, double*)	1	fmul
+139	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	842	kernel(int, double*, double*, double*, double*)	1	fmul
+140	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	845	kernel(int, double*, double*, double*, double*)	1	fmul
+141	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	846	kernel(int, double*, double*, double*, double*)	1	fadd
+142	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	847	kernel(int, double*, double*, double*, double*)	1	fmul
+143	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	849	kernel(int, double*, double*, double*, double*)	1	fadd
+144	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	850	kernel(int, double*, double*, double*, double*)	1	fmul
+145	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	851	kernel(int, double*, double*, double*, double*)	1	fmul
+146	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	855	kernel(int, double*, double*, double*, double*)	1	fmul
+147	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	856	kernel(int, double*, double*, double*, double*)	1	fmul
+148	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	857	kernel(int, double*, double*, double*, double*)	1	fsub
+149	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	858	kernel(int, double*, double*, double*, double*)	1	fsub
+150	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	863	kernel(int, double*, double*, double*, double*)	1	fmul
+151	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	865	kernel(int, double*, double*, double*, double*)	1	fmul
+152	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	868	kernel(int, double*, double*, double*, double*)	1	fadd
+153	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	869	kernel(int, double*, double*, double*, double*)	1	fadd
+154	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	870	kernel(int, double*, double*, double*, double*)	1	fmul
+155	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	872	kernel(int, double*, double*, double*, double*)	1	fmul
+156	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	873	kernel(int, double*, double*, double*, double*)	1	fsub
+157	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	880	kernel(int, double*, double*, double*, double*)	1	fadd
+158	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	881	kernel(int, double*, double*, double*, double*)	1	fadd
+159	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	882	kernel(int, double*, double*, double*, double*)	1	fmul
+160	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	883	kernel(int, double*, double*, double*, double*)	1	fmul
+161	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	884	kernel(int, double*, double*, double*, double*)	1	fmul
+162	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	885	kernel(int, double*, double*, double*, double*)	1	fsub
+163	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	886	kernel(int, double*, double*, double*, double*)	1	fsub
+164	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	852	kernel(int, double*, double*, double*, double*)	1	fadd
+165	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	585	kernel(int, double*, double*, double*, double*)	1	fdiv
+166	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	720	kernel(int, double*, double*, double*, double*)	1	fsub
+167	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	763	kernel(int, double*, double*, double*, double*)	1	fmul
+168	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	762	kernel(int, double*, double*, double*, double*)	1	fmul
+169	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	736	kernel(int, double*, double*, double*, double*)	1	fmul
+170	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	727	kernel(int, double*, double*, double*, double*)	1	fmul
+171	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z6kerneliPdS_S_S_	928	kernel(int, double*, double*, double*, double*)	1	fsub
+172	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	726	kernel(int, double*, double*, double*, double*)	1	fmul
+173	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	725	kernel(int, double*, double*, double*, double*)	1	fmul
+174	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	719	kernel(int, double*, double*, double*, double*)	1	fmul
+175	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	751	kernel(int, double*, double*, double*, double*)	1	fmul
+176	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	758	kernel(int, double*, double*, double*, double*)	1	fmul
+177	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	759	kernel(int, double*, double*, double*, double*)	1	fadd
+178	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	731	kernel(int, double*, double*, double*, double*)	1	fdiv
+179	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	732	kernel(int, double*, double*, double*, double*)	1	fdiv
+180	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	733	kernel(int, double*, double*, double*, double*)	1	fadd
+181	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	764	kernel(int, double*, double*, double*, double*)	1	fadd
+182	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	712	kernel(int, double*, double*, double*, double*)	1	fadd
+183	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	793	kernel(int, double*, double*, double*, double*)	1	fmul
+184	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	768	kernel(int, double*, double*, double*, double*)	1	fadd
+185	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	769	kernel(int, double*, double*, double*, double*)	1	fdiv
+186	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	925	kernel(int, double*, double*, double*, double*)	1	fmul
+187	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	765	kernel(int, double*, double*, double*, double*)	1	fmul
+188	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	924	kernel(int, double*, double*, double*, double*)	1	fmul
+189	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	876	kernel(int, double*, double*, double*, double*)	1	fadd
+190	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	770	kernel(int, double*, double*, double*, double*)	1	fadd
+191	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc.cu	_Z6kerneliPdS_S_S_	922	kernel(int, double*, double*, double*, double*)	1	fadd
+192	tests/amd/benchmarks/rodinia/myocyte/kernel.cu	_Z6kerneliPdS_S_S_	72	kernel(int, double*, double*, double*, double*)	1	fmul
+193	tests/amd/benchmarks/rodinia/myocyte/kernel.cu	_Z6kerneliPdS_S_S_	88	kernel(int, double*, double*, double*, double*)	1	fmul
+194	tests/amd/benchmarks/rodinia/myocyte/kernel.cu	_Z6kerneliPdS_S_S_	104	kernel(int, double*, double*, double*, double*)	1	fmul
+195	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	0	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+196	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	219	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+197	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	220	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+198	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	223	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+199	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	224	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+200	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z12kernel_cam_2dPdS_iS_iS_id	1028	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+201	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	276	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+202	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	277	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+203	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	280	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+204	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	281	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+205	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	282	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+206	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	283	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+207	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	284	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+208	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	285	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+209	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	288	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+210	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	289	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+211	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	290	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+212	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	291	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+213	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	292	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+214	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	293	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+215	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	294	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+216	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	297	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+217	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	298	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+218	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	299	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+219	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	300	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+220	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	301	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+221	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	302	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+222	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	303	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+223	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	304	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+224	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	305	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+225	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	306	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+226	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	307	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+227	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	308	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+228	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	311	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+229	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	312	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+230	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	313	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+231	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	314	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+232	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	315	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+233	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	316	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+234	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	319	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+235	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	320	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+236	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	321	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+237	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	322	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+238	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	323	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+239	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	326	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+240	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	327	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+241	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	328	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fsub
+242	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	329	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fadd
+243	tests/amd/benchmarks/rodinia/myocyte/kernel_cam_2.cu	_Z12kernel_cam_2dPdS_iS_iS_id	349	kernel_cam_2(double, double*, double*, int, double*, int, double*, int, double)	0	fmul
+244	tests/amd/benchmarks/rodinia/myocyte/solver_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	97	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+245	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	176	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+246	<unknown>	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	-1	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+247	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	373	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+248	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	209	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+249	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	222	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+250	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	235	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+251	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	248	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+252	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	261	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+253	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	274	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+254	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	287	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+255	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	300	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+256	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	313	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+257	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	326	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+258	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	339	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+259	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	352	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+260	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	583	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+261	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	925	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+262	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	584	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+263	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	586	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+264	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	587	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+265	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	682	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+266	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	683	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+267	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	686	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+268	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	690	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+269	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	691	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+270	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	692	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+271	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	0	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+272	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	831	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+273	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	695	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+274	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	696	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+275	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	697	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+276	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	1028	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+277	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	698	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+278	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	699	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+279	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	709	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+280	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	710	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+281	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	711	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+282	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	716	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+283	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	717	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+284	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	718	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+285	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	728	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+286	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	729	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+287	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	730	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+288	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	742	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+289	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	743	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+290	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	745	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+291	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	746	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+292	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	747	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+293	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	748	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+294	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	749	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+295	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	750	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+296	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	754	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+297	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	755	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+298	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	756	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+299	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	757	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+300	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	774	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+301	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	775	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+302	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	776	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+303	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	777	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+304	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	778	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+305	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	779	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+306	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	780	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+307	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	781	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+308	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	784	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+309	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	785	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+310	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	786	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+311	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	787	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+312	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	788	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+313	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	789	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+314	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	790	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+315	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	791	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+316	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	792	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+317	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	794	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+318	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	795	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+319	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	800	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+320	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	801	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+321	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	802	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+322	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	803	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+323	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	804	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+324	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	805	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+325	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	806	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+326	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	807	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+327	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	808	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+328	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	809	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+329	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	810	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+330	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	811	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+331	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	1025	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+332	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	814	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+333	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	815	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+334	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	816	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+335	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	817	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+336	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	820	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+337	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	821	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+338	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	822	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+339	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	823	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+340	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	828	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+341	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	831	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+342	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	832	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+343	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	830	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+344	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	833	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+345	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	834	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+346	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	835	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+347	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	836	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+348	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	837	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+349	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	841	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+350	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	842	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+351	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	845	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+352	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	846	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+353	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	847	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+354	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	849	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+355	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	850	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+356	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	851	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+357	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	855	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+358	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	856	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+359	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	857	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+360	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	858	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+361	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	863	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+362	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	865	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+363	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	868	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+364	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	869	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+365	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	870	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+366	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	872	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+367	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	873	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+368	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	880	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+369	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	881	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+370	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	882	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+371	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	883	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+372	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	884	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+373	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	885	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+374	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	886	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+375	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	852	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+376	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	585	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+377	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	720	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+378	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	763	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+379	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	762	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+380	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	736	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+381	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	727	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+382	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	928	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+383	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	726	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+384	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	725	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+385	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	719	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+386	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	751	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+387	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	758	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+388	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	759	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+389	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	731	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+390	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	732	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+391	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	733	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+392	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	764	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+393	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	712	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+394	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	793	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+395	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	768	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+396	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	769	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fdiv
+397	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	925	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+398	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	765	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+399	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	924	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+400	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	770	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+401	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	922	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+402	tests/amd/benchmarks/rodinia/myocyte/kernel_ecc_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	876	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+403	tests/amd/benchmarks/rodinia/myocyte/kernel_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	73	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+404	tests/amd/benchmarks/rodinia/myocyte/kernel_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	86	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+405	tests/amd/benchmarks/rodinia/myocyte/kernel_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	99	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+406	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	52	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+407	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	53	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+408	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	54	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+409	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	75	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+410	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	76	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+411	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	77	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+412	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	73	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+413	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	74	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+414	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	78	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+415	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	79	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+416	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	80	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+417	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	81	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+418	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	82	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+419	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	83	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+420	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	84	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+421	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	86	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+422	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	87	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+423	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	88	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+424	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	91	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+425	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	92	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+426	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	93	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+427	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	96	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+428	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	97	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+429	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	98	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+430	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	101	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+431	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	102	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+432	tests/amd/benchmarks/rodinia/myocyte/kernel_fin_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	103	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+433	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	374	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+434	tests/amd/benchmarks/rodinia/myocyte/embedded_fehlberg_7_8_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	390	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+435	tests/amd/benchmarks/rodinia/myocyte/solver_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	196	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+436	tests/amd/benchmarks/rodinia/myocyte/solver_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	208	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+437	tests/amd/benchmarks/rodinia/myocyte/solver_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	221	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+438	tests/amd/benchmarks/rodinia/myocyte/solver_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	229	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd
+439	tests/amd/benchmarks/rodinia/myocyte/solver_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	230	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fsub
+440	tests/amd/benchmarks/rodinia/myocyte/solver_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	234	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fmul
+441	tests/amd/benchmarks/rodinia/myocyte/solver_2.cu	_Z8solver_2iiPdS_S_S_S_S_S_S_S_	244	solver_2(int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*)	1	fadd

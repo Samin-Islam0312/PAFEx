@@ -1,0 +1,13 @@
+=== ADI [instrumented]  (group=-, O3, fast)
+    src=tests/cuda/benchmarks/polybench/CUDA/ADI/adi.cu  inc=tests/cuda/benchmarks/polybench/CUDA/ADI  args=none  expect=none
+    scratch=/home/users/sislam3/SBAC-PAD-opt/scratch/ADI/instrumented_O3_fast
+    libdevice=/storage/packages/cuda/12.8.1/nvvm/libdevice/libdevice.10.bc
+--- device pipeline
+--- host pipeline
+--- link
+    device counter symbol in cubin: present
+    atomicrmw sites in instrumented device IR: 564
+--- run x1
+    wall (best of 1): 1.9260s   -> /home/users/sislam3/SBAC-PAD-opt/scratch/ADI/instrumented_O3_fast/timing_instrumented_O3_fast.txt
+    counts: invalid=0 divzero=0 overflow=0 underflow=0 total=18851840 subnormal=0 kernels=1
+=== done: ADI [instrumented_O3_fast]

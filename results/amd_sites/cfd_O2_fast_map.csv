@@ -1,0 +1,43 @@
+index	file	func	line	func_pretty	is_kernel	op
+0	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z24cuda_compute_step_factoriPfS_S_	208	cuda_compute_step_factor(int, float*, float*, float*)	1	fdiv
+1	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z24cuda_compute_step_factoriPfS_S_	215	cuda_compute_step_factor(int, float*, float*, float*)	1	fmul
+2	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z24cuda_compute_step_factoriPfS_S_	220	cuda_compute_step_factor(int, float*, float*, float*)	1	fmul
+3	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z24cuda_compute_step_factoriPfS_S_	225	cuda_compute_step_factor(int, float*, float*, float*)	1	fmul
+4	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z24cuda_compute_step_factoriPfS_S_	722	cuda_compute_step_factor(int, float*, float*, float*)	1	sqrt
+5	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z24cuda_compute_step_factoriPfS_S_	246	cuda_compute_step_factor(int, float*, float*, float*)	1	fadd
+6	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	210	cuda_compute_flux(int, int*, float*, float*, float*)	1	fdiv
+7	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	215	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+8	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	220	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+9	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z17cuda_compute_fluxiPiPfS0_S0_	722	cuda_compute_flux(int, int*, float*, float*, float*)	1	sqrt
+10	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	225	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+11	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	187	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+12	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	194	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+13	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	200	cuda_compute_flux(int, int*, float*, float*, float*)	1	fadd
+14	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	203	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+15	<unknown>	_Z17cuda_compute_fluxiPiPfS0_S0_	-1	cuda_compute_flux(int, int*, float*, float*, float*)	1	fadd
+16	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	305	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+17	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	208	cuda_compute_flux(int, int*, float*, float*, float*)	1	fdiv
+18	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	188	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+19	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	193	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+20	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	198	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+21	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	324	cuda_compute_flux(int, int*, float*, float*, float*)	1	fsub
+22	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	332	cuda_compute_flux(int, int*, float*, float*, float*)	1	fadd
+23	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	333	cuda_compute_flux(int, int*, float*, float*, float*)	1	fadd
+24	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	340	cuda_compute_flux(int, int*, float*, float*, float*)	1	fadd
+25	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	346	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+26	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	352	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+27	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	358	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+28	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	361	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+29	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	368	cuda_compute_flux(int, int*, float*, float*, float*)	1	fadd
+30	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	375	cuda_compute_flux(int, int*, float*, float*, float*)	1	fadd
+31	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	201	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+32	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	202	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+33	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	329	cuda_compute_flux(int, int*, float*, float*, float*)	1	fmul
+34	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	341	cuda_compute_flux(int, int*, float*, float*, float*)	1	fadd
+35	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z17cuda_compute_fluxiPiPfS0_S0_	321	cuda_compute_flux(int, int*, float*, float*, float*)	1	fadd
+36	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z14cuda_time_stepiiPfS_S_S_	398	cuda_time_step(int, int, float*, float*, float*, float*)	1	fdiv
+37	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z14cuda_time_stepiiPfS_S_S_	400	cuda_time_step(int, int, float*, float*, float*, float*)	1	fmul
+38	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z14cuda_time_stepiiPfS_S_S_	401	cuda_time_step(int, int, float*, float*, float*, float*)	1	fmul
+39	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z14cuda_time_stepiiPfS_S_S_	402	cuda_time_step(int, int, float*, float*, float*, float*)	1	fmul
+40	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z14cuda_time_stepiiPfS_S_S_	403	cuda_time_step(int, int, float*, float*, float*, float*)	1	fmul
+41	tests/amd/benchmarks/rodinia/cfd/euler3d.cu	_Z14cuda_time_stepiiPfS_S_S_	404	cuda_time_step(int, int, float*, float*, float*, float*)	1	fmul

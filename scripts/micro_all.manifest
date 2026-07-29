@@ -1,0 +1,16 @@
+fma_zero_inf | - | tests/cuda/basic_tests/invalid/fma_zero_inf.cu   | tests/cuda/basic_tests/invalid   | - | -
+inf_sub      | - | tests/cuda/basic_tests/invalid/inf_sub.cu        | tests/cuda/basic_tests/invalid   | - | -
+mul_zero_inf | - | tests/cuda/basic_tests/invalid/mul_zero_inf.cu   | tests/cuda/basic_tests/invalid   | - | -
+sqrt         | - | tests/cuda/basic_tests/invalid/sqrt.cu           | tests/cuda/basic_tests/invalid   | - | -
+inv_div      | - | tests/cuda/basic_tests/invalid/div.cu            | tests/cuda/basic_tests/invalid   | - | -
+divByZero    | - | tests/cuda/basic_tests/divZero/divByZero.cu      | tests/cuda/basic_tests/divZero   | - | -
+logB_test    | - | tests/cuda/basic_tests/divZero/logB_test.cu      | tests/cuda/basic_tests/divZero   | - | -
+round_nearest  | - | tests/cuda/basic_tests/overflow/round_nearest.cu  | tests/cuda/basic_tests/overflow | - | -
+round_negative | - | tests/cuda/basic_tests/overflow/round_negative.cu | tests/cuda/basic_tests/overflow | - | -
+round_positive | - | tests/cuda/basic_tests/overflow/round_positive.cu | tests/cuda/basic_tests/overflow | - | -
+round_zero     | - | tests/cuda/basic_tests/overflow/round_zero.cu     | tests/cuda/basic_tests/overflow | - | -
+uf_basic     | - | tests/cuda/basic_tests/underflow/basic.cu        | tests/cuda/basic_tests/underflow | - | -
+uf_denormal  | - | tests/cuda/basic_tests/underflow/denormal.cu     | tests/cuda/basic_tests/underflow | - | -
+uf_gradual   | - | tests/cuda/basic_tests/underflow/gradual.cu      | tests/cuda/basic_tests/underflow | - | -
+uf_iterative | - | tests/cuda/basic_tests/underflow/iterative.cu    | tests/cuda/basic_tests/underflow | - | -
+uf_rounding  | - | tests/cuda/basic_tests/underflow/rounding.cu     | tests/cuda/basic_tests/underflow | - | -

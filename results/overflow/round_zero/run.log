@@ -1,4 +1,4 @@
-[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/overflow/round_zero/host.bc
+[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD-opt/results/overflow/round_zero/host.bc
 [FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
 ========================================
 [TEST] Overflow - Round Toward Zero
@@ -35,18 +35,18 @@ FLT_MAX = 3.402823e+38
 Result: 4/4 tests passed
 ========================================
 
-[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD/results/overflow/round_zero/host.bc
+[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD-opt/results/overflow/round_zero/host.bc
 
 IEEE Exceptions According to the standard
-  Total FP Ops:       0
+  Total FP Ops:       4
   Div by Zero:        0
   Invalid Ops:        0
   Overflow:           4
   Underflow:          0
 
 Detailed Breakdown
-  NaNs (Input):       0
-  NaNs (Created):     0
+  NaNs (Input):       -1
+  NaNs (Created):     -1
   Denormals Produced: 0
 
 Workload Stats
@@ -55,9 +55,9 @@ Workload Stats
 
 Derived Metrics
   Total Exceptions:   4
-  Exception Density:  0 (per million ops)
-  NaN Prop Rate:      0 (per million NaNs)
-  Subnormal Rate:     0 (per million underflows)
-  Instability Score:  0
+  Exception Density:  1000000 (per million ops)
+  NaN Prop Rate:      -1 (per million NaNs)
+  Subnormal Rate:     -1 (per million underflows)
+  Instability Score:  -1
 
 [FP_INSTRUMENT] Finalized.

@@ -1,0 +1,31 @@
+# sweep_hip.manifest — single-TU AMD (gfx942) benchmarks for the opt-flag study.
+# format: name | group | src | inc | args | expect
+# Paths are relative to the repo root. Sources are .cu but compiled with
+# clang++ -x hip, so the extension does not matter.
+#
+# SINGLE-TU ONLY. Every device TU defines the counters (ExternalLinkage), so
+# multi-TU benchmarks fail at device link with duplicate symbols. See below.
+#
+# --- OCML-clean (no __ocml_ references; native fadd/fmul/fdiv/sqrt only) ------
+# These four are the clean cross-vendor comparison points: no library-inlining
+# asymmetry, so tagged and untagged counts should match exactly.
+LU        | invalid   | tests/amd/benchmarks/polybench/CUDA/LU/lu.cu                  | - | - | invalid
+ADI       | underflow | tests/amd/benchmarks/polybench/CUDA/ADI/adi.cu               | - | - | underflow
+# --- OCML-exposed (transcendentals: exp/pow/log via __ocml_*) ----------------
+# myocyte is the tagged-vs-untagged contamination benchmark. It is single-TU
+# IFF main.cu #includes the other .cu files in its directory. CONFIRM with:
+#     grep -n '#include.*\.cu"' tests/amd/benchmarks/rodinia/myocyte/main.cu
+# If that shows includes, uncomment the line below. If not, myocyte is multi-TU
+# and stays deferred with S3D/stencil until the one-definition-TU fix.
+myocyte  | divZero   | tests/amd/benchmarks/rodinia/myocyte/main.cu                  | tests/amd/benchmarks/rodinia/myocyte | 100 1 0 | divzero
+#
+# --- DEFERRED (multi-TU; will fail at device link — DO NOT ENABLE) -----------
+# S3D      needs SHOC common infrastructure, not standalone.
+# stencil  parboil: host (main.cu) and kernel (kernels.cu) are separate TUs.
+# LULESH, XSBench  multi-TU per the handoff.
+GRAMSCHM  | invalid   | tests/amd/benchmarks/polybench/CUDA/GRAMSCHM/gramschmidt.cu  | tests/amd/benchmarks/polybench/CUDA/GRAMSCHM | - | invalid
+gaussian  | none      | tests/amd/benchmarks/rodinia/gaussian/gaussian.cu           | tests/amd/benchmarks/rodinia/gaussian | -s 16 | none
+hotspot   | none      | tests/amd/benchmarks/rodinia/hotspot/hotspot.cu | tests/amd/benchmarks/rodinia/hotspot | 512 2 2 /home/users/sislam3/SBAC-PAD-opt/tests/amd/benchmarks/rodinia/hotspot/data/temp_512 /home/users/sislam3/SBAC-PAD-opt/tests/amd/benchmarks/rodinia/hotspot/data/power_512 output.out | none
+cfd       | underflow | tests/amd/benchmarks/rodinia/cfd/euler3d.cu | tests/amd/benchmarks/rodinia/cfd | /home/users/sislam3/SBAC-PAD-opt/tests/amd/benchmarks/rodinia/cfd/data/fvcorr.domn.097K | underflow
+CORR      | divzero   | tests/amd/benchmarks/polybench/CUDA/CORR/correlation.cu | tests/amd/benchmarks/polybench/CUDA/CORR | - | divzero
+CORR_noguard | divzero | tests/amd/benchmarks/polybench/CUDA/CORR_noguard/correlation.cu | tests/amd/benchmarks/polybench/CUDA/CORR_noguard | - | divzero

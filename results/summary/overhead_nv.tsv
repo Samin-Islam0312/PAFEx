@@ -1,0 +1,6 @@
+bench	opt	fp	kern_base_s	kern_instr_s	kern_ratio	kern_base_minmax	kern_instr_minmax
+myocyte	O0	ieee	0.1024	26.7067	260.807	0.102-0.103	26.126-26.992
+LU	O0	ieee	0.0967	3.7028	38.291	0.096-0.097	3.516-4.608
+GRAMSCHM	O0	ieee	49.9002	152.9256	3.064	45.692-52.248	104.000-159.041
+cfd	O0	ieee	0.1360	21.4920	158.029	0.136-0.136	18.660-24.617
+CORR	O0	ieee	16.6333	41.3640	2.486	14.767-20.695	37.622-45.605

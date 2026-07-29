@@ -1,0 +1,2 @@
+=== GRAMSCHM located exceptions (O0 ieee) ===
+  invalid    tests/amd/benchmarks/polybench/CUDA/GRAMSCHM/gramschmidt.cu:148  op=fdiv  (fired 2048)

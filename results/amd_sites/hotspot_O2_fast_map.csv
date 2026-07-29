@@ -1,0 +1,7 @@
+index	file	func	line	func_pretty	is_kernel	op
+0	tests/amd/benchmarks/rodinia/hotspot/hotspot.cu	_Z14calculate_tempiPfS_S_iiiiffffff	134	calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)	1	fdiv
+1	<unknown>	_Z14calculate_tempiPfS_S_iiiiffffff	-1	calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)	1	fdiv
+2	tests/amd/benchmarks/rodinia/hotspot/hotspot.cu	_Z14calculate_tempiPfS_S_iiiiffffff	197	calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)	1	fmul
+3	tests/amd/benchmarks/rodinia/hotspot/hotspot.cu	_Z14calculate_tempiPfS_S_iiiiffffff	199	calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)	1	fsub
+4	tests/amd/benchmarks/rodinia/hotspot/hotspot.cu	_Z14calculate_tempiPfS_S_iiiiffffff	196	calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)	1	fadd
+5	tests/amd/benchmarks/rodinia/hotspot/hotspot.cu	_Z14calculate_tempiPfS_S_iiiiffffff	198	calculate_temp(int, float*, float*, float*, int, int, int, int, float, float, float, float, float, float)	1	fadd

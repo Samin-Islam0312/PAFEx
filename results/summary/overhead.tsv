@@ -1,0 +1,2 @@
+bench	opt	wall_base_s	wall_instr_s	wall_ratio	kern_base_s	kern_instr_s	kern_ratio	wall_instr_min-max
+gaussian	O0	0.938701	0.861536	.917	.000490	.000354	.722	.669603880-2.515327516

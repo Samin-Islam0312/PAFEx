@@ -1,0 +1,13 @@
+=== LU [instrumented]  (group=invalid, O2, fast)
+    src=tests/cuda/benchmarks/polybench/CUDA/LU/lu.cu  inc=none  args=none  expect=none
+    scratch=/home/users/sislam3/SBAC-PAD-opt/scratch/LU/instrumented_O2_fast
+    libdevice=/storage/packages/cuda/12.8.1/nvvm/libdevice/libdevice.10.bc
+--- device pipeline
+--- host pipeline
+--- link
+    device counter symbol in cubin: present
+    atomicrmw sites in instrumented device IR: 30
+--- run x1
+    wall (best of 1): 5.3158s   -> /home/users/sislam3/SBAC-PAD-opt/scratch/LU/instrumented_O2_fast/timing_instrumented_O2_fast.txt
+    counts: invalid=2045 divzero=0 overflow=0 underflow=0 total=2899932672 subnormal=0 kernels=1
+=== done: LU [instrumented_O2_fast]

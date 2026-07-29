@@ -1,0 +1,9 @@
+index	file	func	line	func_pretty	is_kernel	op
+0	tests/amd/benchmarks/polybench/CUDA/CORR/correlation.cu	_Z11mean_kerneliiPfS_	158	mean_kernel(int, int, float*, float*)	1	fadd
+1	tests/amd/benchmarks/polybench/CUDA/CORR/correlation.cu	_Z11mean_kerneliiPfS_	161	mean_kernel(int, int, float*, float*)	1	fmul
+2	tests/amd/benchmarks/polybench/CUDA/CORR/correlation.cu	_Z10std_kerneliiPfS_S_	177	std_kernel(int, int, float*, float*, float*)	1	fsub
+3	tests/amd/benchmarks/polybench/CUDA/CORR/correlation.cu	_Z10std_kerneliiPfS_S_	179	std_kernel(int, int, float*, float*, float*)	1	fmul
+4	/opt/rocm-7.2.4/lib/llvm/lib/clang/22/include/__clang_hip_math.h	_Z10std_kerneliiPfS_S_	722	std_kernel(int, int, float*, float*, float*)	1	sqrt
+5	tests/amd/benchmarks/polybench/CUDA/CORR/correlation.cu	_Z13reduce_kerneliiPfS_S_	196	reduce_kernel(int, int, float*, float*, float*)	1	fsub
+6	tests/amd/benchmarks/polybench/CUDA/CORR/correlation.cu	_Z13reduce_kerneliiPfS_S_	197	reduce_kernel(int, int, float*, float*, float*)	1	fmul
+7	tests/amd/benchmarks/polybench/CUDA/CORR/correlation.cu	_Z11corr_kerneliiPfS_	217	corr_kernel(int, int, float*, float*)	1	fmul

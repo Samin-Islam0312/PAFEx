@@ -1,0 +1,8 @@
+LU       | invalid   | tests/cuda/benchmarks/polybench/CUDA/LU/lu.cu               | -                                          | -       | -
+GRAMSCHM | invalid   | tests/cuda/benchmarks/polybench/CUDA/GRAMSCHM/gramschmidt.cu | tests/cuda/benchmarks/polybench/CUDA/GRAMSCHM | -       | -
+CORR     | -         | tests/cuda/benchmarks/polybench/CUDA/CORR/correlation.cu    | tests/cuda/benchmarks/polybench/CUDA/CORR  | -       | -
+ADI      | -         | tests/cuda/benchmarks/polybench/CUDA/ADI/adi.cu            | tests/cuda/benchmarks/polybench/CUDA/ADI   | -       | -
+cfd      | underflow | tests/cuda/benchmarks/rodinia/cfd/euler3d.cu               | tests/cuda/benchmarks/rodinia/cfd          | /home/users/sislam3/SBAC-PAD-opt/tests/amd/benchmarks/rodinia/cfd/data/fvcorr.domn.097K | -
+gaussian | none      | tests/cuda/benchmarks/rodinia/gaussian/gaussian.cu        | tests/cuda/benchmarks/rodinia/gaussian     | -s 16   | -
+hotspot  | none      | tests/cuda/benchmarks/rodinia/hotspot/hotspot.cu          | tests/cuda/benchmarks/rodinia/hotspot      | 512 2 2 /home/users/sislam3/SBAC-PAD-opt/tests/amd/benchmarks/rodinia/hotspot/data/temp_512 /home/users/sislam3/SBAC-PAD-opt/tests/amd/benchmarks/rodinia/hotspot/data/power_512 output.out | -
+myocyte  | divzero   | tests/cuda/benchmarks/rodinia/myocyte/main.cu             | tests/cuda/benchmarks/rodinia/myocyte      | 100 1 0 | -

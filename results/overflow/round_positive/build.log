@@ -1,36 +1,18 @@
 === Part 2: Device pipeline ===
-[FPPass] Running on device module: nvptx64-nvidia-cuda
+[FPPass] Running on device module (nvptx64): nvptx64-nvidia-cuda
 [FPPass] Declared device counter array: fp_counters[6]
-[FPPass] Visiting function: _Z26testOverflow_RoundPositivePf [KERNEL]
-[FPPass]   COLLECT nvvm.add 'llvm.nvvm.add.rp.f' @ _Z26testOverflow_RoundPositivePf:204
-[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rp.f' @ _Z26testOverflow_RoundPositivePf:310
-[FPPass]   COLLECT nvvm.mul 'llvm.nvvm.mul.rp.f' @ _Z26testOverflow_RoundPositivePf:310
-[FPPass]   COLLECT nvvm.add 'llvm.nvvm.add.rp.f' @ _Z26testOverflow_RoundPositivePf:204
-[FPPass]   Collected 4 instructions to instrument
-[FPPass]   INSTRUMENT _Z26testOverflow_RoundPositivePf:204 op=0
-[FPPass]     -> Injected check: ex=0 op=0 line=204
-[FPPass]     -> Injected check: ex=2 op=0 line=204
-[FPPass]     -> Injected check: ex=3 op=0 line=204
-[FPPass]     -> Injected check: ex=5 op=0 line=204
-[FPPass]   INSTRUMENT _Z26testOverflow_RoundPositivePf:310 op=2
-[FPPass]     -> Injected check: ex=0 op=2 line=310
-[FPPass]     -> Injected check: ex=2 op=2 line=310
-[FPPass]     -> Injected check: ex=3 op=2 line=310
-[FPPass]     -> Injected check: ex=5 op=2 line=310
-[FPPass]   INSTRUMENT _Z26testOverflow_RoundPositivePf:310 op=2
-[FPPass]     -> Injected check: ex=0 op=2 line=310
-[FPPass]     -> Injected check: ex=2 op=2 line=310
-[FPPass]     -> Injected check: ex=3 op=2 line=310
-[FPPass]     -> Injected check: ex=5 op=2 line=310
-[FPPass]   INSTRUMENT _Z26testOverflow_RoundPositivePf:204 op=0
-[FPPass]     -> Injected check: ex=0 op=0 line=204
-[FPPass]     -> Injected check: ex=2 op=0 line=204
-[FPPass]     -> Injected check: ex=3 op=0 line=204
-[FPPass]     -> Injected check: ex=5 op=0 line=204
-[FPPass] SUMMARY: visited 1 functions, instrumented 4 instructions
+[FPPass] Declared device site array: fp_site_counters[49152]
+[FPPass] Declared device result-class array: fp_result_counters[32768]
+[FPPass] SUMMARY: visited 1 functions, instrumented 4 instructions, 2 sites
+[FPPass] Wrote fp_sites.csv with 2 sites
 === Part 3: Host pipeline ===
-[HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD/results/overflow/round_positive/host.bc
+[HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD-opt/results/overflow/round_positive/host.bc
+[HostPass] TU has __cuda_register_globals (CUDA); emitting shadows, register calls, and accessors.
 [HostPass] Created host shadow: fp_counters[6]
-[HostPass] Registered shadow: fp_counters[6] (48 bytes)
-[HostPass] Found main(), injecting PAPI lifecycle.
+[HostPass] Registered shadow: fp_counters (48 bytes)
+[HostPass] Created host shadow: fp_site_counters[49152]
+[HostPass] Registered shadow: fp_site_counters (393216 bytes)
+[HostPass] Created host shadow: fp_result_counters[32768]
+[HostPass] Registered shadow: fp_result_counters (262144 bytes)
+[HostPass] TU has main; injecting PAPI lifecycle.
 === Part 4: Link ===

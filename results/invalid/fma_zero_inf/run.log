@@ -1,4 +1,4 @@
-[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/invalid/fma_zero_inf/host.bc
+[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD-opt/results/invalid/fma_zero_inf/host.bc
 [FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
 ========================================
 [TEST] Invalid Operation: FMA(0, ∞, c)
@@ -14,18 +14,18 @@ Expected: First 4 results = NaN
 [RESULT 4] value = nan, isNaN = YES
 ========================================
 
-[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD/results/invalid/fma_zero_inf/host.bc
+[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD-opt/results/invalid/fma_zero_inf/host.bc
 
 IEEE Exceptions According to the standard
-  Total FP Ops:       0
+  Total FP Ops:       5
   Div by Zero:        0
   Invalid Ops:        5
   Overflow:           0
   Underflow:          0
 
 Detailed Breakdown
-  NaNs (Input):       0
-  NaNs (Created):     0
+  NaNs (Input):       -1
+  NaNs (Created):     -1
   Denormals Produced: 0
 
 Workload Stats
@@ -34,9 +34,9 @@ Workload Stats
 
 Derived Metrics
   Total Exceptions:   5
-  Exception Density:  0 (per million ops)
-  NaN Prop Rate:      0 (per million NaNs)
-  Subnormal Rate:     0 (per million underflows)
-  Instability Score:  0
+  Exception Density:  1000000 (per million ops)
+  NaN Prop Rate:      -1 (per million NaNs)
+  Subnormal Rate:     -1 (per million underflows)
+  Instability Score:  -1
 
 [FP_INSTRUMENT] Finalized.

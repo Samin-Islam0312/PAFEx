@@ -1,0 +1,13 @@
+=== gaussian [instrumented]  (group=none, O2, ieee)
+    src=tests/cuda/benchmarks/rodinia/gaussian/gaussian.cu  inc=tests/cuda/benchmarks/rodinia/gaussian  args=-s 16  expect=none
+    scratch=/home/users/sislam3/SBAC-PAD-opt/scratch/gaussian/instrumented_O2
+    libdevice=/storage/packages/cuda/12.8.1/nvvm/libdevice/libdevice.10.bc
+--- device pipeline
+--- host pipeline
+--- link
+    device counter symbol in cubin: present
+    atomicrmw sites in instrumented device IR: 48
+--- run x1
+    wall (best of 1): 2.8279s   -> /home/users/sislam3/SBAC-PAD-opt/scratch/gaussian/instrumented_O2/timing_instrumented_O2.txt
+    counts: invalid=0 divzero=0 overflow=0 underflow=0 total=3080 subnormal=0 kernels=1
+=== done: gaussian [instrumented_O2]

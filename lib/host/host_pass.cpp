@@ -70,25 +70,60 @@ static const RuntimeNames HIPNames = {
     "__hipRegisterVar", "__hipRegisterFunction",
     "hipMemcpyFromSymbol", "hipMemcpyToSymbol", "HIP"
 };
-// Returns the register-callback function to anchor on, and writes the fatbin
-// handle Value into HandleOut. CUDA: __cuda_register_globals(handle) — handle
-// is arg 0. HIP (ROCm 7.x): no __hip_register_globals; registration is inlined
-// into __hip_module_ctor(), handle is the first operand of the first
-// __hipRegisterFunction/Var call (the merged phi), valid only from that call on.
-static Function *findRegSite(Module &M, const RuntimeNames *RT,
-                             Value *&HandleOut, Instruction *&InsertAfter) {
-    HandleOut = nullptr; InsertAfter = nullptr;
+// Is this one of clang's own registration calls in __cuda_register_globals?
+static bool isVendorRegisterCall(const Instruction *I, const RuntimeNames *RT) {
+    const auto *CI = dyn_cast<CallInst>(I);
+    if (!CI) return false;
+    const Function *Callee = CI->getCalledFunction();
+    if (!Callee) return false;
+    StringRef N = Callee->getName();
+    return N == RT->RegisterFunction || N == RT->RegisterVar ||
+           N == "__cudaRegisterManagedVar" || N == "__hipRegisterManagedVar" ||
+           N == "__cudaRegisterSurface"    || N == "__cudaRegisterTexture";
+}
 
-    // CUDA: dedicated register-globals fn, handle = arg 0 (unchanged behavior).
+// Returns the register-callback function to anchor on. Writes the fatbin handle
+// Value into HandleOut and an IRBuilder INSERT-BEFORE point into InsertPtOut
+// (i.e. injected calls land immediately *before* the returned instruction).
+//
+// The two runtimes need genuinely different discovery, and only the resulting
+// `Value *Handle` is common:
+//
+//   CUDA: clang emits a dedicated __cuda_register_globals(void **handle);
+//     the handle is arg 0 and dominates the whole function, so the only
+//     question is WHERE to insert. We walk past clang's own __cudaRegister*
+//     calls and insert after them, so our registrations run on a handle the
+//     runtime has already seen this module's other globals through. This walk
+//     is the published SBAC-PAD NVIDIA behavior — do not "simplify" it to
+//     getFirstInsertionPt(), which inserts AHEAD of clang's registrations.
+//
+//   HIP (ROCm 7.x): there is no __hip_register_globals — registration is
+//     inlined into __hip_module_ctor(), and the handle is the first operand of
+//     the first __hipRegister* call (the merged phi), which is only valid from
+//     that call onward. So for HIP the register call is the anchor, not an
+//     obstacle to walk past.
+static Function *findRegSite(Module &M, const RuntimeNames *RT,
+                             Value *&HandleOut, Instruction *&InsertPtOut) {
+    HandleOut = nullptr; InsertPtOut = nullptr;
+
+    // ---- CUDA: dedicated register-globals fn, handle = arg 0. ----
     if (Function *F = M.getFunction(RT->RegisterGlobals);
         F && !F->isDeclaration()) {
-        HandleOut = F->getArg(0);
-        InsertAfter = &*F->getEntryBlock().getFirstInsertionPt();
+        BasicBlock &EntryBB = F->getEntryBlock();
+        Instruction *InsertPt = &*EntryBB.getFirstInsertionPt();
+        while (InsertPt && isVendorRegisterCall(InsertPt, RT)) {
+            Instruction *Next = InsertPt->getNextNode();
+            if (!Next) break;                 // shouldn't happen: a terminator follows
+            InsertPt = Next;
+        }
+        HandleOut   = F->getArg(0);
+        InsertPtOut = InsertPt ? InsertPt : EntryBB.getTerminator();
         return F;
     }
 
-    // HIP ROCm 7.x: anchor on __hip_module_ctor, but only if it actually
-    // contains a RegisterFunction call (distinguishes it from __hip_module_dtor).
+    // ---- HIP ROCm 7.x: anchor on __hip_module_ctor, but only if it actually
+    // contains a RegisterFunction/Var call (distinguishes it from
+    // __hip_module_dtor, which has neither). ----
     if (Function *F = M.getFunction(RT->ModuleCtor);
         F && !F->isDeclaration()) {
         for (BasicBlock &BB : *F)
@@ -97,10 +132,21 @@ static Function *findRegSite(Module &M, const RuntimeNames *RT,
                     if (Function *Callee = CI->getCalledFunction()) {
                         StringRef N = Callee->getName();
                         if (N == RT->RegisterFunction || N == RT->RegisterVar) {
+                            // A register call is never a terminator, so the next
+                            // node always exists; if the IR ever says otherwise
+                            // that is a hard error, not a call to keep scanning
+                            // and silently anchor somewhere else.
                             Instruction *After = CI->getNextNode();
-                            if (!After) continue;              // register call is block terminator-adjacent; skip
-                            HandleOut = CI->getArgOperand(0);  // = %6, the phi
-                            InsertAfter = CI->getNextNode();   // in block %5, handle dominates
+                            if (!After) {
+                                errs() << "[HostPass] ERROR: " << N
+                                       << " in " << RT->ModuleCtor
+                                       << " has no successor instruction; cannot "
+                                          "anchor registration. Not instrumenting "
+                                          "this TU.\n";
+                                return nullptr;
+                            }
+                            HandleOut   = CI->getArgOperand(0);  // the merged phi
+                            InsertPtOut = After;                 // handle dominates here
                             return F;
                         }
                     }
@@ -143,9 +189,14 @@ public:
         }
 
         if (!HasMain && !RegGlobals) {
+            // Name the anchors we actually look for. ROCm 7.x emits no
+            // __hip_register_globals at all, so reporting it here sent the
+            // reader looking for a symbol that is never supposed to exist.
             errs() << "[HostPass] Skipping TU (no main, no "
-                   << CUDANames.RegisterGlobals << " / "
-                   << HIPNames.RegisterGlobals << "): " << M.getName() << "\n";
+                   << CUDANames.RegisterGlobals << ", no "
+                   << HIPNames.ModuleCtor << " carrying "
+                   << HIPNames.RegisterFunction << "/" << HIPNames.RegisterVar
+                   << "): " << M.getName() << "\n";
             return PreservedAnalyses::all();
         }
 
@@ -160,6 +211,12 @@ public:
         // ===== Counter-side work: shadows + register calls + accessors =====
         // Done in the TU that has the register-globals function (the one with
         // kernel definitions).
+        if (RegGlobals && alreadyInstrumented(M)) {
+            errs() << "[HostPass] TU already carries " << kReadFn
+                   << "; counter side already instrumented, skipping.\n";
+            RegGlobals = nullptr;
+        }
+
         if (RegGlobals) {
             errs() << "[HostPass] TU has " << RegGlobals->getName()
                 << " (" << RT->Tag << "); emitting shadows, register calls, and accessors.\n";
@@ -277,6 +334,12 @@ public:
 
         // ===== Lifecycle injection =====
         // Done in the TU that has main.
+        if (HasMain && callsHook(*MainFn, "fp_instrument_init")) {
+            errs() << "[HostPass] main already calls fp_instrument_init; "
+                      "lifecycle already injected, skipping.\n";
+            HasMain = false;
+        }
+
         if (HasMain) {
             errs() << "[HostPass] TU has main; injecting PAPI lifecycle.\n";
 
@@ -306,6 +369,40 @@ public:
 private:
     const RuntimeNames *RT = &CUDANames;
 
+    // ---- idempotency ----
+    // HostPass can legitimately see the same module twice: the O0..O3 grid drives
+    // the pipeline in configurations where the plugin is loaded more than once,
+    // and a second `opt` invocation over an already-instrumented .bc is a one-line
+    // scripting slip. Re-emitting is NOT benign:
+    //   - Function::Create on a name that already exists does not fail, it
+    //     silently renames the new definition to "<name>.1". The driver then
+    //     links the first copy, which registers nothing.
+    //   - A second __cudaRegisterVar/__hipRegisterVar for one device symbol is a
+    //     silent wrong answer at readback, not a diagnostic.
+    //   - A second fp_instrument_init/finalize pair double-publishes to PAPI.
+    // Each emitter is therefore guarded on the symbol it owns, and the two
+    // top-level blocks are guarded on their own sentinels. The checks are direct
+    // symbol/IR queries rather than a metadata marker so they survive being
+    // round-tripped through bitcode and through passes that strip metadata.
+
+    // kReadFn is defined by this pass and by nothing else. A *declaration* can
+    // legitimately appear in a TU that also contains the driver, so require a
+    // definition before concluding we already ran here.
+    static bool alreadyInstrumented(const Module &M) {
+        const Function *F = M.getFunction(kReadFn);
+        return F && !F->isDeclaration();
+    }
+
+    static bool callsHook(const Function &F, StringRef HookName) {
+        for (const BasicBlock &BB : F)
+            for (const Instruction &I : BB)
+                if (const auto *CI = dyn_cast<CallInst>(&I))
+                    if (const Function *Callee = CI->getCalledFunction())
+                        if (Callee->getName() == HookName)
+                            return true;
+        return false;
+    }
+
     FunctionCallee getMemcpyFromSymbol(Module &M) {
         LLVMContext &Ctx = M.getContext();
         PointerType *PtrTy = PointerType::getUnqual(Ctx);
@@ -330,6 +427,10 @@ private:
     // One coalesced D2H copy of the aggregate array, scattered into the six
     // output pointers (one per ExceptionID, in index order).
     void emitReadFunction(Module &M, GlobalVariable *Shadow) {
+        if (Function *Existing = M.getFunction(kReadFn); Existing && !Existing->isDeclaration()) {
+            errs() << "[HostPass] " << kReadFn << " already defined; not re-emitting.\n";
+            return;
+        }
         LLVMContext &Ctx = M.getContext();
         Type *I32 = Type::getInt32Ty(Ctx);
         Type *I64 = Type::getInt64Ty(Ctx);
@@ -395,6 +496,10 @@ private:
     // collapsed into one.
     void emitBulkReadFunction(Module &M, GlobalVariable *ArrShadow,
                               const char *FnName, uint64_t SizeBytes) {
+        if (Function *Existing = M.getFunction(FnName); Existing && !Existing->isDeclaration()) {
+            errs() << "[HostPass] " << FnName << " already defined; not re-emitting.\n";
+            return;
+        }
         LLVMContext &Ctx = M.getContext();
         Type *I32 = Type::getInt32Ty(Ctx);
         Type *I64 = Type::getInt64Ty(Ctx);
@@ -422,6 +527,10 @@ private:
     // Emit: extern "C" int fp_reset_counters(void) — zeroes the aggregate
     // array on device (one coalesced H2D copy of zeros).
     void emitResetFunction(Module &M, GlobalVariable *Shadow) {
+        if (Function *Existing = M.getFunction(kResetFn); Existing && !Existing->isDeclaration()) {
+            errs() << "[HostPass] " << kResetFn << " already defined; not re-emitting.\n";
+            return;
+        }
         LLVMContext &Ctx = M.getContext();
         Type *I32 = Type::getInt32Ty(Ctx);
         Type *I64 = Type::getInt64Ty(Ctx);

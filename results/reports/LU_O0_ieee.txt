@@ -1,0 +1,2 @@
+=== LU located exceptions (O0 ieee) ===
+  invalid    tests/amd/benchmarks/polybench/CUDA/LU/lu.cu:105  op=fdiv  (fired 2045)

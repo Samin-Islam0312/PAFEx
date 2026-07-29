@@ -1,28 +1,18 @@
 === Part 2: Device pipeline ===
-[FPPass] Running on device module: nvptx64-nvidia-cuda
+[FPPass] Running on device module (nvptx64): nvptx64-nvidia-cuda
 [FPPass] Declared device counter array: fp_counters[6]
-[FPPass] Visiting function: _Z12is_subnormalf [device]
-[FPPass]   Collected 0 instructions to instrument
-[FPPass] Visiting function: _Z22testIterativeUnderflowPfPi [KERNEL]
-[FPPass]   COLLECT fmul @ _Z22testIterativeUnderflowPfPi:21
-[FPPass]   Collected 1 instructions to instrument
-[FPPass]   INSTRUMENT _Z22testIterativeUnderflowPfPi:21 op=2
-[FPPass]     -> Injected check: ex=0 op=2 line=21
-[FPPass]     -> Injected check: ex=2 op=2 line=21
-[FPPass]     -> Injected check: ex=3 op=2 line=21
-[FPPass]     -> Injected check: ex=5 op=2 line=21
-[FPPass] Visiting function: _Z23testUnderflow_SummationPf [KERNEL]
-[FPPass]   COLLECT fadd @ _Z23testUnderflow_SummationPf:50
-[FPPass]   Collected 1 instructions to instrument
-[FPPass]   INSTRUMENT _Z23testUnderflow_SummationPf:50 op=0
-[FPPass]     -> Injected check: ex=0 op=0 line=50
-[FPPass]     -> Injected check: ex=2 op=0 line=50
-[FPPass]     -> Injected check: ex=3 op=0 line=50
-[FPPass]     -> Injected check: ex=5 op=0 line=50
-[FPPass] SUMMARY: visited 3 functions, instrumented 2 instructions
+[FPPass] Declared device site array: fp_site_counters[49152]
+[FPPass] Declared device result-class array: fp_result_counters[32768]
+[FPPass] SUMMARY: visited 3 functions, instrumented 2 instructions, 2 sites
+[FPPass] Wrote fp_sites.csv with 2 sites
 === Part 3: Host pipeline ===
-[HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD/results/underflow/iterative/host.bc
+[HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD-opt/results/underflow/iterative/host.bc
+[HostPass] TU has __cuda_register_globals (CUDA); emitting shadows, register calls, and accessors.
 [HostPass] Created host shadow: fp_counters[6]
-[HostPass] Registered shadow: fp_counters[6] (48 bytes)
-[HostPass] Found main(), injecting PAPI lifecycle.
+[HostPass] Registered shadow: fp_counters (48 bytes)
+[HostPass] Created host shadow: fp_site_counters[49152]
+[HostPass] Registered shadow: fp_site_counters (393216 bytes)
+[HostPass] Created host shadow: fp_result_counters[32768]
+[HostPass] Registered shadow: fp_result_counters (262144 bytes)
+[HostPass] TU has main; injecting PAPI lifecycle.
 === Part 4: Link ===

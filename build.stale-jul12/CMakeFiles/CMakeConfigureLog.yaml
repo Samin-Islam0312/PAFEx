@@ -1,0 +1,515 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Linux - 4.18.0-553.16.1.el8_10.x86_64 - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /home/users/sislam3/opt/llvm-22/bin/clang 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is Clang, found in:
+        /home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/3.31.2/CompilerIdC/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /home/users/sislam3/opt/llvm-22/bin/clang++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is Clang, found in:
+        /home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/3.31.2/CompilerIdCXX/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-qXNyur"
+      binary: "/home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-qXNyur"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/home/users/sislam3/opt/llvm-22/bin/clang-scan-deps"
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-qXNyur'
+        
+        Run Build Command(s): /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/bin/cmake -E env VERBOSE=1 /usr/local/spack-tools/view/bin/gmake -f Makefile cmTC_650ab/fast
+        /usr/local/spack-tools/view/bin/gmake  -f CMakeFiles/cmTC_650ab.dir/build.make CMakeFiles/cmTC_650ab.dir/build
+        gmake[1]: Entering directory '/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-qXNyur'
+        Building C object CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o
+        /home/users/sislam3/opt/llvm-22/bin/clang   -v -MD -MT CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o -c /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeCCompilerABI.c
+        clang version 22.1.5 (https://github.com/llvm/llvm-project.git 5ea218a153f4d2f815b8244eab3e4b4ba5e00e6c)
+        Target: x86_64-unknown-linux-gnu
+        Thread model: posix
+        InstalledDir: /storage/users/sislam3/opt/llvm-22/bin
+        Build config: +assertions
+        Found candidate GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13
+        Selected GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13
+        Candidate multilib: .;@m64
+        Candidate multilib: 32;@m32
+        Selected multilib: .;@m64
+        Found HIP installation: /opt/rocm, version 7.2.53211
+         (in-process)
+         "/storage/users/sislam3/opt/llvm-22/bin/clang-22" -cc1 -triple x86_64-unknown-linux-gnu -emit-obj -disable-free -clear-ast-before-backend -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -fdebug-compilation-dir=/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-qXNyur -v -fcoverage-compilation-dir=/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-qXNyur -resource-dir /storage/users/sislam3/opt/llvm-22/lib/clang/22 -dependency-file CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o -sys-header-deps -internal-isystem /storage/users/sislam3/opt/llvm-22/lib/clang/22/include -internal-isystem /usr/local/include -internal-isystem /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../x86_64-redhat-linux/include -internal-externc-isystem /include -internal-externc-isystem /usr/include -ferror-limit 19 -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -faddrsig -fdwarf2-cfi-asm -o CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o -x c /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeCCompilerABI.c
+        clang -cc1 version 22.1.5 based upon LLVM 22.1.5 default target x86_64-unknown-linux-gnu
+        ignoring nonexistent directory "/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../x86_64-redhat-linux/include"
+        ignoring nonexistent directory "/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /storage/users/sislam3/opt/llvm-22/lib/clang/22/include
+         /usr/local/include
+         /usr/include
+        End of search list.
+        Linking C executable cmTC_650ab
+        /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/bin/cmake -E cmake_link_script CMakeFiles/cmTC_650ab.dir/link.txt --verbose=1
+        clang version 22.1.5 (https://github.com/llvm/llvm-project.git 5ea218a153f4d2f815b8244eab3e4b4ba5e00e6c)
+        Target: x86_64-unknown-linux-gnu
+        Thread model: posix
+        InstalledDir: /storage/users/sislam3/opt/llvm-22/bin
+        Build config: +assertions
+        Found candidate GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13
+        Selected GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13
+        Candidate multilib: .;@m64
+        Candidate multilib: 32;@m32
+        Selected multilib: .;@m64
+        Found HIP installation: /opt/rocm, version 7.2.53211
+         "/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../bin/ld" --hash-style=gnu --eh-frame-hdr -m elf_x86_64 -pie -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_650ab /lib/../lib64/Scrt1.o /lib/../lib64/crti.o /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtbeginS.o -L/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13 -L/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../lib64 -L/lib/../lib64 -L/usr/lib64 -L/lib -L/usr/lib -v CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtendS.o /lib/../lib64/crtn.o
+        GNU ld version 2.40-21.el8
+        /home/users/sislam3/opt/llvm-22/bin/clang  -v -Wl,-v CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o -o cmTC_650ab
+        gmake[1]: Leaving directory '/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-qXNyur'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/storage/users/sislam3/opt/llvm-22/lib/clang/22/include]
+          add: [/usr/local/include]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/storage/users/sislam3/opt/llvm-22/lib/clang/22/include] ==> [/home/users/sislam3/opt/llvm-22/lib/clang/22/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/home/users/sislam3/opt/llvm-22/lib/clang/22/include;/usr/local/include;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: '/home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-qXNyur']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/bin/cmake -E env VERBOSE=1 /usr/local/spack-tools/view/bin/gmake -f Makefile cmTC_650ab/fast]
+        ignore line: [/usr/local/spack-tools/view/bin/gmake  -f CMakeFiles/cmTC_650ab.dir/build.make CMakeFiles/cmTC_650ab.dir/build]
+        ignore line: [gmake[1]: Entering directory '/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-qXNyur']
+        ignore line: [Building C object CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/home/users/sislam3/opt/llvm-22/bin/clang   -v -MD -MT CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o -c /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeCCompilerABI.c]
+        ignore line: [clang version 22.1.5 (https://github.com/llvm/llvm-project.git 5ea218a153f4d2f815b8244eab3e4b4ba5e00e6c)]
+        ignore line: [Target: x86_64-unknown-linux-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /storage/users/sislam3/opt/llvm-22/bin]
+        ignore line: [Build config: +assertions]
+        ignore line: [Found candidate GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13]
+        ignore line: [Selected GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13]
+        ignore line: [Candidate multilib: .]
+        ignore line: [@m64]
+        ignore line: [Candidate multilib: 32]
+        ignore line: [@m32]
+        ignore line: [Selected multilib: .]
+        ignore line: [@m64]
+        ignore line: [Found HIP installation: /opt/rocm  version 7.2.53211]
+        ignore line: [ (in-process)]
+        ignore line: [ "/storage/users/sislam3/opt/llvm-22/bin/clang-22" -cc1 -triple x86_64-unknown-linux-gnu -emit-obj -disable-free -clear-ast-before-backend -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -fdebug-compilation-dir=/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-qXNyur -v -fcoverage-compilation-dir=/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-qXNyur -resource-dir /storage/users/sislam3/opt/llvm-22/lib/clang/22 -dependency-file CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o -sys-header-deps -internal-isystem /storage/users/sislam3/opt/llvm-22/lib/clang/22/include -internal-isystem /usr/local/include -internal-isystem /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../x86_64-redhat-linux/include -internal-externc-isystem /include -internal-externc-isystem /usr/include -ferror-limit 19 -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -faddrsig -fdwarf2-cfi-asm -o CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o -x c /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeCCompilerABI.c]
+        ignore line: [clang -cc1 version 22.1.5 based upon LLVM 22.1.5 default target x86_64-unknown-linux-gnu]
+        ignore line: [ignoring nonexistent directory "/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../x86_64-redhat-linux/include"]
+        ignore line: [ignoring nonexistent directory "/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /storage/users/sislam3/opt/llvm-22/lib/clang/22/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Linking C executable cmTC_650ab]
+        ignore line: [/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/bin/cmake -E cmake_link_script CMakeFiles/cmTC_650ab.dir/link.txt --verbose=1]
+        ignore line: [clang version 22.1.5 (https://github.com/llvm/llvm-project.git 5ea218a153f4d2f815b8244eab3e4b4ba5e00e6c)]
+        ignore line: [Target: x86_64-unknown-linux-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /storage/users/sislam3/opt/llvm-22/bin]
+        ignore line: [Build config: +assertions]
+        ignore line: [Found candidate GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13]
+        ignore line: [Selected GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13]
+        ignore line: [Candidate multilib: .]
+        ignore line: [@m64]
+        ignore line: [Candidate multilib: 32]
+        ignore line: [@m32]
+        ignore line: [Selected multilib: .]
+        ignore line: [@m64]
+        ignore line: [Found HIP installation: /opt/rocm  version 7.2.53211]
+        link line: [ "/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../bin/ld" --hash-style=gnu --eh-frame-hdr -m elf_x86_64 -pie -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_650ab /lib/../lib64/Scrt1.o /lib/../lib64/crti.o /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtbeginS.o -L/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13 -L/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../lib64 -L/lib/../lib64 -L/usr/lib64 -L/lib -L/usr/lib -v CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtendS.o /lib/../lib64/crtn.o]
+          arg [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../bin/ld] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_650ab] ==> ignore
+          arg [/lib/../lib64/Scrt1.o] ==> obj [/lib/../lib64/Scrt1.o]
+          arg [/lib/../lib64/crti.o] ==> obj [/lib/../lib64/crti.o]
+          arg [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtbeginS.o] ==> obj [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtbeginS.o]
+          arg [-L/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13] ==> dir [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13]
+          arg [-L/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../lib64] ==> dir [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../lib64]
+          arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+          arg [-L/usr/lib64] ==> dir [/usr/lib64]
+          arg [-L/lib] ==> dir [/lib]
+          arg [-L/usr/lib] ==> dir [/usr/lib]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_650ab.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lgcc] ==> lib [gcc]
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--no-as-needed] ==> ignore
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--no-as-needed] ==> ignore
+          arg [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtendS.o] ==> obj [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtendS.o]
+          arg [/lib/../lib64/crtn.o] ==> obj [/lib/../lib64/crtn.o]
+        linker tool for 'C': /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../bin/ld
+        collapse obj [/lib/../lib64/Scrt1.o] ==> [/lib64/Scrt1.o]
+        collapse obj [/lib/../lib64/crti.o] ==> [/lib64/crti.o]
+        collapse obj [/lib/../lib64/crtn.o] ==> [/lib64/crtn.o]
+        collapse library dir [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13] ==> [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13]
+        collapse library dir [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../lib64] ==> [/opt/rh/gcc-toolset-13/root/usr/lib64]
+        collapse library dir [/lib/../lib64] ==> [/lib64]
+        collapse library dir [/usr/lib64] ==> [/usr/lib64]
+        collapse library dir [/lib] ==> [/lib]
+        collapse library dir [/usr/lib] ==> [/usr/lib]
+        implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+        implicit objs: [/lib64/Scrt1.o;/lib64/crti.o;/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtbeginS.o;/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtendS.o;/lib64/crtn.o]
+        implicit dirs: [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13;/opt/rh/gcc-toolset-13/root/usr/lib64;/lib64;/usr/lib64;/lib;/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../bin/ld" "-v"
+      GNU ld version 2.40-21.el8
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-E5VKah"
+      binary: "/home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-E5VKah"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/home/users/sislam3/opt/llvm-22/bin/clang-scan-deps"
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-E5VKah'
+        
+        Run Build Command(s): /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/bin/cmake -E env VERBOSE=1 /usr/local/spack-tools/view/bin/gmake -f Makefile cmTC_ea270/fast
+        /usr/local/spack-tools/view/bin/gmake  -f CMakeFiles/cmTC_ea270.dir/build.make CMakeFiles/cmTC_ea270.dir/build
+        gmake[1]: Entering directory '/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-E5VKah'
+        Building CXX object CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o
+        /home/users/sislam3/opt/llvm-22/bin/clang++   -v -MD -MT CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp
+        clang version 22.1.5 (https://github.com/llvm/llvm-project.git 5ea218a153f4d2f815b8244eab3e4b4ba5e00e6c)
+        Target: x86_64-unknown-linux-gnu
+        Thread model: posix
+        InstalledDir: /storage/users/sislam3/opt/llvm-22/bin
+        Build config: +assertions
+        Found candidate GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13
+        Selected GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13
+        Candidate multilib: .;@m64
+        Candidate multilib: 32;@m32
+        Selected multilib: .;@m64
+        Found HIP installation: /opt/rocm, version 7.2.53211
+         (in-process)
+         "/storage/users/sislam3/opt/llvm-22/bin/clang-22" -cc1 -triple x86_64-unknown-linux-gnu -emit-obj -disable-free -clear-ast-before-backend -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -fdebug-compilation-dir=/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-E5VKah -v -fcoverage-compilation-dir=/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-E5VKah -resource-dir /storage/users/sislam3/opt/llvm-22/lib/clang/22 -dependency-file CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -internal-isystem /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13 -internal-isystem /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/x86_64-redhat-linux -internal-isystem /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/backward -internal-isystem /storage/users/sislam3/opt/llvm-22/lib/clang/22/include -internal-isystem /usr/local/include -internal-isystem /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../x86_64-redhat-linux/include -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdeprecated-macro -ferror-limit 19 -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -faddrsig -fdwarf2-cfi-asm -o CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp
+        clang -cc1 version 22.1.5 based upon LLVM 22.1.5 default target x86_64-unknown-linux-gnu
+        ignoring nonexistent directory "/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../x86_64-redhat-linux/include"
+        ignoring nonexistent directory "/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13
+         /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/x86_64-redhat-linux
+         /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/backward
+         /storage/users/sislam3/opt/llvm-22/lib/clang/22/include
+         /usr/local/include
+         /usr/include
+        End of search list.
+        Linking CXX executable cmTC_ea270
+        /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ea270.dir/link.txt --verbose=1
+        clang version 22.1.5 (https://github.com/llvm/llvm-project.git 5ea218a153f4d2f815b8244eab3e4b4ba5e00e6c)
+        Target: x86_64-unknown-linux-gnu
+        Thread model: posix
+        InstalledDir: /storage/users/sislam3/opt/llvm-22/bin
+        Build config: +assertions
+        Found candidate GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13
+        Selected GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13
+        Candidate multilib: .;@m64
+        Candidate multilib: 32;@m32
+        Selected multilib: .;@m64
+        Found HIP installation: /opt/rocm, version 7.2.53211
+         "/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../bin/ld" --hash-style=gnu --eh-frame-hdr -m elf_x86_64 -pie -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_ea270 /lib/../lib64/Scrt1.o /lib/../lib64/crti.o /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtbeginS.o -L/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13 -L/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../lib64 -L/lib/../lib64 -L/usr/lib64 -L/lib -L/usr/lib -v CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtendS.o /lib/../lib64/crtn.o
+        GNU ld version 2.40-21.el8
+        /home/users/sislam3/opt/llvm-22/bin/clang++  -v -Wl,-v CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_ea270
+        gmake[1]: Leaving directory '/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-E5VKah'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13]
+          add: [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/x86_64-redhat-linux]
+          add: [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/backward]
+          add: [/storage/users/sislam3/opt/llvm-22/lib/clang/22/include]
+          add: [/usr/local/include]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13] ==> [/opt/rh/gcc-toolset-13/root/usr/include/c++/13]
+        collapse include dir [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/x86_64-redhat-linux] ==> [/opt/rh/gcc-toolset-13/root/usr/include/c++/13/x86_64-redhat-linux]
+        collapse include dir [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/backward] ==> [/opt/rh/gcc-toolset-13/root/usr/include/c++/13/backward]
+        collapse include dir [/storage/users/sislam3/opt/llvm-22/lib/clang/22/include] ==> [/home/users/sislam3/opt/llvm-22/lib/clang/22/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/opt/rh/gcc-toolset-13/root/usr/include/c++/13;/opt/rh/gcc-toolset-13/root/usr/include/c++/13/x86_64-redhat-linux;/opt/rh/gcc-toolset-13/root/usr/include/c++/13/backward;/home/users/sislam3/opt/llvm-22/lib/clang/22/include;/usr/local/include;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: '/home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-E5VKah']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/bin/cmake -E env VERBOSE=1 /usr/local/spack-tools/view/bin/gmake -f Makefile cmTC_ea270/fast]
+        ignore line: [/usr/local/spack-tools/view/bin/gmake  -f CMakeFiles/cmTC_ea270.dir/build.make CMakeFiles/cmTC_ea270.dir/build]
+        ignore line: [gmake[1]: Entering directory '/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-E5VKah']
+        ignore line: [Building CXX object CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/home/users/sislam3/opt/llvm-22/bin/clang++   -v -MD -MT CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang version 22.1.5 (https://github.com/llvm/llvm-project.git 5ea218a153f4d2f815b8244eab3e4b4ba5e00e6c)]
+        ignore line: [Target: x86_64-unknown-linux-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /storage/users/sislam3/opt/llvm-22/bin]
+        ignore line: [Build config: +assertions]
+        ignore line: [Found candidate GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13]
+        ignore line: [Selected GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13]
+        ignore line: [Candidate multilib: .]
+        ignore line: [@m64]
+        ignore line: [Candidate multilib: 32]
+        ignore line: [@m32]
+        ignore line: [Selected multilib: .]
+        ignore line: [@m64]
+        ignore line: [Found HIP installation: /opt/rocm  version 7.2.53211]
+        ignore line: [ (in-process)]
+        ignore line: [ "/storage/users/sislam3/opt/llvm-22/bin/clang-22" -cc1 -triple x86_64-unknown-linux-gnu -emit-obj -disable-free -clear-ast-before-backend -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=all -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -fdebug-compilation-dir=/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-E5VKah -v -fcoverage-compilation-dir=/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-E5VKah -resource-dir /storage/users/sislam3/opt/llvm-22/lib/clang/22 -dependency-file CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o.d -MT CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -internal-isystem /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13 -internal-isystem /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/x86_64-redhat-linux -internal-isystem /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/backward -internal-isystem /storage/users/sislam3/opt/llvm-22/lib/clang/22/include -internal-isystem /usr/local/include -internal-isystem /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../x86_64-redhat-linux/include -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdeprecated-macro -ferror-limit 19 -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -faddrsig -fdwarf2-cfi-asm -o CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o -x c++ /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang -cc1 version 22.1.5 based upon LLVM 22.1.5 default target x86_64-unknown-linux-gnu]
+        ignore line: [ignoring nonexistent directory "/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../x86_64-redhat-linux/include"]
+        ignore line: [ignoring nonexistent directory "/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13]
+        ignore line: [ /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/x86_64-redhat-linux]
+        ignore line: [ /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../include/c++/13/backward]
+        ignore line: [ /storage/users/sislam3/opt/llvm-22/lib/clang/22/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Linking CXX executable cmTC_ea270]
+        ignore line: [/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ea270.dir/link.txt --verbose=1]
+        ignore line: [clang version 22.1.5 (https://github.com/llvm/llvm-project.git 5ea218a153f4d2f815b8244eab3e4b4ba5e00e6c)]
+        ignore line: [Target: x86_64-unknown-linux-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /storage/users/sislam3/opt/llvm-22/bin]
+        ignore line: [Build config: +assertions]
+        ignore line: [Found candidate GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13]
+        ignore line: [Selected GCC installation: /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13]
+        ignore line: [Candidate multilib: .]
+        ignore line: [@m64]
+        ignore line: [Candidate multilib: 32]
+        ignore line: [@m32]
+        ignore line: [Selected multilib: .]
+        ignore line: [@m64]
+        ignore line: [Found HIP installation: /opt/rocm  version 7.2.53211]
+        link line: [ "/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../bin/ld" --hash-style=gnu --eh-frame-hdr -m elf_x86_64 -pie -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_ea270 /lib/../lib64/Scrt1.o /lib/../lib64/crti.o /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtbeginS.o -L/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13 -L/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../lib64 -L/lib/../lib64 -L/usr/lib64 -L/lib -L/usr/lib -v CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtendS.o /lib/../lib64/crtn.o]
+          arg [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../bin/ld] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_ea270] ==> ignore
+          arg [/lib/../lib64/Scrt1.o] ==> obj [/lib/../lib64/Scrt1.o]
+          arg [/lib/../lib64/crti.o] ==> obj [/lib/../lib64/crti.o]
+          arg [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtbeginS.o] ==> obj [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtbeginS.o]
+          arg [-L/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13] ==> dir [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13]
+          arg [-L/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../lib64] ==> dir [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../lib64]
+          arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+          arg [-L/usr/lib64] ==> dir [/usr/lib64]
+          arg [-L/lib] ==> dir [/lib]
+          arg [-L/usr/lib] ==> dir [/usr/lib]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_ea270.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtendS.o] ==> obj [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtendS.o]
+          arg [/lib/../lib64/crtn.o] ==> obj [/lib/../lib64/crtn.o]
+        linker tool for 'CXX': /opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../bin/ld
+        collapse obj [/lib/../lib64/Scrt1.o] ==> [/lib64/Scrt1.o]
+        collapse obj [/lib/../lib64/crti.o] ==> [/lib64/crti.o]
+        collapse obj [/lib/../lib64/crtn.o] ==> [/lib64/crtn.o]
+        collapse library dir [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13] ==> [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13]
+        collapse library dir [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../lib64] ==> [/opt/rh/gcc-toolset-13/root/usr/lib64]
+        collapse library dir [/lib/../lib64] ==> [/lib64]
+        collapse library dir [/usr/lib64] ==> [/usr/lib64]
+        collapse library dir [/lib] ==> [/lib]
+        collapse library dir [/usr/lib] ==> [/usr/lib]
+        implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+        implicit objs: [/lib64/Scrt1.o;/lib64/crti.o;/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtbeginS.o;/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/crtendS.o;/lib64/crtn.o]
+        implicit dirs: [/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13;/opt/rh/gcc-toolset-13/root/usr/lib64;/lib64;/usr/lib64;/lib;/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "/opt/rh/gcc-toolset-13/root/usr/lib/gcc/x86_64-redhat-linux/13/../../../../bin/ld" "-v"
+      GNU ld version 2.40-21.el8
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/Internal/CheckLinkerFlag.cmake:37 (cmake_check_source_compiles)"
+      - "/usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/share/cmake-3.31/Modules/CheckLinkerFlag.cmake:44 (cmake_check_linker_flag)"
+      - "/home/users/sislam3/opt/llvm-22/lib/cmake/llvm/AddLLVM.cmake:337 (check_linker_flag)"
+      - "/home/users/sislam3/opt/llvm-22/lib/cmake/llvm/AddLLVM.cmake:680 (add_link_opts)"
+      - "/home/users/sislam3/opt/llvm-22/lib/cmake/llvm/AddLLVM.cmake:921 (llvm_add_library)"
+      - "/home/users/sislam3/opt/llvm-22/lib/cmake/llvm/AddLLVM.cmake:1204 (add_llvm_library)"
+      - "lib/device/CMakeLists.txt:2 (add_llvm_pass_plugin)"
+    checks:
+      - "Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS"
+    directories:
+      source: "/home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-n9PPN4"
+      binary: "/home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-n9PPN4"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "/home/users/sislam3/opt/llvm-22/bin/clang-scan-deps"
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/users/sislam3/opt/llvm-22/lib/cmake/llvm;/storage/users/sislam3/opt/llvm-22/lib/cmake/llvm"
+    buildResult:
+      variable: "LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS"
+      cached: true
+      stdout: |
+        Change Dir: '/home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-n9PPN4'
+        
+        Run Build Command(s): /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/bin/cmake -E env VERBOSE=1 /usr/local/spack-tools/view/bin/gmake -f Makefile cmTC_39387/fast
+        /usr/local/spack-tools/view/bin/gmake  -f CMakeFiles/cmTC_39387.dir/build.make CMakeFiles/cmTC_39387.dir/build
+        gmake[1]: Entering directory '/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-n9PPN4'
+        Building CXX object CMakeFiles/cmTC_39387.dir/src.cxx.o
+        /home/users/sislam3/opt/llvm-22/bin/clang++ -DLLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS  -std=gnu++17 -MD -MT CMakeFiles/cmTC_39387.dir/src.cxx.o -MF CMakeFiles/cmTC_39387.dir/src.cxx.o.d -o CMakeFiles/cmTC_39387.dir/src.cxx.o -c /home/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-n9PPN4/src.cxx
+        Linking CXX executable cmTC_39387
+        /usr/local/spack-tools/spack/opt/spack/linux-centos7-x86_64_v3/gcc-10.5.0/cmake-3.31.2-yxbmt5sncfk373kdhkfp2fu4agts4rvl/bin/cmake -E cmake_link_script CMakeFiles/cmTC_39387.dir/link.txt --verbose=1
+        /home/users/sislam3/opt/llvm-22/bin/clang++ -Wl,-Bsymbolic-functions CMakeFiles/cmTC_39387.dir/src.cxx.o -o cmTC_39387
+        gmake[1]: Leaving directory '/storage/users/sislam3/SBAC-PAD-opt/build/CMakeFiles/CMakeScratch/TryCompile-n9PPN4'
+        
+      exitCode: 0
+...

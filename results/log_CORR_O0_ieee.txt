@@ -1,0 +1,13 @@
+=== CORR [instrumented]  (group=-, O0, ieee)
+    src=tests/cuda/benchmarks/polybench/CUDA/CORR/correlation.cu  inc=tests/cuda/benchmarks/polybench/CUDA/CORR  args=none  expect=none
+    scratch=/home/users/sislam3/SBAC-PAD-opt/scratch/CORR/instrumented
+    libdevice=/storage/packages/cuda/12.8.1/nvvm/libdevice/libdevice.10.bc
+--- device pipeline
+--- host pipeline
+--- link
+    device counter symbol in cubin: present
+    atomicrmw sites in instrumented device IR: 123
+--- run x1
+    wall (best of 1): 91.3006s   -> /home/users/sislam3/SBAC-PAD-opt/scratch/CORR/instrumented/timing_instrumented.txt
+    counts: invalid=0 divzero=0 overflow=0 underflow=0 total=8623495168 subnormal=0 kernels=1
+=== done: CORR [instrumented]

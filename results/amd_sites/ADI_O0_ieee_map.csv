@@ -1,0 +1,9 @@
+index	file	func	line	func_pretty	is_kernel	op
+0	tests/amd/benchmarks/polybench/CUDA/ADI/adi.cu	_Z11adi_kernel1iPfS_S_	152	adi_kernel1(int, float*, float*, float*)	1	fmul
+1	tests/amd/benchmarks/polybench/CUDA/ADI/adi.cu	_Z11adi_kernel1iPfS_S_	153	adi_kernel1(int, float*, float*, float*)	1	fmul
+2	tests/amd/benchmarks/polybench/CUDA/ADI/adi.cu	_Z11adi_kernel2iPfS_S_	165	adi_kernel2(int, float*, float*, float*)	1	fdiv
+3	tests/amd/benchmarks/polybench/CUDA/ADI/adi.cu	_Z11adi_kernel3iPfS_S_	178	adi_kernel3(int, float*, float*, float*)	1	fmul
+4	tests/amd/benchmarks/polybench/CUDA/ADI/adi.cu	_Z11adi_kernel4iPfS_S_i	190	adi_kernel4(int, float*, float*, float*, int)	1	fmul
+5	tests/amd/benchmarks/polybench/CUDA/ADI/adi.cu	_Z11adi_kernel4iPfS_S_i	191	adi_kernel4(int, float*, float*, float*, int)	1	fmul
+6	tests/amd/benchmarks/polybench/CUDA/ADI/adi.cu	_Z11adi_kernel5iPfS_S_	202	adi_kernel5(int, float*, float*, float*)	1	fdiv
+7	tests/amd/benchmarks/polybench/CUDA/ADI/adi.cu	_Z11adi_kernel6iPfS_S_i	213	adi_kernel6(int, float*, float*, float*, int)	1	fmul

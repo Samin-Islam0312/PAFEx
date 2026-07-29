@@ -1,54 +1,18 @@
 === Part 2: Device pipeline ===
-[FPPass] Running on device module: nvptx64-nvidia-cuda
+[FPPass] Running on device module (nvptx64): nvptx64-nvidia-cuda
 [FPPass] Declared device counter array: fp_counters[6]
-[FPPass] Visiting function: _Z14testInvalidDivPf [KERNEL]
-[FPPass]   COLLECT fdiv @ _Z14testInvalidDivPf:13
-[FPPass]   COLLECT fdiv @ _Z14testInvalidDivPf:14
-[FPPass]   COLLECT fdiv @ _Z14testInvalidDivPf:15
-[FPPass]   COLLECT fdiv @ _Z14testInvalidDivPf:16
-[FPPass]   COLLECT fdiv @ _Z14testInvalidDivPf:17
-[FPPass]   COLLECT fdiv @ _Z14testInvalidDivPf:20
-[FPPass]   Collected 6 instructions to instrument
-[FPPass]   INSTRUMENT _Z14testInvalidDivPf:13 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=13
-[FPPass]     -> Injected check: ex=1 op=3 line=13
-[FPPass]     -> Injected check: ex=2 op=3 line=13
-[FPPass]     -> Injected check: ex=3 op=3 line=13
-[FPPass]     -> Injected check: ex=5 op=3 line=13
-[FPPass]   INSTRUMENT _Z14testInvalidDivPf:14 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=14
-[FPPass]     -> Injected check: ex=1 op=3 line=14
-[FPPass]     -> Injected check: ex=2 op=3 line=14
-[FPPass]     -> Injected check: ex=3 op=3 line=14
-[FPPass]     -> Injected check: ex=5 op=3 line=14
-[FPPass]   INSTRUMENT _Z14testInvalidDivPf:15 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=15
-[FPPass]     -> Injected check: ex=1 op=3 line=15
-[FPPass]     -> Injected check: ex=2 op=3 line=15
-[FPPass]     -> Injected check: ex=3 op=3 line=15
-[FPPass]     -> Injected check: ex=5 op=3 line=15
-[FPPass]   INSTRUMENT _Z14testInvalidDivPf:16 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=16
-[FPPass]     -> Injected check: ex=1 op=3 line=16
-[FPPass]     -> Injected check: ex=2 op=3 line=16
-[FPPass]     -> Injected check: ex=3 op=3 line=16
-[FPPass]     -> Injected check: ex=5 op=3 line=16
-[FPPass]   INSTRUMENT _Z14testInvalidDivPf:17 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=17
-[FPPass]     -> Injected check: ex=1 op=3 line=17
-[FPPass]     -> Injected check: ex=2 op=3 line=17
-[FPPass]     -> Injected check: ex=3 op=3 line=17
-[FPPass]     -> Injected check: ex=5 op=3 line=17
-[FPPass]   INSTRUMENT _Z14testInvalidDivPf:20 op=3
-[FPPass]     -> Injected check: ex=0 op=3 line=20
-[FPPass]     -> Injected check: ex=1 op=3 line=20
-[FPPass]     -> Injected check: ex=2 op=3 line=20
-[FPPass]     -> Injected check: ex=3 op=3 line=20
-[FPPass]     -> Injected check: ex=5 op=3 line=20
-[FPPass] SUMMARY: visited 1 functions, instrumented 6 instructions
+[FPPass] Declared device site array: fp_site_counters[49152]
+[FPPass] Declared device result-class array: fp_result_counters[32768]
+[FPPass] SUMMARY: visited 1 functions, instrumented 6 instructions, 6 sites
+[FPPass] Wrote fp_sites.csv with 6 sites
 === Part 3: Host pipeline ===
-[HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD/results/invalid/div/host.bc
+[HostPass] Running on Host Module: /home/users/sislam3/SBAC-PAD-opt/results/invalid/div/host.bc
+[HostPass] TU has __cuda_register_globals (CUDA); emitting shadows, register calls, and accessors.
 [HostPass] Created host shadow: fp_counters[6]
-[HostPass] Registered shadow: fp_counters[6] (48 bytes)
-[HostPass] Found main(), injecting PAPI lifecycle.
+[HostPass] Registered shadow: fp_counters (48 bytes)
+[HostPass] Created host shadow: fp_site_counters[49152]
+[HostPass] Registered shadow: fp_site_counters (393216 bytes)
+[HostPass] Created host shadow: fp_result_counters[32768]
+[HostPass] Registered shadow: fp_result_counters (262144 bytes)
+[HostPass] TU has main; injecting PAPI lifecycle.
 === Part 4: Link ===

@@ -1,0 +1,3 @@
+index	file	func	line	func_pretty	is_kernel	op
+0	tests/amd/benchmarks/polybench/CUDA/LU/lu.cu	_Z10lu_kernel1iPfi	105	lu_kernel1(int, float*, int)	1	fdiv
+1	tests/amd/benchmarks/polybench/CUDA/LU/lu.cu	_Z10lu_kernel2iPfi	117	lu_kernel2(int, float*, int)	1	fmul

@@ -1,4 +1,4 @@
-[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD/results/divZero/divByZero/host.bc
+[FP_INSTRUMENT] Initialized for: /home/users/sislam3/SBAC-PAD-opt/results/divZero/divByZero/host.bc
 [FP_INSTRUMENT] PAPI SDE provider: CUDA_FP_ANALYSIS
 ========================================
 [TEST] Division by Zero Exception
@@ -75,18 +75,18 @@ Summary: 9/9 tests passed
 Overall: PASSED
 ========================================
 
-[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD/results/divZero/divByZero/host.bc
+[FP_INSTRUMENT] Summary for: /home/users/sislam3/SBAC-PAD-opt/results/divZero/divByZero/host.bc
 
 IEEE Exceptions According to the standard
-  Total FP Ops:       0
+  Total FP Ops:       9
   Div by Zero:        8
   Invalid Ops:        1
   Overflow:           0
   Underflow:          0
 
 Detailed Breakdown
-  NaNs (Input):       0
-  NaNs (Created):     0
+  NaNs (Input):       -1
+  NaNs (Created):     -1
   Denormals Produced: 0
 
 Workload Stats
@@ -95,9 +95,9 @@ Workload Stats
 
 Derived Metrics
   Total Exceptions:   9
-  Exception Density:  0 (per million ops)
-  NaN Prop Rate:      0 (per million NaNs)
-  Subnormal Rate:     0 (per million underflows)
-  Instability Score:  0
+  Exception Density:  1000000 (per million ops)
+  NaN Prop Rate:      -1 (per million NaNs)
+  Subnormal Rate:     -1 (per million underflows)
+  Instability Score:  -1
 
 [FP_INSTRUMENT] Finalized.

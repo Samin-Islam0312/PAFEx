@@ -1,0 +1,13 @@
+=== cfd [instrumented]  (group=underflow, O0, fast)
+    src=tests/cuda/benchmarks/rodinia/cfd/euler3d.cu  inc=tests/cuda/benchmarks/rodinia/cfd  args=/home/users/sislam3/SBAC-PAD-opt/tests/amd/benchmarks/rodinia/cfd/data/fvcorr.domn.097K  expect=none
+    scratch=/home/users/sislam3/SBAC-PAD-opt/scratch/cfd/instrumented_fast
+    libdevice=/storage/packages/cuda/12.8.1/nvvm/libdevice/libdevice.10.bc
+--- device pipeline
+--- host pipeline
+--- link
+    device counter symbol in cubin: present
+    atomicrmw sites in instrumented device IR: 1557
+--- run x1
+    wall (best of 1): 21.4991s   -> /home/users/sislam3/SBAC-PAD-opt/scratch/cfd/instrumented_fast/timing_instrumented_fast.txt
+    counts: invalid=0 divzero=0 overflow=0 underflow=392173 total=13241882400 subnormal=0 kernels=1
+=== done: cfd [instrumented_fast]
